@@ -7,6 +7,7 @@ using Legends.Core.IO;
 using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Types;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Legends.Core.Protocol.Messages.Game
 {
@@ -39,7 +40,8 @@ namespace Legends.Core.Protocol.Messages.Game
 
         public override void Serialize(LittleEndianWriter writer)
         {
-            writer.WriteInt(Environment.TickCount); // syncID
+            int syncId = Environment.TickCount;
+            writer.WriteInt(syncId); // syncID
             writer.WriteByte((byte)1); // updating 1 unit
 
 
@@ -109,18 +111,7 @@ namespace Legends.Core.Protocol.Messages.Game
                 }
             }
 
-            if (partial)
-            {
-                foreach (var x in values)
-                {
-                    if (x != null)
-                    {
-                        x.Changed = false;
-                    }
-                }
-
-
-            }
+       
         }
 
     }

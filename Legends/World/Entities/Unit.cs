@@ -91,10 +91,11 @@ namespace Legends.World.Entities
         }
         public virtual void Update(long deltaTime)
         {
-            foreach (var action in SynchronizedActions)
+            for (int i = 0; i < SynchronizedActions.Count; i++)
             {
-                action();
+                SynchronizedActions[i].Invoke();
             }
+         
             SynchronizedActions.Clear();
         }
         public abstract void OnUnitEnterVision(Unit unit);

@@ -56,7 +56,7 @@ namespace Legends.Core.Protocol.Game
             var bytes = new List<byte>();
             for (var i = 0; i < length; i++)
                 bytes.Add(reader.ReadByte());
-            this.content = Encoding.ASCII.GetString(bytes.ToArray());
+            this.content = Encoding.UTF8.GetString(bytes.ToArray());
         }
 
         public override void Serialize(LittleEndianWriter writer)
@@ -69,8 +69,10 @@ namespace Legends.Core.Protocol.Game
             writer.WriteInt(length);
             writer.WriteBytes(unk2);
 
-            foreach (var b in Encoding.ASCII.GetBytes(content))
+            foreach (var b in Encoding.UTF8.GetBytes(content))
                 writer.WriteByte((byte)b);
+
+            writer.WriteByte(0);
         }
     }
 }

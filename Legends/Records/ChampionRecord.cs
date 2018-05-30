@@ -167,7 +167,7 @@ namespace Legends.Records
             }
             else
             {
-                return 1.0f;
+                return SkinRecord.DEFAULT_SKIN_SCALE;
             }
         }
 
