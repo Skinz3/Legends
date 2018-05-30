@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9075FF6E-824E-4468-851E-83D1354A7BCE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Legends.Core</RootNamespace>
+    <AssemblyName>Legends.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YAXLib, Version=2.15.0.0, Culture=neutral, PublicKeyToken=15c43682c986900f, processorArchitecture=MSIL">
+      <HintPath>..\packages\YAXLib.2.15\lib\net4.0\YAXLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cryptography\Blowfish.cs" />
+    <Compile Include="Cryptography\Crypto.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Geometry\MovementVector.cs" />
+    <Compile Include="IO\Inibin\InibinFile.cs" />
+    <Compile Include="IO\Inibin\InibinSet.cs" />
+    <Compile Include="IO\LittleEndianReader.cs" />
+    <Compile Include="IO\LittleEndianWriter.cs" />
+    <Compile Include="IO\NavGrid\NavGridFile.cs" />
+    <Compile Include="IO\RAF\RAF.cs" />
+    <Compile Include="IO\RAF\RAFFileEntry.cs" />
+    <Compile Include="JSON\JSONSerializer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\ENetClient.cs" />
+    <Compile Include="Protocol\Enum\IsTargetableToTeamFlags.cs" />
+    <Compile Include="Protocol\Enum\SpellCanCastBitsEnum.cs" />
+    <Compile Include="Protocol\Enum\StatActionStateEnum.cs" />
+    <Compile Include="Protocol\Enum\AnnounceEnum.cs" />
+    <Compile Include="Protocol\Enum\ChampionEnum.cs" />
+    <Compile Include="Protocol\Enum\StatSecondaryId.cs" />
+    <Compile Include="Protocol\Enum\StatPrimaryId.cs" />
+    <Compile Include="Protocol\Messages\BaseMessage.cs" />
+    <Compile Include="Protocol\Channel.cs" />
+    <Compile Include="Protocol\Enum\ChatChannelType.cs" />
+    <Compile Include="Protocol\Enum\MovementType.cs" />
+    <Compile Include="Protocol\Enum\SummonerSpellId.cs" />
+    <Compile Include="Protocol\Enum\TeamId.cs" />
+    <Compile Include="Protocol\Messages\GameMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\AnnounceMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\ChatBoxMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\DashMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\LeaveVisionMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\FogUpdate2Message.cs" />
+    <Compile Include="Protocol\Messages\Game\GameTimerMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\GameTimerUpdateMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\EnterVisionMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\HeroSpawnMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\MovementAnswerMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\MovementConfirmationMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\PlayerInfoMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\LockCameraRequestMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\MovementRequestMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\UpdateStatsMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\SetHealthMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\SkillUpRequestMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\SpawnParticleMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\SpellAnimationMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\StartGameMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\StartGameRequestMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\ViewMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\ViewRequestMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\CharLoadedMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\ClientReadyMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\EndSpawnMessage.cs" />
+    <Compile Include="Protocol\Messages\Other\DebugMessage.cs" />
+    <Compile Include="Protocol\Messages\Other\ExitMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\KeyCheckMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\LoadScreenInfoMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\LoadScreenPlayerChampionMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\LoadScreenPlayerNameMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\PingLoadInfoAnswerMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\PingLoadInfoMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\PlayerInformations.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\QueryStatusAnswerMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\QueryStatusRequestMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\StartSpawnMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\SynchVersionAnswerMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\SynchVersionMessage.cs" />
+    <Compile Include="Protocol\Messages\LoadingScreen\WorldGameNumberMessage.cs" />
+    <Compile Include="Protocol\Messages\Message.cs" />
+    <Compile Include="Protocol\Messages\PacketCmd.cs" />
+    <Compile Include="Protocol\Messages\Game\TurretSpawnMessage.cs" />
+    <Compile Include="Protocol\Other\WaypointsReader.cs" />
+    <Compile Include="Protocol\ProtocolManager.cs" />
+    <Compile Include="Protocol\Messages\StateMessage.cs" />
+    <Compile Include="Protocol\Messages\StateMessage2.cs" />
+    <Compile Include="Protocol\Types\ReplicateStat.cs" />
+    <Compile Include="Utils\AsyncRandom.cs" />
+    <Compile Include="Inibin\InibinHashEnum.cs" />
+    <Compile Include="Utils\Logger.cs" />
+    <Compile Include="Utils\Singleton.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ENetCS\ENetCS.csproj">
+      <Project>{D3AFF7FA-96F6-42B8-B03C-E508DC80EC3A}</Project>
+      <Name>ENetCS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

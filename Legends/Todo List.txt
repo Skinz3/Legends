@@ -1,0 +1,19 @@
+﻿
+
+A fix
+
+GameHandler.cs HandleChatBoxMessage() fix the weird char bug ig ^^
+Player.cs  Client.Send(new EnterVisionMessage()) im done.. >.<
+PlayerStats.cs ->  SkinRecord all skins?
+AIStats.cs AttackSpeed(attackdelay = ? what is this)
+Fix bug de UpdateStats(true) qui envoit a nimporte qui ou qui n'envoit pas 
+
+A faire
+
+Tourelles
+Sorts
+minions
+jungle
+vla
+PlayerInfoMessage a partir de lsb
+

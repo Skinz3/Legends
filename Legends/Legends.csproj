@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{08C77ABF-5998-4DD1-A21F-F68FC58FD7F8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Legends</RootNamespace>
+    <AssemblyName>Legends</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite">
+      <HintPath>.\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YAXLib, Version=2.15.0.0, Culture=neutral, PublicKeyToken=15c43682c986900f, processorArchitecture=MSIL">
+      <HintPath>..\packages\YAXLib.2.15\lib\net4.0\YAXLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configurations\Configuration.cs" />
+    <Compile Include="Configurations\ConfigurationManager.cs" />
+    <Compile Include="Handlers\GameHandler.cs" />
+    <Compile Include="Handlers\LoadingScreenHandlers.cs" />
+    <Compile Include="Network\LoLClient.cs" />
+    <Compile Include="Network\LoLServer.cs" />
+    <Compile Include="Network\NetIdProvider.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Records\ChampionRecord.cs" />
+    <Compile Include="Records\ExperienceRecord.cs" />
+    <Compile Include="Records\ItemRecord.cs" />
+    <Compile Include="Records\MapRecord.cs" />
+    <Compile Include="Records\SkinRecord.cs" />
+    <Compile Include="Records\SpellRecord.cs" />
+    <Compile Include="World\Champions\Champion.cs" />
+    <Compile Include="World\Champions\ChampionManager.cs" />
+    <Compile Include="World\Champions\Dummy.cs" />
+    <Compile Include="World\Champions\Ezreal.cs" />
+    <Compile Include="World\Commands\CommandAttribute.cs" />
+    <Compile Include="World\Commands\CommandsManager.cs" />
+    <Compile Include="World\Commands\CommandsRepertory.cs" />
+    <Compile Include="World\Entities\Statistics\AIStats.cs" />
+    <Compile Include="World\Entities\AttackableUnit.cs" />
+    <Compile Include="World\Entities\MovableUnit.cs" />
+    <Compile Include="World\Entities\Movements\WaypointsCollection.cs" />
+    <Compile Include="World\Entities\Player.cs" />
+    <Compile Include="Configurations\PlayerData.cs" />
+    <Compile Include="World\Entities\Replication\AttackSpeed.cs" />
+    <Compile Include="World\Entities\Replication\Health.cs" />
+    <Compile Include="World\Entities\Statistics\PlayerStats.cs" />
+    <Compile Include="World\Entities\Replication\ReplicationManager.cs" />
+    <Compile Include="World\Entities\Replication\ReplicationStats.cs" />
+    <Compile Include="World\Entities\Replication\Stat.cs" />
+    <Compile Include="World\Entities\Replication\StatMod.cs" />
+    <Compile Include="World\Entities\Statistics\Stats.cs" />
+    <Compile Include="World\Entities\Unit.cs" />
+    <Compile Include="World\Games\Game.cs" />
+    <Compile Include="World\Games\GamesManager.cs" />
+    <Compile Include="World\Games\Maps\HowlingAbyss.cs" />
+    <Compile Include="World\Games\Maps\Map.cs" />
+    <Compile Include="World\Games\Maps\NewSummonersRift.cs" />
+    <Compile Include="World\Games\Maps\SummonersRift.cs" />
+    <Compile Include="World\Games\Team.cs" />
+    <Compile Include="World\Spells\Spell.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Todo List.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ENetCS\ENetCS.csproj">
+      <Project>{d3aff7fa-96f6-42b8-b03c-e508dc80ec3a}</Project>
+      <Name>ENetCS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Legends.Core\Legends.Core.csproj">
+      <Project>{9075ff6e-824e-4468-851e-83d1354a7bce}</Project>
+      <Name>Legends.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Legends.ORM\Legends.ORM.csproj">
+      <Project>{fad0a6b1-7fce-4b7f-bf1c-69c3cb7738a3}</Project>
+      <Name>Legends.ORM</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
