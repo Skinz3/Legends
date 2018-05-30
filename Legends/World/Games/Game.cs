@@ -20,7 +20,7 @@ namespace Legends.World.Games
 {
     public class Game
     {
-        public const double REFRESH_RATE = 1000 / 60; // 60fps
+        public const double REFRESH_RATE = 1000 / 60;
 
         public int Id
         {
@@ -81,7 +81,12 @@ namespace Legends.World.Games
             get;
             set;
         }
-        private double GameTime
+        public float GameTime
+        {
+            get;
+            private set;
+        }
+        private double NextSyncTime
         {
             get;
             set;
@@ -99,7 +104,7 @@ namespace Legends.World.Games
         /// Add player to the game and to his team (using Player.Datas)
         /// </summary>
         /// <param name="player"></param>
-        public void AddUnit(Unit unit,TeamId teamId)
+        public void AddUnit(Unit unit, TeamId teamId)
         {
             if (teamId == TeamId.BLUE)
             {
@@ -113,6 +118,10 @@ namespace Legends.World.Games
                 PurpleTeam.AddUnit(unit);
             }
             unit.Initialize();
+        }
+        public bool Contains(long userId)
+        {
+            return Players.FirstOrDefault(x => x.Client.UserId == userId) != null;
         }
         public int PopNextPlayerNo()
         {
@@ -146,13 +155,22 @@ namespace Legends.World.Games
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            GameTime += Stopwatch.ElapsedMilliseconds;
-            Update(Stopwatch.ElapsedMilliseconds);
+            long deltaTime = Stopwatch.ElapsedMilliseconds;
+            GameTime += deltaTime;
+            NextSyncTime += deltaTime;
+            Update(deltaTime);
             Stopwatch = Stopwatch.StartNew();
         }
         private void Update(long deltaTime)
         {
             Console.Title = "Legends FPS: " + deltaTime;
+
+            if (NextSyncTime >= 10 * 1000)
+            {
+                Send(new GameTimerMessage(0, GameTime / 1000f));
+                NextSyncTime = 0;
+            }
+
             BlueTeam.Update(deltaTime);
             PurpleTeam.Update(deltaTime);
             Map.Update(deltaTime);
@@ -171,7 +189,7 @@ namespace Legends.World.Games
                     player.Data.ChampionName));
 
                 player.UpdateInfos();
-             //   player.UpdateStats(true);
+                player.UpdateStats(false);
                 player.UpdateHeath();
 
                 Send(new TurretSpawnMessage(NetIdProvider.PopNextNetId(), "@Turret_T1_R_03_A"));

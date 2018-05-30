@@ -49,9 +49,17 @@ namespace Legends.Handlers
                 logger.Write("No player data for userId:" + userId, MessageState.WARNING);
                 return;
             }
+
+            Game targetGame = GamesManager.TestGame;
+
+            if (targetGame.Contains(userId))
+            {
+                logger.Write(userId + "try to connect a second time!", MessageState.WARNING);
+                return;
+            }
             client.DefinePlayer(new Player(client, datas));
 
-            client.Player.DefineGame(GamesManager.TestGame);
+            client.Player.DefineGame(targetGame);
 
             client.Player.Game.AddUnit(client.Player, client.Player.Data.TeamId);
 

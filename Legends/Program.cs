@@ -35,7 +35,7 @@ namespace Legends
             LoLServer.Initialize();
             logger.Write("Server started");
             Process.Start("StartGame.bat");
-            Process.Start("StartGame2.bat");
+            //Process.Start("StartGame2.bat");
             // Process.Start("StartGame3.bat");
             LoLServer.NetLoop();
 

@@ -50,9 +50,9 @@ namespace Legends.Handlers
 
             client.Player.Team.Send(new EnterVisionMessage(true, client.Player.NetId, client.Player.Position, client.Player.WaypointsCollection.WaypointsIndex, client.Player.WaypointsCollection.GetWaypoints(), client.Player.Game.Map.Record.MiddleOfMap));
 
-
-            //   client.Send(new GameTimerMessage(0, 60));
-            // client.Send(new GameTimerUpdateMessage(0, 60));
+            float gameTime = client.Player.Game.GameTime / 1000f;
+            client.Send(new GameTimerMessage(0, gameTime));
+            client.Send(new GameTimerUpdateMessage(0, gameTime));
 
             //client.Send(new FogUpdate2Message(client.Player.NetId, NetIdProvider.PopNextNetId()));
         }
@@ -99,7 +99,7 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_C2S_SkillUp)]
         public static void HandleSkillUpRequestMessage(SkillUpRequestMessage message, LoLClient client)
         {
-            
+
         }
         [MessageHandler(PacketCmd.PKT_C2S_MoveReq)]
         public static void HandleMovementRequestMessage(MovementRequestMessage message, LoLClient client)
