@@ -82,7 +82,7 @@ namespace Legends.World.Entities
         {
             ChampionRecord = ChampionRecord.GetChampion(Data.ChampionName);
             Champion = ChampionManager.Instance.GetChampion(this, (ChampionEnum)Enum.Parse(typeof(ChampionEnum), Data.ChampionName));
-            Stats = new PlayerStats(ChampionRecord,Data.SkinId);
+            Stats = new PlayerStats(ChampionRecord, Data.SkinId);
             base.Initialize();
         }
         public void DebugMessage(string content)
@@ -140,14 +140,7 @@ namespace Legends.World.Entities
 
         public override void UpdateStats(bool partial = true)
         {
-            if (partial)
-            {
-                PlayerStats.ReplicationManager.Changed = false;
-            }
-
             PlayerStats.UpdateReplication(partial);
-
-
             Game.Send(new UpdateStatsMessage(0, NetId, PlayerStats.ReplicationManager.Values, partial));
         }
     }

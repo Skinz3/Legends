@@ -28,13 +28,13 @@ namespace Legends.World.Commands
         public static void SpeedCommand(LoLClient client, float speed)
         {
             client.Player.PlayerStats.MoveSpeed.SetBaseValue(speed);
-            client.Player.UpdateStats();
+            client.Player.UpdateStats(false);
         }
         [Command("size")]
         public static void SizeCommand(LoLClient client,float size)
         {
             client.Player.PlayerStats.ModelSize.SetBaseValue(size);
-            client.Player.UpdateStats();
+            client.Player.UpdateStats(false);
         }
     }
 }

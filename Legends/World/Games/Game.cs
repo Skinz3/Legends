@@ -171,7 +171,7 @@ namespace Legends.World.Games
                     player.Data.ChampionName));
 
                 player.UpdateInfos();
-                player.UpdateStats(false);
+             //   player.UpdateStats(true);
                 player.UpdateHeath();
 
                 Send(new TurretSpawnMessage(NetIdProvider.PopNextNetId(), "@Turret_T1_R_03_A"));

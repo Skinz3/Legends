@@ -13,7 +13,7 @@ namespace Legends.World.Entities.Statistics.Replication
     public class ReplicationManager
     {
         public ReplicateStat[,] Values { get; private set; } = new ReplicateStat[6, 32];
-        public bool Changed { get; set; }
+        public bool Changed { get; set; } = true;
 
         private void DoUpdate(uint value, int primary, int secondary, bool isFloat)
         {
