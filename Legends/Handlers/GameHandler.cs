@@ -99,7 +99,7 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_C2S_SkillUp)]
         public static void HandleSkillUpRequestMessage(SkillUpRequestMessage message, LoLClient client)
         {
-
+            
         }
         [MessageHandler(PacketCmd.PKT_C2S_MoveReq)]
         public static void HandleMovementRequestMessage(MovementRequestMessage message, LoLClient client)
