@@ -142,6 +142,17 @@ namespace Legends.World.Entities
         {
             PlayerStats.UpdateReplication(partial);
             Game.Send(new UpdateStatsMessage(0, NetId, PlayerStats.ReplicationManager.Values, partial));
+
+            if (partial)
+            {
+                foreach (var x in PlayerStats.ReplicationManager.Values)
+                {
+                    if (x != null)
+                    {
+                        x.Changed = false;
+                    }
+                }
+            }
         }
     }
 }

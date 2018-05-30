@@ -36,22 +36,22 @@ namespace Legends.World.Entities.Statistics.Replication
             }
         }
 
-        public void Update(uint value, int primary, int secondary)
+        public void UpdateUInt(uint value, int primary, int secondary)
         {
             DoUpdate(value, primary, secondary, false);
         }
 
-        public void Update(int value, int primary, int secondary)
+        public void UpdateInt(int value, int primary, int secondary)
         {
             DoUpdate((uint)value, primary, secondary, false);
         }
 
-        public void Update(bool value, int primary, int secondary)
+        public void UpdateBool(bool value, int primary, int secondary)
         {
             DoUpdate(value ? 1u : 0u, primary, secondary, false);
         }
 
-        public void Update(float value, int primary, int secondary)
+        public void UpdateFloat(float value, int primary, int secondary)
         {
             DoUpdate(BitConverter.ToUInt32(BitConverter.GetBytes(value), 0), primary, secondary, true);
         }
