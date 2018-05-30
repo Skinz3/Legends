@@ -4,9 +4,11 @@
   Legends is a league of legends emulator base written in C# .NET Framework 4.6.
   Base project : IntWars (https://github.com/Nisalon/IntWars), League SandBox https://github.com/LeagueSandbox
   
-   ![alt text](https://ibb.co/k2Znvy)
-   ![alt text](https://ibb.co/k2Znvy)
-
+   ![alt text](https://image.ibb.co/kYeLFy/tp2.png) 
+    ![alt text](https://image.ibb.co/dikuay/tp1.png)
+  
+ 
+  
   
   
 ## Installation
