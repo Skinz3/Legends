@@ -46,7 +46,7 @@ namespace Legends
         [StartupInvoke("Protocol",StartupInvokePriority.Second)]
         public static void LoadProtocol()
         {
-            ProtocolManager.Initialize(Assembly.GetExecutingAssembly(), false);
+            ProtocolManager.Initialize(Assembly.GetExecutingAssembly(), true);
         }
     }
 }

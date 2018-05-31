@@ -1,4 +1,5 @@
-﻿using Legends.Core.Protocol.Enum;
+﻿using Legends.Core.DesignPattern;
+using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.Network;
 using Legends.World.Entities.Statistics;
@@ -35,15 +36,28 @@ namespace Legends.World.Commands
             client.Player.PlayerStats.ModelSize.SetBaseValue(size);
             client.Player.UpdateStats(true);
         }
+        [InDeveloppement(InDeveloppementState.HAS_BUG, "When player leave vision, the model is swap back.")]
         [Command("model")]
-        public static void ModelCommand(LoLClient client,string model)
+        public static void ModelCommand(LoLClient client, string model)
         {
-            client.Player.UpdateModel(model,false,0); 
+            client.Player.UpdateModel(model, false, 0);
         }
         [Command("skin")]
-        public static void SkinCommand(LoLClient client,int skinId)
+        public static void SkinCommand(LoLClient client, int skinId)
         {
             client.Player.UpdateModel(client.Player.Model, false, skinId);
+        }
+        [Command("vision")]
+        public static void VisionCommand(LoLClient client)
+        {
+            string str = "I have vision on : ";
+            str += Environment.NewLine;
+            foreach (var unit in client.Player.Team.GetVisibleUnits())
+            {
+                str += unit.Name + " distance: (" + unit.GetDistanceTo(client.Player) + ")";
+           
+            }
+            client.Player.DebugMessage(str);
         }
     }
 }

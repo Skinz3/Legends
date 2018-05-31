@@ -19,6 +19,7 @@ using Legends.Core.Protocol;
 using Legends.Core.Utils;
 using ENet;
 using Legends.World.Entities.Statistics;
+using Legends.Core.DesignPattern;
 
 namespace Legends.World.Entities
 {
@@ -120,9 +121,7 @@ namespace Legends.World.Entities
             }
         }
 
-    
-
-        // todo properly , its a real sh***
+        [InDeveloppement(InDeveloppementState.TEMPORARY, "For serialization reasons...")]
         public override void OnUnitEnterVision(Unit unit)
         {
             if (unit.IsMoving)
@@ -160,6 +159,7 @@ namespace Legends.World.Entities
                 }
             }
         }
+        [InDeveloppement(InDeveloppementState.STARTED)]
         public void OnDisconnect()
         {
             Disconnected = true;

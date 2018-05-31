@@ -25,7 +25,6 @@ namespace Legends.World.Entities
         }
         public override bool IsMoving => false;
 
-    
         public AttackableUnit()
         {
             Alive = true;

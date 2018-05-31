@@ -115,30 +115,10 @@ namespace Legends.Handlers
                 client.Send(new LoadScreenPlayerNameMessage(player.UserId, player.SkinId, player.Name, 0), Channel.CHL_LOADING_SCREEN);
                 client.Send(new LoadScreenPlayerChampionMessage(player.UserId, player.SkinId, player.ChampionName, 0), Channel.CHL_LOADING_SCREEN);
             }
-
-
         }
 
 
-        [MessageHandler(PacketCmd.PKT_C2S_Ping_Load_Info, Channel.CHL_C2S)]
-        public static void HandlePingLoadInfoMessage(PingLoadInfoMessage message, LoLClient client)
-        {
-            client.Player.Game.Send(new PingLoadInfoAnswerMessage()
-            {
-                netId = message.netId,
-                loaded = message.loaded,
-                ping = message.ping,
-                unk1 = message.unk1, // 0 que Yasuo, 1 que Riven, playerId?
-                unk2 = message.unk2,
-                unk3 = message.unk3,
-                unk4 = message.unk4,
-                userId = client.UserId.Value,
-            }, Channel.CHL_LOW_PRIORITY, ENet.PacketFlags.None);
-        }
-        [MessageHandler(PacketCmd.PKT_C2S_Exit)]
-        public static void HandleExit(ExitMessage message, LoLClient client)
-        {
-            client.OnDisconnect();
-        }
+    
+        
     }
 }

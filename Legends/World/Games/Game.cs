@@ -152,12 +152,12 @@ namespace Legends.World.Games
 
             foreach (MapObjectRecord gameObject in Map.Record.GetObjects(MOBObjectType.Turret))
             {
-                gameObject.Name += "_A"; // ?
+             /*   gameObject.Name += "_A"; // ?
                 int netId = (int)(0xFF000000 | CRC32.Compute(Encoding.ASCII.GetBytes(gameObject.Name)));
                 AITurret turret = new AITurret(netId, gameObject);
                 turret.DefineGame(this);
                 AddUnit(turret, TeamId.PURPLE);
-                Map.AddUnit(turret);
+                Map.AddUnit(turret);        */
 
             }
 

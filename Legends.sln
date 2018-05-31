@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends.DatabaseSynchronize
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantome.Libraries.League", "Fantome.League\Fantome.Libraries.League.csproj", "{80F5DF93-19A2-4731-8CD1-982F165D7361}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends.Dev", "Legends.Dev\Legends.Dev.csproj", "{699816A7-6668-46BF-97F4-0D7374025180}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{80F5DF93-19A2-4731-8CD1-982F165D7361}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80F5DF93-19A2-4731-8CD1-982F165D7361}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80F5DF93-19A2-4731-8CD1-982F165D7361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{699816A7-6668-46BF-97F4-0D7374025180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{699816A7-6668-46BF-97F4-0D7374025180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{699816A7-6668-46BF-97F4-0D7374025180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{699816A7-6668-46BF-97F4-0D7374025180}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

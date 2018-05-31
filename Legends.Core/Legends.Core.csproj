@@ -86,6 +86,7 @@
     <Compile Include="Protocol\Enum\SummonerSpellId.cs" />
     <Compile Include="Protocol\Enum\TeamId.cs" />
     <Compile Include="Protocol\Messages\GameMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\HeartBeatMessage.cs" />
     <Compile Include="Protocol\Messages\Game\AnnounceMessage.cs" />
     <Compile Include="Protocol\Messages\Game\ChatBoxMessage.cs" />
     <Compile Include="Protocol\Messages\Game\ClickMessage.cs" />

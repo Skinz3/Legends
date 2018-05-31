@@ -1,4 +1,5 @@
-﻿using Legends.ORM.Attributes;
+﻿using Legends.Core.DesignPattern;
+using Legends.ORM.Attributes;
 using Legends.ORM.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace Legends.Records
             get;
             set;
         }
+
+
         public ExperienceRecord()
         {
 
@@ -35,7 +38,14 @@ namespace Legends.Records
             this.Level = level;
             this.CumulativeExp = cumulativeExp;
         }
-        private static ExperienceRecord HighestExperience()
+
+
+        [StartupInvoke(StartupInvokePriority.Eighth)]
+        public static void Initialize()
+        {
+            Experiences = Experiences.OrderByDescending(x => x.Level).Reverse().ToList();
+        }
+        public static ExperienceRecord GetHighestExperience()
         {
             return Experiences.Last();
         }
@@ -43,7 +53,7 @@ namespace Legends.Records
         {
             int result;
 
-            ExperienceRecord highest = HighestExperience();
+            ExperienceRecord highest = GetHighestExperience();
             if (exp >= highest.CumulativeExp)
             {
                 result = highest.Level;

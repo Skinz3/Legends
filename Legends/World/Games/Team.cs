@@ -71,6 +71,10 @@ namespace Legends.World.Games
         {
             return VisibleUnits.Contains(player);
         }
+        public Unit[] GetVisibleUnits()
+        {
+            return VisibleUnits.ToArray();
+        }
         public void Update(float deltaTime)
         {
             foreach (var opponent in GetOposedTeam().Units.Values)
