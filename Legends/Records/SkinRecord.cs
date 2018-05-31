@@ -1,4 +1,4 @@
-﻿using Legends.Core.Inibin;
+﻿using Legends.Core.IO.Inibin;
 using Legends.ORM.Attributes;
 using Legends.ORM.Interfaces;
 using System;
@@ -12,8 +12,6 @@ namespace Legends.Records
     [Table("skins", 0)]
     public class SkinRecord : ITable
     {
-        public const float DEFAULT_SKIN_SCALE = 1.0f;
-
         public static List<SkinRecord> Skins = new List<SkinRecord>();
 
         [InibinField(InibinHashEnum.SKINS_ChampionSkinID)]

@@ -25,7 +25,7 @@ namespace Legends.World.Entities
     public class Player : MovableUnit
     {
         public const float DEFAULT_START_GOLD = 475;
-        public const float DEFAULT_COOLDOWN_REDUCTION = 80f;
+        public const float DEFAULT_COOLDOWN_REDUCTION = 0f;
         public const float DEFAULT_PERCEPTION_BUBBLE_RADIUS = 1350f;
 
         public LoLClient Client
@@ -68,6 +68,11 @@ namespace Legends.World.Entities
                 return Stats as PlayerStats;
             }
         }
+        public bool Disconnected
+        {
+            get;
+            private set;
+        }
         public override string Name => Data.Name;
 
         public override float PerceptionBubbleRadius => ((PlayerStats)Stats).PerceptionBubbleRadius.Total;
@@ -76,6 +81,7 @@ namespace Legends.World.Entities
         {
             Client = client;
             Data = data;
+            Disconnected = false;
         }
 
         public override void Initialize()
@@ -83,6 +89,8 @@ namespace Legends.World.Entities
             ChampionRecord = ChampionRecord.GetChampion(Data.ChampionName);
             Champion = ChampionManager.Instance.GetChampion(this, (ChampionEnum)Enum.Parse(typeof(ChampionEnum), Data.ChampionName));
             Stats = new PlayerStats(ChampionRecord, Data.SkinId);
+            Model = Data.ChampionName;
+            SkinId = Data.SkinId;
             base.Initialize();
         }
         public void DebugMessage(string content)
@@ -111,6 +119,9 @@ namespace Legends.World.Entities
                 oposedTeam.Send(message);
             }
         }
+
+    
+
         // todo properly , its a real sh***
         public override void OnUnitEnterVision(Unit unit)
         {
@@ -133,11 +144,6 @@ namespace Legends.World.Entities
             Game.Send(new PlayerInfoMessage(NetId, Data.Summoner1Spell, Data.Summoner2Spell));
         }
 
-        public override string ToString()
-        {
-            return Name + " (" + Data.ChampionName + ")";
-        }
-
         public override void UpdateStats(bool partial = true)
         {
             PlayerStats.UpdateReplication(partial);
@@ -153,6 +159,12 @@ namespace Legends.World.Entities
                     }
                 }
             }
+        }
+        public void OnDisconnect()
+        {
+            Disconnected = true;
+            Game.RemoveUnit(this); // sure? 
+            Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId);
         }
     }
 }

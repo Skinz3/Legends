@@ -22,7 +22,6 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-          
         }
         [Command("speed")]
         public static void SpeedCommand(LoLClient client, float speed)
@@ -31,10 +30,20 @@ namespace Legends.World.Commands
             client.Player.UpdateStats(true);
         }
         [Command("size")]
-        public static void SizeCommand(LoLClient client,float size)
+        public static void SizeCommand(LoLClient client, float size)
         {
             client.Player.PlayerStats.ModelSize.SetBaseValue(size);
             client.Player.UpdateStats(true);
+        }
+        [Command("model")]
+        public static void ModelCommand(LoLClient client,string model)
+        {
+            client.Player.UpdateModel(model,false,0); 
+        }
+        [Command("skin")]
+        public static void SkinCommand(LoLClient client,int skinId)
+        {
+            client.Player.UpdateModel(client.Player.Model, false, skinId);
         }
     }
 }

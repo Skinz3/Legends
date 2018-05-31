@@ -25,6 +25,7 @@ namespace Legends.World.Entities
         }
         public override bool IsMoving => false;
 
+    
         public AttackableUnit()
         {
             Alive = true;
@@ -41,7 +42,7 @@ namespace Legends.World.Entities
 
         public void UpdateHeath()
         {
-           Game.Send(new SetHealthMessage(NetId, 0x0000, Stats.Health.Total, Stats.Health.Current)); 
+            Game.Send(new SetHealthMessage(NetId, 0x0000, Stats.Health.Total, Stats.Health.Current));
         }
     }
 }

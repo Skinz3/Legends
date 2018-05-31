@@ -111,7 +111,16 @@ namespace Legends.Core.IO
         {
             return m_reader.ReadSingle();
         }
+        public string[] ReadUTFLines()
+        {
+            List<string> lines = new List<string>();
 
+            foreach (var line in m_reader.ReadString().Split(new string[] { "\r\n" }, StringSplitOptions.None)) 
+            {
+                lines.Add(line);
+            }
+            return lines.ToArray();
+        }
         public string ReadUTF()
         {
             return m_reader.ReadString();

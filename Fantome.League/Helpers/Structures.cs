@@ -101,6 +101,9 @@ namespace Fantome.Libraries.League.Helpers.Structures
             this.Y = y;
             this.Z = z;
         }
+        public Vector3()
+        {
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Vector3"/> instance from a <see cref="BinaryReader"/>
@@ -1109,31 +1112,31 @@ namespace Fantome.Libraries.League.Helpers.Structures
         /// </summary>
         public R3DMatrix44 Inverse()
         {
-            float t11 = this.M23 * this.M34 * this.M42 
-                - this.M24 * this.M33 * this.M42 
-                + this.M24 * this.M32 * this.M43 
-                - this.M22 * this.M34 * this.M43 
-                - this.M23 * this.M32 * this.M44 
+            float t11 = this.M23 * this.M34 * this.M42
+                - this.M24 * this.M33 * this.M42
+                + this.M24 * this.M32 * this.M43
+                - this.M22 * this.M34 * this.M43
+                - this.M23 * this.M32 * this.M44
                 + this.M22 * this.M33 * this.M44;
 
-            float t12 = this.M14 * this.M33 * this.M42 
-                - this.M13 * this.M34 * this.M42 
-                - this.M14 * this.M32 * this.M43 
-                + this.M12 * this.M34 * this.M43 
-                + this.M13 * this.M32 * this.M44 
+            float t12 = this.M14 * this.M33 * this.M42
+                - this.M13 * this.M34 * this.M42
+                - this.M14 * this.M32 * this.M43
+                + this.M12 * this.M34 * this.M43
+                + this.M13 * this.M32 * this.M44
                 - this.M12 * this.M33 * this.M44;
 
             float t13 = this.M13 * this.M24 * this.M42
-                - this.M14 * this.M23 * this.M42 
-                + this.M14 * this.M22 * this.M43 
-                - this.M12 * this.M24 * this.M43 
-                - this.M13 * this.M22 * this.M44 
+                - this.M14 * this.M23 * this.M42
+                + this.M14 * this.M22 * this.M43
+                - this.M12 * this.M24 * this.M43
+                - this.M13 * this.M22 * this.M44
                 + this.M12 * this.M23 * this.M44;
 
-            float t14 = this.M14 * this.M23 * this.M32 
-                - this.M13 * this.M24 * this.M32 
+            float t14 = this.M14 * this.M23 * this.M32
+                - this.M13 * this.M24 * this.M32
                 - this.M14 * this.M22 * this.M33
-                + this.M12 * this.M24 * this.M33 
+                + this.M12 * this.M24 * this.M33
                 + this.M13 * this.M22 * this.M34
                 - this.M12 * this.M23 * this.M34;
 
@@ -1176,7 +1179,7 @@ namespace Fantome.Libraries.League.Helpers.Structures
                 + this.M13 * this.M22 * this.M34
                 - this.M12 * this.M23 * this.M34)
 
-                 +this.M42 *
+                 + this.M42 *
                 (+this.M11 * this.M23 * this.M34
                 - this.M11 * this.M24 * this.M33
                 + this.M14 * this.M21 * this.M33
@@ -1185,7 +1188,7 @@ namespace Fantome.Libraries.League.Helpers.Structures
                 - this.M14 * this.M23 * this.M31)
 
                 + this.M43 *
-               (+ this.M11 * this.M24 * this.M32
+               (+this.M11 * this.M24 * this.M32
                 - this.M11 * this.M22 * this.M34
                 - this.M14 * this.M21 * this.M32
                 + this.M12 * this.M21 * this.M34

@@ -138,7 +138,7 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_C2S_Exit)]
         public static void HandleExit(ExitMessage message, LoLClient client)
         {
-            // todo
+            client.OnDisconnect();
         }
     }
 }

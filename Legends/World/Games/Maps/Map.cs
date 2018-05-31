@@ -33,6 +33,12 @@ namespace Legends.World.Games.Maps
                 return new Vector2(Record.Width / 2, Record.Height / 2);
             }
         }
+
+        public Unit GetUnit(int targetNetId)
+        {
+            return Units.FirstOrDefault(x => x.NetId == targetNetId);
+        }
+
         public List<Unit> Units
         {
             get;
@@ -49,7 +55,7 @@ namespace Legends.World.Games.Maps
         {
             get;
         }
-      
+
         private Game Game
         {
             get;
@@ -58,17 +64,17 @@ namespace Legends.World.Games.Maps
         public Map(Game game)
         {
             Record = MapRecord.GetMap(Id);
-           
+
             Game = game;
             Units = new List<Unit>();
         }
 
-      
- 
+
+
 
         public virtual void Update(long deltaTime)
         {
-        //    Console.Title = deltaTime.ToString();
+            //    Console.Title = deltaTime.ToString();
             foreach (var unit in Units)
             {
                 unit.Update(deltaTime);

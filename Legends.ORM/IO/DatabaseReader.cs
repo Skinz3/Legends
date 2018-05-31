@@ -194,6 +194,10 @@ namespace Legends.ORM.IO
                 {
                     obj[i] = SQLVector2.Deserialize(obj[i].ToString()).ToVector2();
                 }
+                if (this.m_fields[i].FieldType == typeof(Vector3))
+                {
+                    obj[i] = SQLVector3.Deserialize(obj[i].ToString()).ToVector3();
+                }
                 try { obj[i] = Convert.ChangeType(obj[i], this.m_fields[i].FieldType); }
                 catch
                 {

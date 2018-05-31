@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cryptography\Blowfish.cs" />
+    <Compile Include="Cryptography\CRC32.cs" />
     <Compile Include="Cryptography\Crypto.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Geometry\MovementVector.cs" />
@@ -59,6 +60,8 @@
     <Compile Include="IO\Inibin\InibinSet.cs" />
     <Compile Include="IO\LittleEndianReader.cs" />
     <Compile Include="IO\LittleEndianWriter.cs" />
+    <Compile Include="IO\MOB\MOBFile.cs" />
+    <Compile Include="IO\MOB\MOBObject.cs" />
     <Compile Include="IO\NavGrid\NavGridFile.cs" />
     <Compile Include="IO\RAF\RAF.cs" />
     <Compile Include="IO\RAF\RAFFileEntry.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Protocol\Enum\ChampionEnum.cs" />
     <Compile Include="Protocol\Enum\StatSecondaryId.cs" />
     <Compile Include="Protocol\Enum\StatPrimaryId.cs" />
+    <Compile Include="Protocol\Enum\UnitAnnounceEnum.cs" />
     <Compile Include="Protocol\Messages\BaseMessage.cs" />
     <Compile Include="Protocol\Channel.cs" />
     <Compile Include="Protocol\Enum\ChatChannelType.cs" />
@@ -81,6 +85,7 @@
     <Compile Include="Protocol\Messages\GameMessage.cs" />
     <Compile Include="Protocol\Messages\Game\AnnounceMessage.cs" />
     <Compile Include="Protocol\Messages\Game\ChatBoxMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\ClickMessage.cs" />
     <Compile Include="Protocol\Messages\Game\DashMessage.cs" />
     <Compile Include="Protocol\Messages\Game\LeaveVisionMessage.cs" />
     <Compile Include="Protocol\Messages\Game\FogUpdate2Message.cs" />
@@ -93,6 +98,8 @@
     <Compile Include="Protocol\Messages\Game\PlayerInfoMessage.cs" />
     <Compile Include="Protocol\Messages\Game\LockCameraRequestMessage.cs" />
     <Compile Include="Protocol\Messages\Game\MovementRequestMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\UnitAnnounceMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\UpdateModelMessage.cs" />
     <Compile Include="Protocol\Messages\Game\UpdateStatsMessage.cs" />
     <Compile Include="Protocol\Messages\Game\SetHealthMessage.cs" />
     <Compile Include="Protocol\Messages\Game\SkillUpRequestMessage.cs" />
@@ -129,7 +136,7 @@
     <Compile Include="Protocol\Messages\StateMessage2.cs" />
     <Compile Include="Protocol\Types\ReplicateStat.cs" />
     <Compile Include="Utils\AsyncRandom.cs" />
-    <Compile Include="Inibin\InibinHashEnum.cs" />
+    <Compile Include="IO\Inibin\InibinHashEnum.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\Singleton.cs" />
   </ItemGroup>

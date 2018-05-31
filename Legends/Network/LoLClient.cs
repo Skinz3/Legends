@@ -96,5 +96,10 @@ namespace Legends.Network
         {
             Console.WriteLine("todo disconnect");
         }
+
+        public void OnDisconnect()
+        {
+            Player.OnDisconnect();
+        }
     }
 }

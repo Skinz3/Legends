@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.Core.Inibin
+namespace Legends.Core.IO.Inibin
 {
     public enum InibinHashEnum : uint
     {

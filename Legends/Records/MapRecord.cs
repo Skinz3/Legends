@@ -1,4 +1,5 @@
-﻿using Legends.ORM.Attributes;
+﻿using Legends.Core.IO.MOB;
+using Legends.ORM.Attributes;
 using Legends.ORM.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Legends.Records
 {
-    [Table("maps")]
+    [Table("maps", 3)]
     public class MapRecord : ITable
     {
         public static List<MapRecord> Maps = new List<MapRecord>();
@@ -25,6 +26,13 @@ namespace Legends.Records
 
         public float Height;
 
+        [Ignore]
+        public MapObjectRecord[] Objects
+        {
+            get;
+            private set;
+        }
+
         public MapRecord()
         {
 
@@ -36,6 +44,11 @@ namespace Legends.Records
             this.MiddleOfMap = middleOfMap;
             this.Width = width;
             this.Height = height;
+            this.Objects = MapObjectRecord.GetObjects(Id); 
+        }
+        public MapObjectRecord[] GetObjects(MOBObjectType type)
+        {
+            return Array.FindAll(Objects, x => x.Type == type);
         }
         public static MapRecord GetMap(int id)
         {

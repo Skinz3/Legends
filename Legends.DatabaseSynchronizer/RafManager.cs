@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Legends.DatabaseSynchronizer
 {
-    public class RafManager
+    public class RafManager : IDisposable
     {
         public const string ARCHIVE_RELATIVE_PATH = @"RADS\projects\lol_game_client\filearchives\";
         public const string ARCHIVE_EXTENSION = ".raf";
@@ -88,8 +88,13 @@ namespace Legends.DatabaseSynchronizer
             return results.ToArray();
         }
 
-
-        
-
+        public void Dispose()
+        {
+            foreach (var raf in Archives)
+            {
+                raf.Dispose();
+            }
+            Archives = new RAF[0];
+        }
     }
 }

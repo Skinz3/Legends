@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FieldSanitizer.cs" />
     <Compile Include="InibinHook.cs" />
     <Compile Include="Attributes\InibinMethod.cs" />
     <Compile Include="InibinSynchronizer.cs" />

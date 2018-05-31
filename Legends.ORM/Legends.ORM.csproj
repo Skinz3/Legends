@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Addon\SaveTask.cs" />
     <Compile Include="Addon\SQLVector2.cs" />
+    <Compile Include="Addon\SQLVector3.cs" />
     <Compile Include="Attributes\BeforeSavingAttribute.cs" />
     <Compile Include="Attributes\IgnoreAttribute.cs" />
     <Compile Include="Attributes\InibinFieldAttribute.cs" />

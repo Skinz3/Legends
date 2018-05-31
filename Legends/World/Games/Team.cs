@@ -58,6 +58,11 @@ namespace Legends.World.Games
             unit.TeamNo = Size + 1;
             Units.Add(unit.TeamNo, unit);
         }
+
+        public void RemoveUnit(Unit unit)
+        {
+            Units.Remove(unit.TeamNo);
+        }
         public Team GetOposedTeam()
         {
             return Id == TeamId.BLUE ? Game.PurpleTeam : Game.BlueTeam;
@@ -95,7 +100,6 @@ namespace Legends.World.Games
                 }
             }
         }
-
 
     }
 }

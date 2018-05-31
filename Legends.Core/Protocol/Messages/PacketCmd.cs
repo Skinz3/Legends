@@ -107,7 +107,7 @@ namespace Legends.Core.Protocol
         PKT_S2C_MessageBoxRight = 0xA0,
         PKT_PauseGame = 0xA1,
         PKT_S2C_RemoveMessageBoxTop = 0xA2,
-        PKT_S2C_Announce2 = 0xA3, // ? idk
+        PKT_S2C_UnitAnnounce = 0xA3, 
         PKT_C2S_Surrender = 0xA4,
         PKT_S2C_SurrenderResult = 0xA5,
         PKT_S2C_RemoveMessageBoxRight = 0xA7,

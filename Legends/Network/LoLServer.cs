@@ -116,6 +116,11 @@ namespace Legends.Network
                             break;
 
                         case EventType.Disconnect:
+                            if (enetEvent.peer->connectID == 0)
+                            {
+                                return;
+                            }
+                            m_clients[enetEvent.peer->connectID].OnDisconnect();
                             m_clients.Remove(enetEvent.peer->connectID);
                             logger.Write("Client disconnected", MessageState.IMPORTANT_INFO);
                             break;

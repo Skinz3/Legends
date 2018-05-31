@@ -176,6 +176,10 @@ namespace Legends.ORM.IO
             {
                 value = new SQLVector2((Vector2)field.GetValue(element)).ToString();
             }
+            if (field.FieldType == typeof(Vector3))
+            {
+                value = new SQLVector3((Vector3)field.GetValue(element)).ToString();
+            }
             else
             {
                 if (field.FieldType.IsGenericType)

@@ -67,39 +67,9 @@ namespace Legends.DatabaseSynchronizer
                                 if (inibin.Sets[flag].Properties.ContainsKey((uint)attribute.hash))
                                 {
                                     var value = inibin.Sets[flag].Properties[(uint)attribute.hash];
-
-                                    if (value.ToString() == "No")
-                                    {
-                                        field.SetValue(record, false);
-                                    }
-                                    else if (value.ToString() == "Yes")
-                                    {
-                                        field.SetValue(record, true);
-                                    }
-                                    else if (value.ToString() == true.ToString() && field.FieldType != typeof(Boolean))
-                                    {
-                                        field.SetValue(record, 1);
-                                    }
-                                    else if (value.ToString() == false.ToString() && field.FieldType != typeof(Boolean))
-                                    {
-                                        field.SetValue(record, 0);
-                                    }
-                                    else if (value.ToString().Split('.').Last() == "0")
-                                    {
-                                        field.SetValue(record, Convert.ChangeType(value.ToString().Split('.')[0], field.FieldType));
-                                    }
-                                    else if (value.ToString().Contains('.'))
-                                    {
-                                        value = value.ToString().Replace('.', ',');
-                                        field.SetValue(record, Convert.ChangeType(value.ToString(), field.FieldType));
-                                    }
-                                    else if (value.ToString().StartsWith("."))
-                                    {
-                                        value = "0" + value.ToString().Replace('.', ',');
-                                        field.SetValue(record, Convert.ChangeType(value.ToString(), field.FieldType));
-                                    }
-                                    else
-                                    {
+                                    value = FieldSanitizer.Sanitize(value.ToString(), field.FieldType);
+                                   
+                                  
                                         try
                                         {
                                             field.SetValue(record, Convert.ChangeType(value.ToString(), field.FieldType));
@@ -108,7 +78,7 @@ namespace Legends.DatabaseSynchronizer
                                         {
                                             logger.Write("Unable to assign field (" + field.Name + ") to value :" + value + " for " + Path.GetFileNameWithoutExtension(entry.Path), MessageState.WARNING);
                                         }
-                                    }
+                                     
                                 }
                             }
                         }
@@ -144,6 +114,7 @@ namespace Legends.DatabaseSynchronizer
                 logger.Write("Synchronized: " + type.Name);
 
             }
+            logger.Write("Done", MessageState.IMPORTANT_INFO);
         }
         public MethodInfo GetInibinMethodInfo(Type recordType)
         {

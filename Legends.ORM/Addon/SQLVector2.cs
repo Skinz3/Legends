@@ -49,11 +49,21 @@ namespace Legends.ORM.Addon
         {
             return string.Format(FORMATTER, Convert(X), Convert(Y));
         }
-        private string Convert(float f)
+        public static string Convert(float f)
         {
             string integer = Math.Truncate(f).ToString();
-            string deci = f.ToString().Split(',').Last();
-            return integer + "." + deci;
+
+            var split = f.ToString().Split(',');
+
+            if (split.Length > 1)
+            {
+                string deci = split.Last();
+                return integer + "." + deci;
+            }
+            else
+            {
+                return integer;
+            }
         }
         public static SQLVector2 Deserialize(string data)
         {

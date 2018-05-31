@@ -68,9 +68,16 @@
     <Compile Include="Records\ChampionRecord.cs" />
     <Compile Include="Records\ExperienceRecord.cs" />
     <Compile Include="Records\ItemRecord.cs" />
+    <Compile Include="Records\MapObjectRecord.cs" />
     <Compile Include="Records\MapRecord.cs" />
     <Compile Include="Records\SkinRecord.cs" />
     <Compile Include="Records\SpellRecord.cs" />
+    <Compile Include="World\Buildings\AITurret.cs" />
+    <Compile Include="World\Buildings\AnimatedBuilding.cs" />
+    <Compile Include="World\Buildings\BuildingManager.cs" />
+    <Compile Include="World\Buildings\Inhibitor.cs" />
+    <Compile Include="World\Buildings\Nexus.cs" />
+    <Compile Include="World\Buildings\Turret.cs" />
     <Compile Include="World\Champions\Champion.cs" />
     <Compile Include="World\Champions\ChampionManager.cs" />
     <Compile Include="World\Champions\Dummy.cs" />
@@ -78,6 +85,7 @@
     <Compile Include="World\Commands\CommandAttribute.cs" />
     <Compile Include="World\Commands\CommandsManager.cs" />
     <Compile Include="World\Commands\CommandsRepertory.cs" />
+    <Compile Include="World\Buildings\Building.cs" />
     <Compile Include="World\Entities\Statistics\AIStats.cs" />
     <Compile Include="World\Entities\AttackableUnit.cs" />
     <Compile Include="World\Entities\MovableUnit.cs" />
@@ -92,6 +100,7 @@
     <Compile Include="World\Entities\Replication\Stat.cs" />
     <Compile Include="World\Entities\Replication\StatMod.cs" />
     <Compile Include="World\Entities\Statistics\Stats.cs" />
+    <Compile Include="World\Entities\Statistics\TurretStats.cs" />
     <Compile Include="World\Entities\Unit.cs" />
     <Compile Include="World\Games\Game.cs" />
     <Compile Include="World\Games\GamesManager.cs" />

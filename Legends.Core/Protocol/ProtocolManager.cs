@@ -147,7 +147,7 @@ namespace Legends.Core.Protocol
         {
             if (message == null)
             {
-                client.Disconnect();
+                // client.Disconnect();
                 return false;
             }
 

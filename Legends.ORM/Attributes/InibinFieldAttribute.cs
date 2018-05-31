@@ -1,4 +1,4 @@
-﻿using Legends.Core.Inibin;
+﻿using Legends.Core.IO.Inibin;
 using Legends.Core.Utils;
 using System;
 using System.Collections.Generic;

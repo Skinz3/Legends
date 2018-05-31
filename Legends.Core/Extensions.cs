@@ -1,8 +1,10 @@
-﻿using Legends.Core.Utils;
+﻿using Legends.Core.IO;
+using Legends.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Numerics;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
@@ -21,6 +23,16 @@ namespace Legends.Core
                 return default(T);
 
             return enumerable.ElementAt(new AsyncRandom().Next(count));
+        }
+        public static Vector3 DeserializeVector3(LittleEndianReader reader)
+        {
+            return new Vector3(reader.ReadFloat(), reader.ReadFloat(), reader.ReadFloat());
+        }
+        public static void Serialize(this Vector3 vector3,LittleEndianWriter writer)
+        {
+            writer.WriteFloat(vector3.X);
+            writer.WriteFloat(vector3.Y);
+            writer.WriteFloat(vector3.Z);
         }
         public static T[] Random<T>(this IEnumerable<T> enumerable, int count)
         {

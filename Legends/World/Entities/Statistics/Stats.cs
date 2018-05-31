@@ -41,7 +41,7 @@ namespace Legends.World.Entities.Statistics
         public bool IsTargetable
         {
             get;
-            private set;
+            set;
         }
         public IsTargetableToTeamFlags TargetableToTeam
         {
@@ -58,7 +58,7 @@ namespace Legends.World.Entities.Statistics
             get;
             private set;
         }
-        public Stats(float baseHeath, float baseMana, float baseHpRegen,float baseArmor)
+        public Stats(float baseHeath, float baseMana, float baseHpRegen, float baseArmor)
         {
             this.Health = new Health(baseHeath);
             this.Mana = new Health(baseMana);

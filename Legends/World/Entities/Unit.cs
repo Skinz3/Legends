@@ -1,4 +1,5 @@
 ﻿using Legends.Core.Protocol.Enum;
+using Legends.Core.Protocol.Messages.Game;
 using Legends.World.Entities.Movements;
 using Legends.World.Games;
 using Legends.World.Games.Maps;
@@ -13,6 +14,8 @@ namespace Legends.World.Entities
 {
     public abstract class Unit
     {
+        public const float DEFAULT_MODEL_SIZE = 1f;
+
         public int NetId
         {
             get;
@@ -39,6 +42,16 @@ namespace Legends.World.Entities
         {
             get;
         }
+        public string Model
+        {
+            get;
+            protected set;
+        }
+        public int SkinId
+        {
+            get;
+            protected set;
+        }
         private List<Action> SynchronizedActions
         {
             get;
@@ -46,17 +59,17 @@ namespace Legends.World.Entities
         }
         public Unit()
         {
-          
+
             VisibleUnit = new List<Unit>();
             SynchronizedActions = new List<Action>();
         }
-       
+
         public Vector2 Position
         {
             get;
             set;
         }
-  
+
         public List<Unit> VisibleUnit
         {
             get;
@@ -76,7 +89,16 @@ namespace Legends.World.Entities
         {
 
         }
-
+        public virtual void UpdateModel(string newModel, bool updateSpells, int skinId)
+        {
+            Model = newModel;
+            SkinId = skinId;
+            Game.Send(new UpdateModelMessage(NetId, newModel, updateSpells, skinId));
+        }
+        /// <summary>
+        /// Called by Game.AddUnit()
+        /// </summary>
+        /// <param name="team"></param>
         public void DefineTeam(Team team)
         {
             this.Team = team;
@@ -95,7 +117,7 @@ namespace Legends.World.Entities
             {
                 SynchronizedActions[i].Invoke();
             }
-         
+
             SynchronizedActions.Clear();
         }
         public abstract void OnUnitEnterVision(Unit unit);
@@ -119,6 +141,9 @@ namespace Legends.World.Entities
         {
             return VisibleUnit.Contains(other) || other.Team == this.Team;
         }
-
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

@@ -1,7 +1,8 @@
-﻿using Legends.Core.Inibin;
+﻿using Legends.Core.IO.Inibin;
 using Legends.Core.Utils;
 using Legends.ORM.Attributes;
 using Legends.ORM.Interfaces;
+using Legends.World.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -167,7 +168,7 @@ namespace Legends.Records
             }
             else
             {
-                return SkinRecord.DEFAULT_SKIN_SCALE;
+                return Unit.DEFAULT_MODEL_SIZE;
             }
         }
 

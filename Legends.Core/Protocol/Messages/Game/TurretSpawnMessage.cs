@@ -22,7 +22,7 @@ namespace Legends.Core.Protocol.Messages.Game
         {
 
         }
-        public TurretSpawnMessage(int turretNetId, string turretName)
+        public TurretSpawnMessage(int netId, int turretNetId, string turretName) : base(netId)
         {
             this.turretNetId = turretNetId;
             this.turretName = turretName;
@@ -38,9 +38,9 @@ namespace Legends.Core.Protocol.Messages.Game
 
             writer.WriteInt(turretNetId);
             writer.WriteByte((byte)0x40);
-            foreach (var b in Encoding.Default.GetBytes(turretName))
+            foreach (var b in Encoding.UTF8.GetBytes(turretName))
                 writer.WriteByte((byte)b);
-
+                
             writer.Fill(0, 64 - turretName.Length);
             writer.WriteByte((byte)0x0C);
             writer.WriteByte((byte)0x00);

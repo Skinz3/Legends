@@ -18,6 +18,16 @@ namespace Legends.Handlers
 {
     class GameHandler
     {
+        [MessageHandler(PacketCmd.PKT_C2S_Click,Channel.CHL_C2S)]
+        public static void HandleClickMessage(ClickMessage message,LoLClient client)
+        {
+            var targetUnit = client.Player.Game.Map.GetUnit(message.targetNetId);
+
+            if (targetUnit != null)
+            {
+                client.Player.DebugMessage("You clicked on :" + targetUnit.Name);
+            }
+        }
         /// <summary>
         /// There is a bug while encoding message, we receive all good, but are sending the wrong way, mb
         /// </summary>
@@ -114,16 +124,12 @@ namespace Legends.Handlers
                     WaypointsReader wayPointsReader = new WaypointsReader(message.moveData, message.coordCount, client.Player.Game.Map.Size);
 
                     client.Player.Invoke(new Action(() =>
-                    {
-                        client.Player.WaypointsCollection.SetWaypoints(wayPointsReader.Waypoints);
+                   {
+                       client.Player.WaypointsCollection.SetWaypoints(wayPointsReader.Waypoints);
+                       client.Player.SendVision(new MovementAnswerMessage(0, Environment.TickCount, client.Player.WaypointsCollection.GetWaypoints(), client.Player.NetId,
+                     client.Player.Game.Map.Size), Channel.CHL_LOW_PRIORITY);
 
-                        client.Player.SendVision(new MovementAnswerMessage(0, Environment.TickCount, client.Player.WaypointsCollection.GetWaypoints(), client.Player.NetId,
-                        client.Player.Game.Map.Size), Channel.CHL_LOW_PRIORITY);
-
-                    }));
-
-
-
+                   }));
 
                     break;
                 case MovementType.ATTACK:

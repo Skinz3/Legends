@@ -1,4 +1,6 @@
 ﻿using ENet;
+using Legends.Core.Cryptography;
+using Legends.Core.IO.MOB;
 using Legends.Core.Protocol;
 using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Game;
@@ -6,12 +8,15 @@ using Legends.Core.Protocol.LoadingScreen;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.Core.Protocol.Other;
 using Legends.Network;
+using Legends.Records;
+using Legends.World.Buildings;
 using Legends.World.Entities;
 using Legends.World.Games.Maps;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -101,7 +106,7 @@ namespace Legends.World.Games
             this.Timer = new Timer(REFRESH_RATE);
         }
         /// <summary>
-        /// Add player to the game and to his team (using Player.Datas)
+        /// Add player to the game and to his team 
         /// </summary>
         /// <param name="player"></param>
         public void AddUnit(Unit unit, TeamId teamId)
@@ -118,6 +123,10 @@ namespace Legends.World.Games
                 PurpleTeam.AddUnit(unit);
             }
             unit.Initialize();
+        }
+        public void RemoveUnit(Player player)
+        {
+            player.Team.RemoveUnit(player);
         }
         public bool Contains(long userId)
         {
@@ -136,12 +145,23 @@ namespace Legends.World.Games
         }
         public void Start()
         {
-            Spawn();
-
-            foreach (var player in Players)
+            foreach (Player player in Players)
             {
                 Map.AddUnit(player);
             }
+
+            foreach (MapObjectRecord gameObject in Map.Record.GetObjects(MOBObjectType.Turret))
+            {
+                gameObject.Name += "_A"; // ?
+                int netId = (int)(0xFF000000 | CRC32.Compute(Encoding.ASCII.GetBytes(gameObject.Name)));
+                AITurret turret = new AITurret(netId, gameObject);
+                turret.DefineGame(this);
+                AddUnit(turret, TeamId.PURPLE);
+                Map.AddUnit(turret);
+
+            }
+
+            Spawn();
 
             StartCallback();
             this.Started = true;
@@ -179,24 +199,35 @@ namespace Legends.World.Games
         {
             Send(new AnnounceMessage(0, Map.Id, announce));
         }
+        public void UnitAnnounce(UnitAnnounceEnum announce, int netId, int sourceNetId = 0, int[] assitsNetId = null)
+        {
+            Send(new UnitAnnounceMessage(netId, announce, sourceNetId, assitsNetId));
+        }
         private void Spawn()
         {
             Send(new StartSpawnMessage());
 
-            foreach (var player in Players)
+            foreach (var player in Map.Units.OfType<Player>())
             {
-                Send(new HeroSpawnMessage(player.NetId, player.PlayerNo, player.Data.TeamId, player.Data.SkinId, player.Data.Name,
-                    player.Data.ChampionName));
+                Send(new HeroSpawnMessage(player.NetId, player.PlayerNo, player.Data.TeamId, player.SkinId, player.Data.Name,
+                    player.Model));
 
                 player.UpdateInfos();
                 player.UpdateStats(false);
                 player.UpdateHeath();
 
-                Send(new TurretSpawnMessage(NetIdProvider.PopNextNetId(), "@Turret_T1_R_03_A"));
-                Send(new TurretSpawnMessage(NetIdProvider.PopNextNetId(), "@Turret_T1_L_03_A"));
+            }
+
+
+            foreach (var turret in Map.Units.OfType<AITurret>())
+            {
+                Send(new TurretSpawnMessage(0, turret.NetId, turret.Name));
+                turret.UpdateHeath();
             }
 
             Send(new EndSpawnMessage());
         }
+
+
     }
 }

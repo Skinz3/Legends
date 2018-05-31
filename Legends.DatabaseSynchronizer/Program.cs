@@ -16,6 +16,9 @@ using System.Numerics;
 using Legends.Core.IO.NavGrid;
 using System.Diagnostics;
 using Legends.Core.IO.RAF;
+using Legends.Core.IO;
+using Legends.Core.IO.MOB;
+using Legends.ORM.Addon;
 
 namespace Legends.DatabaseSynchronizer
 {
@@ -30,14 +33,16 @@ namespace Legends.DatabaseSynchronizer
 
         static void Main(string[] args)
         {
-          
+            RafManager test = new RafManager(LeagueOfLegendsPath);
+            var aa = test.GetFiles("objects.cfg");
             /* JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/skins.json","SKINS");  */
-            logger.OnStartup(); 
+            logger.OnStartup();
             var recordAssembly = Assembly.GetAssembly(typeof(ChampionRecord));
             DatabaseManager manager = new DatabaseManager(recordAssembly, "127.0.0.1", "legends", "root", "");
             manager.UseProvider();
 
             SynchronizeMaps();
+            SynchronizeMapObjects();
 
             InibinSynchronizer synchronizer = new InibinSynchronizer(LeagueOfLegendsPath, recordAssembly);
             synchronizer.Sync();
@@ -46,7 +51,35 @@ namespace Legends.DatabaseSynchronizer
 
         }
 
+        private static void SynchronizeMapObjects()
+        {
+            List<MapObjectRecord> objects = new List<MapObjectRecord>();
 
+            RafManager manager = new RafManager(LeagueOfLegendsPath);
+
+            var mobFiles = manager.GetFiles(".mob");
+
+
+
+            foreach (var file in mobFiles)
+            {
+                var mob = new MOBFile(new MemoryStream(file.GetContent(true)));
+                int mapId = int.Parse(new string(file.Path.Split('/')[1].Skip(3).ToArray()));
+
+                foreach (var obj in mob.Objects)
+                {
+                    MapObjectRecord record = new MapObjectRecord(mapId, obj.Name, obj.Position, obj.Type,
+                        obj.Scale, obj.Rotation);
+                    objects.Add(record);
+
+                }
+            }
+            DatabaseManager.GetInstance().CreateTable(typeof(MapObjectRecord));
+            objects.AddInstantElements(typeof(MapObjectRecord));
+
+            logger.Write("Map objects synchronized");
+            manager.Dispose();
+        }
         /// <summary>
         /// LEVELS/map11
         /// </summary>
@@ -78,7 +111,7 @@ namespace Legends.DatabaseSynchronizer
 
             DatabaseManager.GetInstance().CreateTable(typeof(MapRecord));
             records.AddInstantElements(typeof(MapRecord));
-
+            manager.Dispose();
             logger.Write("Map synchronized");
 
         }
