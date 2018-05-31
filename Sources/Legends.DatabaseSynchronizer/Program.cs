@@ -31,6 +31,11 @@ namespace Legends.DatabaseSynchronizer
 
         static void Main(string[] args)
         {
+            RafManager manager = new RafManager(LeagueOfLegendsPath);
+
+            var test = manager.GetFiles("ExpCurve.inibin");
+
+
             /* JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/skins.json","SKINS");  */
             logger.OnStartup();
             var recordAssembly = Assembly.GetAssembly(typeof(AIUnitRecord));
