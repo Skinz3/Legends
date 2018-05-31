@@ -34,10 +34,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,24 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Addon\SaveTask.cs" />
-    <Compile Include="Addon\SQLVector2.cs" />
-    <Compile Include="Addon\SQLVector3.cs" />
-    <Compile Include="Attributes\BeforeSavingAttribute.cs" />
-    <Compile Include="Attributes\IgnoreAttribute.cs" />
+    <Compile Include="Attributes\JsonCacheAttribute.cs" />
+    <Compile Include="Attributes\JsonFileNameAttribute.cs" />
     <Compile Include="Attributes\InibinFieldAttribute.cs" />
-    <Compile Include="Attributes\PrimaryAttribute.cs" />
-    <Compile Include="Attributes\RemoveWhereIdAttribute.cs" />
-    <Compile Include="Attributes\ResettableAttribute.cs" />
     <Compile Include="Attributes\TableAttribute.cs" />
-    <Compile Include="Attributes\TranslationAttribute.cs" />
-    <Compile Include="Attributes\UpdateAttribute.cs" />
-    <Compile Include="Attributes\XmlAttribute.cs" />
     <Compile Include="DatabaseManager.cs" />
-    <Compile Include="Interfaces\ITable.cs" />
-    <Compile Include="IO\DatabaseReader.cs" />
-    <Compile Include="IO\DatabaseWriter.cs" />
     <Compile Include="ORMExtensions.cs" />
+    <Compile Include="Interfaces\ITable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +64,12 @@
       <Project>{9075ff6e-824e-4468-851e-83d1354a7bce}</Project>
       <Name>Legends.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IO\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

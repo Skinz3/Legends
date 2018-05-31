@@ -13,6 +13,7 @@ using Legends.Core.Utils;
 using Legends.Core.Protocol;
 using Legends.Configurations;
 using Legends.Core.IO;
+using Legends.Core.DesignPattern;
 
 namespace Legends.Network
 {
@@ -36,12 +37,13 @@ namespace Legends.Network
 
         static Logger logger = new Logger();
 
-        public static bool Initialize()
+        [StartupInvoke("Server", StartupInvokePriority.Last)]
+        public static void Initialize()
         {
 
             m_clients = new Dictionary<uint, LoLClient>();
             if (enet_initialize() < 0)
-                return false;
+                throw new Exception("Unable to initialize ENet...");
 
             var address = new ENetAddress();
             address.host = SERVER_HOST;
@@ -50,19 +52,19 @@ namespace Legends.Network
             _server = enet_host_create(&address, new IntPtr(32), new IntPtr(32), 0, 0);
 
             if (_server == null)
-                return false;
+                throw new Exception("Unable to start ENet server...");
 
             var key = Convert.FromBase64String(SERVER_KEY);
 
             if (key.Length <= 0)
-                return false;
+                throw new Exception("Unable to convert SERVER_KEY...");
 
             fixed (byte* s = key)
             {
                 _blowfish = BlowFishCS.BlowFishCreate(s, new IntPtr(16));
             }
 
-            return true;
+          
         }
         public static BlowFish* GetBlowfish()
         {

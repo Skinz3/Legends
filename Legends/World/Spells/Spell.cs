@@ -9,14 +9,6 @@ namespace Legends.World.Spells
 {
     public class Spell
     {
-        private SpellRecord Record
-        {
-            get;
-            set;
-        }
-        public Spell(SpellRecord spellRecord)
-        {
-            this.Record = spellRecord;
-        }
+      
     }
 }

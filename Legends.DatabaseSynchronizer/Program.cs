@@ -11,14 +11,12 @@ using Legends.Records;
 using System.Reflection;
 using Legends.ORM;
 using Legends.Core.Utils;
-using Legends.Core.JSON;
 using System.Numerics;
 using Legends.Core.IO.NavGrid;
 using System.Diagnostics;
 using Legends.Core.IO.RAF;
 using Legends.Core.IO;
 using Legends.Core.IO.MOB;
-using Legends.ORM.Addon;
 
 namespace Legends.DatabaseSynchronizer
 {
@@ -33,59 +31,67 @@ namespace Legends.DatabaseSynchronizer
 
         static void Main(string[] args)
         {
-            RafManager test = new RafManager(LeagueOfLegendsPath);
-            var aa = test.GetFiles("objects.cfg");
             /* JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/skins.json","SKINS");  */
             logger.OnStartup();
             var recordAssembly = Assembly.GetAssembly(typeof(ChampionRecord));
-            DatabaseManager manager = new DatabaseManager(recordAssembly, "127.0.0.1", "legends", "root", "");
-            manager.UseProvider();
+
+            DatabaseManager.Instance.Initialize(Environment.CurrentDirectory, recordAssembly);
+            DatabaseManager.Instance.LoadTables();
 
             SynchronizeMaps();
-            SynchronizeMapObjects();
-
+            SynchronizeExperience();
             InibinSynchronizer synchronizer = new InibinSynchronizer(LeagueOfLegendsPath, recordAssembly);
             synchronizer.Sync();
 
             Console.Read();
 
         }
-
-        private static void SynchronizeMapObjects()
+        private static void SynchronizeExperience()
         {
-            List<MapObjectRecord> objects = new List<MapObjectRecord>();
-
-            RafManager manager = new RafManager(LeagueOfLegendsPath);
-
-            var mobFiles = manager.GetFiles(".mob");
-
-
-
-            foreach (var file in mobFiles)
+            float[] cumulativeExps = new float[]
             {
-                var mob = new MOBFile(new MemoryStream(file.GetContent(true)));
-                int mapId = int.Parse(new string(file.Path.Split('/')[1].Skip(3).ToArray()));
+                0f,
+                280f,
+                660f,
+                1140f,
+                1720f,
+                2400f,
+                3180f,
+                4060f,
+                5040f,
+                6120f,
+                7300f,
+                8580f,
+                9960f,
+                11440f,
+                13020f,
+                14700f,
+                16480f,
+                18360f,
+            };
+            List<ExperienceRecord> records = new List<ExperienceRecord>();
 
-                foreach (var obj in mob.Objects)
-                {
-                    MapObjectRecord record = new MapObjectRecord(mapId, obj.Name, obj.Position, obj.Type,
-                        obj.Scale, obj.Rotation);
-                    objects.Add(record);
-
-                }
+            int level = 1;
+            for (int i = 0; i < cumulativeExps.Length; i++)
+            {
+                records.Add(new ExperienceRecord(level, cumulativeExps[i]));
+                level++;
             }
-            DatabaseManager.GetInstance().CreateTable(typeof(MapObjectRecord));
-            objects.AddInstantElements(typeof(MapObjectRecord));
+            records.AddInstantElements();
 
-            logger.Write("Map objects synchronized");
-            manager.Dispose();
+            logger.Write("Experiences synchronized");
         }
+
         /// <summary>
         /// LEVELS/map11
         /// </summary>
         private static void SynchronizeMaps()
         {
+
             RafManager manager = new RafManager(LeagueOfLegendsPath);
+
+
+
             var navGrids = manager.GetFiles("AIPath.aimesh_ngrid");
 
             List<MapRecord> records = new List<MapRecord>();
@@ -102,15 +108,34 @@ namespace Legends.DatabaseSynchronizer
                 record.Width = grid.MapWidth;
                 record.Height = grid.MapHeight;
 
+                var file = manager.GetFile("LEVELS/" + record.Name + "/Scene/MapObjects.mob");
+
+                if (file != null)
+                {
+                    List<MapObjectRecord> objects = new List<MapObjectRecord>();
+                    var mob = new MOBFile(new MemoryStream(file.GetContent(true)));
+                    int mapId = int.Parse(new string(file.Path.Split('/')[1].Skip(3).ToArray()));
+                    foreach (var obj in mob.Objects)
+                    {
+                        objects.Add(new MapObjectRecord(obj.Name, obj.Position, obj.Type,
+                            obj.Scale, obj.Rotation));
+
+                    }
+
+                    record.Objects = objects.ToArray();
+                }
+
+
                 if (ids.Contains(record.Id) == false)
                 {
                     records.Add(record);
                     ids.Add(record.Id);
                 }
+
+
             }
 
-            DatabaseManager.GetInstance().CreateTable(typeof(MapRecord));
-            records.AddInstantElements(typeof(MapRecord));
+            records.AddInstantElements();
             manager.Dispose();
             logger.Write("Map synchronized");
 

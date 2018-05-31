@@ -1,18 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Legends.ORM.Attributes
 {
     public class TableAttribute : Attribute
     {
-        public string tableName;
-        public bool catchAll;
-        public short readingOrder;
+        public string Path;
 
-        public TableAttribute(string tableName, short readingOrder = -1, bool catchAll = true)
+        public TableAttribute(string path)
         {
-            this.tableName = tableName;
-            this.catchAll = catchAll;
-            this.readingOrder = readingOrder;
+            this.Path = path;
         }
     }
 }

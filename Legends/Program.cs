@@ -1,4 +1,5 @@
 ﻿using Legends.Configurations;
+using Legends.Core.DesignPattern;
 using Legends.Core.Protocol;
 using Legends.Core.Utils;
 using Legends.Network;
@@ -12,6 +13,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Numerics;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -25,14 +27,8 @@ namespace Legends
 
         static void Main(string[] args)
         {
-
             logger.OnStartup();
-            ConfigurationManager.Instance.LoadConfiguration();
-            LoadProtocol();
-            LoadDatabase();
-            CommandsManager.Instance.Initialize();
-            ChampionManager.Instance.Initialize();
-            LoLServer.Initialize();
+            StartupManager.Instance.Initialize(Assembly.GetAssembly(typeof(ChampionRecord)));
             logger.Write("Server started");
             Process.Start("StartGame.bat");
             Process.Start("StartGame2.bat");
@@ -41,15 +37,14 @@ namespace Legends
 
             Console.ReadKey();
         }
-        private static void LoadDatabase()
+        [StartupInvoke("Json Database", StartupInvokePriority.First)]
+        public static void LoadDatabase()
         {
-            DatabaseManager databaseManager = new DatabaseManager(Assembly.GetExecutingAssembly(),
-                ConfigurationManager.Instance.Configuration.MySQLHost, ConfigurationManager.Instance.Configuration.DatabaseName,
-                ConfigurationManager.Instance.Configuration.MySQLUser, ConfigurationManager.Instance.Configuration.MySQLPassword);
-
-            databaseManager.LoadTables();
+            DatabaseManager.Instance.Initialize(Environment.CurrentDirectory, Assembly.GetAssembly(typeof(ChampionRecord)));
+            DatabaseManager.Instance.LoadTables();
         }
-        private static void LoadProtocol()
+        [StartupInvoke("Protocol",StartupInvokePriority.Second)]
+        public static void LoadProtocol()
         {
             ProtocolManager.Initialize(Assembly.GetExecutingAssembly(), false);
         }

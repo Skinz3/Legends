@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Legends.ORM.Attributes
 {
-    public class ResettableAttribute : Attribute
+    public class JsonFileNameAttribute : Attribute
     {
+        
     }
 }

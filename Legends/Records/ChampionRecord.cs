@@ -1,8 +1,10 @@
-﻿using Legends.Core.IO.Inibin;
+﻿using Legends.Core.DesignPattern;
+using Legends.Core.IO.Inibin;
 using Legends.Core.Utils;
 using Legends.ORM.Attributes;
 using Legends.ORM.Interfaces;
 using Legends.World.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,103 +13,220 @@ using System.Threading.Tasks;
 
 namespace Legends.Records
 {
-    [Table("champions", 1)]
+    [Table("/Database/Champions/")]
     public class ChampionRecord : ITable
     {
-        public static List<ChampionRecord> Champions = new List<ChampionRecord>();
+        [JsonCache]
+        private static List<ChampionRecord> Champions = new List<ChampionRecord>();
 
-        [Primary]
         [InibinField(InibinHashEnum.CHAMPION_championId)]
-        public int Id;
+        public int Id
+        {
+            get;
+            set;
+        }
 
+        [JsonFileName]
         [InibinFieldFileName]
-        public string Name;
+        public string Name
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_BaseHP)]
-        public double BaseHp;
+        public double BaseHp
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_BaseMP)]
-        public double BaseMp;
+        public double BaseMp
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_MoveSpeed)]
-        public short BaseMovementSpeed;
+        public short BaseMovementSpeed
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_AbilityPowerIncPerLevel)]
-        public short AbilityPowerIncPerLevel;
+        public short AbilityPowerIncPerLevel
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_ArmorPerLevel)]
-        public double ArmorPerLevel;
+        public double ArmorPerLevel
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_AttackRange)]
-        public short AttackRange;
+        public short AttackRange
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_AttackSpeedPerLevel)]
-        public double AttackSpeedPerLevel;
+        public double AttackSpeedPerLevel
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_BaseAbilityPower)]
-        public short BaseAbilityPower;
+        public short BaseAbilityPower
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_BaseCritChance)]
-        public double BaseCritChance;
+        public double BaseCritChance
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_BaseDamage)]
-        public double BaseDamage;
+        public double BaseDamage
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_CritPerLevel)]
-        public double CritPerLevel;
+        public double CritPerLevel
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_DamagePerLevel)]
-        public double DamagePerLevel;
+        public double DamagePerLevel
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_HPPerLevel)]
-        public double HpPerLevel;
+        public double HpPerLevel
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_HPRegenPerLevel)]
-        public double HpRegenPerLevel;
+        public double HpRegenPerLevel
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_IsMelee)]
-        public bool IsMelee;
+        public bool IsMelee
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_MPPerLevel)]
-        public double MpPerLevel;
+        public double MpPerLevel
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_MPRegenPerLevel)]
-        public double MPRegenPerLevel;
+        public double MPRegenPerLevel
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_Armor)]
-        public double BaseArmor;
+        public double BaseArmor
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// SpellBlock = MagicResist => must check
         /// </summary>
         [InibinField(InibinHashEnum.CHAMPION_SpellBlock)]
-        public double BaseMagicResist;
+        public double BaseMagicResist
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_BaseStaticHPRegen)]
-        public double BaseHpRegen;
+        public double BaseHpRegen
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_BaseStaticMPRegen)]
-        public double BaseMpRegen;
+        public double BaseMpRegen
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_SpellBlockPerLevel)]
-        public double MagicResistPerLevel;
+        public double MagicResistPerLevel
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_AttackDelayOffsetPercent)]
-        public double AttackDelayOffsetPercent;
+        public double AttackDelayOffsetPercent
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_BaseDodge)]
-        public double BaseDodge;
+        public double BaseDodge
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_AttackSpeed)]
-        public double BaseAttackSpeed;
+        public double BaseAttackSpeed
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_SelectionHeight)]
-        public double SelectionHeight;
+        public double SelectionHeight
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_SelectionRadius)]
-        public double SelectionRadius;
+        public double SelectionRadius
+        {
+            get;
+            set;
+        }
 
-        [Ignore]
+        [JsonIgnore]
         public SkinRecord[] Skins
         {
             get;
@@ -156,8 +275,17 @@ namespace Legends.Records
             this.BaseAttackSpeed = baseAttackSpeed;
             this.SelectionHeight = selectionHeight;
             this.SelectionRadius = selectionRadius;
-            this.Skins = SkinRecord.GetSkins(Id);
         }
+
+        [StartupInvoke("Champion Hooks", StartupInvokePriority.Eighth)]
+        public static void Initialize()
+        {
+            foreach (var record in ChampionRecord.Champions)
+            {
+                record.Skins = SkinRecord.GetSkins(record.Id);
+            }
+        }
+
         public float GetSkinScale(int skinId)
         {
             var skin = Skins.FirstOrDefault(x => x.SkinId == skinId);

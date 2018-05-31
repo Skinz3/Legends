@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.Records
+namespace Legends.ORM.Attributes
 {
-    class ItemRecord
+    public class JsonCacheAttribute : Attribute
     {
     }
 }

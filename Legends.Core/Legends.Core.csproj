@@ -54,6 +54,10 @@
     <Compile Include="Cryptography\Blowfish.cs" />
     <Compile Include="Cryptography\CRC32.cs" />
     <Compile Include="Cryptography\Crypto.cs" />
+    <Compile Include="DesignPattern\DeveloppementManager.cs" />
+    <Compile Include="DesignPattern\StartupInvoke.cs" />
+    <Compile Include="DesignPattern\StartupInvokePriority.cs" />
+    <Compile Include="DesignPattern\StartupManager.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Geometry\MovementVector.cs" />
     <Compile Include="IO\Inibin\InibinFile.cs" />
@@ -65,7 +69,6 @@
     <Compile Include="IO\NavGrid\NavGridFile.cs" />
     <Compile Include="IO\RAF\RAF.cs" />
     <Compile Include="IO\RAF\RAFFileEntry.cs" />
-    <Compile Include="JSON\JSONSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\ENetClient.cs" />
     <Compile Include="Protocol\Enum\IsTargetableToTeamFlags.cs" />

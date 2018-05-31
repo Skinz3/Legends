@@ -1,4 +1,5 @@
-﻿using Legends.Core.Protocol.Enum;
+﻿using Legends.Core.DesignPattern;
+using Legends.Core.Protocol.Enum;
 using Legends.Core.Utils;
 using Legends.World.Entities;
 using System;
@@ -16,6 +17,7 @@ namespace Legends.World.Champions
 
         private Dictionary<ChampionEnum, Type> Handlers = new Dictionary<ChampionEnum, Type>();
 
+        [StartupInvoke("Champion Manager", StartupInvokePriority.Eighth)]
         public void Initialize()
         {
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
@@ -28,7 +30,7 @@ namespace Legends.World.Champions
                 }
             }
         }
-        public Champion GetChampion(Player player,ChampionEnum champion)
+        public Champion GetChampion(Player player, ChampionEnum champion)
         {
             if (Handlers.ContainsKey(champion))
             {

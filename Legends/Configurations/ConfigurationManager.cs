@@ -1,8 +1,9 @@
-﻿using Legends.Core.JSON;
+﻿using Legends.Core.DesignPattern;
 using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.LoadingScreen;
 using Legends.Core.Utils;
 using Legends.World;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using YAXLib;
 
 namespace Legends.Configurations
 {
@@ -27,10 +29,6 @@ namespace Legends.Configurations
         {
             Configuration = new Configuration()
             {
-                MySQLHost = "127.0.0.1",
-                DatabaseName = "legends",
-                MySQLPassword = "",
-                MySQLUser = "root",
                 ServerPort = 5119,
                 Players = new List<PlayerData>()
                 {
@@ -63,9 +61,7 @@ namespace Legends.Configurations
                 }
             };
 
-
-            JsonSerializer<Configuration> config = new JsonSerializer<Configuration>();
-            config.Serialize(Configuration, PATH);
+            File.WriteAllText(PATH, JsonConvert.SerializeObject(Configuration));
         }
 
         public PlayerData GetPlayerData(long userId)
@@ -73,6 +69,7 @@ namespace Legends.Configurations
             return Configuration.Players.FirstOrDefault(x => x.UserId == userId);
         }
 
+        [StartupInvoke("Configuration",StartupInvokePriority.Primitive)]
         public void LoadConfiguration()
         {
             if (File.Exists(PATH) == false)
@@ -81,8 +78,7 @@ namespace Legends.Configurations
             }
             else
             {
-                JsonSerializer<Configuration> serializer = new JsonSerializer<Configuration>();
-                this.Configuration = serializer.Deserialize(PATH);
+                this.Configuration = JsonConvert.DeserializeObject<Configuration>(File.ReadAllText(PATH));
             }
         }
 

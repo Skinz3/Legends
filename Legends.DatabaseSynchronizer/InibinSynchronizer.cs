@@ -5,7 +5,6 @@ using Legends.DatabaseSynchronizer.Attributes;
 using Legends.ORM;
 using Legends.ORM.Attributes;
 using Legends.ORM.Interfaces;
-using Legends.ORM.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -54,9 +53,9 @@ namespace Legends.DatabaseSynchronizer
 
                 var record = (ITable)Activator.CreateInstance(type);
 
-                foreach (var field in record.GetType().GetFields())
+                foreach (var property in record.GetType().GetProperties())
                 {
-                    var attribute = field.GetCustomAttribute<InibinFieldAttribute>();
+                    var attribute = property.GetCustomAttribute<InibinFieldAttribute>();
 
                     if (attribute != null)
                     {
@@ -67,28 +66,28 @@ namespace Legends.DatabaseSynchronizer
                                 if (inibin.Sets[flag].Properties.ContainsKey((uint)attribute.hash))
                                 {
                                     var value = inibin.Sets[flag].Properties[(uint)attribute.hash];
-                                    value = FieldSanitizer.Sanitize(value.ToString(), field.FieldType);
-                                   
-                                  
-                                        try
-                                        {
-                                            field.SetValue(record, Convert.ChangeType(value.ToString(), field.FieldType));
-                                        }
-                                        catch
-                                        {
-                                            logger.Write("Unable to assign field (" + field.Name + ") to value :" + value + " for " + Path.GetFileNameWithoutExtension(entry.Path), MessageState.WARNING);
-                                        }
-                                     
+                                    value = FieldSanitizer.Sanitize(value.ToString(), property.PropertyType);
+
+
+                                    try
+                                    {
+                                        property.SetValue(record, Convert.ChangeType(value.ToString(), property.PropertyType));
+                                    }
+                                    catch
+                                    {
+                                        logger.Write("Unable to assign field (" + property.Name + ") to value :" + value + " for " + Path.GetFileNameWithoutExtension(entry.Path), MessageState.WARNING);
+                                    }
+
                                 }
                             }
                         }
                     }
 
-                    var attribute2 = field.GetCustomAttribute<InibinFieldFileName>();
+                    var attribute2 = property.GetCustomAttribute<InibinFieldFileName>();
 
                     if (attribute2 != null)
                     {
-                        field.SetValue(record, Path.GetFileNameWithoutExtension(entry.Path));
+                        property.SetValue(record, Path.GetFileNameWithoutExtension(entry.Path));
                     }
                 }
                 records.Add(record);
@@ -109,8 +108,7 @@ namespace Legends.DatabaseSynchronizer
 
                 ITable[] records = GetRecords(type, entries);
 
-                DatabaseManager.GetInstance().CreateTable(type);
-                DatabaseManager.GetInstance().WriterInstance(type, DatabaseAction.Add, records);
+                records.AddInstantElements();
                 logger.Write("Synchronized: " + type.Name);
 
             }

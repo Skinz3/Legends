@@ -8,17 +8,29 @@ using System.Threading.Tasks;
 
 namespace Legends.Records
 {
-    [Table("experiences")]
+    [Table("/Database/Experiences/")]
     public class ExperienceRecord : ITable
     {
-        public static List<ExperienceRecord> Experiences = new List<ExperienceRecord>();
+        [JsonCache]
+        private static List<ExperienceRecord> Experiences = new List<ExperienceRecord>();
 
-        [Primary]
-        public int Level;
+        [JsonFileName]
+        public int Level
+        {
+            get;
+            set;
+        }
 
-        public float CumulativeExp;
+        public float CumulativeExp
+        {
+            get;
+            set;
+        }
+        public ExperienceRecord()
+        {
 
-        public ExperienceRecord(int level,float cumulativeExp)
+        }
+        public ExperienceRecord(int level, float cumulativeExp)
         {
             this.Level = level;
             this.CumulativeExp = cumulativeExp;

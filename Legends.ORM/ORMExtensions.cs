@@ -1,100 +1,49 @@
-﻿using Legends.ORM;
+﻿using Legends.Core.Utils;
+using Legends.ORM.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
-using Legends.ORM.Interfaces;
-using Legends.ORM.Addon;
-using Legends.ORM.IO;
 
-namespace Legends
+namespace Legends.ORM
 {
     public static class ORMExtensions
     {
-        public static object Locker = new object();
-        /// <summary>
-        /// Using SaveTask.cs
-        /// </summary>
-        /// <param name="table"></param>
-        /// <param name="addtolist"></param>
-        public static void UpdateElement(this ITable table)
-        {
-            SaveTask.UpdateElement(table);
-        }
-        /// <summary>
-        /// Using SaveTask.cs
-        /// </summary>
-        /// <param name="table"></param>
-        /// <param name="addtolist"></param>
-        public static void AddElement(this ITable table, bool addtolist = true)
-        {
-            SaveTask.AddElement(table, addtolist);
-        }
-        /// <summary>
-        /// Using SaveTask.cs
-        /// </summary>
-        /// <param name="table"></param>
-        /// <param name="addtolist"></param>
-        public static void RemoveElement(this ITable table, bool removefromlist = true)
-        {
-            SaveTask.RemoveElement(table, removefromlist);
-        }
+        static Logger logger = new Logger();
 
         public static void AddInstantElement<T>(this T table, bool addtolist = true) where T : ITable
         {
-            lock (Locker)
+            string path = DatabaseManager.Instance.GetFilename(table);
+
+            if (File.Exists(path))
             {
-                DatabaseWriter<T>.InstantInsert(table);
-                if (addtolist)
-                    SaveTask.AddToList(table);
+                logger.Write("We override " + path, MessageState.WARNING);
             }
-        }
-        public static void UpdateInstantElement<T>(this T table) where T : ITable
-        {
-            lock (Locker)
-                DatabaseWriter<T>.InstantUpdate(table);
+            string dir = Path.GetDirectoryName(path);
+            File.WriteAllText(path, JsonConvert.SerializeObject(table));
+            DatabaseManager.Instance.AddToList(table);
         }
         public static void RemoveInstantElement<T>(this T table, bool removefromList = true) where T : ITable
         {
-            lock (Locker)
-            {
-                DatabaseWriter<T>.InstantRemove(table);
-                if (removefromList)
-                    SaveTask.RemoveFromList(table);
-            }
-
+            File.Delete(DatabaseManager.Instance.GetFilename(table));
+            DatabaseManager.Instance.RemoveFromList(table);
         }
-        public static void RemoveInstantElements(this IEnumerable<ITable> tables, Type type, bool removefromList = true)
+        public static void RemoveInstantElements(this IEnumerable<ITable> tables, bool removefromList = true)
         {
-            DatabaseManager.GetInstance().WriterInstance(type, DatabaseAction.Remove, tables.ToArray());
-
-            if (removefromList)
+            foreach (var element in tables)
             {
-                foreach (var table in tables)
-                {
-                    SaveTask.RemoveFromList(table);
-                }
+                RemoveInstantElement(element, removefromList);
             }
         }
-        public static void AddInstantElements(this IEnumerable<ITable> tables, Type type, bool addtoList = true)
+        public static void AddInstantElements(this IEnumerable<ITable> tables, bool addtoList = true)
         {
-
-            DatabaseManager.GetInstance().WriterInstance(type, DatabaseAction.Add, tables.ToArray());
-
-            if (addtoList)
+            foreach (var element in tables)
             {
-                foreach (var table in tables)
-                {
-                    SaveTask.AddToList(table);
-                }
+                AddInstantElement(element, addtoList);
             }
-        }
-        public static void UpdateInstantElements(this IEnumerable<ITable> tables, Type type)
-        {
-            DatabaseManager.GetInstance().WriterInstance(type, DatabaseAction.Update, tables.ToArray());
         }
     }
 }

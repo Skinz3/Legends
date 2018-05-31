@@ -1,5 +1,6 @@
 ﻿using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.LoadingScreen;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace Legends.Configurations
             get;
             set;
         }
-        [IgnoreDataMember]
+        [JsonIgnore]
         public TeamId TeamId
         {
             get
@@ -44,7 +45,7 @@ namespace Legends.Configurations
                 return (TeamId)Enum.Parse(typeof(TeamId), Team, true);
             }
         }
-        [IgnoreDataMember]
+        [JsonIgnore]
         public SummonerSpellId Summoner1Spell
         {
             get
@@ -52,7 +53,7 @@ namespace Legends.Configurations
                 return (SummonerSpellId)Enum.Parse(typeof(SummonerSpellId), Summoner1, true);
             }
         }
-        [IgnoreDataMember]
+        [JsonIgnore]
         public SummonerSpellId Summoner2Spell
         {
             get

@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -67,11 +70,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Records\ChampionRecord.cs" />
     <Compile Include="Records\ExperienceRecord.cs" />
-    <Compile Include="Records\ItemRecord.cs" />
-    <Compile Include="Records\MapObjectRecord.cs" />
     <Compile Include="Records\MapRecord.cs" />
     <Compile Include="Records\SkinRecord.cs" />
-    <Compile Include="Records\SpellRecord.cs" />
     <Compile Include="World\Buildings\AITurret.cs" />
     <Compile Include="World\Buildings\AnimatedBuilding.cs" />
     <Compile Include="World\Buildings\BuildingManager.cs" />

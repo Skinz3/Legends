@@ -1,4 +1,5 @@
-﻿using Legends.Core.Protocol.Enum;
+﻿using Legends.Core.DesignPattern;
+using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.Core.Protocol.Other;
 using Legends.Core.Utils;
@@ -18,6 +19,7 @@ namespace Legends.World.Commands
 
         private Dictionary<string, MethodInfo> Handlers = new Dictionary<string, MethodInfo>();
 
+        [StartupInvoke("Commands", StartupInvokePriority.Eighth)]
         public void Initialize()
         {
             foreach (var method in typeof(CommandsRepertory).GetMethods())
@@ -63,6 +65,6 @@ namespace Legends.World.Commands
             }
         }
 
-  
+
     }
 }

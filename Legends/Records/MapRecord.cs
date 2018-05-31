@@ -1,6 +1,7 @@
 ﻿using Legends.Core.IO.MOB;
 using Legends.ORM.Attributes;
 using Legends.ORM.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,41 +11,61 @@ using System.Threading.Tasks;
 
 namespace Legends.Records
 {
-    [Table("maps", 3)]
+    [Table("/Database/Maps/")] 
     public class MapRecord : ITable
     {
-        public static List<MapRecord> Maps = new List<MapRecord>();
+        [JsonCache]
+        private static List<MapRecord> Maps = new List<MapRecord>();
 
-        [Primary]
-        public int Id;
+        public int Id
+        {
+            get;
+            set;
+        }
 
-        public string Name;
+        [JsonFileName]
+        public string Name
+        {
+            get;
+            set;
+        }
 
-        public Vector2 MiddleOfMap;
+        public Vector2 MiddleOfMap
+        {
+            get;
+            set;
+        }
 
-        public float Width;
+        public float Width
+        {
+            get;
+            set;
+        }
 
-        public float Height;
+        public float Height
+        {
+            get;
+            set;
+        }
 
-        [Ignore]
         public MapObjectRecord[] Objects
         {
             get;
-            private set;
+            set;
         }
 
         public MapRecord()
         {
 
         }
-        public MapRecord(int id, string name, Vector2 middleOfMap, float width, float height)
+        public MapRecord(int id, string name, Vector2 middleOfMap, float width, float height, MapObjectRecord[] objects)
         {
             this.Id = id;
             this.Name = name;
             this.MiddleOfMap = middleOfMap;
             this.Width = width;
             this.Height = height;
-            this.Objects = MapObjectRecord.GetObjects(Id); 
+            this.Objects = objects;
         }
         public MapObjectRecord[] GetObjects(MOBObjectType type)
         {
@@ -53,6 +74,47 @@ namespace Legends.Records
         public static MapRecord GetMap(int id)
         {
             return Maps.Find(x => x.Id == id);
+        }
+    }
+    public class MapObjectRecord
+    {
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        public Vector3 Position
+        {
+            get;
+            set;
+        }
+
+        public MOBObjectType Type
+        {
+            get;
+            set;
+        }
+
+        public Vector3 Scale
+        {
+            get;
+            set;
+        }
+
+        public Vector3 Rotation
+        {
+            get;
+            set;
+        }
+
+        public MapObjectRecord(string name, Vector3 position, MOBObjectType type, Vector3 scale, Vector3 rotation)
+        {
+            this.Name = name;
+            this.Position = position;
+            this.Type = type;
+            this.Scale = scale;
+            this.Rotation = rotation;
         }
     }
 

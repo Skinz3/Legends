@@ -8,26 +8,6 @@ namespace Legends.Configurations
 {
     public class Configuration
     {
-        public string MySQLHost
-        {
-            get;
-            set;
-        }
-        public string DatabaseName
-        {
-            get;
-            set;
-        }
-        public string MySQLUser
-        {
-            get;
-            set;
-        }
-        public string MySQLPassword
-        {
-            get;
-            set;
-        }
         public ushort ServerPort
         {
             get;

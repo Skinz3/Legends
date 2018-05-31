@@ -1,6 +1,7 @@
 ﻿using Legends.Core.IO.Inibin;
 using Legends.ORM.Attributes;
 using Legends.ORM.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,28 +10,42 @@ using System.Threading.Tasks;
 
 namespace Legends.Records
 {
-    [Table("skins", 0)]
+    [Table("/Database/Skins/")]
     public class SkinRecord : ITable
     {
-        public static List<SkinRecord> Skins = new List<SkinRecord>();
+        [JsonCache]
+        private static List<SkinRecord> Skins = new List<SkinRecord>();
 
+        [JsonFileName]
         [InibinField(InibinHashEnum.SKINS_ChampionSkinID)]
-        public string ChampionSkinId;
+        public string ChampionSkinId
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHAMPION_ChampionSkinName)]
-        public string Name;
+        public string Name
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.SKINS_SkinScale)]
-        public float Scale;
+        public float Scale
+        {
+            get;
+            set;
+        }
 
-        [Ignore]
+        [JsonIgnore]
         public int SkinId
         {
             get;
             private set;
         }
 
-        [Ignore]
+        [JsonIgnore]
         public int ChampionId
         {
             get;
