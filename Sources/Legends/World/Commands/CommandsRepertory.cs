@@ -18,7 +18,7 @@ namespace Legends.World.Commands
         [Command("position")]
         public static void PositionCommand(LoLClient client)
         {
-            client.Player.DebugMessage(client.Player.Position.ToString());
+            client.Hero.DebugMessage(client.Hero.Position.ToString());
         }
         [Command("test")]
         public static void TestCommand(LoLClient client)
@@ -27,37 +27,37 @@ namespace Legends.World.Commands
         [Command("speed")]
         public static void SpeedCommand(LoLClient client, float speed)
         {
-            client.Player.PlayerStats.MoveSpeed.SetBaseValue(speed);
-            client.Player.UpdateStats(true);
+            client.Hero.PlayerStats.MoveSpeed.SetBaseValue(speed);
+            client.Hero.UpdateStats(true);
         }
         [Command("size")]
         public static void SizeCommand(LoLClient client, float size)
         {
-            client.Player.PlayerStats.ModelSize.SetBaseValue(size);
-            client.Player.UpdateStats(true);
+            client.Hero.PlayerStats.ModelSize.SetBaseValue(size);
+            client.Hero.UpdateStats(true);
         }
         [InDeveloppement(InDeveloppementState.HAS_BUG, "When player leave vision, the model is swap back.")]
         [Command("model")]
         public static void ModelCommand(LoLClient client, string model)
         {
-            client.Player.UpdateModel(model, false, 0);
+            client.Hero.UpdateModel(model, false, 0);
         }
         [Command("skin")]
         public static void SkinCommand(LoLClient client, int skinId)
         {
-            client.Player.UpdateModel(client.Player.Model, false, skinId);
+            client.Hero.UpdateModel(client.Hero.Model, false, skinId);
         }
         [Command("vision")]
         public static void VisionCommand(LoLClient client)
         {
             string str = "I have vision on : ";
             str += Environment.NewLine;
-            foreach (var unit in client.Player.Team.GetVisibleUnits())
+            foreach (var unit in client.Hero.Team.GetVisibleUnits())
             {
-                str += unit.Name + " distance: (" + unit.GetDistanceTo(client.Player) + ")";
-           
+                str += unit.Name + " distance: (" + unit.GetDistanceTo(client.Hero) + ")  +";
+
             }
-            client.Player.DebugMessage(str);
+            client.Hero.DebugMessage(str);
         }
     }
 }

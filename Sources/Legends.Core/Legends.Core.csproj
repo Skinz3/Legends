@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\ENetClient.cs" />
     <Compile Include="Protocol\Enum\IsTargetableToTeamFlags.cs" />
+    <Compile Include="Protocol\Enum\PingTypeEnum.cs" />
     <Compile Include="Protocol\Enum\SpellCanCastBitsEnum.cs" />
     <Compile Include="Protocol\Enum\StatActionStateEnum.cs" />
     <Compile Include="Protocol\Enum\AnnounceEnum.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Protocol\Enum\StatSecondaryId.cs" />
     <Compile Include="Protocol\Enum\StatPrimaryId.cs" />
     <Compile Include="Protocol\Enum\UnitAnnounceEnum.cs" />
+    <Compile Include="Protocol\Messages\AttentionPingAnswerMessage.cs" />
     <Compile Include="Protocol\Messages\BaseMessage.cs" />
     <Compile Include="Protocol\Channel.cs" />
     <Compile Include="Protocol\Enum\ChatChannelType.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Protocol\Enum\SummonerSpellId.cs" />
     <Compile Include="Protocol\Enum\TeamId.cs" />
     <Compile Include="Protocol\Messages\GameMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\AttentionPingRequestMessage.cs" />
     <Compile Include="Protocol\Messages\Game\HeartBeatMessage.cs" />
     <Compile Include="Protocol\Messages\Game\AnnounceMessage.cs" />
     <Compile Include="Protocol\Messages\Game\ChatBoxMessage.cs" />

@@ -20,6 +20,7 @@ using Legends.Core.Utils;
 using ENet;
 using Legends.World.Entities.Statistics;
 using Legends.Core.DesignPattern;
+using Legends.Core.Protocol.Messages;
 
 namespace Legends.World.Entities.AI
 {
@@ -62,11 +63,11 @@ namespace Legends.World.Entities.AI
             get;
             private set;
         }
-        public PlayerStats PlayerStats
+        public HeroStats PlayerStats
         {
             get
             {
-                return Stats as PlayerStats;
+                return Stats as HeroStats;
             }
         }
         public bool Disconnected
@@ -76,7 +77,7 @@ namespace Legends.World.Entities.AI
         }
         public override string Name => Data.Name;
 
-        public override float PerceptionBubbleRadius => ((PlayerStats)Stats).PerceptionBubbleRadius.Total;
+        public override float PerceptionBubbleRadius => ((HeroStats)Stats).PerceptionBubbleRadius.Total;
 
         public AIHero(LoLClient client, PlayerData data)
         {
@@ -87,12 +88,16 @@ namespace Legends.World.Entities.AI
 
         public override void Initialize()
         {
-            ChampionRecord = AIUnitRecord.GetChampion(Data.ChampionName);
+            ChampionRecord = AIUnitRecord.GetAIUnitRecord(Data.ChampionName);
             Champion = ChampionManager.Instance.GetChampion(this, (ChampionEnum)Enum.Parse(typeof(ChampionEnum), Data.ChampionName));
-            Stats = new PlayerStats(ChampionRecord, Data.SkinId);
+            Stats = new HeroStats(ChampionRecord, Data.SkinId);
             Model = Data.ChampionName;
             SkinId = Data.SkinId;
             base.Initialize();
+        }
+        public void AddVision(AIUnit source)
+        {
+            Client.Send(new FogUpdate2Message(Team.Id, source.NetId, source.Position, NetIdProvider.PopNextNetId(), source.PerceptionBubbleRadius));
         }
         public void DebugMessage(string content)
         {
@@ -121,28 +126,22 @@ namespace Legends.World.Entities.AI
             }
         }
 
-        [InDeveloppement(InDeveloppementState.TEMPORARY, "For serialization reasons...")]
         public override void OnUnitEnterVision(Unit unit)
         {
-            if (unit.IsMoving)
-            {
-                AIUnit attackableUnit = (AIUnit)unit;
-                Client.Send(new EnterVisionMessage(false, unit.NetId, unit.Position, attackableUnit.WaypointsCollection.WaypointsIndex, attackableUnit.WaypointsCollection.GetWaypoints(), Game.Map.Record.MiddleOfMap));
-            }
-            else
-            {
-                Client.Send(new EnterVisionMessage(false, unit.NetId, unit.Position, 1, new Vector2[] { unit.Position, unit.Position }, Game.Map.Record.MiddleOfMap));
-            }
+
         }
         public override void OnUnitLeaveVision(Unit unit)
         {
-            Client.Send(new LeaveVisionMessage(unit.NetId));
+
         }
         public void UpdateInfos()
         {
             Game.Send(new PlayerInfoMessage(NetId, Data.Summoner1Spell, Data.Summoner2Spell));
         }
-
+        public void AttentionPing(Vector2 position, int targetNetId, PingTypeEnum pingType)
+        {
+            Team.Send(new AttentionPingAnswerMessage(position, targetNetId, NetId, pingType));
+        }
         public override void UpdateStats(bool partial = true)
         {
             PlayerStats.UpdateReplication(partial);
@@ -163,8 +162,10 @@ namespace Legends.World.Entities.AI
         public void OnDisconnect()
         {
             Disconnected = true;
-            Game.RemoveUnit(this); // sure? 
+            Game.RemoveUnit(this); // maybe depend of reconnect system
             Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId);
         }
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Legends.Core.Protocol.Messages.Game;
+﻿using Legends.Core.Protocol.Enum;
+using Legends.Core.Protocol.Messages.Game;
 using Legends.Records;
 using Legends.World.Buildings;
 using Legends.World.Entities;
@@ -14,36 +15,50 @@ namespace Legends.World.Entities.AI
 {
     public class AITurret : AIUnit
     {
-        public override string Name => MapObject.Name;
+        public override string Name => MapObjectRecord.Name;
 
         public override float PerceptionBubbleRadius => ((TurretStats)Stats).PerceptionBubbleRadius.Total;
 
-        private MapObjectRecord MapObject
+        private MapObjectRecord MapObjectRecord
         {
             get;
             set;
         }
-        public AITurret(int netId,MapObjectRecord mapObject)
+        private string Suffix
+        {
+            get;
+            set;
+        }
+        private AIUnitRecord AIUnitRecord
+        {
+            get;
+            set;
+        }
+        public AITurret(int netId, MapObjectRecord mapObject, string suffix)
         {
             this.NetId = netId;
-            this.MapObject = mapObject;
+            this.MapObjectRecord = mapObject;
             this.Position = new Vector2(mapObject.Position.X, mapObject.Position.Y);
+            this.Suffix = suffix;
         }
         public override void Initialize()
         {
-            Stats = BuildingManager.Instance.GetDefaultStatsForAITurret();
+            AIUnitRecord = BuildingManager.Instance.GetAIUnitRecord(this);
+            Stats = new TurretStats(AIUnitRecord);
             base.Initialize();
         }
         public override void OnUnitEnterVision(Unit unit)
         {
             var t = unit as AIHero;
-
-            Console.WriteLine(t + " touched by " + this);
+            t.AttentionPing(unit.Position, unit.NetId, PingTypeEnum.Ping_Missing);
         }
-
+        public string GetClientName()
+        {
+            return Name + Suffix;
+        }
         public override void OnUnitLeaveVision(Unit unit)
         {
-            
+
         }
 
         public override void UpdateStats(bool partial)

@@ -300,7 +300,7 @@ namespace Legends.Records
             }
         }
 
-        public static AIUnitRecord GetChampion(string name)
+        public static AIUnitRecord GetAIUnitRecord(string name)
         {
             return AIUnits.FirstOrDefault(x => x.Name == name);
         }

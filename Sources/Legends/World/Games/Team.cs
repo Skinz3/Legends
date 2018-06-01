@@ -8,6 +8,10 @@ using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol;
 using ENet;
 using Legends.World.Entities.AI;
+using Legends.Core.Protocol.Game;
+using System.Numerics;
+using Legends.Core.DesignPattern;
+using Legends.Core.Protocol.Messages.Game;
 
 namespace Legends.World.Games
 {
@@ -76,6 +80,23 @@ namespace Legends.World.Games
         {
             return VisibleUnits.ToArray();
         }
+        [InDeveloppement(InDeveloppementState.TEMPORARY)]
+        private void OnTeamEnterVision(Unit unit)
+        {
+            if (unit.IsMoving)
+            {
+                AIUnit attackableUnit = (AIUnit)unit;
+                Send(new EnterVisionMessage(false, unit.NetId, unit.Position, attackableUnit.WaypointsCollection.WaypointsIndex, attackableUnit.WaypointsCollection.GetWaypoints(), Game.Map.Record.MiddleOfMap));
+            }
+            else
+            {
+                Send(new EnterVisionMessage(false, unit.NetId, unit.Position, 1, new Vector2[] { unit.Position, unit.Position }, Game.Map.Record.MiddleOfMap));
+            }
+        }
+        private void OnTeamLeaveVision(Unit unit)
+        {
+            Send(new LeaveVisionMessage(unit.NetId));
+        }
         public void Update(float deltaTime)
         {
             foreach (var opponent in GetOposedTeam().Units.Values)
@@ -91,6 +112,7 @@ namespace Legends.World.Games
                             visible = true;
                             if (!VisibleUnits.Contains(opponent))
                             {
+                                OnTeamEnterVision(opponent);
                                 unit.OnUnitEnterVision(opponent);
                                 VisibleUnits.Add(opponent);
                             }
@@ -106,8 +128,11 @@ namespace Legends.World.Games
                     {
                         VisibleUnits.Remove(opponent);
 
+                        OnTeamLeaveVision(opponent);
+
                         foreach (var unit in Units.Values)
                         {
+                          
                             unit.OnUnitLeaveVision(opponent);
                         }
                     }

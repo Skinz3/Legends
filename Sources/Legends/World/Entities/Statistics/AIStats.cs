@@ -1,5 +1,6 @@
 ﻿using Legends.Core.Protocol.Enum;
 using Legends.Records;
+using Legends.World.Entities.AI;
 using Legends.World.Entities.Statistics.Replication;
 using System;
 using System.Collections.Generic;
@@ -118,6 +119,16 @@ namespace Legends.World.Entities.Statistics
                 return ExperienceRecord.GetLevel(Experience); // weird a bit, threadsafe?
             }
         }
+        public float Gold
+        {
+            get;
+            private set;
+        }
+        public float GoldTotal
+        {
+            get;
+            private set;
+        }
         public int NeutralMinionsKilled
         {
             get;
@@ -148,6 +159,13 @@ namespace Legends.World.Entities.Statistics
             this.PerceptionBubbleRadius = new Stat(basePerceptionBubbleRadius);
             this.MoveSpeed = new Stat(baseMoveSpeed);
             this.ModelSize = new Stat(baseModelSize);
+            this.Gold = AIHero.DEFAULT_START_GOLD;
+            this.GoldTotal = this.Gold;
+        }
+        public void AddGold(float value)
+        {
+            Gold += value;
+            GoldTotal += value;
         }
         public void AddExperience(float value)
         {

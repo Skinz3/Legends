@@ -15,7 +15,13 @@ namespace Legends.World.Entities.AI
             get;
             private set;
         }
-
+        public AIStats AIStats
+        {
+            get
+            {
+                return (AIStats)Stats;
+            }
+        }
         public override bool IsMoving => WaypointsCollection.TargetPosition != null && WaypointsCollection.TargetPosition != Position;
 
         public AIUnit()

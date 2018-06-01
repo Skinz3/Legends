@@ -81,5 +81,9 @@ namespace Legends.World.Entities.Statistics.Replication
             FlatBonus -= modifier.FlatBonus;
             PercentBonus -= modifier.PercentBonus;
         }
+        public override string ToString()
+        {
+            return string.Format("({0})", Total);
+        }
     }
 }

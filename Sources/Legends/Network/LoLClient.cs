@@ -41,7 +41,7 @@ namespace Legends.Network
 
         public override string Ip => "An Ip ";
 
-        public AIHero Player
+        public AIHero Hero
         {
             get;
             private set;
@@ -50,9 +50,9 @@ namespace Legends.Network
         {
             Ready = false;
         }
-        public void DefinePlayer(AIHero player)
+        public void DefinePlayer(AIHero hero)
         {
-            this.Player = player;
+            this.Hero = hero;
         }
         public void OnDataArrival(ENetPacket* packet, Channel channel)
         {
@@ -100,7 +100,7 @@ namespace Legends.Network
 
         public void OnDisconnect()
         {
-            Player.OnDisconnect();
+            Hero.OnDisconnect();
         }
     }
 }

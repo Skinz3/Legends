@@ -153,13 +153,11 @@ namespace Legends.World.Games
 
             foreach (MapObjectRecord gameObject in Map.Record.GetObjects(MOBObjectType.Turret))
             {
-                gameObject.Name += "_A"; // ?
-                int netId = (int)(0xFF000000 | CRC32.Compute(Encoding.ASCII.GetBytes(gameObject.Name)));
-                AITurret turret = new AITurret(netId, gameObject);
+                int netId = (int)(BuildingManager.TOWER_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(gameObject.Name + BuildingManager.TOWER_SUFFIX)));
+                AITurret turret = new AITurret(netId, gameObject, BuildingManager.TOWER_SUFFIX);
                 turret.DefineGame(this);
-                AddUnit(turret, TeamId.PURPLE);
-                Map.AddUnit(turret);       
-
+                AddUnit(turret, BuildingManager.Instance.GetTeamId(turret.Name));
+                Map.AddUnit(turret);
             }
 
             Spawn();
@@ -222,8 +220,16 @@ namespace Legends.World.Games
 
             foreach (var turret in Map.Units.OfType<AITurret>())
             {
-                Send(new TurretSpawnMessage(0, turret.NetId, turret.Name));
+                Send(new TurretSpawnMessage(0, turret.NetId, turret.GetClientName()));
                 turret.UpdateHeath();
+
+                foreach (var player in Map.Units.OfType<AIHero>())
+                {
+                    if (player.Team == turret.Team)
+                    {
+                        player.AddVision(turret);
+                    }
+                }
             }
 
             Send(new EndSpawnMessage());

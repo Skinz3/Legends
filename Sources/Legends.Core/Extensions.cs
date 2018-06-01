@@ -26,13 +26,16 @@ namespace Legends.Core
         }
         public static Vector3 DeserializeVector3(LittleEndianReader reader)
         {
-            return new Vector3(reader.ReadFloat(), reader.ReadFloat(), reader.ReadFloat());
+            float x = reader.ReadFloat();
+            float z = reader.ReadFloat();
+            float y = reader.ReadFloat();
+            return new Vector3(x, y, z);
         }
-        public static void Serialize(this Vector3 vector3,LittleEndianWriter writer)
+        public static void Serialize(this Vector3 vector3, LittleEndianWriter writer)
         {
             writer.WriteFloat(vector3.X);
-            writer.WriteFloat(vector3.Y);
             writer.WriteFloat(vector3.Z);
+            writer.WriteFloat(vector3.Y);
         }
         public static T[] Random<T>(this IEnumerable<T> enumerable, int count)
         {

@@ -60,23 +60,23 @@ namespace Legends.Handlers
             }
             client.DefinePlayer(new AIHero(client, datas));
 
-            client.Player.DefineGame(targetGame);
+            client.Hero.DefineGame(targetGame);
 
-            client.Player.Game.AddUnit(client.Player, client.Player.Data.TeamId);
+            client.Hero.Game.AddUnit(client.Hero, client.Hero.Data.TeamId);
 
-            client.Player.PlayerNo = client.Player.Game.PopNextPlayerNo();
+            client.Hero.PlayerNo = client.Hero.Game.PopNextPlayerNo();
 
             // on montre aux joueurs de la partie que je suis la !
-            client.Player.Game.Send(new KeyCheckMessage(PartialKey, client.Player.PlayerNo, userId, 0, 0, 0), Channel.CHL_HANDSHAKE);
+            client.Hero.Game.Send(new KeyCheckMessage(PartialKey, client.Hero.PlayerNo, userId, 0, 0, 0), Channel.CHL_HANDSHAKE);
 
             // on montre a moi les autre joueurs de la partie
-            foreach (var player in client.Player.Game.Players)
+            foreach (var player in client.Hero.Game.Players)
             {
                 client.Send(new KeyCheckMessage(PartialKey, player.PlayerNo, player.Client.UserId.Value, 0, 0, 0), Channel.CHL_HANDSHAKE);
             }
 
             // useless??
-            client.Send(new WorldGameNumberMessage(client.Player.Game.Id, client.Player.Game.Name), Channel.CHL_S2C);
+            client.Send(new WorldGameNumberMessage(client.Hero.Game.Id, client.Hero.Game.Name), Channel.CHL_S2C);
 
             // blowfish >= 8 
             client.Encrypt = true;
@@ -100,7 +100,7 @@ namespace Legends.Handlers
             else
             {
                 var infos = ConfigurationManager.Instance.GetPlayersInformations();
-                client.Send(new SynchVersionAnswerMessage(0, 1, client.Player.Game.Map.Id, infos,
+                client.Send(new SynchVersionAnswerMessage(0, 1, client.Hero.Game.Map.Id, infos,
                 LoLServer.CLIENT_REQUIRED_VERSION, "CLASSIC", "NA1", 487826), Channel.CHL_S2C);
             }
         }

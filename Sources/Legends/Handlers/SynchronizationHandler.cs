@@ -18,7 +18,7 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_C2S_Ping_Load_Info, Channel.CHL_C2S)]
         public static void HandlePingLoadInfoMessage(PingLoadInfoMessage message, LoLClient client)
         {
-            client.Player.Game.Send(new PingLoadInfoAnswerMessage()
+            client.Hero.Game.Send(new PingLoadInfoAnswerMessage()
             {
                 netId = message.netId,
                 loaded = message.loaded,
@@ -37,7 +37,7 @@ namespace Legends.Handlers
             {
                 var diff = message.ackTime - message.receiveTime;
 
-                var msg = $"Player {client.Player.Name} sent an invalid heartbeat - Timestamp error (diff: {diff})";
+                var msg = $"Player {client.Hero.Name} sent an invalid heartbeat - Timestamp error (diff: {diff})";
                 logger.Write(msg, MessageState.WARNING);
             }
 

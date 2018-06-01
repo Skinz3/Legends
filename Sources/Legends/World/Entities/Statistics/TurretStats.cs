@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Legends.Records;
+using Legends.World.Entities.AI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +21,13 @@ namespace Legends.World.Entities.Statistics
         {
         }
 
+        public TurretStats(AIUnitRecord record):base((float) record.BaseHp, (float) record.BaseMp, (float) record.BaseHpRegen, (float) record.BaseArmor,
+             (float) record.BaseDamage, record.BaseAbilityPower, (float) record.BaseDodge, (float) record.BaseCritChance, (float) record.BaseMagicResist,
+             (float) record.BaseMpRegen, record.AttackRange, (float) record.BaseAttackSpeed, AIHero.DEFAULT_COOLDOWN_REDUCTION,
+             0, 0, 0, 0, 0, AIHero.DEFAULT_PERCEPTION_BUBBLE_RADIUS, record.BaseMovementSpeed, 1)
+        {
+
+        }
         public override void UpdateReplication(bool partial = true)
         {
             ReplicationManager.UpdateFloat(Mana.Total,1,0);

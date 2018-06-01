@@ -32,6 +32,34 @@ namespace Legends.DatabaseSynchronizer
         {
             List<RAFFileEntry> results = new List<RAFFileEntry>();
 
+            var rf = manager.GetFiles("DATA/Characters/");
+            rf = rf.ToList().FindAll(x => x.Path.Contains(".inibin")).ToArray();
+
+
+
+            foreach (var f in rf)
+            {
+                string aiName = f.Path.Split('/')[2];
+
+                string path = string.Format("DATA/Characters/{0}/{0}.inibin", aiName);
+
+                var value = manager.GetFile(path);
+
+                if (value != null && results.Find(x => x.Path == value.Path) == null)
+                    results.Add(value);
+            }
+
+
+
+
+
+
+
+
+
+
+
+            return results.ToArray();
             foreach (ChampionEnum champion in Enum.GetValues(typeof(ChampionEnum)))
             {
                 string path = string.Format("DATA/Characters/{0}/{0}.inibin", champion.ToString());

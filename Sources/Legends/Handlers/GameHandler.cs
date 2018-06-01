@@ -18,49 +18,26 @@ namespace Legends.Handlers
 {
     class GameHandler
     {
-        [MessageHandler(PacketCmd.PKT_C2S_Click,Channel.CHL_C2S)]
-        public static void HandleClickMessage(ClickMessage message,LoLClient client)
+        [MessageHandler(PacketCmd.PKT_C2S_Click, Channel.CHL_C2S)]
+        public static void HandleClickMessage(ClickMessage message, LoLClient client)
         {
-            var targetUnit = client.Player.Game.Map.GetUnit(message.targetNetId);
+            var targetUnit = client.Hero.Game.Map.GetUnit(message.targetNetId);
 
             if (targetUnit != null)
             {
-                client.Player.DebugMessage("You clicked on :" + targetUnit.Name);
+                string msg = "You clicked on {0} Position : {1} Distance to me : {2}";
+                client.Hero.DebugMessage(string.Format(msg, targetUnit.Name, targetUnit.Position, targetUnit.GetDistanceTo(client.Hero)));
             }
         }
-        /// <summary>
-        /// There is a bug while encoding message, we receive all good, but are sending the wrong way, mb
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="client"></param>
-        [MessageHandler(PacketCmd.PKT_ChatBoxMessage, Channel.CHL_COMMUNICATION)]
-        public static void HandleChatBoxMessage(ChatBoxMessage message, LoLClient client)
-        {
-            if (message.content.StartsWith(CommandsManager.COMMANDS_PREFIX))
-            {
-                CommandsManager.Instance.Handle(client, message.content);
-            }
-            else
-            {
-                switch (message.channel)
-                {
-                    case ChatChannelType.ALL:
-                        client.Player.Game.Send(message, Channel.CHL_COMMUNICATION);
-                        break;
-                    case ChatChannelType.TEAM:
-                        client.Player.Team.Send(message, Channel.CHL_COMMUNICATION);
-                        break;
-                }
-            }
-        }
+       
         [MessageHandler(PacketCmd.PKT_C2S_StartGame)]
         public static void HandleStartGameRequestMessage(StartGameRequestMessage message, LoLClient client)
         {
             client.Send(new StartGameMessage(0));
 
-            client.Player.Team.Send(new EnterVisionMessage(true, client.Player.NetId, client.Player.Position, client.Player.WaypointsCollection.WaypointsIndex, client.Player.WaypointsCollection.GetWaypoints(), client.Player.Game.Map.Record.MiddleOfMap));
+            client.Hero.Team.Send(new EnterVisionMessage(true, client.Hero.NetId, client.Hero.Position, client.Hero.WaypointsCollection.WaypointsIndex, client.Hero.WaypointsCollection.GetWaypoints(), client.Hero.Game.Map.Record.MiddleOfMap));
 
-            float gameTime = client.Player.Game.GameTime / 1000f;
+            float gameTime = client.Hero.Game.GameTime / 1000f;
             client.Send(new GameTimerMessage(0, gameTime));
             client.Send(new GameTimerUpdateMessage(0, gameTime));
 
@@ -69,13 +46,13 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_C2S_CharLoaded, Channel.CHL_C2S)]
         public static void HandleCharLoadedMessage(CharLoadedMessage message, LoLClient client)
         {
-            client.Player.ReadyToSpawn = true;
-            client.Player.NetId = NetIdProvider.PopNextNetId(); // start timeout timer
-            client.Player.Position = client.Player.Game.Map.GetStartPosition(client.Player);
+            client.Hero.ReadyToSpawn = true;
+            client.Hero.NetId = NetIdProvider.PopNextNetId(); // start timeout timer
+            client.Hero.Position = client.Hero.Game.Map.GetStartPosition(client.Hero);
 
-            if (client.Player.Game.CanStart)
+            if (client.Hero.Game.CanStart)
             {
-                client.Player.Game.Start();
+                client.Hero.Game.Start();
             }
 
         }
@@ -121,13 +98,13 @@ namespace Legends.Handlers
                     break;
                 case MovementType.MOVE:
 
-                    WaypointsReader wayPointsReader = new WaypointsReader(message.moveData, message.coordCount, client.Player.Game.Map.Size);
+                    WaypointsReader wayPointsReader = new WaypointsReader(message.moveData, message.coordCount, client.Hero.Game.Map.Size);
 
-                    client.Player.Invoke(new Action(() =>
+                    client.Hero.Invoke(new Action(() =>
                    {
-                       client.Player.WaypointsCollection.SetWaypoints(wayPointsReader.Waypoints);
-                       client.Player.SendVision(new MovementAnswerMessage(0, Environment.TickCount, client.Player.WaypointsCollection.GetWaypoints(), client.Player.NetId,
-                     client.Player.Game.Map.Size), Channel.CHL_LOW_PRIORITY);
+                       client.Hero.WaypointsCollection.SetWaypoints(wayPointsReader.Waypoints);
+                       client.Hero.SendVision(new MovementAnswerMessage(0, Environment.TickCount, client.Hero.WaypointsCollection.GetWaypoints(), client.Hero.NetId,
+                     client.Hero.Game.Map.Size), Channel.CHL_LOW_PRIORITY);
 
                    }));
 

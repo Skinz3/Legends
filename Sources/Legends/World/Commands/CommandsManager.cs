@@ -56,12 +56,12 @@ namespace Legends.World.Commands
                 }
                 catch
                 {
-                    client.Player.DebugMessage(name + " usage: [" + string.Join("] [", Array.ConvertAll(methodParams.Skip(1).ToArray(), x => x.ParameterType.Name)) + "]");
+                    client.Hero.DebugMessage(name + " usage: [" + string.Join("] [", Array.ConvertAll(methodParams.Skip(1).ToArray(), x => x.ParameterType.Name)) + "]");
                 }
             }
             else
             {
-                client.Player.DebugMessage("Available commands: ." + string.Join(" " + COMMANDS_PREFIX, Handlers.Keys));
+                client.Hero.DebugMessage("Available commands: ." + string.Join(" " + COMMANDS_PREFIX, Handlers.Keys));
             }
         }
 

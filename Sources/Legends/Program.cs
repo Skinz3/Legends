@@ -43,7 +43,7 @@ namespace Legends
             DatabaseManager.Instance.Initialize(Environment.CurrentDirectory, Assembly.GetAssembly(typeof(AIUnitRecord)));
             DatabaseManager.Instance.LoadTables();
         }
-        [StartupInvoke("Protocol",StartupInvokePriority.Second)]
+        [StartupInvoke("Protocol", StartupInvokePriority.Second)]
         public static void LoadProtocol()
         {
             ProtocolManager.Initialize(Assembly.GetExecutingAssembly(), true);
