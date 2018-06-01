@@ -80,7 +80,7 @@
     <Compile Include="Protocol\Enum\StatSecondaryId.cs" />
     <Compile Include="Protocol\Enum\StatPrimaryId.cs" />
     <Compile Include="Protocol\Enum\UnitAnnounceEnum.cs" />
-    <Compile Include="Protocol\Messages\AttentionPingAnswerMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\AttentionPingAnswerMessage.cs" />
     <Compile Include="Protocol\Messages\BaseMessage.cs" />
     <Compile Include="Protocol\Channel.cs" />
     <Compile Include="Protocol\Enum\ChatChannelType.cs" />
@@ -105,6 +105,7 @@
     <Compile Include="Protocol\Messages\Game\PlayerInfoMessage.cs" />
     <Compile Include="Protocol\Messages\Game\LockCameraRequestMessage.cs" />
     <Compile Include="Protocol\Messages\Game\MovementRequestMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\SetTargetMessage.cs" />
     <Compile Include="Protocol\Messages\Game\UnitAnnounceMessage.cs" />
     <Compile Include="Protocol\Messages\Game\UpdateModelMessage.cs" />
     <Compile Include="Protocol\Messages\Game\UpdateStatsMessage.cs" />

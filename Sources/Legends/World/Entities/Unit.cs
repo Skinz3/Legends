@@ -59,8 +59,6 @@ namespace Legends.World.Entities
         }
         public Unit()
         {
-
-            VisibleUnit = new List<Unit>();
             SynchronizedActions = new List<Action>();
         }
 
@@ -70,11 +68,7 @@ namespace Legends.World.Entities
             set;
         }
 
-        public List<Unit> VisibleUnit
-        {
-            get;
-            private set;
-        }
+       
         public Game Game
         {
             get;
@@ -139,7 +133,7 @@ namespace Legends.World.Entities
         }
         public bool HasVision(Unit other)
         {
-            return VisibleUnit.Contains(other) || other.Team == this.Team;
+            return Team.HasVision(other);
         }
         public override string ToString()
         {

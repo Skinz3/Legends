@@ -7,6 +7,7 @@ using Legends.Core.Protocol.Game;
 using Legends.Core.Protocol.LoadingScreen;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.Core.Protocol.Other;
+using Legends.Core.Utils;
 using Legends.Network;
 using Legends.Records;
 using Legends.World.Buildings;
@@ -26,6 +27,8 @@ namespace Legends.World.Games
 {
     public class Game
     {
+        private Logger logger = new Logger();
+
         public const double REFRESH_RATE = 1000 / 60;
 
         public int Id
@@ -153,11 +156,17 @@ namespace Legends.World.Games
 
             foreach (MapObjectRecord gameObject in Map.Record.GetObjects(MOBObjectType.Turret))
             {
-                int netId = (int)(BuildingManager.TOWER_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(gameObject.Name + BuildingManager.TOWER_SUFFIX)));
-                AITurret turret = new AITurret(netId, gameObject, BuildingManager.TOWER_SUFFIX);
-                turret.DefineGame(this);
-                AddUnit(turret, BuildingManager.Instance.GetTeamId(turret.Name));
-                Map.AddUnit(turret);
+                string name = gameObject.Name + BuildingManager.TOWER_SUFFIX;
+                var teamId = BuildingManager.Instance.GetTeamId(name);
+
+                if (teamId != TeamId.UNKNOWN)
+                {
+                    int netId = (int)(BuildingManager.TOWER_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(name)));
+                    AITurret turret = new AITurret(netId, gameObject, BuildingManager.TOWER_SUFFIX);
+                    turret.DefineGame(this);
+                    AddUnit(turret, teamId);
+                    Map.AddUnit(turret);
+                }
             }
 
             Spawn();

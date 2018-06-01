@@ -34,7 +34,10 @@ namespace Legends.World.Games
                 return Units.Count;
             }
         }
-        private List<Unit> VisibleUnits
+        /// <summary>
+        /// Dictionary (VisibleUnit,VisibleByUnit)
+        /// </summary>
+        private Dictionary<Unit, Unit> VisibleUnits
         {
             get;
             set;
@@ -48,7 +51,7 @@ namespace Legends.World.Games
         {
             this.Id = id;
             this.Units = new Dictionary<int, Unit>();
-            this.VisibleUnits = new List<Unit>();
+            this.VisibleUnits = new Dictionary<Unit, Unit>();
             this.Game = game;
         }
         public void Send(Message message, Channel channel = Channel.CHL_S2C, PacketFlags flags = PacketFlags.Reliable)
@@ -74,11 +77,11 @@ namespace Legends.World.Games
         }
         public bool HasVision(Unit player)
         {
-            return VisibleUnits.Contains(player);
+            return VisibleUnits.ContainsKey(player);
         }
         public Unit[] GetVisibleUnits()
         {
-            return VisibleUnits.ToArray();
+            return VisibleUnits.Keys.ToArray();
         }
         [InDeveloppement(InDeveloppementState.TEMPORARY)]
         private void OnTeamEnterVision(Unit unit)
@@ -110,11 +113,11 @@ namespace Legends.World.Games
                         if (unit.InFieldOfView(opponent))
                         {
                             visible = true;
-                            if (!VisibleUnits.Contains(opponent))
+                            if (!VisibleUnits.ContainsKey(opponent))
                             {
                                 OnTeamEnterVision(opponent);
                                 unit.OnUnitEnterVision(opponent);
-                                VisibleUnits.Add(opponent);
+                                VisibleUnits.Add(opponent, unit);
                             }
                         }
 
@@ -124,17 +127,15 @@ namespace Legends.World.Games
 
                 if (visible == false)
                 {
-                    if (VisibleUnits.Contains(opponent))
+                    if (VisibleUnits.ContainsKey(opponent))
                     {
+                        var visibleBy = VisibleUnits[opponent];
+
                         VisibleUnits.Remove(opponent);
 
                         OnTeamLeaveVision(opponent);
 
-                        foreach (var unit in Units.Values)
-                        {
-                          
-                            unit.OnUnitLeaveVision(opponent);
-                        }
+                        visibleBy.OnUnitLeaveVision(opponent);
                     }
                 }
             }
