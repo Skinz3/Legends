@@ -45,7 +45,7 @@ namespace Legends.World.Entities.AI
         {
             get
             {
-                return AIStats.AttackRange.Total + 150;
+                return AIStats.AttackRange.Total + 150; // + 150?
             }
         }
         private List<Unit> UnitsInRange
@@ -80,7 +80,6 @@ namespace Legends.World.Entities.AI
         public override void OnDead(Unit source)
         {
             base.OnDead(source);
-            Game.Send(new DieMessage(source.NetId));
             Game.UnitAnnounce(UnitAnnounceEnum.TurretDestroyed, NetId, source.NetId, new int[0]);
         }
         public string GetClientName()

@@ -22,17 +22,17 @@ namespace Legends.Core.Protocol
 
         public override void Pack(LittleEndianWriter writer)
         {
-        //    writer.WriteByte((byte)Cmd);
-            writer.WriteInt(netId);
-
-
-            if ((short)Cmd >= byte.MaxValue) // Make an extended packet instead
+            if ((short)Cmd > byte.MaxValue) // oops, riot needs ids ! 
             {
-                var oldPosition = writer.Position;
-                writer.Position = 0;
                 writer.WriteByte((byte)PacketCmd.PKT_S2C_Extended);
-                writer.Position = oldPosition;
+                writer.WriteInt(netId);
                 writer.WriteShort((short)Cmd);
+
+            }
+            else
+            {
+                writer.WriteByte((byte)Cmd);
+                writer.WriteInt(netId);
             }
 
             Serialize(writer);

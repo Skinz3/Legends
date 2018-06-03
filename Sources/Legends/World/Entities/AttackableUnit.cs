@@ -1,5 +1,6 @@
 ﻿using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Game;
+using Legends.Core.Protocol.Messages.Extended;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
@@ -54,6 +55,7 @@ namespace Legends.World.Entities
         public virtual void OnDead(Unit source)
         {
             Alive = false;
+            Game.Send(new DieMessage(source.NetId, NetId));
         }
         public void UpdateHeath()
         {

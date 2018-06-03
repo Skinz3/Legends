@@ -47,8 +47,7 @@ namespace Legends.Core.Protocol.Game
             var numCoords = wayPoints.Count() * 2;
             writer.WriteByte((byte)numCoords);
             writer.WriteInt((int)actorNetId);
-            var encoded = MovementVector.EncodeWaypoints(wayPoints, mapSize);
-            writer.WriteBytes(encoded);
+            writer.WriteBytes(MovementVector.EncodeWaypoints(wayPoints, mapSize));
 
         }
       

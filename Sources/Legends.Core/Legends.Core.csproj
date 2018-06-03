@@ -84,6 +84,7 @@
     <Compile Include="Protocol\Enum\StatSecondaryId.cs" />
     <Compile Include="Protocol\Enum\StatPrimaryId.cs" />
     <Compile Include="Protocol\Enum\UnitAnnounceEnum.cs" />
+    <Compile Include="Protocol\Messages\Game\DestroyObjectMessage.cs" />
     <Compile Include="Protocol\Messages\Game\DieMessage.cs" />
     <Compile Include="Protocol\Messages\Game\AttentionPingAnswerMessage.cs" />
     <Compile Include="Protocol\Messages\BaseMessage.cs" />

@@ -109,12 +109,12 @@ namespace Legends.Handlers
                     WaypointsReader wayPointsReader = new WaypointsReader(message.moveData, message.coordCount, client.Hero.Game.Map.Size);
 
                     client.Hero.Invoke(new Action(() =>
-                   {
+                    {
                        client.Hero.WaypointsCollection.SetWaypoints(wayPointsReader.Waypoints);
                        client.Hero.SendVision(new MovementAnswerMessage(0, client.Hero.WaypointsCollection.GetWaypoints(), client.Hero.NetId,
-                     client.Hero.Game.Map.Size), Channel.CHL_LOW_PRIORITY);
+                       client.Hero.Game.Map.Size), Channel.CHL_LOW_PRIORITY);
 
-                   }));
+                    }));
 
                     break;
                 case MovementType.ATTACK:
