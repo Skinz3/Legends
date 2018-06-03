@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Les informations générales relatives à un assembly dépendent de
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("Legends.ORM")]
+[assembly: AssemblyTitle("SmartORM.TableViewer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Legends.ORM")]
+[assembly: AssemblyProduct("SmartORM.TableViewer")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Le GUID suivant est pour l'ID de la typelib si ce projet est exposé à COM
-[assembly: Guid("fad0a6b1-7fce-4b7f-bf1c-69c3cb7738a3")]
+[assembly: Guid("c71ac29c-1645-4a21-a4d2-fc9e10544485")]
 
 // Les informations de version pour un assembly se composent des quatre valeurs suivantes :
 //

@@ -54,7 +54,7 @@ namespace Legends.World.Commands
             str += Environment.NewLine;
             foreach (var unit in client.Hero.Team.GetVisibleUnits())
             {
-                str += unit.Name + " distance: (" + unit.GetDistanceTo(client.Hero) + ")  +";
+                str += unit.Name + " distance: (" + unit.GetDistanceTo(client.Hero) + ")  ";
 
             }
             client.Hero.DebugMessage(str);

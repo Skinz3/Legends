@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using Legends.Core.Protocol.Enum;
+using Legends.Scripts.Maps;
 
 namespace Legends.World.Games.Maps
 {
-    public class NewSummonersRift : Map
+    public class SummonersRiftUpdated : Map
     {
-        public override int Id => 11;
+        public override MapIdEnum Id => MapIdEnum.SummonersRiftUpdated;
 
         public override Dictionary<int, Vector2[]> BlueSpawns => new Dictionary<int, Vector2[]>()
         {
@@ -22,10 +24,14 @@ namespace Legends.World.Games.Maps
              {1, new Vector2[] {  new Vector2(14284, 14361) } },
         };
 
-        public NewSummonersRift(Game game) : base(game)
+        public SummonersRiftUpdated(Game game) : base(game)
         {
 
         }
 
+        protected override MapScript CreateScript(Game game)
+        {
+            return new SummonersRiftUpdatedScript(game);
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.ORM.Interfaces
+namespace SmartORM
 {
     public interface ITable
     {

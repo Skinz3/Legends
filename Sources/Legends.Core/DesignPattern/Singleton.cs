@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 
 
-namespace Legends.Core.Utils
+namespace Legends.Core.DesignPattern
 {
     /// <summary>
     /// From Bouh2 - WCell

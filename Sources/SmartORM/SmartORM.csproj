@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{15DE79E5-6E1F-4810-A112-13774C7F4B41}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Legends.DatabaseSynchronizer</RootNamespace>
-    <AssemblyName>Legends.DatabaseSynchronizer</AssemblyName>
+    <ProjectGuid>{0DC448D5-19C9-48DF-AF74-F2349D08AB22}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmartORM</RootNamespace>
+    <AssemblyName>SmartORM</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,11 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,32 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FieldSanitizer.cs" />
-    <Compile Include="InibinHook.cs" />
-    <Compile Include="Attributes\InibinMethod.cs" />
-    <Compile Include="InibinSynchronizer.cs" />
-    <Compile Include="JSONHashes.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Attributes\JsonCacheAttribute.cs" />
+    <Compile Include="Attributes\JsonFileNameAttribute.cs" />
+    <Compile Include="Attributes\TableAttribute.cs" />
+    <Compile Include="DatabaseManager.cs" />
+    <Compile Include="DesignPattern\Singleton.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="IO\SmartFile.cs" />
+    <Compile Include="IO\SmartTable.cs" />
+    <Compile Include="ITable.cs" />
+    <Compile Include="ITableManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RafManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Legends.Core\Legends.Core.csproj">
-      <Project>{9075ff6e-824e-4468-851e-83d1354a7bce}</Project>
-      <Name>Legends.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Legends\Legends.csproj">
-      <Project>{08c77abf-5998-4dd1-a21f-f68fc58fd7f8}</Project>
-      <Name>Legends</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SmartORM\SmartORM.csproj">
-      <Project>{0dc448d5-19c9-48df-af74-f2349d08ab22}</Project>
-      <Name>SmartORM</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

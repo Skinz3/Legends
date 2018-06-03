@@ -1,10 +1,11 @@
-﻿using Legends.Core.DesignPattern;
+﻿using Legends.Core.Attributes;
+using Legends.Core.DesignPattern;
 using Legends.Core.IO.Inibin;
 using Legends.Core.Utils;
-using Legends.ORM.Attributes;
-using Legends.ORM.Interfaces;
 using Legends.World.Entities;
 using Newtonsoft.Json;
+using SmartORM;
+using SmartORM.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Legends.Records
 {
-    [Table("/Database/AIUnit/")]
+    [Table("/Database/AIUnits/")]
     public class AIUnitRecord : ITable
     {
         [JsonCache]

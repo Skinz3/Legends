@@ -1,7 +1,7 @@
 ﻿using Legends.Core.IO.MOB;
-using Legends.ORM.Attributes;
-using Legends.ORM.Interfaces;
 using Newtonsoft.Json;
+using SmartORM;
+using SmartORM.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +66,10 @@ namespace Legends.Records
             this.Width = width;
             this.Height = height;
             this.Objects = objects;
+        }
+        public MapObjectRecord GetObject(string name)
+        {
+            return Objects.FirstOrDefault(x => x.Name == name);
         }
         public MapObjectRecord[] GetObjects(MOBObjectType type)
         {

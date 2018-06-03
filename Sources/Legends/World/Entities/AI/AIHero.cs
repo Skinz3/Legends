@@ -95,10 +95,7 @@ namespace Legends.World.Entities.AI
             SkinId = Data.SkinId;
             base.Initialize();
         }
-        public void AddVision(AIUnit source)
-        {
-            Client.Send(new FogUpdate2Message(Team.Id, source.NetId, source.Position, NetIdProvider.PopNextNetId(), source.PerceptionBubbleRadius));
-        }
+    
         public void DebugMessage(string content)
         {
             Client.Send(new DebugMessage(NetId, content));

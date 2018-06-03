@@ -12,13 +12,13 @@ using System.Diagnostics;
 using System.Numerics;
 using Legends.Records;
 using Legends.World.Entities.AI;
+using Legends.Scripts.Maps;
 
 namespace Legends.World.Games.Maps
 {
     public abstract class Map
     {
-
-        public abstract int Id
+        public abstract MapIdEnum Id
         {
             get;
         }
@@ -62,15 +62,18 @@ namespace Legends.World.Games.Maps
             get;
             set;
         }
+        public MapScript Script
+        {
+            get;
+            private set;
+        }
         public Map(Game game)
         {
-            Record = MapRecord.GetMap(Id);
-
+            Record = MapRecord.GetMap((int)Id);
+            Script = CreateScript(game);
             Game = game;
             Units = new List<Unit>();
         }
-
-
 
 
         public virtual void Update(long deltaTime)
@@ -91,6 +94,7 @@ namespace Legends.World.Games.Maps
             int teamIndex = player.TeamNo - 1;
             return player.Team.Id == TeamId.BLUE ? BlueSpawns[teamSize][teamIndex] : PurpleSpawns[teamSize][teamIndex];
         }
+        protected abstract MapScript CreateScript(Game game);
 
         public static Map CreateMap(int id, Game game)
         {
@@ -101,7 +105,7 @@ namespace Legends.World.Games.Maps
                 case 12: // howling abyss
                     return new HowlingAbyss(game);
                 case 11: // summonersrift , reworked
-                    return new NewSummonersRift(game);
+                    return new SummonersRiftUpdated(game);
             }
 
             throw new Exception("Cannot define map...");

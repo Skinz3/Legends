@@ -47,7 +47,7 @@ namespace Legends.Handlers
         public static void HandleCharLoadedMessage(CharLoadedMessage message, LoLClient client)
         {
             client.Hero.ReadyToSpawn = true;
-            client.Hero.NetId = NetIdProvider.PopNextNetId(); // start timeout timer
+            client.Hero.NetId = client.Hero.Game.NetIdProvider.PopNextNetId();
             client.Hero.Position = client.Hero.Game.Map.GetStartPosition(client.Hero);
 
             if (client.Hero.Game.CanStart)

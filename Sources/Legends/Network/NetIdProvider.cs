@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Legends.Core.DesignPattern;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,18 +7,28 @@ using System.Threading.Tasks;
 
 namespace Legends.Network
 {
-    class NetIdProvider
+    public class NetIdProvider
     {
-        private static int dwStart = 0x40000000; //new netid
+        private const int DEFAULT_NET_ID = 0x40000000;
 
-        private static object locker = new object();
+        private object locker = new object();
 
-        public static int PopNextNetId()
+        private int LastNetId
+        {
+            get;
+            set;
+        }
+        public NetIdProvider()
+        {
+            this.LastNetId = DEFAULT_NET_ID;
+        }
+
+        public int PopNextNetId()
         {
             lock (locker)
             {
-                dwStart++;
-                return dwStart;
+                LastNetId++;
+                return LastNetId;
             }
         }
     }

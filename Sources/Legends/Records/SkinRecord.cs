@@ -1,7 +1,8 @@
-﻿using Legends.Core.IO.Inibin;
-using Legends.ORM.Attributes;
-using Legends.ORM.Interfaces;
+﻿using Legends.Core.Attributes;
+using Legends.Core.IO.Inibin;
 using Newtonsoft.Json;
+using SmartORM;
+using SmartORM.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Legends.Records
 {
-    [Table("/Database/Skins/")]
+    [Table("/Database/Skins")]
     public class SkinRecord : ITable
     {
         [JsonCache]

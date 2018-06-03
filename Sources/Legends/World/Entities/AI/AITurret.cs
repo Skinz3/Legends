@@ -1,5 +1,6 @@
 ﻿using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Messages.Game;
+using Legends.Network;
 using Legends.Records;
 using Legends.World.Buildings;
 using Legends.World.Entities;
@@ -51,17 +52,17 @@ namespace Legends.World.Entities.AI
             get;
             set;
         }
-        public AITurret(int netId, MapObjectRecord mapObject, string suffix)
+        public AITurret(int netId, MapObjectRecord mapObject, AIUnitRecord aiUnitRecord, string suffix)
         {
             this.NetId = netId;
             this.MapObjectRecord = mapObject;
+            this.AIUnitRecord = aiUnitRecord;
             this.Position = new Vector2(mapObject.Position.X, mapObject.Position.Y);
             this.UnitsInRange = new List<Unit>();
             this.Suffix = suffix;
         }
         public override void Initialize()
         {
-            AIUnitRecord = BuildingManager.Instance.GetAIUnitRecord(this);
             Stats = new TurretStats(AIUnitRecord);
             base.Initialize();
         }
@@ -94,11 +95,8 @@ namespace Legends.World.Entities.AI
             }
             return results.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
-        public override void Update(long deltaTime)
+        private void UpdateTarget(long deltaTime)
         {
-            base.Update(deltaTime);
-
-
             if (Target != null) // La cible n'est plus en portée de la tourelle
             {
                 if (this.GetDistanceTo(Target) > AttackRange)
@@ -106,7 +104,7 @@ namespace Legends.World.Entities.AI
                 else
                     return;
             }
-        
+
 
             var unitsInRange = GetUnitsInAttackRange(); // on cherche les autres entitées a portée de la tourelle
 
@@ -114,8 +112,11 @@ namespace Legends.World.Entities.AI
             {
                 SetTarget(unitsInRange.Last().Key);
             }
-
-
+        }
+        public override void Update(long deltaTime)
+        {
+            base.Update(deltaTime);
+            this.UpdateTarget(deltaTime);
 
         }
         public override void UpdateStats(bool partial)

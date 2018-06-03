@@ -72,6 +72,8 @@
     <Compile Include="Records\ExperienceRecord.cs" />
     <Compile Include="Records\MapRecord.cs" />
     <Compile Include="Records\SkinRecord.cs" />
+    <Compile Include="Scripts\Maps\MapScript.cs" />
+    <Compile Include="Scripts\Maps\SummonersRiftUpdatedScript.cs" />
     <Compile Include="World\Entities\AI\AITurret.cs" />
     <Compile Include="World\Entities\Buildings\AnimatedBuilding.cs" />
     <Compile Include="World\Buildings\BuildingManager.cs" />
@@ -105,9 +107,10 @@
     <Compile Include="World\Entities\Unit.cs" />
     <Compile Include="World\Games\Game.cs" />
     <Compile Include="World\Games\GamesManager.cs" />
+    <Compile Include="World\Games\Maps\Fog\FogUpdate.cs" />
     <Compile Include="World\Games\Maps\HowlingAbyss.cs" />
     <Compile Include="World\Games\Maps\Map.cs" />
-    <Compile Include="World\Games\Maps\NewSummonersRift.cs" />
+    <Compile Include="World\Games\Maps\SummonersRiftUpdated.cs" />
     <Compile Include="World\Games\Maps\SummonersRift.cs" />
     <Compile Include="World\Games\Team.cs" />
     <Compile Include="World\Spells\Spell.cs" />
@@ -128,9 +131,9 @@
       <Project>{9075ff6e-824e-4468-851e-83d1354a7bce}</Project>
       <Name>Legends.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Legends.ORM\Legends.ORM.csproj">
-      <Project>{fad0a6b1-7fce-4b7f-bf1c-69c3cb7738a3}</Project>
-      <Name>Legends.ORM</Name>
+    <ProjectReference Include="..\SmartORM\SmartORM.csproj">
+      <Project>{0dc448d5-19c9-48df-af74-f2349d08ab22}</Project>
+      <Name>SmartORM</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

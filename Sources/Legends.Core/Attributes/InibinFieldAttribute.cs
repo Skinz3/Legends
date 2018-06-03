@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.ORM.Attributes
+namespace Legends.Core.Attributes
 {
     public class InibinFieldAttribute : Attribute
     {

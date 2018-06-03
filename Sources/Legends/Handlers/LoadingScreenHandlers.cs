@@ -100,7 +100,7 @@ namespace Legends.Handlers
             else
             {
                 var infos = ConfigurationManager.Instance.GetPlayersInformations();
-                client.Send(new SynchVersionAnswerMessage(0, 1, client.Hero.Game.Map.Id, infos,
+                client.Send(new SynchVersionAnswerMessage(0, 1, (int)client.Hero.Game.Map.Id, infos,
                 LoLServer.CLIENT_REQUIRED_VERSION, "CLASSIC", "NA1", 487826), Channel.CHL_S2C);
             }
         }
@@ -119,7 +119,7 @@ namespace Legends.Handlers
         }
 
 
-    
-        
+
+
     }
 }

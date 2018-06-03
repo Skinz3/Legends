@@ -12,6 +12,8 @@ using Legends.Core.Protocol.Game;
 using System.Numerics;
 using Legends.Core.DesignPattern;
 using Legends.Core.Protocol.Messages.Game;
+using Legends.World.Games.Maps.Fog;
+using Legends.Network;
 
 namespace Legends.World.Games
 {
@@ -47,12 +49,18 @@ namespace Legends.World.Games
             get;
             set;
         }
+        private List<FogUpdate> FogUpdates
+        {
+            get;
+            set;
+        }
         public Team(Game game, TeamId id)
         {
             this.Id = id;
             this.Units = new Dictionary<int, Unit>();
             this.VisibleUnits = new Dictionary<Unit, Unit>();
             this.Game = game;
+            this.FogUpdates = new List<FogUpdate>();
         }
         public void Send(Message message, Channel channel = Channel.CHL_S2C, PacketFlags flags = PacketFlags.Reliable)
         {
@@ -99,6 +107,20 @@ namespace Legends.World.Games
         private void OnTeamLeaveVision(Unit unit)
         {
             Send(new LeaveVisionMessage(unit.NetId));
+        }
+        public void InitializeFog()
+        {
+            foreach (var unit in Units.Values.OfType<AITurret>())
+            {
+                AddFogUpdate(new FogUpdate(Game.NetIdProvider.PopNextNetId(), Id, unit));
+            }
+        }
+        private void AddFogUpdate(FogUpdate fogUpdate)
+        {
+            this.Send(new FogUpdate2Message(Id, fogUpdate.Source.NetId,
+                fogUpdate.Source.Position, fogUpdate.NetId, fogUpdate.Source.PerceptionBubbleRadius));
+
+            FogUpdates.Add(fogUpdate);
         }
         public void Update(float deltaTime)
         {

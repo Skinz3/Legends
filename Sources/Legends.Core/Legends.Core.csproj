@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\InibinFieldAttribute.cs" />
     <Compile Include="Cryptography\Blowfish.cs" />
     <Compile Include="Cryptography\CRC32.cs" />
     <Compile Include="Cryptography\Crypto.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\ENetClient.cs" />
     <Compile Include="Protocol\Enum\IsTargetableToTeamFlags.cs" />
+    <Compile Include="Protocol\Enum\MapIdEnum.cs" />
     <Compile Include="Protocol\Enum\PingTypeEnum.cs" />
     <Compile Include="Protocol\Enum\SpellCanCastBitsEnum.cs" />
     <Compile Include="Protocol\Enum\StatActionStateEnum.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Protocol\Messages\Game\LockCameraRequestMessage.cs" />
     <Compile Include="Protocol\Messages\Game\MovementRequestMessage.cs" />
     <Compile Include="Protocol\Messages\Game\SetTargetMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\ShowProjectileMessage.cs" />
     <Compile Include="Protocol\Messages\Game\UnitAnnounceMessage.cs" />
     <Compile Include="Protocol\Messages\Game\UpdateModelMessage.cs" />
     <Compile Include="Protocol\Messages\Game\UpdateStatsMessage.cs" />
@@ -146,7 +149,7 @@
     <Compile Include="Utils\AsyncRandom.cs" />
     <Compile Include="IO\Inibin\InibinHashEnum.cs" />
     <Compile Include="Utils\Logger.cs" />
-    <Compile Include="Utils\Singleton.cs" />
+    <Compile Include="DesignPattern\Singleton.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ENetCS\ENetCS.csproj">

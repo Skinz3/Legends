@@ -31,6 +31,11 @@ namespace Legends.World.Games
 
         public const double REFRESH_RATE = 1000 / 60;
 
+        public NetIdProvider NetIdProvider
+        {
+            get;
+            private set;
+        }
         public int Id
         {
             get;
@@ -102,10 +107,11 @@ namespace Legends.World.Games
         }
         public Game(int id, string name, int mapId) // Enum MapType, switch -> instance
         {
-            this.BlueTeam = new Team(this, TeamId.BLUE);
-            this.PurpleTeam = new Team(this, TeamId.PURPLE);
+            this.NetIdProvider = new NetIdProvider();
             this.Id = id;
             this.Name = name;
+            this.BlueTeam = new Team(this, TeamId.BLUE);
+            this.PurpleTeam = new Team(this, TeamId.PURPLE);
             this.Map = Map.CreateMap(mapId, this);
             this.Timer = new Timer(REFRESH_RATE);
         }
@@ -149,25 +155,7 @@ namespace Legends.World.Games
         }
         public void Start()
         {
-            foreach (AIHero player in Players)
-            {
-                Map.AddUnit(player);
-            }
-
-            foreach (MapObjectRecord gameObject in Map.Record.GetObjects(MOBObjectType.Turret))
-            {
-                string name = gameObject.Name + BuildingManager.TOWER_SUFFIX;
-                var teamId = BuildingManager.Instance.GetTeamId(name);
-
-                if (teamId != TeamId.UNKNOWN)
-                {
-                    int netId = (int)(BuildingManager.TOWER_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(name)));
-                    AITurret turret = new AITurret(netId, gameObject, BuildingManager.TOWER_SUFFIX);
-                    turret.DefineGame(this);
-                    AddUnit(turret, teamId);
-                    Map.AddUnit(turret);
-                }
-            }
+           
 
             Spawn();
 
@@ -191,8 +179,6 @@ namespace Legends.World.Games
         }
         private void Update(long deltaTime)
         {
-            Console.Title = "Legends FPS: " + deltaTime;
-
             if (NextSyncTime >= 10 * 1000)
             {
                 Send(new GameTimerMessage(0, GameTime / 1000f));
@@ -205,7 +191,7 @@ namespace Legends.World.Games
         }
         public void Announce(AnnounceEnum announce)
         {
-            Send(new AnnounceMessage(0, Map.Id, announce));
+            Send(new AnnounceMessage(0, (int)Map.Id, announce));
         }
         public void UnitAnnounce(UnitAnnounceEnum announce, int netId, int sourceNetId = 0, int[] assitsNetId = null)
         {
@@ -213,6 +199,14 @@ namespace Legends.World.Games
         }
         private void Spawn()
         {
+            foreach (AIHero player in Players)
+            {
+                Map.AddUnit(player);
+            }
+
+            Map.Script.Spawn();
+
+        
             Send(new StartSpawnMessage());
 
             foreach (var player in Map.Units.OfType<AIHero>())
@@ -223,23 +217,19 @@ namespace Legends.World.Games
                 player.UpdateInfos();
                 player.UpdateStats(false);
                 player.UpdateHeath();
-
             }
+
+
 
 
             foreach (var turret in Map.Units.OfType<AITurret>())
             {
                 Send(new TurretSpawnMessage(0, turret.NetId, turret.GetClientName()));
                 turret.UpdateHeath();
-
-                foreach (var player in Map.Units.OfType<AIHero>())
-                {
-                    if (player.Team == turret.Team)
-                    {
-                        player.AddVision(turret);
-                    }
-                }
             }
+
+            BlueTeam.InitializeFog();
+            PurpleTeam.InitializeFog();
 
             Send(new EndSpawnMessage());
         }

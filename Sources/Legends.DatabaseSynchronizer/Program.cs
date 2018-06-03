@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using Legends.Core.Geometry;
 using Legends.Records;
 using System.Reflection;
-using Legends.ORM;
 using Legends.Core.Utils;
 using System.Numerics;
 using Legends.Core.IO.NavGrid;
@@ -17,6 +16,7 @@ using System.Diagnostics;
 using Legends.Core.IO.RAF;
 using Legends.Core.IO;
 using Legends.Core.IO.MOB;
+using SmartORM;
 
 namespace Legends.DatabaseSynchronizer
 {
@@ -40,14 +40,15 @@ namespace Legends.DatabaseSynchronizer
             logger.OnStartup();
             var recordAssembly = Assembly.GetAssembly(typeof(AIUnitRecord));
 
-            DatabaseManager.Instance.Initialize(Environment.CurrentDirectory, recordAssembly);
-            DatabaseManager.Instance.LoadTables();
+            DatabaseManager.Instance.Initialize(Environment.CurrentDirectory + "/database.smart", recordAssembly);
+            DatabaseManager.Instance.DropDatabase();
 
             SynchronizeMaps();
             SynchronizeExperience();
             InibinSynchronizer synchronizer = new InibinSynchronizer(LeagueOfLegendsPath, recordAssembly);
             synchronizer.Sync();
 
+            DatabaseManager.Instance.Save();
             Console.Read();
 
         }
@@ -82,7 +83,7 @@ namespace Legends.DatabaseSynchronizer
                 records.Add(new ExperienceRecord(level, cumulativeExps[i]));
                 level++;
             }
-            records.AddInstantElements();
+            records.AddElements();
 
             logger.Write("Experiences synchronized");
         }
@@ -140,7 +141,7 @@ namespace Legends.DatabaseSynchronizer
 
             }
 
-            records.AddInstantElements();
+            records.AddElements();
             manager.Dispose();
             logger.Write("Map synchronized");
 

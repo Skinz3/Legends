@@ -1,15 +1,17 @@
-﻿using System;
+﻿using Legends.Core.Protocol.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Legends.Scripts.Maps;
 
 namespace Legends.World.Games.Maps
 {
     public class SummonersRift : Map
     {
-        public override int Id => 1;
+        public override MapIdEnum Id => MapIdEnum.SummonersRift;
 
         public override Dictionary<int, Vector2[]> BlueSpawns => new Dictionary<int, Vector2[]>
         {
@@ -36,6 +38,9 @@ namespace Legends.World.Games.Maps
 
         }
 
-
+        protected override MapScript CreateScript(Game game)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,10 +1,10 @@
-﻿using Legends.Core.IO.Inibin;
+﻿using Legends.Core.Attributes;
+using Legends.Core.IO.Inibin;
 using Legends.Core.IO.RAF;
 using Legends.Core.Utils;
 using Legends.DatabaseSynchronizer.Attributes;
-using Legends.ORM;
-using Legends.ORM.Attributes;
-using Legends.ORM.Interfaces;
+using SmartORM;
+using SmartORM.Attributes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -108,7 +108,7 @@ namespace Legends.DatabaseSynchronizer
 
                 ITable[] records = GetRecords(type, entries);
 
-                records.AddInstantElements();
+                records.AddElements();
                 logger.Write("Synchronized: " + type.Name);
 
             }

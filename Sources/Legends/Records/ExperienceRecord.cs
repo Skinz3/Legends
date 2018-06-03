@@ -1,6 +1,6 @@
 ﻿using Legends.Core.DesignPattern;
-using Legends.ORM.Attributes;
-using Legends.ORM.Interfaces;
+using SmartORM;
+using SmartORM.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Legends.Records
 {
-    [Table("/Database/Experiences/")]
+    [Table("/Database/Experiences")]
     public class ExperienceRecord : ITable
     {
         [JsonCache]

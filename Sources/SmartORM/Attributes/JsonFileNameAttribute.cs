@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.ORM.Attributes
+namespace SmartORM.Attributes
 {
-    public class JsonCacheAttribute : Attribute
+    public class JsonFileNameAttribute : Attribute
     {
+        
     }
 }
