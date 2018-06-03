@@ -9,6 +9,6 @@ namespace Legends.World.Games
 {
     public class GamesManager
     {
-        public static Game TestGame = new Game(1, "Partie de test", 11);
+        public static Game TestGame = new Game(1, "Partie de test", 1);
     }
 }

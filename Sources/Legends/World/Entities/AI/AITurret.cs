@@ -6,11 +6,13 @@ using Legends.Records;
 using Legends.World.Buildings;
 using Legends.World.Entities;
 using Legends.World.Entities.Statistics;
+using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Legends.World.Entities.AI
@@ -36,7 +38,7 @@ namespace Legends.World.Entities.AI
             get;
             set;
         }
-        private Unit Target
+        private AttackableUnit Target
         {
             get;
             set;
@@ -67,7 +69,7 @@ namespace Legends.World.Entities.AI
             Stats = new TurretStats(AIUnitRecord);
             base.Initialize();
         }
-        protected void SetTarget(Unit unit)
+        protected void SetTarget(AttackableUnit unit)
         {
             Target = unit;
             Game.Send(new SetTargetMessage(NetId, unit.NetId));
@@ -86,11 +88,11 @@ namespace Legends.World.Entities.AI
         {
             return Name + Suffix;
         }
-        private Dictionary<Unit, float> GetUnitsInAttackRange()
+        private Dictionary<AttackableUnit, float> GetUnitsInAttackRange()
         {
-            Dictionary<Unit, float> results = new Dictionary<Unit, float>();
+            Dictionary<AttackableUnit, float> results = new Dictionary<AttackableUnit, float>();
 
-            foreach (var unit in GetOposedTeam().Units.Values)
+            foreach (var unit in GetOposedTeam().Units.Values.OfType<AttackableUnit>())
             {
                 float distance = this.GetDistanceTo(unit);
                 if (distance <= AttackRange) // <= vs <
@@ -116,6 +118,10 @@ namespace Legends.World.Entities.AI
             if (Target == null && unitsInRange.Count > 0)
             {
                 SetTarget(unitsInRange.Last().Key);
+                Game.Send(new BeginAutoAttackMessage(NetId, Target.NetId, 0x80, 0, false, Target.Position, Position, Game.Map.Record.MiddleOfMap));
+                var target = Target;
+                Thread.Sleep(1000);
+                target.InflictDamages(new Damages(this, target, 120, DamageType.DAMAGE_TYPE_PHYSICAL, DamageResultEnum.DAMAGE_TEXT_NORMAL));
             }
         }
         public override void Update(long deltaTime)

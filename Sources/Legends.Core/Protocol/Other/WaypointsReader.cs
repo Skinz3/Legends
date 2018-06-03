@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Legends.Core.Protocol.Other
 {
     /// <summary>
-    /// Used for MovementRequestMessage.cs WayPoints are point of the pathfinding.
+    /// Used for MovementRequestMessage.cs WayPoints are point of the client pathfinding.
     /// </summary>
     public class WaypointsReader
     {

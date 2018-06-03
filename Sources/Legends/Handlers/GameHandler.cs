@@ -36,6 +36,9 @@ namespace Legends.Handlers
 
 
                 ((AttackableUnit)targetUnit).InflictDamages(d);
+
+
+                client.Hero.Game.Send(new BeginAutoAttackMessage(client.Hero.NetId, targetUnit.NetId, 0x80, 0, false, targetUnit.Position, client.Hero.Position, client.Hero.Game.Map.Record.MiddleOfMap));
             }
         }
 
@@ -110,6 +113,8 @@ namespace Legends.Handlers
 
                     client.Hero.Invoke(new Action(() =>
                     {
+                       // the client delay lead to display problems so we secure the first waypoint.
+                       wayPointsReader.Waypoints[0] = client.Hero.Position; 
                        client.Hero.WaypointsCollection.SetWaypoints(wayPointsReader.Waypoints);
                        client.Hero.SendVision(new MovementAnswerMessage(0, client.Hero.WaypointsCollection.GetWaypoints(), client.Hero.NetId,
                        client.Hero.Game.Map.Size), Channel.CHL_LOW_PRIORITY);

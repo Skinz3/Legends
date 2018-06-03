@@ -25,7 +25,12 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-          
+            client.Hero.AIStats.AttackSpeed.SetBaseValue(1.60f);
+            client.Hero.Stats.Health.Current += 100;
+            client.Hero.UpdateStats();
+
+
+
 
         }
         [Command("speed")]

@@ -40,7 +40,7 @@ namespace Legends.World.Games.Maps
 
         protected override MapScript CreateScript(Game game)
         {
-            throw new NotImplementedException();
+            return new SummonersRiftUpdatedScript(game);
         }
     }
 }
