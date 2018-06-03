@@ -39,7 +39,7 @@ namespace Legends
 
             Console.ReadKey();
         }
-        [StartupInvoke("Json Database", StartupInvokePriority.First)]
+        [StartupInvoke("SmartDB", StartupInvokePriority.First)]
         public static void LoadDatabase()
         {
             DatabaseManager.Instance.Initialize(Environment.CurrentDirectory + "/" + DATABASE_FILENAME, Assembly.GetAssembly(typeof(AIUnitRecord)));
