@@ -155,7 +155,7 @@ namespace Legends.World.Games
         }
         public void Start()
         {
-           
+
 
             Spawn();
 
@@ -193,7 +193,7 @@ namespace Legends.World.Games
         {
             Send(new AnnounceMessage(0, (int)Map.Id, announce));
         }
-        public void UnitAnnounce(UnitAnnounceEnum announce, int netId, int sourceNetId = 0, int[] assitsNetId = null)
+        public void UnitAnnounce(UnitAnnounceEnum announce, int netId, int sourceNetId, int[] assitsNetId)
         {
             Send(new UnitAnnounceMessage(netId, announce, sourceNetId, assitsNetId));
         }
@@ -206,7 +206,7 @@ namespace Legends.World.Games
 
             Map.Script.Spawn();
 
-        
+
             Send(new StartSpawnMessage());
 
             foreach (var player in Map.Units.OfType<AIHero>())
@@ -225,6 +225,7 @@ namespace Legends.World.Games
             foreach (var turret in Map.Units.OfType<AITurret>())
             {
                 Send(new TurretSpawnMessage(0, turret.NetId, turret.GetClientName()));
+                turret.UpdateStats(false);
                 turret.UpdateHeath();
             }
 

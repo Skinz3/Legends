@@ -216,6 +216,6 @@ namespace Legends.Core.Protocol
         PKT_S2C_StopForceTargetSpell = 0x12A,
         PKT_S2C_LockCamera = 0x12B,
         PKT_S2C_SetFadeOut = 0x12D,
-        PKT_S2C_UnlockAnimation = 0x12F
+        PKT_S2C_UnlockAnimation = 0x12F,
     }
 }

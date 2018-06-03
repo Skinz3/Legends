@@ -160,7 +160,7 @@ namespace Legends.World.Entities.AI
         {
             Disconnected = true;
             Game.RemoveUnit(this); // maybe depend of reconnect system
-            Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId);
+            Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId,0,new int[0]);
         }
 
 

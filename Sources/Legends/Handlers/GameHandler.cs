@@ -7,6 +7,8 @@ using Legends.Core.Protocol.Messages.Game;
 using Legends.Core.Protocol.Other;
 using Legends.Network;
 using Legends.World.Commands;
+using Legends.World.Entities;
+using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +29,16 @@ namespace Legends.Handlers
             {
                 string msg = "You clicked on {0} Position : {1} Distance to me : {2}";
                 client.Hero.DebugMessage(string.Format(msg, targetUnit.Name, targetUnit.Position, targetUnit.GetDistanceTo(client.Hero)));
+
+
+                var d = new Damages(client.Hero, (AttackableUnit)targetUnit, 60,
+                    DamageType.DAMAGE_TYPE_PHYSICAL, DamageResultEnum.DAMAGE_TEXT_NORMAL);
+
+
+                ((AttackableUnit)targetUnit).InflictDamages(d);
             }
         }
-       
+
         [MessageHandler(PacketCmd.PKT_C2S_StartGame)]
         public static void HandleStartGameRequestMessage(StartGameRequestMessage message, LoLClient client)
         {
@@ -41,7 +50,6 @@ namespace Legends.Handlers
             client.Send(new GameTimerMessage(0, gameTime));
             client.Send(new GameTimerUpdateMessage(0, gameTime));
 
-            //client.Send(new FogUpdate2Message(client.Player.NetId, NetIdProvider.PopNextNetId()));
         }
         [MessageHandler(PacketCmd.PKT_C2S_CharLoaded, Channel.CHL_C2S)]
         public static void HandleCharLoadedMessage(CharLoadedMessage message, LoLClient client)
@@ -103,7 +111,7 @@ namespace Legends.Handlers
                     client.Hero.Invoke(new Action(() =>
                    {
                        client.Hero.WaypointsCollection.SetWaypoints(wayPointsReader.Waypoints);
-                       client.Hero.SendVision(new MovementAnswerMessage(0, Environment.TickCount, client.Hero.WaypointsCollection.GetWaypoints(), client.Hero.NetId,
+                       client.Hero.SendVision(new MovementAnswerMessage(0, client.Hero.WaypointsCollection.GetWaypoints(), client.Hero.NetId,
                      client.Hero.Game.Map.Size), Channel.CHL_LOW_PRIORITY);
 
                    }));

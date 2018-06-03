@@ -113,6 +113,7 @@
     <Compile Include="World\Games\Maps\SummonersRiftUpdated.cs" />
     <Compile Include="World\Games\Maps\SummonersRift.cs" />
     <Compile Include="World\Games\Team.cs" />
+    <Compile Include="World\Spells\Damages.cs" />
     <Compile Include="World\Spells\Spell.cs" />
   </ItemGroup>
   <ItemGroup>

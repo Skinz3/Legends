@@ -3,6 +3,7 @@ using Legends.Core.Protocol.Game;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
+using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,21 @@ namespace Legends.World.Entities
         /// </summary>
         public abstract void UpdateStats(bool partial);
 
+        public virtual void InflictDamages(Damages damages)
+        {
+            Stats.Health.Current -= damages.Amount;
+            Game.Send(new DamageDoneMessage(damages.Result, damages.Type, damages.Amount, NetId, damages.Source.NetId));
+            UpdateHeath();
+
+            if (Stats.Health.Current <= 0)
+            {
+                OnDead(damages.Source);
+            }
+        }
+        public virtual void OnDead(Unit source)
+        {
+            Alive = false;
+        }
         public void UpdateHeath()
         {
             Game.Send(new SetHealthMessage(NetId, 0x0000, Stats.Health.Total, Stats.Health.Current));

@@ -100,8 +100,8 @@ namespace Legends.World.Entities.Movements
                     }
                 }
 
-              // var p = ((Player)Unit);
-            //   p.Game.Send(new EnterVisionMessage(true, p.NetId, p.Position, WaypointsIndex, GetWaypoints(), p.Game.Map.Record.MiddleOfMap));
+             //   var p = ((AIHero)Unit);
+             //   p.Game.Send(new EnterVisionMessage(true, p.NetId, p.Position, WaypointsIndex, GetWaypoints(), p.Game.Map.Record.MiddleOfMap));
             }
         }
         public override string ToString()

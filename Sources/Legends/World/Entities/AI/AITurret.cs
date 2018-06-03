@@ -1,4 +1,5 @@
 ﻿using Legends.Core.Protocol.Enum;
+using Legends.Core.Protocol.Messages.Extended;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.Network;
 using Legends.Records;
@@ -76,7 +77,12 @@ namespace Legends.World.Entities.AI
             Target = null;
             Game.Send(new SetTargetMessage(NetId, 0));
         }
-
+        public override void OnDead(Unit source)
+        {
+            base.OnDead(source);
+            Game.Send(new DieMessage(source.NetId));
+            Game.UnitAnnounce(UnitAnnounceEnum.TurretDestroyed, NetId, source.NetId, new int[0]);
+        }
         public string GetClientName()
         {
             return Name + Suffix;

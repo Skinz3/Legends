@@ -72,6 +72,8 @@
     <Compile Include="IO\RAF\RAFFileEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\ENetClient.cs" />
+    <Compile Include="Protocol\Enum\DamageResultEnum.cs" />
+    <Compile Include="Protocol\Enum\DamageTypeEnum.cs" />
     <Compile Include="Protocol\Enum\IsTargetableToTeamFlags.cs" />
     <Compile Include="Protocol\Enum\MapIdEnum.cs" />
     <Compile Include="Protocol\Enum\PingTypeEnum.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Protocol\Enum\StatSecondaryId.cs" />
     <Compile Include="Protocol\Enum\StatPrimaryId.cs" />
     <Compile Include="Protocol\Enum\UnitAnnounceEnum.cs" />
+    <Compile Include="Protocol\Messages\Game\DieMessage.cs" />
     <Compile Include="Protocol\Messages\Game\AttentionPingAnswerMessage.cs" />
     <Compile Include="Protocol\Messages\BaseMessage.cs" />
     <Compile Include="Protocol\Channel.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="Protocol\Enum\TeamId.cs" />
     <Compile Include="Protocol\Messages\GameMessage.cs" />
     <Compile Include="Protocol\Messages\Game\AttentionPingRequestMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\DamageDoneMessage.cs" />
     <Compile Include="Protocol\Messages\Game\HeartBeatMessage.cs" />
     <Compile Include="Protocol\Messages\Game\AnnounceMessage.cs" />
     <Compile Include="Protocol\Messages\Game\ChatBoxMessage.cs" />

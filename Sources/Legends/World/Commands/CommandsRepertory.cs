@@ -2,8 +2,10 @@
 using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.Network;
+using Legends.World.Entities.AI;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
+using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,8 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
+          
+
         }
         [Command("speed")]
         public static void SpeedCommand(LoLClient client, float speed)

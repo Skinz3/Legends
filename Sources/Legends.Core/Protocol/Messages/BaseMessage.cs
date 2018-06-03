@@ -22,8 +22,19 @@ namespace Legends.Core.Protocol
 
         public override void Pack(LittleEndianWriter writer)
         {
-            writer.WriteByte((byte)Cmd);
+        //    writer.WriteByte((byte)Cmd);
             writer.WriteInt(netId);
+
+
+            if ((short)Cmd >= byte.MaxValue) // Make an extended packet instead
+            {
+                var oldPosition = writer.Position;
+                writer.Position = 0;
+                writer.WriteByte((byte)PacketCmd.PKT_S2C_Extended);
+                writer.Position = oldPosition;
+                writer.WriteShort((short)Cmd);
+            }
+
             Serialize(writer);
         }
         public override void Unpack(LittleEndianReader reader)
