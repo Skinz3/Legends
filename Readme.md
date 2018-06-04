@@ -23,6 +23,4 @@
 
    Jesus (Moonshadow) https://github.com/moonshadow565
 
-## License
-   
-  ![alt text](https://lesoufflenumerique.files.wordpress.com/2015/09/licence-cc-by.png?w=768&h=271)
+

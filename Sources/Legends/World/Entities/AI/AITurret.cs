@@ -75,6 +75,11 @@ namespace Legends.World.Entities.AI
             Target = null;
             Game.Send(new SetTargetMessage(NetId, 0));
         }
+        public override void InflictDamages(Damages damages)
+        {
+            base.InflictDamages(damages);
+            this.UpdateHeath();
+        }
         public override void OnDead(Unit source)
         {
             base.OnDead(source);
@@ -113,9 +118,10 @@ namespace Legends.World.Entities.AI
 
             if (Target == null && unitsInRange.Count > 0)
             {
+             //   MoveToAutoattack(Target as AIUnit);
                 SetTarget(unitsInRange.Last().Key);
-                Game.Send(new BeginAutoAttackMessage(NetId, Target.NetId, 0x80, 0, false, Target.Position, Position, Game.Map.Record.MiddleOfMap));
-                var target = Target;
+               
+              Game.Send(new BeginAutoAttackMessage(NetId, Target.NetId, 0x80, 0, false, Target.Position, Position, Game.Map.Record.MiddleOfMap));
             }
         }
         public override void Update(long deltaTime)

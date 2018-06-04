@@ -1,5 +1,7 @@
 ﻿using Legends.Core.DesignPattern;
+using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Messages.Game;
+using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +44,7 @@ namespace Legends.World.Entities.AI
         {
             /*  client.Hero.AttentionPing(targetPosition, target.NetId, PingTypeEnum.Ping_OnMyWay); */
             Unit.Game.Send(new BeginAutoAttackMessage(Unit.NetId, TargetUnit.NetId, 0x80, 0, false, TargetUnit.Position, Unit.Position, Unit.Game.Map.Record.MiddleOfMap));
+            TargetUnit.InflictDamages(new Damages(Unit, TargetUnit, 66, DamageType.DAMAGE_TYPE_PHYSICAL, DamageResultEnum.DAMAGE_TEXT_CRITICAL));
         }
         public void UnsetTarget()
         {

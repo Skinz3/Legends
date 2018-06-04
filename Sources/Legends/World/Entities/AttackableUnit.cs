@@ -42,13 +42,13 @@ namespace Legends.World.Entities
         /// <summary>
         /// todo ? for attackable unit only?
         /// </summary>
-        public abstract void UpdateStats(bool partial);
+        public abstract void UpdateStats(bool partial = true);
 
         public virtual void InflictDamages(Damages damages)
         {
             Stats.Health.Current -= damages.Amount;
             Game.Send(new DamageDoneMessage(damages.Result, damages.Type, damages.Amount, NetId, damages.Source.NetId));
-            UpdateHeath();
+            UpdateStats();
 
             if (Stats.Health.Current <= 0)
             {
@@ -79,7 +79,7 @@ namespace Legends.World.Entities
         }
         public void UpdateHeath()
         {
-            Game.Send(new SetHealthMessage(NetId, 0, Stats.Health.Total, Stats.Health.Current));
+           Game.Send(new SetHealthMessage(NetId, 0, Stats.Health.Total, Stats.Health.Current));
         }
     }
 }

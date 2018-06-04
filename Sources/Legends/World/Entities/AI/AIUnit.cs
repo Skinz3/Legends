@@ -64,14 +64,24 @@ namespace Legends.World.Entities.AI
         {
             Move(new Path(this, targetVector));
         }
-     
+
 
         public void MoveToAutoattack(AIUnit targetUnit)
         {
+            AutoattackUpdater.DefineTarget(targetUnit);
+
             float distanceToTarget = AIStats.AttackRange.Total +
                 ((float)targetUnit.Record.SelectionRadius * targetUnit.AIStats.ModelSize.Total);
 
-            Move(new Path(this, targetUnit, distanceToTarget));
+            if (this.GetDistanceTo(targetUnit) < distanceToTarget)
+            {
+                AutoattackUpdater.OnTargetReach();
+            }
+            else
+            {
+                if (AIStats.MoveSpeed.Total > 0)
+                    Move(new Path(this, targetUnit, distanceToTarget));
+            }
 
         }
         public void StopMove()

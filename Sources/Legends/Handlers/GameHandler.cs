@@ -130,6 +130,12 @@ namespace Legends.Handlers
                     client.Hero.Invoke(new Action(() =>
                     {
                         var target = (AIUnit)client.Hero.Game.Map.GetUnit(message.targetNetId);
+
+                        if (target == null)
+                        {
+                            client.Hero.DebugMessage("Unable to autoattack, target is null");
+                            return;
+                        }
                         client.Hero.MoveToAutoattack(target);
 
                     }));

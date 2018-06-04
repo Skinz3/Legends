@@ -95,7 +95,7 @@ namespace Legends.World.Entities.Movements
             this.TargetUnit = target;
             this.WaypointsIndex = 1;
 
-            this.Unit.AutoattackUpdater.DefineTarget(target);
+       
 
             Vector2 targetPosition = target.Position;
 
