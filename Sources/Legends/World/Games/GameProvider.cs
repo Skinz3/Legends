@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Games
 {
-    public class GamesManager
+    public class GameProvider
     {
-        public static Game TestGame = new Game(1, "Partie de test", 1);
+        public static Game TestGame = new Game(1, "Partie de test", 11);
     }
 }

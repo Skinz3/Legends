@@ -1,6 +1,7 @@
 ﻿using Legends.Configurations;
 using Legends.Core.DesignPattern;
 using Legends.Core.Protocol;
+using Legends.Core.Time;
 using Legends.Core.Utils;
 using Legends.Network;
 using Legends.Records;
@@ -27,9 +28,9 @@ namespace Legends
 
         public const string DATABASE_FILENAME = "database.smart";
 
+        [STAThread]
         static void Main(string[] args)
         {
-        
             logger.OnStartup();
             StartupManager.Instance.Initialize(Assembly.GetAssembly(typeof(AIUnitRecord)));
             logger.Write("Server started");

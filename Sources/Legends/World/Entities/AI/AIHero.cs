@@ -52,11 +52,10 @@ namespace Legends.World.Entities.AI
             get;
             set;
         }
-
-        public AIUnitRecord ChampionRecord
+        public bool ReadyToStart
         {
             get;
-            private set;
+            set;
         }
         public Champion Champion
         {
@@ -79,7 +78,8 @@ namespace Legends.World.Entities.AI
 
         public override float PerceptionBubbleRadius => ((HeroStats)Stats).PerceptionBubbleRadius.Total;
 
-        public AIHero(LoLClient client, PlayerData data)
+
+        public AIHero(LoLClient client, PlayerData data)  
         {
             Client = client;
             Data = data;
@@ -88,14 +88,14 @@ namespace Legends.World.Entities.AI
 
         public override void Initialize()
         {
-            ChampionRecord = AIUnitRecord.GetAIUnitRecord(Data.ChampionName);
-            Champion = ChampionManager.Instance.GetChampion(this, (ChampionEnum)Enum.Parse(typeof(ChampionEnum), Data.ChampionName));
-            Stats = new HeroStats(ChampionRecord, Data.SkinId);
+            Record = AIUnitRecord.GetAIUnitRecord(Data.ChampionName);
+            Champion = ChampionProvider.Instance.GetChampion(this, (ChampionEnum)Enum.Parse(typeof(ChampionEnum), Data.ChampionName));
+            Stats = new HeroStats(Record, Data.SkinId);
             Model = Data.ChampionName;
             SkinId = Data.SkinId;
             base.Initialize();
         }
-    
+
         public void DebugMessage(string content)
         {
             Client.Send(new DebugMessage(NetId, content));
@@ -103,25 +103,8 @@ namespace Legends.World.Entities.AI
         public override void Update(long deltaTime)
         {
             base.Update(deltaTime);
-            WaypointsCollection.InterpolateMovement(deltaTime);
         }
 
-        /// <summary>
-        /// Envoit un message a tous les joueurs possédant la vision sur ce joueur.
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="channel"></param>
-        public void SendVision(Message message, Channel channel = Channel.CHL_S2C, PacketFlags flags = PacketFlags.Reliable)
-        {
-            Team.Send(message, channel, flags);
-
-            Team oposedTeam = GetOposedTeam();
-
-            if (oposedTeam.HasVision(this))
-            {
-                oposedTeam.Send(message);
-            }
-        }
 
         public override void OnUnitEnterVision(Unit unit)
         {
@@ -160,7 +143,7 @@ namespace Legends.World.Entities.AI
         {
             Disconnected = true;
             Game.RemoveUnit(this); // maybe depend of reconnect system
-            Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId,0,new int[0]);
+            Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, 0, new int[0]);
         }
 
 

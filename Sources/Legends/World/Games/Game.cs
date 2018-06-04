@@ -7,6 +7,7 @@ using Legends.Core.Protocol.Game;
 using Legends.Core.Protocol.LoadingScreen;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.Core.Protocol.Other;
+using Legends.Core.Time;
 using Legends.Core.Utils;
 using Legends.Network;
 using Legends.Records;
@@ -29,7 +30,11 @@ namespace Legends.World.Games
     {
         private Logger logger = new Logger();
 
-        public const double REFRESH_RATE = 1000 / 60;
+        /// <summary>
+        /// Theorically 60fps
+        /// Aprox equal to 16.666
+        /// </summary>
+        public const double REFRESH_RATE = (1000d / 60d);
 
         public NetIdProvider NetIdProvider
         {
@@ -68,11 +73,18 @@ namespace Legends.World.Games
             get;
             set;
         }
-        public bool CanStart
+        public bool CanSpawn
         {
             get
             {
                 return Players.All(x => x.ReadyToSpawn);
+            }
+        }
+        public bool CanStart
+        {
+            get
+            {
+                return Players.All(x => x.ReadyToStart);
             }
         }
         public bool Started
@@ -85,7 +97,7 @@ namespace Legends.World.Games
             get;
             private set;
         }
-        private Timer Timer
+        private HighResolutionTimer Timer
         {
             get;
             set;
@@ -100,6 +112,13 @@ namespace Legends.World.Games
             get;
             private set;
         }
+        public float GameTimeSeconds
+        {
+            get
+            {
+                return GameTime / 1000f;
+            }
+        }
         private double NextSyncTime
         {
             get;
@@ -113,8 +132,9 @@ namespace Legends.World.Games
             this.BlueTeam = new Team(this, TeamId.BLUE);
             this.PurpleTeam = new Team(this, TeamId.PURPLE);
             this.Map = Map.CreateMap(mapId, this);
-            this.Timer = new Timer(REFRESH_RATE);
+            this.Timer = new HighResolutionTimer((int)REFRESH_RATE);
         }
+
         /// <summary>
         /// Add player to the game and to his team 
         /// </summary>
@@ -153,58 +173,14 @@ namespace Legends.World.Games
                 player.Client.Send(message, channel, flags);
             }
         }
-        public void Start()
-        {
-
-
-            Spawn();
-
-            StartCallback();
-            this.Started = true;
-        }
-        public void StartCallback()
-        {
-            Stopwatch = Stopwatch.StartNew();
-            Timer.Elapsed += Timer_Elapsed;
-            Timer.Start();
-        }
-
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            long deltaTime = Stopwatch.ElapsedMilliseconds;
-            GameTime += deltaTime;
-            NextSyncTime += deltaTime;
-            Update(deltaTime);
-            Stopwatch = Stopwatch.StartNew();
-        }
-        private void Update(long deltaTime)
-        {
-            if (NextSyncTime >= 10 * 1000)
-            {
-                Send(new GameTimerMessage(0, GameTime / 1000f));
-                NextSyncTime = 0;
-            }
-
-            BlueTeam.Update(deltaTime);
-            PurpleTeam.Update(deltaTime);
-            Map.Update(deltaTime);
-        }
-        public void Announce(AnnounceEnum announce)
-        {
-            Send(new AnnounceMessage(0, (int)Map.Id, announce));
-        }
-        public void UnitAnnounce(UnitAnnounceEnum announce, int netId, int sourceNetId, int[] assitsNetId)
-        {
-            Send(new UnitAnnounceMessage(netId, announce, sourceNetId, assitsNetId));
-        }
-        private void Spawn()
+        public void Spawn()
         {
             foreach (AIHero player in Players)
             {
                 Map.AddUnit(player);
             }
 
-            Map.Script.Spawn();
+             Map.Script.OnSpawn();
 
 
             Send(new StartSpawnMessage());
@@ -233,7 +209,62 @@ namespace Legends.World.Games
             PurpleTeam.InitializeFog();
 
             Send(new EndSpawnMessage());
+
+
+
         }
+        public void Start()
+        {
+            foreach (var player in Players)
+            {
+                player.Team.Send(new EnterVisionMessage(true, player.NetId, player.Position, player.Path.WaypointsIndex, player.Path.GetWaypoints(), player.Game.Map.Record.MiddleOfMap));
+            }
+
+            float gameTime = GameTime / 1000f;
+            
+            Send(new GameTimerMessage(0, gameTime));
+            Send(new GameTimerUpdateMessage(0, gameTime));
+            this.Started = true;
+            StartCallback();
+            Map.Script.OnStart();
+            Send(new StartGameMessage(0));
+        }
+        public void StartCallback()
+        {
+            Stopwatch = Stopwatch.StartNew();
+            Timer.Elapsed += Timer_Elapsed;
+            Timer.Start();
+        }
+
+        private void Timer_Elapsed()
+        {
+            long deltaTime = Stopwatch.ElapsedMilliseconds;
+            GameTime += deltaTime;
+            NextSyncTime += deltaTime;
+            Update(deltaTime);
+            Stopwatch = Stopwatch.StartNew();
+        }
+        private void Update(long deltaTime)
+        {
+            if (NextSyncTime >= 10 * 1000)
+            {
+                Send(new GameTimerMessage(0, GameTime / 1000f));
+                NextSyncTime = 0;
+            }
+
+            BlueTeam.Update(deltaTime);
+            PurpleTeam.Update(deltaTime);
+            Map.Update(deltaTime);
+        }
+        public void Announce(AnnounceEnum announce)
+        {
+            Send(new AnnounceMessage(0, (int)Map.Id, announce));
+        }
+        public void UnitAnnounce(UnitAnnounceEnum announce, int netId, int sourceNetId, int[] assitsNetId)
+        {
+            Send(new UnitAnnounceMessage(netId, announce, sourceNetId, assitsNetId));
+        }
+
 
 
     }

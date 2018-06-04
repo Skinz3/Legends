@@ -76,6 +76,11 @@ namespace SmartORM.IO
         public ITable[] ConvertToRecord(string path, Type type)
         {
             List<ITable> records = new List<ITable>();
+
+            if (Tables.ContainsKey(path) == false)
+            {
+                throw new Exception("Table is missing: " + path);
+            }
             SmartTable table = Tables[path];
 
             foreach (var file in table.Files)

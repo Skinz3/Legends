@@ -27,6 +27,12 @@ namespace Legends.DatabaseSynchronizer
             }
             return results.ToArray();
         }
+        [InibinMethod(typeof(SpellRecord))]
+        public static RAFFileEntry[] GetSpellsInibin(RafManager manager)
+        {
+            List<RAFFileEntry> results = new List<RAFFileEntry>();
+            return Array.FindAll(manager.GetFiles("DATA/Spells/"), x => x.Path.Contains(".inibin"));
+        }
         [InibinMethod(typeof(AIUnitRecord))]
         public static RAFFileEntry[] GetChampionsInibin(RafManager manager)
         {
@@ -43,38 +49,12 @@ namespace Legends.DatabaseSynchronizer
 
                 string path = string.Format("DATA/Characters/{0}/{0}.inibin", aiName);
 
-                var value = manager.GetFile(path);
 
-                if (value != null && results.Find(x => x.Path == value.Path) == null)
-                    results.Add(value);
-            }
-
-
-
-
-
-
-
-
-
-
-
-            return results.ToArray();
-            foreach (ChampionEnum champion in Enum.GetValues(typeof(ChampionEnum)))
-            {
-                string path = string.Format("DATA/Characters/{0}/{0}.inibin", champion.ToString());
-                var value = manager.GetFile(path);
-
-                if (value == null)
-                {
-                    Console.WriteLine(path + " dont exist");
-                }
-                else
-                {
-                    results.Add(value);
-                }
+                if (manager.Exists(path) && results.Find(x => x.Path == path) == null)
+                    results.Add(manager.GetFile(path));
             }
             return results.ToArray();
+       
         }
     }
 }

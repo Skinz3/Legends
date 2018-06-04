@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Champions
 {
-    public class ChampionManager : Singleton<ChampionManager>
+    public class ChampionProvider : Singleton<ChampionProvider>
     {
         private Logger logger = new Logger();
 

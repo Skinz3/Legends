@@ -17,7 +17,7 @@ using Legends.Network;
 
 namespace Legends.World.Games
 {
-    public class Team
+    public class Team : IUpdatable
     {
         public TeamId Id
         {
@@ -97,7 +97,7 @@ namespace Legends.World.Games
             if (unit.IsMoving)
             {
                 AIUnit attackableUnit = (AIUnit)unit;
-                Send(new EnterVisionMessage(false, unit.NetId, unit.Position, attackableUnit.WaypointsCollection.WaypointsIndex, attackableUnit.WaypointsCollection.GetWaypoints(), Game.Map.Record.MiddleOfMap));
+                Send(new EnterVisionMessage(false, unit.NetId, unit.Position, attackableUnit.Path.WaypointsIndex, attackableUnit.Path.GetWaypoints(), Game.Map.Record.MiddleOfMap));
             }
             else
             {
@@ -122,7 +122,7 @@ namespace Legends.World.Games
 
             FogUpdates.Add(fogUpdate);
         }
-        public void Update(float deltaTime)
+        public void Update(long deltaTime)
         {
             foreach (var opponent in GetOposedTeam().Units.Values)
             {

@@ -15,7 +15,7 @@ using YAXLib;
 
 namespace Legends.Configurations
 {
-    public class ConfigurationManager : Singleton<ConfigurationManager>
+    public class ConfigurationProvider : Singleton<ConfigurationProvider>
     {
         public static string PATH = Environment.CurrentDirectory + "/config.json";
 

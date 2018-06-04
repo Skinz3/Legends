@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Buildings
 {
-    public class BuildingManager : Singleton<BuildingManager>
+    public class BuildingProvider : Singleton<BuildingProvider>
     {
 
         public static string TOWER_SUFFIX = TOWER_SEPARATOR + "A"; // ?

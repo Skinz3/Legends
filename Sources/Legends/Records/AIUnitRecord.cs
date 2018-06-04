@@ -226,7 +226,6 @@ namespace Legends.Records
             get;
             set;
         }
-
         [JsonIgnore]
         public SkinRecord[] Skins
         {

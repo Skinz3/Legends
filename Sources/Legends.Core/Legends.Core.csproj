@@ -60,6 +60,7 @@
     <Compile Include="DesignPattern\StartupInvokePriority.cs" />
     <Compile Include="DesignPattern\StartupManager.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Geometry\Geo.cs" />
     <Compile Include="Geometry\MovementVector.cs" />
     <Compile Include="IO\Inibin\InibinFile.cs" />
     <Compile Include="IO\Inibin\InibinSet.cs" />
@@ -110,11 +111,13 @@
     <Compile Include="Protocol\Messages\Game\HeroSpawnMessage.cs" />
     <Compile Include="Protocol\Messages\Game\MovementAnswerMessage.cs" />
     <Compile Include="Protocol\Messages\Game\MovementConfirmationMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\NextAutoattackMessage.cs" />
     <Compile Include="Protocol\Messages\Game\PlayerInfoMessage.cs" />
     <Compile Include="Protocol\Messages\Game\LockCameraRequestMessage.cs" />
     <Compile Include="Protocol\Messages\Game\MovementRequestMessage.cs" />
     <Compile Include="Protocol\Messages\Game\SetTargetMessage.cs" />
     <Compile Include="Protocol\Messages\Game\ShowProjectileMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\StopAutoAttackMessage.cs" />
     <Compile Include="Protocol\Messages\Game\UnitAnnounceMessage.cs" />
     <Compile Include="Protocol\Messages\Game\UpdateModelMessage.cs" />
     <Compile Include="Protocol\Messages\Game\UpdateStatsMessage.cs" />
@@ -152,6 +155,8 @@
     <Compile Include="Protocol\Messages\StateMessage.cs" />
     <Compile Include="Protocol\Messages\StateMessage2.cs" />
     <Compile Include="Protocol\Types\ReplicateStat.cs" />
+    <Compile Include="Time\ActionTimer.cs" />
+    <Compile Include="Time\HighResolutionTimer.cs" />
     <Compile Include="Utils\AsyncRandom.cs" />
     <Compile Include="IO\Inibin\InibinHashEnum.cs" />
     <Compile Include="Utils\Logger.cs" />

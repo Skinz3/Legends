@@ -43,7 +43,7 @@ namespace Legends.Handlers
             }
             client.UserId = userId;
 
-            PlayerData datas = ConfigurationManager.Instance.GetPlayerData(userId);
+            PlayerData datas = ConfigurationProvider.Instance.GetPlayerData(userId);
 
             if (datas == null)
             {
@@ -51,7 +51,7 @@ namespace Legends.Handlers
                 return;
             }
 
-            Game targetGame = GamesManager.TestGame;
+            Game targetGame = GameProvider.TestGame;
 
             if (targetGame.Contains(userId))
             {
@@ -99,7 +99,7 @@ namespace Legends.Handlers
             }
             else
             {
-                var infos = ConfigurationManager.Instance.GetPlayersInformations();
+                var infos = ConfigurationProvider.Instance.GetPlayersInformations();
                 client.Send(new SynchVersionAnswerMessage(0, 1, (int)client.Hero.Game.Map.Id, infos,
                 LoLServer.CLIENT_REQUIRED_VERSION, "CLASSIC", "NA1", 487826), Channel.CHL_S2C);
             }
@@ -109,9 +109,9 @@ namespace Legends.Handlers
         {
             client.Ready = true;
 
-            client.Send(new LoadScreenInfoMessage(6, 6, ConfigurationManager.Instance.GetBlueIds(), ConfigurationManager.Instance.GetPurpleIds()), Channel.CHL_LOADING_SCREEN);
+            client.Send(new LoadScreenInfoMessage(6, 6, ConfigurationProvider.Instance.GetBlueIds(), ConfigurationProvider.Instance.GetPurpleIds()), Channel.CHL_LOADING_SCREEN);
 
-            foreach (var player in ConfigurationManager.Instance.Configuration.Players)
+            foreach (var player in ConfigurationProvider.Instance.Configuration.Players)
             {
                 client.Send(new LoadScreenPlayerNameMessage(player.UserId, player.SkinId, player.Name, 0), Channel.CHL_LOADING_SCREEN);
                 client.Send(new LoadScreenPlayerChampionMessage(player.UserId, player.SkinId, player.ChampionName, 0), Channel.CHL_LOADING_SCREEN);

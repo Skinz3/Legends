@@ -21,6 +21,7 @@ namespace Legends.World.Commands
         public static void PositionCommand(LoLClient client)
         {
             client.Hero.DebugMessage(client.Hero.Position.ToString());
+            client.Hero.AttentionPing(client.Hero.Position, client.Hero.NetId, PingTypeEnum.Ping_OnMyWay);
         }
         [Command("test")]
         public static void TestCommand(LoLClient client)

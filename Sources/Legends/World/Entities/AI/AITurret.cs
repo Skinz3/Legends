@@ -33,11 +33,7 @@ namespace Legends.World.Entities.AI
             get;
             set;
         }
-        private AIUnitRecord AIUnitRecord
-        {
-            get;
-            set;
-        }
+
         private AttackableUnit Target
         {
             get;
@@ -55,18 +51,18 @@ namespace Legends.World.Entities.AI
             get;
             set;
         }
-        public AITurret(int netId, MapObjectRecord mapObject, AIUnitRecord aiUnitRecord, string suffix)
+        public AITurret(int netId, AIUnitRecord record, MapObjectRecord mapObject, string suffix)
         {
             this.NetId = netId;
+            this.Record = record;
             this.MapObjectRecord = mapObject;
-            this.AIUnitRecord = aiUnitRecord;
             this.Position = new Vector2(mapObject.Position.X, mapObject.Position.Y);
             this.UnitsInRange = new List<Unit>();
             this.Suffix = suffix;
         }
         public override void Initialize()
         {
-            Stats = new TurretStats(AIUnitRecord);
+            Stats = new TurretStats(Record);
             base.Initialize();
         }
         protected void SetTarget(AttackableUnit unit)
@@ -120,8 +116,6 @@ namespace Legends.World.Entities.AI
                 SetTarget(unitsInRange.Last().Key);
                 Game.Send(new BeginAutoAttackMessage(NetId, Target.NetId, 0x80, 0, false, Target.Position, Position, Game.Map.Record.MiddleOfMap));
                 var target = Target;
-                Thread.Sleep(1000);
-                target.InflictDamages(new Damages(this, target, 120, DamageType.DAMAGE_TYPE_PHYSICAL, DamageResultEnum.DAMAGE_TEXT_NORMAL));
             }
         }
         public override void Update(long deltaTime)

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Commands
 {
-    public class CommandsManager : Singleton<CommandsManager>
+    public class CommandsProvider : Singleton<CommandsProvider>
     {
         public const string COMMANDS_PREFIX = ".";
 

@@ -84,7 +84,7 @@ namespace Legends.World.Entities.Statistics
 
             ReplicationManager.UpdateFloat(MagicResistance.PercentBonus, 1, 18); // mPercentMagicReduction
 
-            ReplicationManager.UpdateFloat(AttackSpeed.BaseBonus, 1, 19); // mAttackSpeedMod 
+            ReplicationManager.UpdateFloat(3.0f, 1, 19); // mAttackSpeedMod 
             ReplicationManager.UpdateFloat(AttackRange.FlatBonus, 1, 20); //mFlatCastRangeMod
 
             ReplicationManager.UpdateFloat(-(CooldownReduction.Total / 100f), 1, 21); // mPercentCooldownMod  -0.5f = 50% cd reduction

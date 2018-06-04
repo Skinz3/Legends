@@ -1,7 +1,9 @@
 ﻿using Legends.Core.Cryptography;
 using Legends.Core.Protocol.Enum;
+using Legends.Core.Time;
 using Legends.Core.Utils;
 using Legends.Records;
+using Legends.World;
 using Legends.World.Buildings;
 using Legends.World.Entities.AI;
 using Legends.World.Games;
@@ -14,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Legends.Scripts.Maps
 {
-    public abstract class MapScript
+    public abstract class MapScript : IUpdatable
     {
         protected Logger logger = new Logger();
 
@@ -24,13 +26,41 @@ namespace Legends.Scripts.Maps
         {
             get;
             private set;
+
+        }
+        private List<KeyValuePair<Action, float>> DelayedActions
+        {
+            get;
+            set;
         }
         public MapScript(Game game)
         {
             this.Game = game;
+            this.DelayedActions = new List<KeyValuePair<Action, float>>();
         }
-        public abstract void Spawn();
+        /// <summary>
+        /// 
+        /// </summary>
+        public abstract void OnSpawn();
 
+        /// <summary>
+        /// GameTime = 0
+        /// </summary>
+        public abstract void OnStart();
+        /// <summary>
+        /// Delay = seconds
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="delay"></param>
+        protected void Action(Action action, float delay)
+        {
+            DelayedActions.Add(new KeyValuePair<Action, float>(action, delay));
+        }
+
+        protected void Announce(AnnounceEnum announce, float delay)
+        {
+            Action(new Action(() => { Game.Announce(announce); }), delay);
+        }
         protected void SpawnAITurret(string turretName, string aiUnitRecordName)
         {
             AIUnitRecord aIUnitRecord = AIUnitRecord.GetAIUnitRecord(aiUnitRecordName);
@@ -48,14 +78,14 @@ namespace Legends.Scripts.Maps
                 return;
             }
 
-            string fullName = turretName + BuildingManager.TOWER_SUFFIX;
+            string fullName = turretName + BuildingProvider.TOWER_SUFFIX;
 
-            var teamId = BuildingManager.Instance.GetTeamId(turretName);
+            var teamId = BuildingProvider.Instance.GetTeamId(turretName);
 
             if (teamId != TeamId.UNKNOWN)
             {
-                int netId = (int)(BuildingManager.TOWER_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(fullName)));
-                AITurret turret = new AITurret(netId, objectRecord, aIUnitRecord, BuildingManager.TOWER_SUFFIX);
+                int netId = (int)(BuildingProvider.TOWER_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(fullName)));
+                AITurret turret = new AITurret(netId, aIUnitRecord, objectRecord, BuildingProvider.TOWER_SUFFIX);
                 turret.DefineGame(Game);
                 Game.AddUnit(turret, teamId);
                 Game.Map.AddUnit(turret);
@@ -63,6 +93,20 @@ namespace Legends.Scripts.Maps
             else
             {
                 logger.Write(string.Format(SPAWN_EX_STRING, turretName, "Unable to find a team."), MessageState.WARNING);
+            }
+        }
+
+        public void Update(long deltaTime)
+        {
+            if (DelayedActions.Count > 0)
+            {
+                var pairs = DelayedActions.FindAll(x => x.Value <= Game.GameTimeSeconds);
+
+                foreach (var pair in pairs)
+                {
+                    pair.Key();
+                    DelayedActions.Remove(pair);
+                }
             }
         }
     }

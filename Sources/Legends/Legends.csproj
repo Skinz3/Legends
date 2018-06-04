@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -57,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\Configuration.cs" />
-    <Compile Include="Configurations\ConfigurationManager.cs" />
+    <Compile Include="Configurations\ConfigurationProvider.cs" />
     <Compile Include="Handlers\CommunicationHandler.cs" />
     <Compile Include="Handlers\GameHandler.cs" />
     <Compile Include="Handlers\LoadingScreenHandlers.cs" />
@@ -72,27 +75,29 @@
     <Compile Include="Records\ExperienceRecord.cs" />
     <Compile Include="Records\MapRecord.cs" />
     <Compile Include="Records\SkinRecord.cs" />
+    <Compile Include="Records\SpellRecord.cs" />
     <Compile Include="Scripts\Maps\MapScript.cs" />
     <Compile Include="Scripts\Maps\SummonersRiftUpdatedScript.cs" />
     <Compile Include="World\Entities\AI\AITurret.cs" />
+    <Compile Include="World\Entities\AI\AutoattackManager.cs" />
     <Compile Include="World\Entities\Buildings\AnimatedBuilding.cs" />
-    <Compile Include="World\Buildings\BuildingManager.cs" />
+    <Compile Include="World\Buildings\BuildingProvider.cs" />
     <Compile Include="World\Entities\Buildings\Inhibitor.cs" />
     <Compile Include="World\Entities\Buildings\Nexus.cs" />
     <Compile Include="World\Entities\Buildings\Turret.cs" />
     <Compile Include="World\Champions\Champion.cs" />
-    <Compile Include="World\Champions\ChampionManager.cs" />
+    <Compile Include="World\Champions\ChampionProvider.cs" />
     <Compile Include="World\Champions\Dummy.cs" />
     <Compile Include="World\Champions\Ezreal.cs" />
     <Compile Include="World\Commands\CommandAttribute.cs" />
-    <Compile Include="World\Commands\CommandsManager.cs" />
+    <Compile Include="World\Commands\CommandsProvider.cs" />
     <Compile Include="World\Commands\CommandsRepertory.cs" />
     <Compile Include="World\Entities\Buildings\Building.cs" />
     <Compile Include="World\Entities\AI\AIMinion.cs" />
+    <Compile Include="World\Entities\Movements\Path.cs" />
     <Compile Include="World\Entities\Statistics\AIStats.cs" />
     <Compile Include="World\Entities\AttackableUnit.cs" />
     <Compile Include="World\Entities\AI\AIUnit.cs" />
-    <Compile Include="World\Entities\Movements\WaypointsCollection.cs" />
     <Compile Include="World\Entities\AI\AIHero.cs" />
     <Compile Include="Configurations\PlayerData.cs" />
     <Compile Include="World\Entities\Replication\AttackSpeed.cs" />
@@ -106,13 +111,14 @@
     <Compile Include="World\Entities\Statistics\TurretStats.cs" />
     <Compile Include="World\Entities\Unit.cs" />
     <Compile Include="World\Games\Game.cs" />
-    <Compile Include="World\Games\GamesManager.cs" />
+    <Compile Include="World\Games\GameProvider.cs" />
     <Compile Include="World\Games\Maps\Fog\FogUpdate.cs" />
     <Compile Include="World\Games\Maps\HowlingAbyss.cs" />
     <Compile Include="World\Games\Maps\Map.cs" />
     <Compile Include="World\Games\Maps\SummonersRiftUpdated.cs" />
     <Compile Include="World\Games\Maps\SummonersRift.cs" />
     <Compile Include="World\Games\Team.cs" />
+    <Compile Include="World\IUpdatable.cs" />
     <Compile Include="World\Spells\Damages.cs" />
     <Compile Include="World\Spells\Spell.cs" />
   </ItemGroup>
@@ -121,6 +127,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon.ico" />
     <Content Include="Todo List.txt" />
   </ItemGroup>
   <ItemGroup>

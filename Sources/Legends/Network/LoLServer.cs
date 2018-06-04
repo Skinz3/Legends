@@ -47,7 +47,7 @@ namespace Legends.Network
 
             var address = new ENetAddress();
             address.host = SERVER_HOST;
-            address.port = ConfigurationManager.Instance.Configuration.ServerPort;
+            address.port = ConfigurationProvider.Instance.Configuration.ServerPort;
 
             _server = enet_host_create(&address, new IntPtr(32), new IntPtr(32), 0, 0);
 

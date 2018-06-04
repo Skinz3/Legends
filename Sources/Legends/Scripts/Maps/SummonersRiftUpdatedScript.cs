@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Legends.World.Games;
+using Legends.Core.Protocol.Enum;
 
 namespace Legends.Scripts.Maps
 {
@@ -13,8 +14,17 @@ namespace Legends.Scripts.Maps
         {
 
         }
+        /// <summary>
+        /// Called when GameTime = 0. And Callback start.
+        /// </summary>
+        public override void OnStart()
+        {
+            Announce(AnnounceEnum.WelcomeToSR, 25);
+            Announce(AnnounceEnum.ThirySecondsToMinionsSpawn, 35);
+            Announce(AnnounceEnum.MinionsHaveSpawned, 65);
+        }
 
-        public override void Spawn()
+        public override void OnSpawn()
         {
             SpawnAITurret("Turret_T1_R_03", "SRUAP_Turret_Order1");
             SpawnAITurret("Turret_T1_R_02", "SRUAP_Turret_Order2");

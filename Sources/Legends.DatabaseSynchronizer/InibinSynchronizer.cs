@@ -3,6 +3,7 @@ using Legends.Core.IO.Inibin;
 using Legends.Core.IO.RAF;
 using Legends.Core.Utils;
 using Legends.DatabaseSynchronizer.Attributes;
+using Legends.Records;
 using SmartORM;
 using SmartORM.Attributes;
 using System;
@@ -45,6 +46,7 @@ namespace Legends.DatabaseSynchronizer
         }
         public ITable[] GetRecords(Type type, RAFFileEntry[] entries)
         {
+
             List<ITable> records = new List<ITable>();
 
             foreach (var entry in entries)
@@ -52,9 +54,15 @@ namespace Legends.DatabaseSynchronizer
                 var inibin = new InibinFile(new MemoryStream(entry.GetContent(true)));
 
                 var record = (ITable)Activator.CreateInstance(type);
-
-                foreach (var property in record.GetType().GetProperties())
+                foreach (var property in type.GetProperties())
                 {
+                    var attribute2 = property.GetCustomAttribute<InibinFieldFileName>();
+
+                    if (attribute2 != null)
+                    {
+                        property.SetValue(record, Path.GetFileNameWithoutExtension(entry.Path));
+                    }
+
                     var attribute = property.GetCustomAttribute<InibinFieldAttribute>();
 
                     if (attribute != null)
@@ -68,7 +76,6 @@ namespace Legends.DatabaseSynchronizer
                                     var value = inibin.Sets[flag].Properties[(uint)attribute.hash];
                                     value = FieldSanitizer.Sanitize(value.ToString(), property.PropertyType);
 
-
                                     try
                                     {
                                         property.SetValue(record, Convert.ChangeType(value.ToString(), property.PropertyType));
@@ -79,17 +86,17 @@ namespace Legends.DatabaseSynchronizer
                                     }
 
                                 }
+                                else
+                                {
+                                    logger.Write(entry.Path + " has not value for" + property.Name, MessageState.WARNING);
+                                }
                             }
                         }
                     }
 
-                    var attribute2 = property.GetCustomAttribute<InibinFieldFileName>();
 
-                    if (attribute2 != null)
-                    {
-                        property.SetValue(record, Path.GetFileNameWithoutExtension(entry.Path));
-                    }
                 }
+              
                 records.Add(record);
             }
             return records.ToArray();

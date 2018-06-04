@@ -1,4 +1,5 @@
-﻿using Legends.Core.Protocol.Enum;
+﻿using Legends.Core.Geometry;
+using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.World.Entities.Movements;
 using Legends.World.Games;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Entities
 {
-    public abstract class Unit
+    public abstract class Unit : IUpdatable
     {
         public const float DEFAULT_MODEL_SIZE = 1f;
 
@@ -68,7 +69,7 @@ namespace Legends.World.Entities
             set;
         }
 
-       
+
         public Game Game
         {
             get;
@@ -129,7 +130,16 @@ namespace Legends.World.Entities
         }
         public float GetDistanceTo(Unit other)
         {
-            return (float)Math.Sqrt(Math.Pow(other.Position.X - Position.X, 2) + Math.Pow(other.Position.Y - Position.Y, 2));
+            return Geo.GetDistance(Position, other.Position);
+        }
+        /// <summary>
+        /// In Radians
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public float GetAngleBetween(Unit other)
+        {
+            return Geo.GetAngle(Position, other.Position);
         }
         public bool HasVision(Unit other)
         {

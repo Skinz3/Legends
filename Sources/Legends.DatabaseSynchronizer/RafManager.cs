@@ -53,6 +53,10 @@ namespace Legends.DatabaseSynchronizer
             }
             this.Archives = rafs.ToArray();
         }
+        public bool Exists(string path)
+        {
+            return Archives.FirstOrDefault(x => x.Files.FirstOrDefault(f => f.Path == path) != null) != null;
+        }
         public RAFFileEntry GetFile(string path) // "DATA/Characters/Aatrox/Aatrox.inibin"
         {
             foreach (var archive in Archives)

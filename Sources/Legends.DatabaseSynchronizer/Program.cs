@@ -36,7 +36,7 @@ namespace Legends.DatabaseSynchronizer
             var test = manager.GetFiles("ExpCurve.inibin");
 
 
-            /* JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/skins.json","SKINS");  */
+           // JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/spells.json","SPELLS");  
             logger.OnStartup();
             var recordAssembly = Assembly.GetAssembly(typeof(AIUnitRecord));
 

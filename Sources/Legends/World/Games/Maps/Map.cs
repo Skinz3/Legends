@@ -78,11 +78,11 @@ namespace Legends.World.Games.Maps
 
         public virtual void Update(long deltaTime)
         {
-            //    Console.Title = deltaTime.ToString();
             foreach (var unit in Units)
             {
                 unit.Update(deltaTime);
             }
+            Script.Update(deltaTime);
         }
         public void AddUnit(Unit unit)
         {

@@ -22,9 +22,9 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_ChatBoxMessage, Channel.CHL_COMMUNICATION)]
         public static void HandleChatBoxMessage(ChatBoxMessage message, LoLClient client)
         {
-            if (message.content.StartsWith(CommandsManager.COMMANDS_PREFIX))
+            if (message.content.StartsWith(CommandsProvider.COMMANDS_PREFIX))
             {
-                CommandsManager.Instance.Handle(client, message.content);
+                CommandsProvider.Instance.Handle(client, message.content);
             }
             else
             {

@@ -1,9 +1,12 @@
-﻿using Legends.Core.Protocol.Enum;
+﻿using ENet;
+using Legends.Core.Protocol;
+using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Game;
 using Legends.Core.Protocol.Messages.Extended;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
+using Legends.World.Games;
 using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
@@ -52,6 +55,23 @@ namespace Legends.World.Entities
                 OnDead(damages.Source);
             }
         }
+        /// <summary>
+        /// Envoit un message a tous les joueurs possédant la vision sur ce joueur.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="channel"></param>
+        public void SendVision(Message message, Channel channel = Channel.CHL_S2C, PacketFlags flags = PacketFlags.Reliable)
+        {
+            Team.Send(message, channel, flags);
+
+            Team oposedTeam = GetOposedTeam();
+
+            if (oposedTeam.HasVision(this))
+            {
+                oposedTeam.Send(message);
+            }
+        }
+
         public virtual void OnDead(Unit source)
         {
             Alive = false;
