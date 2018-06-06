@@ -55,6 +55,8 @@
     <Compile Include="Cryptography\Blowfish.cs" />
     <Compile Include="Cryptography\CRC32.cs" />
     <Compile Include="Cryptography\Crypto.cs" />
+    <Compile Include="CSharp\InjectionManager.cs" />
+    <Compile Include="CSharp\Script.cs" />
     <Compile Include="DesignPattern\DeveloppementManager.cs" />
     <Compile Include="DesignPattern\StartupInvoke.cs" />
     <Compile Include="DesignPattern\StartupInvokePriority.cs" />
@@ -171,5 +173,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

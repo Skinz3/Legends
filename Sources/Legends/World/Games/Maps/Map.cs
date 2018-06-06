@@ -94,7 +94,10 @@ namespace Legends.World.Games.Maps
             int teamIndex = player.TeamNo - 1;
             return player.Team.Id == TeamId.BLUE ? BlueSpawns[teamSize][teamIndex] : PurpleSpawns[teamSize][teamIndex];
         }
-        protected abstract MapScript CreateScript(Game game);
+        protected MapScript CreateScript(Game game)
+        {
+            return MapScriptsManager.Instance.GetMapScript(Id, game);
+        }
 
         public static Map CreateMap(int id, Game game)
         {

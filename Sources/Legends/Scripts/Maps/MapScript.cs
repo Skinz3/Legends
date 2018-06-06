@@ -1,4 +1,5 @@
 ﻿using Legends.Core.Cryptography;
+using Legends.Core.CSharp;
 using Legends.Core.Protocol.Enum;
 using Legends.Core.Time;
 using Legends.Core.Utils;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Legends.Scripts.Maps
 {
-    public abstract class MapScript : IUpdatable
+    public abstract class MapScript : Script, IUpdatable
     {
         protected Logger logger = new Logger();
 

@@ -77,7 +77,7 @@
     <Compile Include="Records\SkinRecord.cs" />
     <Compile Include="Records\SpellRecord.cs" />
     <Compile Include="Scripts\Maps\MapScript.cs" />
-    <Compile Include="Scripts\Maps\SummonersRiftUpdatedScript.cs" />
+    <Compile Include="Scripts\Maps\MapScriptsManager.cs" />
     <Compile Include="World\Entities\AI\AITurret.cs" />
     <Compile Include="World\Entities\AI\AutoattackManager.cs" />
     <Compile Include="World\Entities\Buildings\AnimatedBuilding.cs" />

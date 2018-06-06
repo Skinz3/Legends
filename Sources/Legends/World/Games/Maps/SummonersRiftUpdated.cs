@@ -28,10 +28,6 @@ namespace Legends.World.Games.Maps
         {
 
         }
-
-        protected override MapScript CreateScript(Game game)
-        {
-            return new SummonersRiftUpdatedScript(game);
-        }
+       
     }
 }

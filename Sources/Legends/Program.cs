@@ -1,4 +1,5 @@
 ﻿using Legends.Configurations;
+using Legends.Core.CSharp;
 using Legends.Core.DesignPattern;
 using Legends.Core.Protocol;
 using Legends.Core.Time;
@@ -11,6 +12,7 @@ using SmartORM;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -35,7 +37,7 @@ namespace Legends
             StartupManager.Instance.Initialize(Assembly.GetAssembly(typeof(AIUnitRecord)));
             logger.Write("Server started");
             Process.Start("StartGame.bat");
-          Process.Start("StartGame2.bat");
+            Process.Start("StartGame2.bat");
             // Process.Start("StartGame3.bat");
             LoLServer.NetLoop();
 
@@ -46,8 +48,11 @@ namespace Legends
         {
             DatabaseManager.Instance.Initialize(Environment.CurrentDirectory + "/" + DATABASE_FILENAME, Assembly.GetAssembly(typeof(AIUnitRecord)));
             DatabaseManager.Instance.LoadTables();
-
-
+        }
+        [StartupInvoke("CSharp Scripts", StartupInvokePriority.Third)]
+        public static void LoadScripts()
+        {
+            InjectionManager.Instance.Initialize(new Assembly[] { Assembly.GetAssembly(typeof(AIUnitRecord)), Assembly.GetAssembly(typeof(Script)) });
         }
         [StartupInvoke("Protocol", StartupInvokePriority.Second)]
         public static void LoadProtocol()
