@@ -41,10 +41,13 @@ namespace Legends.World.Entities.AI
         }
         public override bool IsMoving => Path.IsMoving;
 
-
+        public abstract bool Autoattack
+        {
+            get;
+        }
         public AIUnit()
         {
-            this.AutoattackUpdater = new AutoattackManager(this);
+            this.AutoattackUpdater = new AutoattackManager(this, Autoattack);
             this.Path = new Path(this);
         }
         public override void Update(long deltaTime)
@@ -53,16 +56,19 @@ namespace Legends.World.Entities.AI
             Path.Update(deltaTime);
             this.AutoattackUpdater.Update(deltaTime);
         }
-        public void Move(Path path)
+        public void Move(Path path, bool unsetTarget = true)
         {
+            if (unsetTarget)
+                AutoattackUpdater.UnsetTarget();
+
             Path = path;
             SendVision(new MovementAnswerMessage(0, Path.GetWaypoints(), NetId, Game.Map.Size), Channel.CHL_LOW_PRIORITY);
             OnPathChanged?.Invoke(Path);
 
         }
-        public void MoveTo(Vector2 targetVector)
+        public void MoveTo(Vector2 targetVector, bool unsetTarget = true)
         {
-            Move(new Path(this, targetVector));
+            Move(new Path(this, targetVector), unsetTarget);
         }
 
 
@@ -80,13 +86,13 @@ namespace Legends.World.Entities.AI
             else
             {
                 if (AIStats.MoveSpeed.Total > 0)
-                    Move(new Path(this, targetUnit, distanceToTarget));
+                    Move(new Path(this, targetUnit, distanceToTarget), false);
             }
 
         }
-        public void StopMove()
+        public void StopMove(bool unsetTarget = true)
         {
-            Move(new Path(this));
+            Move(new Path(this), unsetTarget);
         }
 
     }

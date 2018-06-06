@@ -105,9 +105,6 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_C2S_MoveReq)]
         public static void HandleMovementRequestMessage(MovementRequestMessage message, LoLClient client)
         {
-
-
-
             switch (message.type)
             {
                 case MovementType.EMOTE:

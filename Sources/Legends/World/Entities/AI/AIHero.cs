@@ -78,7 +78,8 @@ namespace Legends.World.Entities.AI
 
         public override float PerceptionBubbleRadius => ((HeroStats)Stats).PerceptionBubbleRadius.Total;
 
-
+        public override bool Autoattack => false;
+          
         public AIHero(LoLClient client, PlayerData data)  
         {
             Client = client;

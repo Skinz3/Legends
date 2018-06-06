@@ -51,6 +51,9 @@ namespace Legends.World.Entities.AI
             get;
             set;
         }
+
+        public override bool Autoattack => true;
+
         public AITurret(int netId, AIUnitRecord record, MapObjectRecord mapObject, string suffix)
         {
             this.NetId = netId;
