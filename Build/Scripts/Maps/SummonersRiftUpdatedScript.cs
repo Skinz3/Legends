@@ -10,8 +10,8 @@ namespace Legends.Scripts.Maps
 {
     public class SummonersRiftUpdatedScript : MapScript
     {
-		public const MapIdEnum MAP_ID = MapIdEnum.SummonersRiftUpdated;
-		
+        public const MapIdEnum MAP_ID = MapIdEnum.SummonersRiftUpdated;
+
         public SummonersRiftUpdatedScript(Game game) : base(game)
         {
 
