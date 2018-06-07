@@ -29,6 +29,10 @@ namespace Legends.Core.Protocol
             this.Peer = peer;
         }
 
+        public virtual void OnMessageHandle(Message message, Delegate handler)
+        {
+            handler.DynamicInvoke(null, message, this);
+        }
         public abstract void Disconnect();
     }
 }

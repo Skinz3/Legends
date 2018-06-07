@@ -37,7 +37,7 @@ namespace Legends
             StartupManager.Instance.Initialize(Assembly.GetAssembly(typeof(AIUnitRecord)));
             logger.Write("Server started");
             Process.Start("StartGame.bat");
-                 Process.Start("StartGame2.bat");
+            Process.Start("StartGame2.bat");
             // Process.Start("StartGame3.bat");
             LoLServer.NetLoop();
 

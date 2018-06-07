@@ -1,5 +1,6 @@
 ﻿using ENet;
 using Legends.Core.Cryptography;
+using Legends.Core.DesignPattern;
 using Legends.Core.IO;
 using Legends.Core.Protocol;
 using Legends.Core.Utils;
@@ -66,8 +67,18 @@ namespace Legends.Network
             Message message = ProtocolManager.BuildMessage(this, channel, data);
             ProtocolManager.HandleMessage(message, this);
         }
-
-
+        [InDeveloppement(InDeveloppementState.THINK_ABOUT_IT,"A good synchronization method?")]
+        public override void OnMessageHandle(Message message, Delegate handler)
+        {
+            if (Hero != null && Hero.Game != null && Hero.Game.Started)
+            {
+                Hero.Game.Invoke(new Action(() => { handler.DynamicInvoke(null, message, this); }));
+            }
+            else
+            {
+                handler.DynamicInvoke(null, message, this);
+            }
+        }
         public bool Send(byte[] buffer, Channel channelNo, PacketFlags flag = PacketFlags.Reliable)
         {
 

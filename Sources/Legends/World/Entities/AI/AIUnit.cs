@@ -39,11 +39,26 @@ namespace Legends.World.Entities.AI
             get;
             protected set;
         }
+        public float AttackRange
+        {
+            get
+            {
+                return AIStats.AttackRange.Total + 150; // + 150?
+            }
+        }
         public override bool IsMoving => Path.IsMoving;
 
         public abstract bool Autoattack
         {
             get;
+        }
+        public virtual void OnTargetSet(AttackableUnit target)
+        {
+
+        }
+        public virtual void OnTargetUnset(AttackableUnit target)
+        {
+
         }
         public AIUnit()
         {

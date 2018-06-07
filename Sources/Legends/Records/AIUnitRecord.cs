@@ -57,7 +57,7 @@ namespace Legends.Records
         }
 
         [InibinField(InibinHashEnum.CHARACTER_AbilityPowerIncPerLevel)]
-        public short AbilityPowerIncPerLevel
+        public float AbilityPowerIncPerLevel
         {
             get;
             set;

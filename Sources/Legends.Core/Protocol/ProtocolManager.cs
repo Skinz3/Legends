@@ -163,8 +163,7 @@ namespace Legends.Core.Protocol
 
                     try
                     {
-
-                        handler.Value.DynamicInvoke(null, message, client);
+                        client.OnMessageHandle(message, handler.Value);
                         return true;
 
                     }

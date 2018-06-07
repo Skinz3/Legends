@@ -15,6 +15,10 @@ namespace Legends.Core
 {
     public static class Extensions
     {
+        public static float GetValuePrct(this float value, float percentage)
+        {
+            return (value * (percentage / 100f));
+        }
         public static T Random<T>(this IEnumerable<T> enumerable)
         {
             int count = enumerable.Count();

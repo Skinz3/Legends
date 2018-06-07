@@ -29,6 +29,13 @@ namespace Legends.World.Games
             get;
             set;
         }
+        public AttackableUnit[] AliveUnits
+        {
+            get
+            {
+                return Array.FindAll(Units.Values.OfType<AttackableUnit>().ToArray(), x => x.Alive);
+            }
+        }
         public int Size
         {
             get

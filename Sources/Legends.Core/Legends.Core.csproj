@@ -88,6 +88,9 @@
     <Compile Include="Protocol\Enum\StatPrimaryId.cs" />
     <Compile Include="Protocol\Enum\UnitAnnounceEnum.cs" />
     <Compile Include="Protocol\Messages\Game\BeginAutoAttackMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\ChampionDeathTimerMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\ChampionDieMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\ChampionRespawnMessage.cs" />
     <Compile Include="Protocol\Messages\Game\DestroyObjectMessage.cs" />
     <Compile Include="Protocol\Messages\Game\DieMessage.cs" />
     <Compile Include="Protocol\Messages\Game\AttentionPingAnswerMessage.cs" />
@@ -111,6 +114,7 @@
     <Compile Include="Protocol\Messages\Game\GameTimerUpdateMessage.cs" />
     <Compile Include="Protocol\Messages\Game\EnterVisionMessage.cs" />
     <Compile Include="Protocol\Messages\Game\HeroSpawnMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\LevelUpMessage.cs" />
     <Compile Include="Protocol\Messages\Game\MovementAnswerMessage.cs" />
     <Compile Include="Protocol\Messages\Game\MovementConfirmationMessage.cs" />
     <Compile Include="Protocol\Messages\Game\NextAutoattackMessage.cs" />

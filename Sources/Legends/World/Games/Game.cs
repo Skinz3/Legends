@@ -119,7 +119,19 @@ namespace Legends.World.Games
                 return GameTime / 1000f;
             }
         }
+        public float GameTimeMinutes
+        {
+            get
+            {
+                return GameTimeSeconds / 60f;
+            }
+        }
         private double NextSyncTime
+        {
+            get;
+            set;
+        }
+        private List<Action> SynchronizedActions
         {
             get;
             set;
@@ -133,8 +145,12 @@ namespace Legends.World.Games
             this.PurpleTeam = new Team(this, TeamId.PURPLE);
             this.Map = Map.CreateMap(mapId, this);
             this.Timer = new HighResolutionTimer((int)REFRESH_RATE);
+            this.SynchronizedActions = new List<Action>();
         }
-
+        public void Invoke(Action action)
+        {
+            SynchronizedActions.Add(action);
+        }
         /// <summary>
         /// Add player to the game and to his team 
         /// </summary>
@@ -180,7 +196,7 @@ namespace Legends.World.Games
                 Map.AddUnit(player);
             }
 
-             Map.Script.OnSpawn();
+            Map.Script.OnSpawn();
 
 
             Send(new StartSpawnMessage());
@@ -221,11 +237,11 @@ namespace Legends.World.Games
             }
 
             float gameTime = GameTime / 1000f;
-            
+
             Send(new GameTimerMessage(0, gameTime));
             Send(new GameTimerUpdateMessage(0, gameTime));
-            this.Started = true;
             StartCallback();
+            this.Started = true;
             Map.Script.OnStart();
             Send(new StartGameMessage(0));
         }
@@ -251,6 +267,12 @@ namespace Legends.World.Games
                 Send(new GameTimerMessage(0, GameTime / 1000f));
                 NextSyncTime = 0;
             }
+            Console.WriteLine(GameTimeMinutes);
+            foreach (var action in SynchronizedActions)
+            {
+                action();
+            }
+            SynchronizedActions.Clear();
 
             BlueTeam.Update(deltaTime);
             PurpleTeam.Update(deltaTime);

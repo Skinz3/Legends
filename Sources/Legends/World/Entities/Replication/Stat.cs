@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,6 +65,10 @@ namespace Legends.World.Entities.Statistics.Replication
         public void SetBaseValue(float baseValue)
         {
             this.BaseValue = baseValue;
+        }
+        public void AddBaseValue(float value)
+        {
+            this.BaseValue += value;
         }
         public void ApplyModifier(StatMod modifier)
         {

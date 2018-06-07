@@ -45,19 +45,67 @@ namespace Legends.World.Entities.AI
         {
             this.Unit = unit;
             this.Auto = auto;
+            this.UnitsInRange = new List<Unit>();
         }
-
+        private List<Unit> UnitsInRange
+        {
+            get;
+            set;
+        }
         private long test = 0;
 
+        private Dictionary<AttackableUnit, float> GetUnitsInAttackRange()
+        {
+            Dictionary<AttackableUnit, float> results = new Dictionary<AttackableUnit, float>();
+
+            foreach (var unit in Unit.GetOposedTeam().AliveUnits)
+            {
+                float distance = Unit.GetDistanceTo(unit);
+                if (distance <= Unit.AttackRange) // <= vs <
+                {
+                    results.Add(unit, distance);
+                }
+            }
+            return results.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        }
+        private void UpdateTarget(long deltaTime)
+        {
+            if (TargetUnit != null) // La cible n'est plus en portée de la tourelle
+            {
+                if (Unit.GetDistanceTo(TargetUnit) > Unit.AttackRange)
+                    UnsetTarget();
+                else
+                    return;
+            }
+
+
+            var unitsInRange = GetUnitsInAttackRange(); // on cherche les autres entitées a portée de la tourelle
+
+            if (TargetUnit == null && unitsInRange.Count > 0)
+            {
+                DefineTarget(unitsInRange.Last().Key);
+
+                OnTargetReach();
+            }
+        }
         public void Update(long deltaTime)
         {
+            if (Auto)
+            {
+                UpdateTarget(deltaTime);
+            }
             if (IsAttacking)
             {
+                if (TargetUnit.Alive == false)
+                {
+                    UnsetTarget();
+                    return;
+                }
                 test++;
                 if (test == 30)
                 {
-                    TargetUnit.InflictDamages(new Damages(Unit, TargetUnit, 12, DamageType.DAMAGE_TYPE_PHYSICAL, DamageResultEnum.DAMAGE_TEXT_CRITICAL));
-                    Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, TargetUnit.NetId, Unit.Game.NetIdProvider.PopNextNetId(), true, true));
+                    TargetUnit.InflictDamages(new Damages(Unit, TargetUnit, 120, DamageType.DAMAGE_TYPE_PHYSICAL, DamageResultEnum.DAMAGE_TEXT_CRITICAL));
+                    Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, TargetUnit.NetId, Unit.Game.NetIdProvider.PopNextNetId(),false, true));
                     test = 0;
                 }
             }
@@ -79,11 +127,13 @@ namespace Legends.World.Entities.AI
         {
             Unit.Game.Send(new StopAutoAttackMessage(Unit.NetId));
             IsAttacking = false;
+            Unit.OnTargetUnset(TargetUnit);
             TargetUnit = null;
         }
-        public void DefineTarget(AIUnit target)
+        public void DefineTarget(AttackableUnit target)
         {
             this.TargetUnit = target;
+            Unit.OnTargetSet(target);
         }
     }
 }

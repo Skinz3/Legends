@@ -88,7 +88,7 @@ namespace Legends.World.Games.Maps
         {
             Units.Add(unit);
         }
-        public Vector2 GetStartPosition(AIHero player)
+        public Vector2 GetSpawnPosition(AIHero player)
         {
             int teamSize = player.Team.Size;
             int teamIndex = player.TeamNo - 1;

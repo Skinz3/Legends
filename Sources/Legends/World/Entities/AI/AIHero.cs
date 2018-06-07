@@ -28,6 +28,7 @@ namespace Legends.World.Entities.AI
     {
         public const float DEFAULT_START_GOLD = 475;
         public const float DEFAULT_COOLDOWN_REDUCTION = 0f;
+
         public const float DEFAULT_PERCEPTION_BUBBLE_RADIUS = 1350f;
 
         public LoLClient Client
@@ -79,8 +80,13 @@ namespace Legends.World.Entities.AI
         public override float PerceptionBubbleRadius => ((HeroStats)Stats).PerceptionBubbleRadius.Total;
 
         public override bool Autoattack => false;
-          
-        public AIHero(LoLClient client, PlayerData data)  
+
+        private DeathTimer DeathTimer
+        {
+            get;
+            set;
+        }
+        public AIHero(LoLClient client, PlayerData data)
         {
             Client = client;
             Data = data;
@@ -93,10 +99,54 @@ namespace Legends.World.Entities.AI
             Champion = ChampionProvider.Instance.GetChampion(this, (ChampionEnum)Enum.Parse(typeof(ChampionEnum), Data.ChampionName));
             Stats = new HeroStats(Record, Data.SkinId);
             Model = Data.ChampionName;
+            DeathTimer = new DeathTimer(this);
             SkinId = Data.SkinId;
             base.Initialize();
         }
+        [InDeveloppement(InDeveloppementState.TODO, "Skill points")]
+        public void AddExperience(float value)
+        {
+            int oldLevel = AIStats.Level;
+            AIStats.AddExperience(value);
 
+            if (AIStats.Level > oldLevel)
+            {
+                int diff = AIStats.Level - oldLevel;
+
+                AIStats.Health.BaseBonus += (float)Record.HpPerLevel;
+                AIStats.Mana.BaseBonus += (float)Record.MpPerLevel;
+                AIStats.HpRegeneration.BaseBonus += (float)Record.HpRegenPerLevel;
+                AIStats.ManaRegeneration.BaseBonus += (float)Record.MPRegenPerLevel;
+                AIStats.AttackDamage.BaseBonus += (float)Record.DamagePerLevel;
+                AIStats.Armor.BaseBonus += (float)Record.ArmorPerLevel;
+                AIStats.AbilityPower.BaseBonus += (float)Record.AbilityPowerIncPerLevel;
+                AIStats.AttackSpeed.BaseBonus += (float)Record.AttackSpeedPerLevel;
+                AIStats.CriticalHit.BaseBonus += (float)Record.CritPerLevel;
+                AIStats.MagicResistance.BaseBonus += (float)Record.MagicResistPerLevel;
+            }
+
+            Game.Send(new LevelUpMessage(NetId, (byte)AIStats.Level, 0)); // tdoo
+            UpdateStats();
+        }
+        public override void OnDead(Unit source) // we override base
+        {
+            AIStats.Health.Current = 0;
+            AIStats.Mana.Current = 0;
+            UpdateStats();
+            Alive = false;
+            Game.Send(new ChampionDieMessage(300, NetId, source.NetId, 1));
+            Game.UnitAnnounce(UnitAnnounceEnum.Death, NetId, source.NetId, new int[0]);
+            DeathTimer.OnDead();
+        }
+        public void OnRevive()
+        {
+            AIStats.Health.Current = AIStats.Health.Total;
+            AIStats.Mana.Current = AIStats.Mana.Total;
+            Alive = true;
+            Position = SpawnPosition;
+            Client.Send(new ChampionRespawnMessage(NetId, Position));
+            UpdateStats();
+        }
         public void DebugMessage(string content)
         {
             Client.Send(new DebugMessage(NetId, content));
@@ -104,6 +154,7 @@ namespace Legends.World.Entities.AI
         public override void Update(long deltaTime)
         {
             base.Update(deltaTime);
+            DeathTimer.Update(deltaTime);
         }
 
 

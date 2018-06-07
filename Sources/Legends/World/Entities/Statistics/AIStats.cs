@@ -162,6 +162,7 @@ namespace Legends.World.Entities.Statistics
             this.Gold = AIHero.DEFAULT_START_GOLD;
             this.GoldTotal = this.Gold;
         }
+       
         public void AddGold(float value)
         {
             Gold += value;

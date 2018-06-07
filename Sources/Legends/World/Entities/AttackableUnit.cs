@@ -1,4 +1,5 @@
 ﻿using ENet;
+using Legends.Core.DesignPattern;
 using Legends.Core.Protocol;
 using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Game;
@@ -21,7 +22,7 @@ namespace Legends.World.Entities
         public bool Alive
         {
             get;
-            private set;
+            protected set;
         }
         public Stats Stats
         {
@@ -71,7 +72,7 @@ namespace Legends.World.Entities
                 oposedTeam.Send(message);
             }
         }
-
+        [InDeveloppement(InDeveloppementState.TODO, "The parametters should be DeathDescription.cs for assits")]
         public virtual void OnDead(Unit source)
         {
             Alive = false;
@@ -79,7 +80,7 @@ namespace Legends.World.Entities
         }
         public void UpdateHeath()
         {
-           Game.Send(new SetHealthMessage(NetId, 0, Stats.Health.Total, Stats.Health.Current));
+            Game.Send(new SetHealthMessage(NetId, 0, Stats.Health.Total, Stats.Health.Current));
         }
     }
 }

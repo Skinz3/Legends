@@ -62,7 +62,9 @@ namespace Legends.Handlers
             client.Hero.ReadyToSpawn = true;
 
             client.Hero.NetId = client.Hero.Game.NetIdProvider.PopNextNetId();
-            client.Hero.Position = client.Hero.Game.Map.GetStartPosition(client.Hero);
+            client.Hero.SpawnPosition = client.Hero.Game.Map.GetSpawnPosition(client.Hero);
+            client.Hero.Position = client.Hero.SpawnPosition;
+
 
             if (client.Hero.Game.CanSpawn)
             {
@@ -111,31 +113,25 @@ namespace Legends.Handlers
                     break;
                 case MovementType.MOVE:
 
-                    client.Hero.Invoke(new Action(() =>
-                    {
-                        WaypointsReader wayPointsReader = new WaypointsReader(message.moveData, message.coordCount, client.Hero.Game.Map.Size);
-                        // the client delay lead to display problems so we secure the first waypoint.
-                        wayPointsReader.Waypoints[0] = client.Hero.Position;
-                        client.Hero.Move(new Path(client.Hero, wayPointsReader.Waypoints));
+                    WaypointsReader wayPointsReader = new WaypointsReader(message.moveData, message.coordCount, client.Hero.Game.Map.Size);
+                    // the client delay lead to display problems so we secure the first waypoint.
+                    wayPointsReader.Waypoints[0] = client.Hero.Position;
+                    client.Hero.Move(new Path(client.Hero, wayPointsReader.Waypoints));
 
-                    }));
 
                     break;
                 case MovementType.ATTACK:
 
                     // ThreadSafe important !! 
-                    client.Hero.Invoke(new Action(() =>
+                    var target = (AIUnit)client.Hero.Game.Map.GetUnit(message.targetNetId);
+
+                    if (target == null)
                     {
-                        var target = (AIUnit)client.Hero.Game.Map.GetUnit(message.targetNetId);
+                        client.Hero.DebugMessage("Unable to autoattack, target is null");
+                        return;
+                    }
+                    client.Hero.MoveToAutoattack(target);
 
-                        if (target == null)
-                        {
-                            client.Hero.DebugMessage("Unable to autoattack, target is null");
-                            return;
-                        }
-                        client.Hero.MoveToAutoattack(target);
-
-                    }));
 
                     break;
                 case MovementType.ATTACKMOVE:

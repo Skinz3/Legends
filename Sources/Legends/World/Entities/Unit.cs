@@ -53,14 +53,9 @@ namespace Legends.World.Entities
             get;
             protected set;
         }
-        private List<Action> SynchronizedActions
-        {
-            get;
-            set;
-        }
         public Unit()
         {
-            SynchronizedActions = new List<Action>();
+
         }
 
         public Vector2 Position
@@ -68,7 +63,11 @@ namespace Legends.World.Entities
             get;
             set;
         }
-
+        public Vector2 SpawnPosition
+        {
+            get;
+            set;
+        }
 
         public Game Game
         {
@@ -102,18 +101,9 @@ namespace Legends.World.Entities
         {
             this.Game = game;
         }
-        public void Invoke(Action action)
-        {
-            SynchronizedActions.Add(action);
-        }
         public virtual void Update(long deltaTime)
         {
-            for (int i = 0; i < SynchronizedActions.Count; i++)
-            {
-                SynchronizedActions[i].Invoke();
-            }
 
-            SynchronizedActions.Clear();
         }
         public abstract void OnUnitEnterVision(Unit unit);
 
@@ -149,5 +139,7 @@ namespace Legends.World.Entities
         {
             return Name;
         }
+
+     
     }
 }

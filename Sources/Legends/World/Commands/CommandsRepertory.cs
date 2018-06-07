@@ -57,6 +57,11 @@ namespace Legends.World.Commands
         {
             client.Hero.UpdateModel(client.Hero.Model, false, skinId);
         }
+        [Command("exp")]
+        public static void AddExperienceCommand(LoLClient client,float exp)
+        {
+            client.Hero.AddExperience(exp);
+        }
         [Command("vision")]
         public static void VisionCommand(LoLClient client)
         {
