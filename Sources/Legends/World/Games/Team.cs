@@ -131,11 +131,11 @@ namespace Legends.World.Games
         }
         public void Update(long deltaTime)
         {
-            foreach (var opponent in GetOposedTeam().Units.Values)
+            foreach (var opponent in GetOposedTeam().AliveUnits)
             {
                 bool visible = false;
 
-                foreach (var unit in Units.Values)
+                foreach (var unit in AliveUnits)
                 {
                     if (unit.PerceptionBubbleRadius > 0)
                     {

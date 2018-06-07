@@ -131,10 +131,10 @@ namespace Legends.World.Games
             get;
             set;
         }
-        private List<Action> SynchronizedActions
+        public List<Action> SynchronizedActions
         {
             get;
-            set;
+            private set;
         }
         public Game(int id, string name, int mapId) // Enum MapType, switch -> instance
         {
@@ -267,8 +267,7 @@ namespace Legends.World.Games
                 Send(new GameTimerMessage(0, GameTime / 1000f));
                 NextSyncTime = 0;
             }
-            Console.WriteLine(GameTimeMinutes);
-            foreach (var action in SynchronizedActions)
+            foreach (var action in new List<Action>(SynchronizedActions))
             {
                 action();
             }

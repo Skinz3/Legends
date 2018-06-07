@@ -31,7 +31,7 @@ namespace Legends.World.Entities.Movements
         {
             get
             {
-                if (Waypoints.Count < 2)
+                if (Waypoints.Count < 2 || WaypointsIndex == Waypoints.Count)
                 {
                     return null;
                 }
@@ -77,7 +77,7 @@ namespace Legends.World.Entities.Movements
         }
         public Path(AIUnit unit, Vector2 targetPosition) : this(unit, new List<Vector2>() { unit.Position, targetPosition })
         {
-           
+
         }
         public Path(AIUnit unit) : this(unit, new List<Vector2>() { unit.Position })
         {
@@ -94,7 +94,7 @@ namespace Legends.World.Entities.Movements
             this.TargetUnit = target;
             this.WaypointsIndex = 1;
 
-       
+
 
             Vector2 targetPosition = target.Position;
 
@@ -139,7 +139,7 @@ namespace Legends.World.Entities.Movements
                             Unit.AutoattackUpdater.OnTargetReach();
                         }
                         OnMoveEnd?.Invoke(Unit.Position);
-                    //    Unit.StopMove();
+                        //    Unit.StopMove();
                         End = true;
                     }
                 }

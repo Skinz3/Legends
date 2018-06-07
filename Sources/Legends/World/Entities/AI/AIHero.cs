@@ -144,7 +144,7 @@ namespace Legends.World.Entities.AI
             AIStats.Mana.Current = AIStats.Mana.Total;
             Alive = true;
             Position = SpawnPosition;
-            Client.Send(new ChampionRespawnMessage(NetId, Position));
+            Game.Send(new ChampionRespawnMessage(NetId, Position));
             UpdateStats();
         }
         public void DebugMessage(string content)
