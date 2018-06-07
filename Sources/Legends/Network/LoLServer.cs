@@ -65,11 +65,10 @@ namespace Legends.Network
 
         private static bool Broadcast(byte[] buffer, Channel channelNo, PacketFlags packetFlags = PacketFlags.None)
         {
+            if (buffer.Length >= 8)
+                buffer = BlowFish.Encrypt(buffer);
             fixed (byte* b = buffer)
             {
-                if (buffer.Length >= 8)
-                    BlowFish.Encrypt(buffer);
-
                 var packet = enet_packet_create(new IntPtr(b), new IntPtr(buffer.Length), packetFlags);
                 enet_host_broadcast(LoLServer.GetServer(), (byte)channelNo, packet);
             }
