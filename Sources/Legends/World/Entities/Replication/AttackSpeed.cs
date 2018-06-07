@@ -14,13 +14,20 @@ namespace Legends.World.Entities.Statistics.Replication
             get;
             private set;
         }
-
+        public float Ratio
+        {
+            get
+            {
+                return Total / BaseValue;
+            }
+        }
         public override float Total => BaseValue * PercentBaseBonus * BaseBonus;
 
         public AttackSpeed(float attackDelay) : base(0.625f, 0.2f, 2.5f)
         {
             AttackDelay = attackDelay;
             BaseValue = 0.625f / (1 + AttackDelay);
+            BaseBonus = 1;
             PercentBaseBonus = 1;
             PercentBonus = 1;
         }

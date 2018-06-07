@@ -75,6 +75,7 @@
     <Compile Include="IO\RAF\RAFFileEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\ENetClient.cs" />
+    <Compile Include="Protocol\Enum\AttackSlotEnum.cs" />
     <Compile Include="Protocol\Enum\DamageResultEnum.cs" />
     <Compile Include="Protocol\Enum\DamageTypeEnum.cs" />
     <Compile Include="Protocol\Enum\IsTargetableToTeamFlags.cs" />

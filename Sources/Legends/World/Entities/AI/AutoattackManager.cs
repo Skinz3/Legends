@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Entities.AI
 {
-    [InDeveloppement(InDeveloppementState.BAD_SPELLING, "Find a better name!")]
+    [InDeveloppement(InDeveloppementState.STARTED,"This is not finished ^^ & find a better name, AutoattackManager is weird")]
     public class AutoattackManager : IUpdatable
     {
         public AIUnit Unit
@@ -46,13 +46,18 @@ namespace Legends.World.Entities.AI
             this.Unit = unit;
             this.Auto = auto;
             this.UnitsInRange = new List<Unit>();
+            this.AttackDelay = (1 / Unit.AIStats.AttackSpeed.Total) * 1000;
         }
         private List<Unit> UnitsInRange
         {
             get;
             set;
         }
-        private long test = 0;
+        private float AttackDelay
+        {
+            get;
+            set;
+        }
 
         private Dictionary<AttackableUnit, float> GetUnitsInAttackRange()
         {
@@ -88,6 +93,7 @@ namespace Legends.World.Entities.AI
                 OnTargetReach();
             }
         }
+        bool swapp = false;
         public void Update(long deltaTime)
         {
             if (Auto)
@@ -101,17 +107,25 @@ namespace Legends.World.Entities.AI
                     UnsetTarget();
                     return;
                 }
-                test++;
-                if (test == 30)
+
+                AttackDelay -= deltaTime;
+
+                if (AttackDelay <= 0)
                 {
-                    TargetUnit.InflictDamages(new Damages(Unit, TargetUnit, 120, DamageType.DAMAGE_TYPE_PHYSICAL, DamageResultEnum.DAMAGE_TEXT_CRITICAL));
-                    Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, TargetUnit.NetId, Unit.Game.NetIdProvider.PopNextNetId(),false, true));
-                    test = 0;
+                    AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_2;
+
+                    if (swapp)
+                        slot = AttackSlotEnum.BASIC_ATTACK_1;
+
+                    swapp = !swapp;
+                    TargetUnit.InflictDamages(new Damages(Unit, TargetUnit,720, DamageType.DAMAGE_TYPE_PHYSICAL, DamageResultEnum.DAMAGE_TEXT_CRITICAL));
+                    Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, TargetUnit.NetId, Unit.Game.NetIdProvider.PopNextNetId(), slot, false));
+                    this.AttackDelay = (1 / Unit.AIStats.AttackSpeed.Total) * 1000;
                 }
             }
             else
             {
-                test = 0;
+                this.AttackDelay = (1 / Unit.AIStats.AttackSpeed.Total) * 1000;
             }
         }
         public void OnTargetReach()

@@ -62,8 +62,13 @@ namespace Legends.World.Entities.AI
         }
         public AIUnit()
         {
+           
+        }
+        public override void Initialize()
+        {
             this.AutoattackUpdater = new AutoattackManager(this, Autoattack);
             this.Path = new Path(this);
+            base.Initialize();
         }
         public override void Update(long deltaTime)
         {

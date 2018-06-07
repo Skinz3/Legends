@@ -70,6 +70,11 @@ namespace Legends.World.Entities.AI
                 return Stats as HeroStats;
             }
         }
+        public Score Score
+        {
+            get;
+            private set;
+        }
         public bool Disconnected
         {
             get;
@@ -101,6 +106,7 @@ namespace Legends.World.Entities.AI
             Model = Data.ChampionName;
             DeathTimer = new DeathTimer(this);
             SkinId = Data.SkinId;
+            Score = new Score();
             base.Initialize();
         }
         [InDeveloppement(InDeveloppementState.TODO, "Skill points")]
@@ -128,15 +134,17 @@ namespace Legends.World.Entities.AI
             Game.Send(new LevelUpMessage(NetId, (byte)AIStats.Level, 0)); // tdoo
             UpdateStats();
         }
-        public override void OnDead(Unit source) // we override base
+        public override void OnDead(AttackableUnit source) // we override base
         {
             AIStats.Health.Current = 0;
             AIStats.Mana.Current = 0;
             UpdateStats();
             Alive = false;
-            Game.Send(new ChampionDieMessage(300, NetId, source.NetId, 1));
-            Game.UnitAnnounce(UnitAnnounceEnum.Death, NetId, source.NetId, new int[0]);
+            Score.DeathCount++;
             DeathTimer.OnDead();
+            Game.Send(new ChampionDieMessage(500, NetId, source.NetId, DeathTimer.TimeLeftSeconds));
+            Game.UnitAnnounce(UnitAnnounceEnum.Death, NetId, source.NetId, new int[0]);
+            Client.Send(new ChampionDeathTimerMessage(NetId, DeathTimer.TimeLeftSeconds));
         }
         public void OnRevive()
         {

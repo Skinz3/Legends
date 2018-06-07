@@ -78,7 +78,7 @@ namespace Legends.World.Entities.AI
         public void OnDead()
         {
             TimeLeft = GetTimeLeft() * 1000;
-            Hero.Client.Send(new ChampionDeathTimerMessage(Hero.NetId, TimeLeftSeconds));
+            
         }
 
     }

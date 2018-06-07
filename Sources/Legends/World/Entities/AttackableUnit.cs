@@ -73,7 +73,7 @@ namespace Legends.World.Entities
             }
         }
         [InDeveloppement(InDeveloppementState.TODO, "The parametters should be DeathDescription.cs for assits")]
-        public virtual void OnDead(Unit source)
+        public virtual void OnDead(AttackableUnit source)
         {
             Alive = false;
             Game.Send(new DieMessage(source.NetId, NetId));

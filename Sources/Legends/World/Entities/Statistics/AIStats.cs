@@ -136,7 +136,7 @@ namespace Legends.World.Entities.Statistics
         }
         public AIStats(float baseHeath, float baseMana, float baseHpRegen, float baseArmor, float baseAttackDamage,
             float baseAbilityPower, float baseDodge, float baseCriticalHit, float baseMagicResistance, float baseManaRegeneration,
-            float baseAttackRange, float baseAttackSpeed, float baseCooldownReduction, float baseArmorPenetration,
+            float baseAttackRange, float baseAttackSpeed, float attackDelayPercent, float baseCooldownReduction, float baseArmorPenetration,
             float baseMagicPenetration, float baseLifeSteal, float baseSpellVamp, float baseCCReduction, float basePerceptionBubbleRadius,
             float baseMoveSpeed, float baseModelSize) : base(baseHeath, baseMana, baseHpRegen, baseArmor)
         {
@@ -149,7 +149,7 @@ namespace Legends.World.Entities.Statistics
             this.MagicResistance = new Stat(baseMagicResistance);
             this.ManaRegeneration = new Stat(baseManaRegeneration);
             this.AttackRange = new Stat(baseAttackRange);
-            this.AttackSpeed = new AttackSpeed(0f); // attakdelay , what is this?
+            this.AttackSpeed = new AttackSpeed(attackDelayPercent); // attakdelay , what is this?
             this.CooldownReduction = new Stat(baseCooldownReduction);
             this.ArmorPenetration = new Stat(baseArmorPenetration);
             this.MagicPenetration = new Stat(baseMagicPenetration);
@@ -162,7 +162,7 @@ namespace Legends.World.Entities.Statistics
             this.Gold = AIHero.DEFAULT_START_GOLD;
             this.GoldTotal = this.Gold;
         }
-       
+
         public void AddGold(float value)
         {
             Gold += value;

@@ -68,7 +68,7 @@ namespace Legends.World.Entities.AI
             base.InflictDamages(damages);
             this.UpdateHeath();
         }
-        public override void OnDead(Unit source)
+        public override void OnDead(AttackableUnit source)
         {
             base.OnDead(source);
             Game.UnitAnnounce(UnitAnnounceEnum.TurretDestroyed, NetId, source.NetId, new int[0]);

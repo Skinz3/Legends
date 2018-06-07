@@ -12,25 +12,25 @@ namespace Legends.World.Entities.Statistics
     {
         public TurretStats(float baseHeath, float baseMana, float baseHpRegen,
             float baseArmor, float baseAttackDamage, float baseAbilityPower,
-            float baseDodge, float baseCriticalHit, float baseMagicResistance, 
-            float baseManaRegeneration, float baseAttackRange, float baseAttackSpeed,
+            float baseDodge, float baseCriticalHit, float baseMagicResistance,
+            float baseManaRegeneration, float baseAttackRange, float baseAttackSpeed, float attackDelayPercent,
             float baseCooldownReduction, float baseArmorPenetration, float baseMagicPenetration,
             float baseLifeSteal, float baseSpellVamp, float baseCCReduction,
-            float basePerceptionBubbleRadius, float baseMoveSpeed, float baseModelSize) : 
-            base(baseHeath, baseMana, baseHpRegen, baseArmor, baseAttackDamage, baseAbilityPower, baseDodge, baseCriticalHit, baseMagicResistance, baseManaRegeneration, baseAttackRange, baseAttackSpeed, baseCooldownReduction, baseArmorPenetration, baseMagicPenetration, baseLifeSteal, baseSpellVamp, baseCCReduction, basePerceptionBubbleRadius, baseMoveSpeed, baseModelSize)
+            float basePerceptionBubbleRadius, float baseMoveSpeed, float baseModelSize) :
+            base(baseHeath, baseMana, baseHpRegen, baseArmor, baseAttackDamage, baseAbilityPower, baseDodge, baseCriticalHit, baseMagicResistance, baseManaRegeneration, baseAttackRange, baseAttackSpeed, attackDelayPercent, baseCooldownReduction, baseArmorPenetration, baseMagicPenetration, baseLifeSteal, baseSpellVamp, baseCCReduction, basePerceptionBubbleRadius, baseMoveSpeed, baseModelSize)
         {
         }
 
-        public TurretStats(AIUnitRecord record):base((float) record.BaseHp, (float) record.BaseMp, (float) record.BaseHpRegen, (float) record.BaseArmor,
-             (float) record.BaseDamage, record.BaseAbilityPower, (float) record.BaseDodge, (float) record.BaseCritChance, (float) record.BaseMagicResist,
-             (float) record.BaseMpRegen, record.AttackRange, (float) record.BaseAttackSpeed, AIHero.DEFAULT_COOLDOWN_REDUCTION,
+        public TurretStats(AIUnitRecord record) : base((float)record.BaseHp, (float)record.BaseMp, (float)record.BaseHpRegen, (float)record.BaseArmor,
+             (float)record.BaseDamage, record.BaseAbilityPower, (float)record.BaseDodge, (float)record.BaseCritChance, (float)record.BaseMagicResist,
+             (float)record.BaseMpRegen, record.AttackRange, (float)record.BaseAttackSpeed, (float)record.AttackDelayOffsetPercent, AIHero.DEFAULT_COOLDOWN_REDUCTION,
              0, 0, 0, 0, 0, AIHero.DEFAULT_PERCEPTION_BUBBLE_RADIUS, record.BaseMovementSpeed, 1)
         {
 
         }
         public override void UpdateReplication(bool partial = true)
         {
-            ReplicationManager.UpdateFloat(Mana.Total,1,0);
+            ReplicationManager.UpdateFloat(Mana.Total, 1, 0);
             ReplicationManager.UpdateFloat(Mana.Current, 1, 1);
             ReplicationManager.UpdateUInt((uint)ActionState, 1, 2);
             ReplicationManager.UpdateBool(IsMagicImmune, 1, 3);

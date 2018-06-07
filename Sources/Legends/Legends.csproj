@@ -81,6 +81,7 @@
     <Compile Include="World\Entities\AI\AITurret.cs" />
     <Compile Include="World\Entities\AI\AutoattackManager.cs" />
     <Compile Include="World\Entities\AI\DeathTimer.cs" />
+    <Compile Include="World\Entities\AI\Score.cs" />
     <Compile Include="World\Entities\Buildings\AnimatedBuilding.cs" />
     <Compile Include="World\Buildings\BuildingProvider.cs" />
     <Compile Include="World\Entities\Buildings\Inhibitor.cs" />

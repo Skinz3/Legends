@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Legends.Core.IO;
+using Legends.Core.Protocol.Enum;
 
 namespace Legends.Core.Protocol.Messages.Game
 {
@@ -17,14 +18,14 @@ namespace Legends.Core.Protocol.Messages.Game
 
         public int targetNetId;
         public int futureProjectileNetId;
-        public bool critical;
+        public AttackSlotEnum attackSlot;
         public bool initial;
 
-        public NextAutoattackMessage(int sourceNetId,int targetNetId,int futureProjectileNetId,bool critical,bool initial) : base(sourceNetId)
+        public NextAutoattackMessage(int sourceNetId, int targetNetId, int futureProjectileNetId, AttackSlotEnum attackSlot, bool initial) : base(sourceNetId)
         {
             this.targetNetId = targetNetId;
             this.futureProjectileNetId = futureProjectileNetId;
-            this.critical = critical;
+            this.attackSlot = attackSlot;
             this.initial = initial;
         }
 
@@ -46,10 +47,8 @@ namespace Legends.Core.Protocol.Messages.Game
                 writer.WriteByte(0x7F); // extraTime
 
             writer.WriteInt(futureProjectileNetId);
-            if (critical)
-                writer.WriteByte(0x49); // attackSlot
-            else
-                writer.WriteByte(0x40); // attackSlot
+
+            writer.WriteByte((byte)attackSlot); // attackSlot
 
             writer.WriteByte(0x40);
             writer.WriteByte(0x01);

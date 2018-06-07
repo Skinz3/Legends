@@ -1,4 +1,5 @@
-﻿using Legends.Core.Cryptography;
+﻿using Legends.Configurations;
+using Legends.Core.Cryptography;
 using Legends.Core.Geometry;
 using Legends.Core.Protocol;
 using Legends.Core.Protocol.Enum;
@@ -36,12 +37,6 @@ namespace Legends.Handlers
 
                 var d = new Damages(client.Hero, (AttackableUnit)targetUnit, 60,
                     DamageType.DAMAGE_TYPE_PHYSICAL, DamageResultEnum.DAMAGE_TEXT_NORMAL);
-
-
-                //  ((AttackableUnit)targetUnit).InflictDamages(d);
-
-
-                //  client.Hero.Game.Send(new BeginAutoAttackMessage(client.Hero.NetId, targetUnit.NetId, 0x80, 0, false, targetUnit.Position, client.Hero.Position, client.Hero.Game.Map.Record.MiddleOfMap));
             }
         }
 
@@ -50,7 +45,7 @@ namespace Legends.Handlers
         {
             client.Hero.ReadyToStart = true;
 
-            if (client.Hero.Game.CanStart)
+            if (client.Hero.Game.CanStart) //  && ConfigurationProvider.Instance.Configuration.Players.Count() == client.Hero.Game.Players.Count() (wait all players to be connected)
             {
                 client.Hero.Game.Start();
             }
@@ -64,7 +59,6 @@ namespace Legends.Handlers
             client.Hero.NetId = client.Hero.Game.NetIdProvider.PopNextNetId();
             client.Hero.SpawnPosition = client.Hero.Game.Map.GetSpawnPosition(client.Hero);
             client.Hero.Position = client.Hero.SpawnPosition;
-
 
             if (client.Hero.Game.CanSpawn)
             {

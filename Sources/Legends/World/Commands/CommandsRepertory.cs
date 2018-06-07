@@ -26,13 +26,9 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-            client.Hero.AIStats.AttackSpeed.SetBaseValue(1.60f);
-            client.Hero.Stats.Health.Current += 100;
+            client.Hero.DebugMessage(client.Hero.PlayerStats.AttackSpeed.Total.ToString());
+            client.Hero.Stats.Health.BaseBonus += 4000;
             client.Hero.UpdateStats();
-
-
-
-
         }
         [Command("speed")]
         public static void SpeedCommand(LoLClient client, float speed)
@@ -40,6 +36,7 @@ namespace Legends.World.Commands
             client.Hero.PlayerStats.MoveSpeed.SetBaseValue(speed);
             client.Hero.UpdateStats(true);
         }
+
         [Command("size")]
         public static void SizeCommand(LoLClient client, float size)
         {

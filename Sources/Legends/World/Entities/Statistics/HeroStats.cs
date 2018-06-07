@@ -13,10 +13,10 @@ namespace Legends.World.Entities.Statistics
     {
         public HeroStats(AIUnitRecord record, int skinId) : base((float)record.BaseHp, (float)record.BaseMp, (float)record.BaseHpRegen, (float)record.BaseArmor,
             (float)record.BaseDamage, record.BaseAbilityPower, (float)record.BaseDodge, (float)record.BaseCritChance, (float)record.BaseMagicResist,
-            (float)record.BaseMpRegen, record.AttackRange, (float)record.BaseAttackSpeed, AIHero.DEFAULT_COOLDOWN_REDUCTION,
+            (float)record.BaseMpRegen, record.AttackRange, (float)record.BaseAttackSpeed,(float)record.AttackDelayOffsetPercent, AIHero.DEFAULT_COOLDOWN_REDUCTION,
             0, 0, 0, 0, 0, AIHero.DEFAULT_PERCEPTION_BUBBLE_RADIUS, record.BaseMovementSpeed, record.GetSkinScale(skinId)) // 1 = todo SkinRecord
         {
-         
+
         }
 
         public override void UpdateReplication(bool partial = true)
@@ -84,7 +84,8 @@ namespace Legends.World.Entities.Statistics
 
             ReplicationManager.UpdateFloat(MagicResistance.PercentBonus, 1, 18); // mPercentMagicReduction
 
-            ReplicationManager.UpdateFloat(3.0f, 1, 19); // mAttackSpeedMod 
+            ReplicationManager.UpdateFloat(AttackSpeed.Ratio, 1, 19); // mAttackSpeedMod 
+
             ReplicationManager.UpdateFloat(AttackRange.FlatBonus, 1, 20); //mFlatCastRangeMod
 
             ReplicationManager.UpdateFloat(-(CooldownReduction.Total / 100f), 1, 21); // mPercentCooldownMod  -0.5f = 50% cd reduction
@@ -136,7 +137,7 @@ namespace Legends.World.Entities.Statistics
 
             ReplicationManager.UpdateUInt((uint)TargetableToTeam, 3, 16); // targetableToTeam Flags
         }
-    
+
     }
 
 
