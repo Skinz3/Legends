@@ -33,7 +33,7 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_KeyCheck, Channel.CHL_C2S)]
         public static void HandleKeyCheckMessage(KeyCheckMessage message, LoLClient client)
         {
-            long userId = (long)BlowFishCS.Decrypt2(LoLServer.GetBlowfish(), (ulong)message.checkId);
+            long userId = LoLServer.BlowFish.Decrypt((ulong)message.checkId);
 
             logger.Write("User (" + userId + ") connected!");
 

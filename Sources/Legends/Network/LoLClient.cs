@@ -57,11 +57,15 @@ namespace Legends.Network
         }
         public void OnDataArrival(ENetPacket* packet, Channel channel)
         {
-            if ((int)packet->dataLength >= 8 && Encrypt)
-                BlowFishCS.Decrypt1(LoLServer.GetBlowfish(), (byte*)packet->data, new IntPtr((int)packet->dataLength - ((int)packet->dataLength % 8)));
+
+
             var data = new byte[(int)packet->dataLength];
             Marshal.Copy(packet->data, data, 0, data.Length);
 
+            if ((int)packet->dataLength >= 8 && Encrypt)
+            {
+                data = LoLServer.BlowFish.Decrypt(data);
+            }
             LittleEndianReader reader = new LittleEndianReader(data);
 
             Message message = ProtocolManager.BuildMessage(this, channel, data);
@@ -77,18 +81,17 @@ namespace Legends.Network
               else
               {
                   */
-                 handler.DynamicInvoke(null, message, this);
+            handler.DynamicInvoke(null, message, this);
             //  }
         }
         public bool Send(byte[] buffer, Channel channelNo, PacketFlags flag = PacketFlags.Reliable)
         {
 
+
+            if (buffer.Length >= 8)
+                buffer = LoLServer.BlowFish.Encrypt(buffer);
             fixed (byte* data = buffer)
             {
-                if (buffer.Length >= 8)
-                    BlowFishCS.Encrypt1(LoLServer.GetBlowfish(), data, new IntPtr(buffer.Length - (buffer.Length % 8)));
-
-
                 var packet = enet_packet_create(new IntPtr(data), new IntPtr(buffer.Length), flag);
                 if (enet_peer_send(Peer, (byte)channelNo, packet) < 0)
                     return false;

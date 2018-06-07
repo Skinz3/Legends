@@ -33,7 +33,7 @@ namespace Legends.Network
         static ENetHost* _server;
 
 
-        static BlowFish* _blowfish;
+        public static BlowFish BlowFish;
 
         static Logger logger = new Logger();
 
@@ -59,16 +59,8 @@ namespace Legends.Network
             if (key.Length <= 0)
                 throw new Exception("Unable to convert SERVER_KEY...");
 
-            fixed (byte* s = key)
-            {
-                _blowfish = BlowFishCS.BlowFishCreate(s, new IntPtr(16));
-            }
+            BlowFish = new BlowFish(key);
 
-          
-        }
-        public static BlowFish* GetBlowfish()
-        {
-            return _blowfish;
         }
 
         private static bool Broadcast(byte[] buffer, Channel channelNo, PacketFlags packetFlags = PacketFlags.None)
@@ -76,7 +68,7 @@ namespace Legends.Network
             fixed (byte* b = buffer)
             {
                 if (buffer.Length >= 8)
-                    BlowFishCS.Encrypt1(LoLServer.GetBlowfish(), b, new IntPtr(buffer.Length - (buffer.Length % 8)));
+                    BlowFish.Encrypt(buffer);
 
                 var packet = enet_packet_create(new IntPtr(b), new IntPtr(buffer.Length), packetFlags);
                 enet_host_broadcast(LoLServer.GetServer(), (byte)channelNo, packet);
