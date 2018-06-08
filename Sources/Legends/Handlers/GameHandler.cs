@@ -31,12 +31,8 @@ namespace Legends.Handlers
 
             if (targetUnit != null)
             {
-                string msg = "You clicked on {0} Position : {1} Distance to me : {2}";
-                client.Hero.DebugMessage(string.Format(msg, targetUnit.Name, targetUnit.Position, targetUnit.GetDistanceTo(client.Hero)));
-
-
-                var d = new Damages(client.Hero, (AttackableUnit)targetUnit, 60,
-                    DamageType.DAMAGE_TYPE_PHYSICAL, DamageResultEnum.DAMAGE_TEXT_NORMAL);
+              //  string msg = "You clicked on {0} Position : {1} Distance to me : {2}";
+               // client.Hero.DebugMessage(string.Format(msg, targetUnit.Name, targetUnit.Position, targetUnit.GetDistanceTo(client.Hero)));
             }
         }
 
@@ -110,7 +106,7 @@ namespace Legends.Handlers
                     WaypointsReader wayPointsReader = new WaypointsReader(message.moveData, message.coordCount, client.Hero.Game.Map.Size);
                     // the client delay lead to display problems so we secure the first waypoint.
                     wayPointsReader.Waypoints[0] = client.Hero.Position;
-                    client.Hero.Move(new Path(client.Hero, wayPointsReader.Waypoints));
+                    client.Hero.Move(wayPointsReader.Waypoints);
 
 
                     break;
@@ -124,7 +120,8 @@ namespace Legends.Handlers
                         client.Hero.DebugMessage("Unable to autoattack, target is null");
                         return;
                     }
-                    client.Hero.MoveToAutoattack(target);
+
+                    client.Hero.TryAutoattack(target);
 
 
                     break;

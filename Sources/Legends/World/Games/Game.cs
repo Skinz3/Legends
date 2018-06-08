@@ -233,7 +233,7 @@ namespace Legends.World.Games
         {
             foreach (var player in Players)
             {
-                player.Team.Send(new EnterVisionMessage(true, player.NetId, player.Position, player.Path.WaypointsIndex, player.Path.GetWaypoints(), player.Game.Map.Record.MiddleOfMap));
+                player.Team.Send(new EnterVisionMessage(true, player.NetId, player.Position, player.PathManager.WaypointsIndex, player.PathManager.GetWaypoints(), player.Game.Map.Record.MiddleOfMap));
             }
 
             float gameTime = GameTime / 1000f;

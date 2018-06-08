@@ -23,6 +23,8 @@ namespace Legends.World.Entities.AI
 
         public override float PerceptionBubbleRadius => ((TurretStats)Stats).PerceptionBubbleRadius.Total;
 
+        
+
         private MapObjectRecord MapObjectRecord
         {
             get;
@@ -34,7 +36,7 @@ namespace Legends.World.Entities.AI
             set;
         }
 
-        public override bool Autoattack => true;
+        public override bool IsAttackAutomatic => true;
 
         public AITurret(int netId, AIUnitRecord record, MapObjectRecord mapObject, string suffix)
         {
@@ -80,7 +82,20 @@ namespace Legends.World.Entities.AI
 
         public override void UpdateStats(bool partial)
         {
-            Game.Send(new UpdateStatsMessage(0, NetId, ((TurretStats)Stats).ReplicationManager.Values, partial));
+            TurretStats stats = ((TurretStats)Stats);
+            stats.UpdateReplication(partial);
+            Game.Send(new UpdateStatsMessage(0, NetId, stats.ReplicationManager.Values, partial));
+
+            if (partial)
+            {
+                foreach (var x in stats.ReplicationManager.Values)
+                {
+                    if (x != null)
+                    {
+                        x.Changed = false;
+                    }
+                }
+            }
         }
 
         public override void OnUnitEnterVision(Unit unit)

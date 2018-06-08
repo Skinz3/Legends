@@ -44,7 +44,7 @@ namespace Legends.Core.Protocol.Messages.Game
             if (initial)
                 writer.WriteByte(0x80); // extraTime
             else
-                writer.WriteByte(0x7F); // extraTime
+                writer.WriteByte(0x7F); // extraTime 0x7F
 
             writer.WriteInt(futureProjectileNetId);
 

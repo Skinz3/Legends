@@ -10,6 +10,8 @@ namespace Legends.World.Entities.Statistics
 {
     public class TurretStats : AIStats
     {
+        public const float DEFAULT_PERCEPTION_BUBBLE_RADIUS = 1000;
+
         public TurretStats(float baseHeath, float baseMana, float baseHpRegen,
             float baseArmor, float baseAttackDamage, float baseAbilityPower,
             float baseDodge, float baseCriticalHit, float baseMagicResistance,
@@ -24,7 +26,7 @@ namespace Legends.World.Entities.Statistics
         public TurretStats(AIUnitRecord record) : base((float)record.BaseHp, (float)record.BaseMp, (float)record.BaseHpRegen, (float)record.BaseArmor,
              (float)record.BaseDamage, record.BaseAbilityPower, (float)record.BaseDodge, (float)record.BaseCritChance, (float)record.BaseMagicResist,
              (float)record.BaseMpRegen, record.AttackRange, (float)record.BaseAttackSpeed, (float)record.AttackDelayOffsetPercent, AIHero.DEFAULT_COOLDOWN_REDUCTION,
-             0, 0, 0, 0, 0, AIHero.DEFAULT_PERCEPTION_BUBBLE_RADIUS, record.BaseMovementSpeed, 1)
+             0, 0, 0, 0, 0, DEFAULT_PERCEPTION_BUBBLE_RADIUS, record.BaseMovementSpeed, 1)
         {
 
         }
@@ -39,7 +41,7 @@ namespace Legends.World.Entities.Statistics
             ReplicationManager.UpdateBool(IsLifeStealImmune, 1, 6);
             ReplicationManager.UpdateFloat(AttackDamage.BaseValue, 1, 7);
             ReplicationManager.UpdateFloat(Armor.Total, 1, 8);
-            ReplicationManager.UpdateFloat(MagicResistance.Total, 1, 90);
+            ReplicationManager.UpdateFloat(MagicResistance.Total, 1, 9);
             ReplicationManager.UpdateFloat(AttackSpeed.BaseBonus, 1, 10);
             ReplicationManager.UpdateFloat(AttackDamage.FlatBonus, 1, 11);
             ReplicationManager.UpdateFloat(AttackDamage.PercentBonus, 1, 12);

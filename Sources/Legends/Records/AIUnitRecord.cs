@@ -76,14 +76,12 @@ namespace Legends.Records
             get;
             set;
         }
-
         [InibinField(InibinHashEnum.CHARACTER_AttackSpeedPerLevel)]
         public double AttackSpeedPerLevel
         {
             get;
             set;
         }
-
         [InibinField(InibinHashEnum.CHARACTER_BaseAbilityPower)]
         public short BaseAbilityPower
         {
@@ -184,7 +182,18 @@ namespace Legends.Records
             get;
             set;
         }
-
+        [InibinField(InibinHashEnum.CHARACTER_AcquisitionRange)]
+        public double AquisitionRange
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ChasingAttackRangePercent)]
+        public double ChasingAttackRangePercent
+        {
+            get;
+            set;
+        }
         [InibinField(InibinHashEnum.CHARACTER_SpellBlockPerLevel)]
         public double MagicResistPerLevel
         {

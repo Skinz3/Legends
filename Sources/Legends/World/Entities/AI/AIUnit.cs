@@ -2,8 +2,10 @@
 using Legends.Core.Protocol;
 using Legends.Core.Protocol.Game;
 using Legends.Records;
+using Legends.World.Entities.AI.Autoattack;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
+using Legends.World.Entities.Statistics.Replication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +17,12 @@ namespace Legends.World.Entities.AI
 {
     public abstract class AIUnit : AttackableUnit
     {
-        public Action<Path> OnPathChanged;
-
-        public Path Path
+        public PathManager PathManager
         {
             get;
             private set;
         }
-        public AutoattackManager AutoattackUpdater
+        public AttackManager AttackManager
         {
             get;
             private set;
@@ -46,9 +46,9 @@ namespace Legends.World.Entities.AI
                 return AIStats.AttackRange.Total + 150; // + 150?
             }
         }
-        public override bool IsMoving => Path.IsMoving;
+        public override bool IsMoving => PathManager.IsMoving;
 
-        public abstract bool Autoattack
+        public abstract bool IsAttackAutomatic
         {
             get;
         }
@@ -62,58 +62,96 @@ namespace Legends.World.Entities.AI
         }
         public AIUnit()
         {
-           
         }
+
         public override void Initialize()
         {
-            this.AutoattackUpdater = new AutoattackManager(this, Autoattack);
-            this.Path = new Path(this);
+            if (Record.IsMelee)
+            {
+                AttackManager = new MeleeManager(this, IsAttackAutomatic);
+            }
+            else
+            {
+                AttackManager = new RangedManager(this, IsAttackAutomatic);
+            }
+
+            PathManager = new PathManager(this);
             base.Initialize();
         }
         public override void Update(long deltaTime)
         {
             base.Update(deltaTime);
-            Path.Update(deltaTime);
-            this.AutoattackUpdater.Update(deltaTime);
+            PathManager.Update(deltaTime);
+            this.AttackManager.Update(deltaTime);
         }
-        public void Move(Path path, bool unsetTarget = true)
+        public void Move(List<Vector2> waypoints, bool unsetTarget = true)
         {
             if (unsetTarget)
-                AutoattackUpdater.UnsetTarget();
+                AttackManager.StopAttackTarget();
 
-            Path = path;
-            SendVision(new MovementAnswerMessage(0, Path.GetWaypoints(), NetId, Game.Map.Size), Channel.CHL_LOW_PRIORITY);
-            OnPathChanged?.Invoke(Path);
+            PathManager.Move(waypoints);
+            OnMove();
+
+
+        }
+        private void OnMove()
+        {
+            SendVision(new MovementAnswerMessage(0, PathManager.GetWaypoints(), NetId, Game.Map.Size), Channel.CHL_LOW_PRIORITY);
 
         }
         public void MoveTo(Vector2 targetVector, bool unsetTarget = true)
         {
-            Move(new Path(this, targetVector), unsetTarget);
-        }
-
-
-        public void MoveToAutoattack(AIUnit targetUnit)
-        {
-            AutoattackUpdater.DefineTarget(targetUnit);
-
-            float distanceToTarget = AIStats.AttackRange.Total +
-                ((float)targetUnit.Record.SelectionRadius * targetUnit.AIStats.ModelSize.Total);
-
-            if (this.GetDistanceTo(targetUnit) < distanceToTarget)
-            {
-                AutoattackUpdater.OnTargetReach();
-            }
-            else
-            {
-                if (AIStats.MoveSpeed.Total > 0)
-                    Move(new Path(this, targetUnit, distanceToTarget), false);
-            }
-
+            Move(new List<Vector2>() { Position, targetVector }, unsetTarget);
         }
         public void StopMove(bool unsetTarget = true)
         {
-            Move(new Path(this), unsetTarget);
+            Move(new List<Vector2>() { Position }, unsetTarget);
         }
+        public bool InRangeToAutoAttack(AIUnit target)
+        {
+            return this.GetDistanceTo(target) <= GetDistanceToAutoAttack(target);
+        }
+        public bool InChasingRange(AIUnit target)
+        {
+            return this.GetDistanceTo(target) <= GetChasingRange(target);
+        }
+        private float GetChasingRange(AIUnit target)
+        {
+            return (AIStats.AttackRange.Total + (AIStats.AttackRange.Total * (float)Record.ChasingAttackRangePercent)) +
+            ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
+        }
+        public float GetDistanceToAutoAttack(AIUnit target)
+        {
+            return AIStats.AttackRange.Total +
+               ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
+        }
+        /// <summary>
+        /// Try to autoattack target, if the unit dont have range, it follows target
+        /// </summary>
+        /// <param name="targetUnit"></param>
+        public void TryAutoattack(AIUnit targetUnit)
+        {
+            if (targetUnit.Alive == false)
+            {
+                return;
+            }
+            if (InChasingRange(targetUnit))
+            {
+                if (IsMoving)
+                {
+                    StopMove();
+                }
+                AttackManager.BeginAttackTarget(targetUnit);
+            }
+            else
+            {
+                Action onTargetReach = new Action(() => { TryAutoattack(targetUnit); }); // recursive call 
+                PathManager.MoveToTarget(targetUnit, onTargetReach, GetDistanceToAutoAttack(targetUnit));
+                OnMove();
+            }
+
+        }
+
 
     }
 }

@@ -47,8 +47,10 @@ namespace Legends.World.Entities
 
         public virtual void InflictDamages(Damages damages)
         {
-            Stats.Health.Current -= damages.Amount;
-            Game.Send(new DamageDoneMessage(damages.Result, damages.Type, damages.Amount, NetId, damages.Source.NetId));
+            damages.Apply();
+            
+            Stats.Health.Current -= damages.Delta;
+            Game.Send(new DamageDoneMessage(damages.Result, damages.Type, damages.Delta, NetId, damages.Source.NetId));
             UpdateStats();
 
             if (Stats.Health.Current <= 0)

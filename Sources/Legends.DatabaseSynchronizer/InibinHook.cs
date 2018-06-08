@@ -1,9 +1,11 @@
-﻿using Legends.Core.IO.RAF;
+﻿using Legends.Core.IO.Inibin;
+using Legends.Core.IO.RAF;
 using Legends.Core.Protocol.Enum;
 using Legends.DatabaseSynchronizer.Attributes;
 using Legends.Records;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +55,7 @@ namespace Legends.DatabaseSynchronizer
                 if (manager.Exists(path) && results.Find(x => x.Path == path) == null)
                     results.Add(manager.GetFile(path));
             }
+
             return results.ToArray();
        
         }

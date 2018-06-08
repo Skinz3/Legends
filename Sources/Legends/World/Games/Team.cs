@@ -104,7 +104,7 @@ namespace Legends.World.Games
             if (unit.IsMoving)
             {
                 AIUnit attackableUnit = (AIUnit)unit;
-                Send(new EnterVisionMessage(false, unit.NetId, unit.Position, attackableUnit.Path.WaypointsIndex, attackableUnit.Path.GetWaypoints(), Game.Map.Record.MiddleOfMap));
+                Send(new EnterVisionMessage(false, unit.NetId, unit.Position, attackableUnit.PathManager.WaypointsIndex, attackableUnit.PathManager.GetWaypoints(), Game.Map.Record.MiddleOfMap));
             }
             else
             {

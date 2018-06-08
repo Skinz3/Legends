@@ -9,23 +9,14 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Entities.Movements
 {
-    public class Path : IUpdatable
+    public class PathManager : IUpdatable
     {
-        public event Action<Vector2> OnMoveEnd;
-        public event Action<Vector2> OnPositionInterpolated;
+        public static float TARGET_DETECTION_OFFSET = 1f;
 
         public int WaypointsIndex
         {
             get;
             private set;
-        }
-        /// <summary>
-        /// Arrivé au waypoint final?
-        /// </summary>
-        private bool End
-        {
-            get;
-            set;
         }
         public Vector2? NextPosition
         {
@@ -56,7 +47,17 @@ namespace Legends.World.Entities.Movements
             get;
             set;
         }
-        private AttackableUnit TargetUnit
+        private AIUnit TargetUnit
+        {
+            get;
+            set;
+        }
+        private Action OnTargetReachAction
+        {
+            get;
+            set;
+        }
+        private float DistanceToTarget
         {
             get;
             set;
@@ -68,34 +69,33 @@ namespace Legends.World.Entities.Movements
         }
         public bool IsMoving => NextPosition != null && NextPosition != Unit.Position;
 
-        public Path(AIUnit unit, List<Vector2> waypoints)
+        public PathManager(AIUnit unit)
         {
             this.Unit = unit;
+            this.Waypoints = new List<Vector2>() { Unit.Position };
+            this.OnTargetReachAction = null;
+            this.DistanceToTarget = 0f;
+            this.TargetUnit = null;
+        }
+        public void Move(List<Vector2> waypoints)
+        {
             this.Waypoints = waypoints;
             this.WaypointsIndex = 1;
             this.TargetUnit = null;
-        }
-        public Path(AIUnit unit, Vector2 targetPosition) : this(unit, new List<Vector2>() { unit.Position, targetPosition })
-        {
-
-        }
-        public Path(AIUnit unit) : this(unit, new List<Vector2>() { unit.Position })
-        {
-
+            this.OnTargetReachAction = null;
+            this.DistanceToTarget = 0f;
         }
         /// <summary>
         /// Only use for auto attack
         /// </summary>
         /// <param name="unit"></param>
         /// <param name="target"></param>
-        public Path(AIUnit unit, AIUnit target, float distanceToTarget = 0)
+        public void MoveToTarget(AIUnit target, Action onTargetReach, float distanceToTarget = 0)
         {
-            this.Unit = unit;
             this.TargetUnit = target;
             this.WaypointsIndex = 1;
-
-
-
+            this.DistanceToTarget = distanceToTarget;
+            this.OnTargetReachAction = onTargetReach;
             Vector2 targetPosition = target.Position;
 
             if (distanceToTarget > 0)
@@ -108,6 +108,7 @@ namespace Legends.World.Entities.Movements
         {
             return Waypoints.ToArray();
         }
+
         /// <summary>
         /// Créer une interpolation entre un point a et b, avec a la position actuelle
         /// et b le prochain noeud du pathfinding (waypoints).
@@ -117,15 +118,25 @@ namespace Legends.World.Entities.Movements
         /// <param name="deltaTime"></param>
         private void InterpolateMovement(long deltaTime)
         {
-            if (!End && IsMoving)
+            if (IsMoving)
             {
                 float deltaMovement = Unit.AIStats.MoveSpeed.Total * 0.001f * deltaTime; // deltaTime
 
-                float xOffset = Direction.X * deltaMovement * 1.05f;
-                float yOffset = Direction.Y * deltaMovement * 1.05f;
+                float xOffset = Direction.X * deltaMovement * 1.08f;
+                float yOffset = Direction.Y * deltaMovement * 1.08f;
 
                 Unit.Position = new Vector2(Unit.Position.X + xOffset, Unit.Position.Y + yOffset);
-                OnPositionInterpolated?.Invoke(Unit.Position);
+              
+                if (TargetUnit != null)
+                {
+                    if (TargetUnit.GetDistanceTo(Unit) <= DistanceToTarget)
+                    {
+                        OnTargetReachAction();
+                        return;
+
+                    }
+                }
+
 
                 if (Math.Abs(Unit.Position.X - NextPosition.Value.X) <= Math.Abs(xOffset) && Math.Abs(Unit.Position.Y - NextPosition.Value.Y) <= Math.Abs(yOffset))
                 {
@@ -136,11 +147,10 @@ namespace Legends.World.Entities.Movements
                     {
                         if (TargetUnit != null)
                         {
-                            Unit.AutoattackUpdater.OnTargetReach();
+                            OnTargetReachAction();
                         }
-                        OnMoveEnd?.Invoke(Unit.Position);
-                        //    Unit.StopMove();
-                        End = true;
+
+
                     }
                 }
 

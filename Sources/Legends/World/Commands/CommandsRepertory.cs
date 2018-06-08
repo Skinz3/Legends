@@ -3,6 +3,8 @@ using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.Network;
 using Legends.World.Entities.AI;
+using Legends.World.Entities.AI.Autoattack;
+using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
 using Legends.World.Spells;
@@ -26,8 +28,9 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-            client.Hero.DebugMessage(client.Hero.PlayerStats.AttackSpeed.Total.ToString());
-            client.Hero.Stats.Health.BaseBonus += 4000;
+            client.Hero.PlayerStats.AttackDamage.FlatBonus += 50f;
+            client.Hero.PlayerStats.AttackSpeed.BaseBonus += 0.3f;
+            client.Hero.Stats.Health.BaseBonus += 500;
             client.Hero.UpdateStats();
         }
         [Command("speed")]
@@ -59,6 +62,13 @@ namespace Legends.World.Commands
         {
             client.Hero.AddExperience(exp);
         }
+        [Command("life")]
+        public static void LifeCommand(LoLClient client)
+        {
+            client.Hero.AIStats.Health.Current = client.Hero.AIStats.Health.Total;
+            client.Hero.UpdateStats();
+        }
+       
         [Command("vision")]
         public static void VisionCommand(LoLClient client)
         {

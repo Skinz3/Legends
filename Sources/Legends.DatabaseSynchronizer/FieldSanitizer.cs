@@ -16,7 +16,7 @@ namespace Legends.DatabaseSynchronizer
             }
             else if (value.ToString() == "Yes")
             {
-                return false;
+                return true;
             }
             else if (value.ToString() == true.ToString() && fieldType != typeof(Boolean))
             {

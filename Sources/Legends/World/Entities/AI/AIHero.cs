@@ -21,6 +21,7 @@ using ENet;
 using Legends.World.Entities.Statistics;
 using Legends.Core.DesignPattern;
 using Legends.Core.Protocol.Messages;
+using Legends.World.Entities.Statistics.Replication;
 
 namespace Legends.World.Entities.AI
 {
@@ -29,7 +30,7 @@ namespace Legends.World.Entities.AI
         public const float DEFAULT_START_GOLD = 475;
         public const float DEFAULT_COOLDOWN_REDUCTION = 0f;
 
-        public const float DEFAULT_PERCEPTION_BUBBLE_RADIUS = 1350f;
+       
 
         public LoLClient Client
         {
@@ -84,7 +85,7 @@ namespace Legends.World.Entities.AI
 
         public override float PerceptionBubbleRadius => ((HeroStats)Stats).PerceptionBubbleRadius.Total;
 
-        public override bool Autoattack => false;
+        public override bool IsAttackAutomatic => false;
 
         private DeathTimer DeathTimer
         {
@@ -198,6 +199,7 @@ namespace Legends.World.Entities.AI
                 }
             }
         }
+    
         [InDeveloppement(InDeveloppementState.STARTED)]
         public void OnDisconnect()
         {
@@ -206,6 +208,6 @@ namespace Legends.World.Entities.AI
             Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, 0, new int[0]);
         }
 
-
+       
     }
 }
