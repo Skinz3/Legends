@@ -78,7 +78,7 @@ namespace Legends.World.Entities
         }
         public void UpdateHeath()
         {
-            Game.Send(new SetHealthMessage(NetId, 0, Stats.Health.Total, Stats.Health.Current));
+            Game.Send(new SetHealthMessage(NetId, 0, Stats.Health.TotalSafe, Stats.Health.Current));
         }
     }
 }

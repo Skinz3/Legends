@@ -24,7 +24,7 @@ namespace Legends.Core.Protocol.Game
 
         public float currentHealth;
 
-        public SetHealthMessage(int netId, short unk1, float totalHealth, float currentHealth) : base(netId)
+        public SetHealthMessage(uint netId, short unk1, float totalHealth, float currentHealth) : base(netId)
         {
             this.unk1 = unk1;
             this.totalHealth = totalHealth;

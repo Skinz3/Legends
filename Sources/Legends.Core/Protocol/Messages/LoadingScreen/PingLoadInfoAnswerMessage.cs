@@ -23,7 +23,7 @@ namespace Legends.Core.Protocol.LoadingScreen
         public short unk3;
         public byte unk4;
 
-        public PingLoadInfoAnswerMessage(int unk1, long userId, float loaded, float ping, short unk2, short unk3, byte unk4, int netId) : base(netId)
+        public PingLoadInfoAnswerMessage(int unk1, long userId, float loaded, float ping, short unk2, short unk3, byte unk4, uint netId) : base(netId)
         {
             this.unk1 = unk1;
             this.userId = userId;

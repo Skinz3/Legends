@@ -17,15 +17,15 @@ namespace Legends.Core.Protocol.Messages.Game
         public static Channel CHANNEL = Channel.CHL_S2C;
         public override Channel Channel => CHANNEL;
 
-        public int targetNetId;
+        public uint targetNetId;
         public byte extraTime;
-        public int futureProjectileNetId;
+        public uint futureProjectileNetId;
         public bool isCritical;
         public Vector2 targetPosition;
         public Vector2 sourcePosition;
         public Vector2 middleOfMap;
 
-        public BeginAutoAttackMessage(int sourceNetId, int targetNetId, byte extraTime, int futureProjectileNetId, bool isCritical, 
+        public BeginAutoAttackMessage(uint sourceNetId, uint targetNetId, byte extraTime, uint futureProjectileNetId, bool isCritical, 
             Vector2 targetPosition,Vector2 sourcePosition,Vector2 middleOfMap) : base(sourceNetId)
         {
             this.extraTime = extraTime;
@@ -46,9 +46,9 @@ namespace Legends.Core.Protocol.Messages.Game
 
         public override void Serialize(LittleEndianWriter writer)
         {
-            writer.WriteInt(targetNetId);
+            writer.WriteUInt(targetNetId);
             writer.WriteByte((byte)extraTime); // extraTime
-            writer.WriteInt(futureProjectileNetId); // Basic attack projectile ID, to be spawned later
+            writer.WriteUInt(futureProjectileNetId); // Basic attack projectile ID, to be spawned later
 
             if (isCritical)
                 writer.WriteByte((byte)0x49); // attackSlot

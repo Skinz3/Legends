@@ -15,7 +15,7 @@ namespace Legends.Core.Protocol.LoadingScreen
         public static Channel CHANNEL = Channel.CHL_S2C;
         public override Channel Channel => CHANNEL;
 
-        public EndSpawnMessage(int netId) : base(netId)
+        public EndSpawnMessage(uint netId) : base(netId)
         {
 
         }

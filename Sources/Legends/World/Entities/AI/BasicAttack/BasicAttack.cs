@@ -34,7 +34,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         {
             get
             {
-                return (1 / Unit.AIStats.AttackSpeed.Total) * 1000;
+                return (1 / Unit.AIStats.AttackSpeed.TotalSafe) * 1000;
             }
         }
         /// <summary>
@@ -109,7 +109,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         }
         public void InflictDamages()
         {
-            Target.InflictDamages(new Damages(Unit, Target, Unit.AIStats.AttackDamage.Total, Critical, DamageType.DAMAGE_TYPE_PHYSICAL));
+            Target.InflictDamages(new Damages(Unit, Target, Unit.AIStats.AttackDamage.TotalSafe, Critical, DamageType.DAMAGE_TYPE_PHYSICAL));
             Hit = true;
         }
         public virtual void Update(long deltaTime)

@@ -16,6 +16,7 @@ using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using Legends.World.Games.Maps;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -131,7 +132,10 @@ namespace Legends.World.Games
             get;
             set;
         }
-        public List<Action> SynchronizedActions
+        /// <summary>
+        /// ConcurentBag<T> is a threadsafe object.
+        /// </summary>
+        public ConcurrentBag<Action> SynchronizedActions
         {
             get;
             private set;
@@ -145,7 +149,7 @@ namespace Legends.World.Games
             this.PurpleTeam = new Team(this, TeamId.PURPLE);
             this.Map = Map.CreateMap(mapId, this);
             this.Timer = new HighResolutionTimer((int)REFRESH_RATE);
-            this.SynchronizedActions = new List<Action>();
+            this.SynchronizedActions = new ConcurrentBag<Action>();
         }
         public void Invoke(Action action)
         {
@@ -198,9 +202,7 @@ namespace Legends.World.Games
 
             Map.Script.OnSpawn();
 
-
             Send(new StartSpawnMessage());
-
             foreach (var player in Map.Units.OfType<AIHero>())
             {
                 Send(new HeroSpawnMessage(player.NetId, player.PlayerNo, player.Data.TeamId, player.SkinId, player.Data.Name,
@@ -210,7 +212,6 @@ namespace Legends.World.Games
                 player.UpdateStats(false);
                 player.UpdateHeath();
             }
-
 
             foreach (var turret in Map.Units.OfType<AITurret>())
             {
@@ -272,11 +273,11 @@ namespace Legends.World.Games
                 Send(new GameTimerMessage(0, GameTime / 1000f));
                 NextSyncTime = 0;
             }
-            foreach (var action in new List<Action>(SynchronizedActions))
+            foreach (var action in SynchronizedActions)
             {
                 action();
             }
-            SynchronizedActions.Clear();
+            SynchronizedActions = new ConcurrentBag<Action>();
 
             BlueTeam.Update(deltaTime);
             PurpleTeam.Update(deltaTime);
@@ -286,7 +287,7 @@ namespace Legends.World.Games
         {
             Send(new AnnounceMessage(0, (int)Map.Id, announce));
         }
-        public void UnitAnnounce(UnitAnnounceEnum announce, int netId, int sourceNetId, int[] assitsNetId)
+        public void UnitAnnounce(UnitAnnounceEnum announce, uint netId, uint sourceNetId, uint[] assitsNetId)
         {
             Send(new UnitAnnounceMessage(netId, announce, sourceNetId, assitsNetId));
         }

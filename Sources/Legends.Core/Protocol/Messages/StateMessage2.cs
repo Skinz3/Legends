@@ -9,7 +9,7 @@ namespace Legends.Core.Protocol
 {
     public abstract class StateMessage2 : BaseMessage
     {
-        public StateMessage2(int netId) : base(netId)
+        public StateMessage2(uint netId) : base(netId)
         {
 
         }

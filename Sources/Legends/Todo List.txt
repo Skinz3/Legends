@@ -4,7 +4,7 @@ A fix
 
 Player.cs  Client.Send(new EnterVisionMessage()) im done.. >.<
 AIStats.cs AttackSpeed(attackdelay = ? what is this)
-Bug turret detection range? my updatevision algo?
+
 
 A faire
 
@@ -15,3 +15,4 @@ jungle
 vla
 PlayerInfoMessage a partir de lsb
 
+Map Object pour toute les maps !! important SCO files

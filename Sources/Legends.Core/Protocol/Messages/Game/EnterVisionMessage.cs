@@ -31,7 +31,7 @@ namespace Legends.Core.Protocol.Game
         {
 
         }
-        public EnterVisionMessage(bool spawn, int netId, Vector2 position, int waypointsIndex, Vector2[] waypoints, Vector2 middleOfMap) : base(netId)
+        public EnterVisionMessage(bool spawn, uint netId, Vector2 position, int waypointsIndex, Vector2[] waypoints, Vector2 middleOfMap) : base(netId)
         {
             this.spawn = spawn;
             this.position = position;

@@ -21,12 +21,12 @@ namespace Legends.Core.Protocol.Game
         public override Channel Channel => CHANNEL;
 
         public TeamId teamId;
-        public int unitNetId;
+        public uint unitNetId;
         public Vector2 position;
-        public int fogNetId;
+        public uint fogNetId;
         public float visionRadius;
 
-        public FogUpdate2Message(TeamId teamId, int unitNetId, Vector2 position, int fogNetId, float visionRadius) : base(0)
+        public FogUpdate2Message(TeamId teamId, uint unitNetId, Vector2 position, uint fogNetId, float visionRadius) : base(0)
         {
             this.teamId = teamId;
             this.unitNetId = unitNetId;

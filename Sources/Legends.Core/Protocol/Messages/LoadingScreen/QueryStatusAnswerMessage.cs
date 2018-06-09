@@ -17,7 +17,7 @@ namespace Legends.Core.Protocol.LoadingScreen
 
         public byte state;
 
-        public QueryStatusAnswerMessage(int netId, byte state) : base(netId)
+        public QueryStatusAnswerMessage(uint netId, byte state) : base(netId)
         {
             this.state = state;
         }

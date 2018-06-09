@@ -45,9 +45,9 @@ namespace Legends.World.Entities.Statistics.Replication
                     return;
                 }
 
-                var percentHp = Current / Total;
+                var percentHp = Current / TotalSafe;
                 _percentBaseBonus = value;
-                Current = Total * percentHp;
+                Current = TotalSafe * percentHp;
             }
         }
 
@@ -61,9 +61,9 @@ namespace Legends.World.Entities.Statistics.Replication
                     return;
                 }
 
-                var percentHp = Current / Total;
+                var percentHp = Current / TotalSafe;
                 _flatBonus = value;
-                Current = Total * percentHp;
+                Current = TotalSafe * percentHp;
             }
         }
 
@@ -77,9 +77,9 @@ namespace Legends.World.Entities.Statistics.Replication
                     return;
                 }
 
-                var percentHp = Current / Total;
+                var percentHp = Current / TotalSafe;
                 _percentBonus = value;
-                Current = Total * percentHp;
+                Current = TotalSafe * percentHp;
             }
         }
 

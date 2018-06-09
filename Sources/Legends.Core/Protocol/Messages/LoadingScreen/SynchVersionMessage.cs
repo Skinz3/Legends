@@ -22,7 +22,7 @@ namespace Legends.Core.Protocol.LoadingScreen
         {
 
         }
-        public SynchVersionMessage(int netId, int unk1, byte[] version) : base(netId)
+        public SynchVersionMessage(uint netId, int unk1, byte[] version) : base(netId)
         {
             this.unk1 = unk1;
             this.version = version;

@@ -11,7 +11,7 @@ namespace Legends.Core.Protocol
     {
         public int ticks;
 
-        public GameMessage(int netId, int ticks) : base(netId)
+        public GameMessage(uint netId, int ticks) : base(netId)
         {
             this.ticks = ticks;
         }
@@ -23,13 +23,13 @@ namespace Legends.Core.Protocol
         public override void Pack(LittleEndianWriter writer)
         {
             writer.WriteByte((byte)Cmd);
-            writer.WriteInt(netId);
+            writer.WriteUInt(netId);
             writer.WriteInt(ticks);
             Serialize(writer);
         }
         public override void Unpack(LittleEndianReader reader)
         {
-            this.netId = reader.ReadInt();
+            this.netId = reader.ReadUInt();
             this.ticks = reader.ReadInt();
             this.Deserialize(reader);
         }

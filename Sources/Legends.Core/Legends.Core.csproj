@@ -120,6 +120,7 @@
     <Compile Include="Protocol\Messages\Game\MovementAnswerMessage.cs" />
     <Compile Include="Protocol\Messages\Game\MovementConfirmationMessage.cs" />
     <Compile Include="Protocol\Messages\Game\NextAutoattackMessage.cs" />
+    <Compile Include="Protocol\Messages\Game\ObjectSpawnMessage.cs" />
     <Compile Include="Protocol\Messages\Game\PlayerInfoMessage.cs" />
     <Compile Include="Protocol\Messages\Game\LockCameraRequestMessage.cs" />
     <Compile Include="Protocol\Messages\Game\MovementRequestMessage.cs" />

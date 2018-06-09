@@ -9,9 +9,9 @@ namespace Legends.Core.Protocol
 {
     public abstract class BaseMessage : Message
     {
-        public int netId;
+        public uint netId;
 
-        public BaseMessage(int netId)
+        public BaseMessage(uint netId)
         {
             this.netId = netId;
         }
@@ -25,21 +25,21 @@ namespace Legends.Core.Protocol
             if ((short)Cmd > byte.MaxValue) // oops, riot needs ids ! 
             {
                 writer.WriteByte((byte)PacketCmd.PKT_S2C_Extended);
-                writer.WriteInt(netId);
+                writer.WriteUInt(netId);
                 writer.WriteShort((short)Cmd);
 
             }
             else
             {
                 writer.WriteByte((byte)Cmd);
-                writer.WriteInt(netId);
+                writer.WriteUInt(netId);
             }
 
             Serialize(writer);
         }
         public override void Unpack(LittleEndianReader reader)
         {
-            this.netId = reader.ReadInt();
+            this.netId = reader.ReadUInt();
             this.Deserialize(reader);
         }
     }

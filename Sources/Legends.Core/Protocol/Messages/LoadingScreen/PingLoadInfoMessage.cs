@@ -27,7 +27,7 @@ namespace Legends.Core.Protocol.LoadingScreen
         {
 
         }
-        public PingLoadInfoMessage(int netId,int unk1,long userId,float loaded,float ping,short unk2,short unk3,byte unk4):base(netId)
+        public PingLoadInfoMessage(uint netId,int unk1,long userId,float loaded,float ping,short unk2,short unk3,byte unk4):base(netId)
         {
             this.unk1 = unk1;
             this.userId = userId;

@@ -19,7 +19,7 @@ namespace Legends.Core.Protocol.Messages.Game
         public short skillPoints;
 
 
-        public LevelUpMessage(int netId, byte newLevel, short skillPoints) : base(netId)
+        public LevelUpMessage(uint netId, byte newLevel, short skillPoints) : base(netId)
         {
             this.newLevel = newLevel;
             this.skillPoints = skillPoints;

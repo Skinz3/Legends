@@ -18,15 +18,15 @@ namespace Legends.Core.Protocol.Messages.Game
         public override Channel Channel => CHANNEL;
 
         public Vector2 position;
-        public int targetNetId;
-        public int sourceNetId;
+        public uint targetNetId;
+        public uint sourceNetId;
         public PingTypeEnum pingType;
 
         public AttentionPingAnswerMessage()
         {
 
         }
-        public AttentionPingAnswerMessage(Vector2 position, int targetNetId, int sourceNetId, PingTypeEnum pingType)
+        public AttentionPingAnswerMessage(Vector2 position, uint targetNetId, uint sourceNetId, PingTypeEnum pingType)
         {
             this.position = position;
             this.targetNetId = targetNetId;
@@ -38,8 +38,8 @@ namespace Legends.Core.Protocol.Messages.Game
             writer.WriteFloat(position.X);
             writer.WriteFloat(position.Y);
 
-            writer.WriteInt(targetNetId);
-            writer.WriteInt(sourceNetId);
+            writer.WriteUInt(targetNetId);
+            writer.WriteUInt(sourceNetId);
             writer.WriteByte((byte)pingType);
             writer.WriteByte(0xFB);
         }

@@ -95,11 +95,11 @@ namespace Legends.World.Spells
 
             if (Type == DamageType.DAMAGE_TYPE_PHYSICAL)
             {
-                ApplyBasicReduction(Target.Stats.Armor.Total);
+                ApplyBasicReduction(Target.Stats.Armor.TotalSafe);
             }
             else if (Type == DamageType.DAMAGE_TYPE_MAGICAL)
             {
-                ApplyBasicReduction(Target.AIStats.MagicResistance.Total);
+                ApplyBasicReduction(Target.AIStats.MagicResistance.TotalSafe);
             }
 
         }

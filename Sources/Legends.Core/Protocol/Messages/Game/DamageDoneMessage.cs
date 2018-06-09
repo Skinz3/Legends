@@ -19,10 +19,10 @@ namespace Legends.Core.Protocol.Messages.Game
         public DamageResultEnum damageResult;
         public DamageType damageType;
         public float value;
-        public int targetNetId;
-        public int sourceNetId;
+        public uint targetNetId;
+        public uint sourceNetId;
 
-        public DamageDoneMessage(DamageResultEnum damageResult, DamageType damageType, float value, int targetNetId, int sourceNetId) : base(targetNetId)
+        public DamageDoneMessage(DamageResultEnum damageResult, DamageType damageType, float value, uint targetNetId, uint sourceNetId) : base(targetNetId)
         {
             this.damageResult = damageResult;
             this.damageType = damageType;
@@ -45,8 +45,8 @@ namespace Legends.Core.Protocol.Messages.Game
             writer.WriteByte((byte)damageResult);
             writer.WriteShort((short)((short)damageType << 8));
             writer.WriteFloat((float)value);
-            writer.WriteInt(targetNetId);
-            writer.WriteInt(sourceNetId);
+            writer.WriteUInt(targetNetId);
+            writer.WriteUInt(sourceNetId);
         }
     }
 }

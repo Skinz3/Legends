@@ -23,7 +23,7 @@ namespace Legends.Core.Protocol.LoadingScreen
         public string region;
         public int gameFeatures; // 487826
 
-        public SynchVersionAnswerMessage(int netId, byte unk, int mapId, PlayerInformations[] players,
+        public SynchVersionAnswerMessage(uint netId, byte unk, int mapId, PlayerInformations[] players,
             string version, string gameMode, string region, int gameFeatures) : base(netId)
         {
             this.unk = unk;

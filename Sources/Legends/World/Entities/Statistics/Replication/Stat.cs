@@ -91,7 +91,7 @@ namespace Legends.World.Entities.Statistics.Replication
         }
         public override string ToString()
         {
-            return string.Format("({0})", Total);
+            return string.Format("({0})", TotalSafe);
         }
     }
 }

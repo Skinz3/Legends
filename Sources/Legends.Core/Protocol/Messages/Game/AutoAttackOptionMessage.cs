@@ -17,7 +17,7 @@ namespace Legends.Core.Protocol.Messages.Game
 
         public bool Activated;
             
-        public AutoAttackOptionMessage(int netId) : base(netId)
+        public AutoAttackOptionMessage(uint netId) : base(netId)
         {
         }
         public AutoAttackOptionMessage()

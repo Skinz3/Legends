@@ -15,11 +15,11 @@ namespace Legends.Core.Protocol.Messages.Game
         public static Channel CHANNEL = Channel.CHL_S2C;
         public override Channel Channel => CHANNEL;
 
-        public int sourceNetId;
+        public uint sourceNetId;
 
-        public int targetNetId;
+        public uint targetNetId;
 
-        public DestroyObjectMessage(int sourceNetId, int targetNetId) : base(sourceNetId)
+        public DestroyObjectMessage(uint sourceNetId, uint targetNetId) : base(sourceNetId)
         {
             this.sourceNetId = sourceNetId;
             this.targetNetId = targetNetId;
@@ -36,7 +36,7 @@ namespace Legends.Core.Protocol.Messages.Game
 
         public override void Serialize(LittleEndianWriter writer)
         {
-            writer.WriteInt(targetNetId);
+            writer.WriteUInt(targetNetId);
         }
     }
 }

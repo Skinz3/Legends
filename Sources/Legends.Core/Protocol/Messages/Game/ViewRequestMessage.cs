@@ -27,7 +27,7 @@ namespace Legends.Core.Protocol.Game
         public int unk2;
         public byte requestNo;
 
-        public ViewRequestMessage(int netId) : base(netId)
+        public ViewRequestMessage(uint netId) : base(netId)
         {
         }
 

@@ -17,7 +17,7 @@ namespace Legends.Core.Protocol.Messages.Game
 
         public string animationName;
 
-        public SpellAnimationMessage(string animationName, int netId) : base(netId)
+        public SpellAnimationMessage(string animationName, uint netId) : base(netId)
         {
             this.animationName = animationName;
         }

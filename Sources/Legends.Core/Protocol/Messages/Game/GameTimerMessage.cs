@@ -17,7 +17,7 @@ namespace Legends.Core.Protocol.Game
 
         public float time;
 
-        public GameTimerMessage(int netId, float time) : base(netId)
+        public GameTimerMessage(uint netId, float time) : base(netId)
         {
             this.time = time;
         }

@@ -21,13 +21,13 @@ namespace Legends.Core.Protocol.Messages.Game
 
         public ReplicateStat[,] values;
         public bool partial;
-        public int actorNetId;
+        public uint actorNetId;
 
         public UpdateStatsMessage()
         {
 
         }
-        public UpdateStatsMessage(int netId, int actorNetId, ReplicateStat[,] values, bool partial) : base(netId)
+        public UpdateStatsMessage(uint netId, uint actorNetId, ReplicateStat[,] values, bool partial) : base(netId)
         {
             this.values = values;
             this.partial = partial;

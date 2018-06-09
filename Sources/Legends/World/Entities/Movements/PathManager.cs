@@ -123,7 +123,7 @@ namespace Legends.World.Entities.Movements
         {
             if (IsMoving && !End)
             {
-                float deltaMovement = Unit.AIStats.MoveSpeed.Total * 0.001f * deltaTime; // deltaTime
+                float deltaMovement = Unit.AIStats.MoveSpeed.TotalSafe * 0.001f * deltaTime; // deltaTime
 
                 float xOffset = Direction.X * deltaMovement * 1.06f;
                 float yOffset = Direction.Y * deltaMovement * 1.06f;

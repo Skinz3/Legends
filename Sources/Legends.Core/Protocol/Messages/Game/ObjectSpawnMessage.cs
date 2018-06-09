@@ -5,32 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 using Legends.Core.IO;
 
-namespace Legends.Core.Protocol.LoadingScreen
+namespace Legends.Core.Protocol.Messages.Game
 {
-    public class ClientReadyMessage : BaseMessage
+    public class ObjectSpawnMessage : BaseMessage
     {
-        public static PacketCmd PACKET_CMD = PacketCmd.PKT_C2S_ClientReady;
+        public static PacketCmd PACKET_CMD = PacketCmd.PKT_S2C_ObjectSpawn;
         public override PacketCmd Cmd => PACKET_CMD;
 
-        public static Channel CHANNEL = Channel.CHL_LOADING_SCREEN;
+        public static Channel CHANNEL = Channel.CHL_GAMEPLAY;
         public override Channel Channel => CHANNEL;
 
-        public ClientReadyMessage(uint netId):base(netId)
+        public ObjectSpawnMessage(uint netId):base(netId)
         {
-
+            
         }
-        public ClientReadyMessage()
+        public ObjectSpawnMessage()
         {
 
         }
         public override void Deserialize(LittleEndianReader reader)
         {
-      
+            throw new NotImplementedException();
         }
 
         public override void Serialize(LittleEndianWriter writer)
         {
-           
+            writer.Fill(0, 3);
         }
     }
 }

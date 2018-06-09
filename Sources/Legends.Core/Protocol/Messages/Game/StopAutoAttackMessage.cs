@@ -15,7 +15,7 @@ namespace Legends.Core.Protocol.Messages.Game
         public static Channel CHANNEL = Channel.CHL_S2C;
         public override Channel Channel => CHANNEL;
 
-        public StopAutoAttackMessage(int sourceId) : base(sourceId)
+        public StopAutoAttackMessage(uint sourceId) : base(sourceId)
         {
 
         }

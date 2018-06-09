@@ -21,7 +21,7 @@ namespace Legends.World.Entities.AI
     {
         public override string Name => MapObjectRecord.Name;
 
-        public override float PerceptionBubbleRadius => ((TurretStats)Stats).PerceptionBubbleRadius.Total;
+        public override float PerceptionBubbleRadius => ((TurretStats)Stats).PerceptionBubbleRadius.TotalSafe;
 
         public override bool DefaultAutoattackActivated => true;
 
@@ -36,7 +36,7 @@ namespace Legends.World.Entities.AI
             set;
         }
 
-        public AITurret(int netId, AIUnitRecord record, MapObjectRecord mapObject, string suffix)
+        public AITurret(uint netId, AIUnitRecord record, MapObjectRecord mapObject, string suffix)
         {
             this.NetId = netId;
             this.Record = record;
@@ -71,7 +71,7 @@ namespace Legends.World.Entities.AI
         public override void OnDead(AttackableUnit source)
         {
             base.OnDead(source);
-            Game.UnitAnnounce(UnitAnnounceEnum.TurretDestroyed, NetId, source.NetId, new int[0]);
+            Game.UnitAnnounce(UnitAnnounceEnum.TurretDestroyed, NetId, source.NetId, new uint[0]);
         }
         public string GetClientName()
         {

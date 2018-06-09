@@ -11,7 +11,7 @@ namespace Legends.World.Games.Maps.Fog
 {
     public class FogUpdate
     {
-        public int NetId
+        public uint NetId
         {
             get;
             private set;
@@ -27,7 +27,7 @@ namespace Legends.World.Games.Maps.Fog
             get;
             private set;
         }
-        public FogUpdate(int netId, TeamId teamId, Unit source)
+        public FogUpdate(uint netId, TeamId teamId, Unit source)
         {
             this.NetId = NetId;
             this.TeamId = teamId;

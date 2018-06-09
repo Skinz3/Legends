@@ -17,7 +17,7 @@ namespace Legends.World.Entities
     {
         public const float DEFAULT_MODEL_SIZE = 1f;
 
-        public int NetId
+        public uint NetId
         {
             get;
             set;

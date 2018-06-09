@@ -68,16 +68,16 @@ namespace Legends.World.Entities.Statistics
             ReplicationManager.UpdateFloat(AttackDamage.BaseValue, 1, 5); // baseAttackDamage  non affiché, utilisé pour des items comme sheen
             ReplicationManager.UpdateFloat(AbilityPower.BaseValue, 1, 6); // baseAbilityDamage
 
-            ReplicationManager.UpdateFloat(Dodge.Total, 1, 7); // Dodge
-            ReplicationManager.UpdateFloat(CriticalHit.Total, 1, 8);  // crit
+            ReplicationManager.UpdateFloat(Dodge.TotalSafe, 1, 7); // Dodge
+            ReplicationManager.UpdateFloat(CriticalHit.TotalSafe, 1, 8);  // crit
 
-            ReplicationManager.UpdateFloat(Armor.Total, 1, 9); // marmor
-            ReplicationManager.UpdateFloat(MagicResistance.Total, 1, 10); // magicResist
+            ReplicationManager.UpdateFloat(Armor.TotalSafe, 1, 9); // marmor
+            ReplicationManager.UpdateFloat(MagicResistance.TotalSafe, 1, 10); // magicResist
 
-            ReplicationManager.UpdateFloat(HpRegeneration.Total, 1, 11); // hpRegenRate
-            ReplicationManager.UpdateFloat(ManaRegeneration.Total, 1, 12); // mpRegenRate
+            ReplicationManager.UpdateFloat(HpRegeneration.TotalSafe, 1, 11); // hpRegenRate
+            ReplicationManager.UpdateFloat(ManaRegeneration.TotalSafe, 1, 12); // mpRegenRate
 
-            ReplicationManager.UpdateFloat(AttackRange.Total, 1, 13); // mAttackRange
+            ReplicationManager.UpdateFloat(AttackRange.TotalSafe, 1, 13); // mAttackRange
             ReplicationManager.UpdateFloat(AttackDamage.FlatBonus, 1, 14); // flat physical damage mod (damagebonus)
 
             ReplicationManager.UpdateFloat(AttackDamage.PercentBonus, 1, 15); // mPercentPhysicalDamageMod  (percentage on ad bonus i think, check dat)
@@ -90,7 +90,7 @@ namespace Legends.World.Entities.Statistics
 
             ReplicationManager.UpdateFloat(AttackRange.FlatBonus, 1, 20); //mFlatCastRangeMod
 
-            ReplicationManager.UpdateFloat(-(CooldownReduction.Total / 100f), 1, 21); // mPercentCooldownMod  -0.5f = 50% cd reduction
+            ReplicationManager.UpdateFloat(-(CooldownReduction.TotalSafe / 100f), 1, 21); // mPercentCooldownMod  -0.5f = 50% cd reduction
 
             ReplicationManager.UpdateFloat(0f, 1, 22); // mPassiveCooldownEndTime
 
@@ -98,13 +98,13 @@ namespace Legends.World.Entities.Statistics
 
             ReplicationManager.UpdateFloat(ArmorPenetration.FlatBonus, 1, 24); // mFlatArmorPenetration
             ReplicationManager.UpdateFloat(2f - ArmorPenetration.PercentBonus, 1, 25); // mPercentArmorPenetration 0.6 is percentage
-            ReplicationManager.UpdateFloat(MagicPenetration.Total, 1, 26);// mFlatMagicPenetration
+            ReplicationManager.UpdateFloat(MagicPenetration.TotalSafe, 1, 26);// mFlatMagicPenetration
             ReplicationManager.UpdateFloat(2f - MagicPenetration.PercentBonus, 1, 27);  //mPercentMagicPenetration
 
-            ReplicationManager.UpdateFloat(LifeSteal.Total, 1, 28); // mPercentLifeStealMod
+            ReplicationManager.UpdateFloat(LifeSteal.TotalSafe, 1, 28); // mPercentLifeStealMod
             ReplicationManager.UpdateFloat(LifeSteal.PercentBonus, 1, 29); // mPercentSpellVampMod
 
-            ReplicationManager.UpdateFloat(CCReduction.Total, 1, 30); // mPercentCCReduction
+            ReplicationManager.UpdateFloat(CCReduction.TotalSafe, 1, 30); // mPercentCCReduction
 
             ReplicationManager.UpdateFloat(ArmorPenetration.PercentBonus, 2, 0); // mPercentBonusArmorPenetration
             ReplicationManager.UpdateFloat(MagicPenetration.PercentBonus, 2, 1);  // mPercentBonusMagicPenetration
@@ -114,9 +114,9 @@ namespace Legends.World.Entities.Statistics
             ReplicationManager.UpdateFloat(Health.Current, 3, 0); // current hp
             ReplicationManager.UpdateFloat(Mana.Current, 3, 1); // current mp
 
-            ReplicationManager.UpdateFloat(Health.Total, 3, 2); // max hp
+            ReplicationManager.UpdateFloat(Health.TotalSafe, 3, 2); // max hp
 
-            ReplicationManager.UpdateFloat(Mana.Total, 3, 3); // max mp
+            ReplicationManager.UpdateFloat(Mana.TotalSafe, 3, 3); // max mp
 
             ReplicationManager.UpdateFloat(Experience, 3, 4); // currentExp
 
@@ -127,8 +127,8 @@ namespace Legends.World.Entities.Statistics
             ReplicationManager.UpdateFloat(PerceptionBubbleRadius.FlatBonus, 3, 8); // mFlatBubbleRadiusMod
             ReplicationManager.UpdateFloat(PerceptionBubbleRadius.PercentBonus, 3, 9); // mPercentBubbleRadiusMod
 
-            ReplicationManager.UpdateFloat(MoveSpeed.Total, 3, 10); // move speed, working
-            ReplicationManager.UpdateFloat(ModelSize.Total, 3, 11); // modelSize
+            ReplicationManager.UpdateFloat(MoveSpeed.TotalSafe, 3, 10); // move speed, working
+            ReplicationManager.UpdateFloat(ModelSize.TotalSafe, 3, 11); // modelSize
 
             ReplicationManager.UpdateFloat(0f, 3, 12); // mPathfindingRadiusMod
             ReplicationManager.UpdateUInt((uint)Level, 3, 13); // mLevel uint

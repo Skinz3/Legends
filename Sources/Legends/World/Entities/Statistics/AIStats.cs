@@ -165,7 +165,7 @@ namespace Legends.World.Entities.Statistics
         }
         public bool CriticalStrike()
         {
-            return Extensions.RandomAssertion(CriticalHit.Total);
+            return Extensions.RandomAssertion(CriticalHit.TotalSafe);
         }
         public void AddGold(float value)
         {

@@ -23,7 +23,7 @@ namespace Legends.Core.Protocol.Game
         public SummonerSpellId sum1;
         public SummonerSpellId sum2;
 
-        public PlayerInfoMessage(int netId, SummonerSpellId sum1, SummonerSpellId sum2) : base(netId)
+        public PlayerInfoMessage(uint netId, SummonerSpellId sum1, SummonerSpellId sum2) : base(netId)
         {
             this.sum1 = sum1;
             this.sum2 = sum2;

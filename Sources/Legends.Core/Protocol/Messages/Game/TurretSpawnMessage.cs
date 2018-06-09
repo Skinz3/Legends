@@ -15,14 +15,14 @@ namespace Legends.Core.Protocol.Messages.Game
         public static Channel CHANNEL = Channel.CHL_S2C;
         public override Channel Channel => CHANNEL;
 
-        public int turretNetId;
+        public uint turretNetId;
         public string turretName;
 
         public TurretSpawnMessage()
         {
 
         }
-        public TurretSpawnMessage(int netId, int turretNetId, string turretName) : base(netId)
+        public TurretSpawnMessage(uint netId, uint turretNetId, string turretName) : base(netId)
         {
             this.turretNetId = turretNetId;
             this.turretName = turretName;
@@ -36,7 +36,7 @@ namespace Legends.Core.Protocol.Messages.Game
         public override void Serialize(LittleEndianWriter writer)
         {
 
-            writer.WriteInt(turretNetId);
+            writer.WriteUInt(turretNetId);
             writer.WriteByte((byte)0x40);
             foreach (var b in Encoding.UTF8.GetBytes(turretName))
                 writer.WriteByte((byte)b);

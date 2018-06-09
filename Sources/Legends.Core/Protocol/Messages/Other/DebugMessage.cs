@@ -20,7 +20,7 @@ namespace Legends.Core.Protocol.Other
 
         string message;
 
-        public DebugMessage(int netId,string message) : base(netId)
+        public DebugMessage(uint netId,string message) : base(netId)
         {
             this.message = message;
         }

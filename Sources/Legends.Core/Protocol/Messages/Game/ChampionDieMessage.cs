@@ -16,10 +16,10 @@ namespace Legends.Core.Protocol.Messages.Game
         public override Channel Channel => CHANNEL;
 
         public int goldFromKill;
-        public int killerNetId;
+        public uint killerNetId;
         public float respawnTimerMs;
 
-        public ChampionDieMessage(int goldFromKill, int deadNetId, int killerNetId, float respawnTimerMs) : base(deadNetId)
+        public ChampionDieMessage(int goldFromKill, uint deadNetId, uint killerNetId, float respawnTimerMs) : base(deadNetId)
         {
             this.goldFromKill = goldFromKill;
             this.killerNetId = killerNetId;
@@ -39,7 +39,7 @@ namespace Legends.Core.Protocol.Messages.Game
             writer.WriteInt(goldFromKill); // Gold from kill?
             writer.WriteByte((byte)0);
 
-            writer.WriteInt(killerNetId);
+            writer.WriteUInt(killerNetId);
 
             writer.WriteByte((byte)0);
             writer.WriteByte((byte)7);

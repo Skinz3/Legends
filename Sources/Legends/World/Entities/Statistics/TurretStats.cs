@@ -32,7 +32,7 @@ namespace Legends.World.Entities.Statistics
         }
         public override void UpdateReplication(bool partial = true)
         {
-            ReplicationManager.UpdateFloat(Mana.Total, 1, 0);
+            ReplicationManager.UpdateFloat(Mana.TotalSafe, 1, 0);
             ReplicationManager.UpdateFloat(Mana.Current, 1, 1);
             ReplicationManager.UpdateUInt((uint)ActionState, 1, 2);
             ReplicationManager.UpdateBool(IsMagicImmune, 1, 3);
@@ -40,19 +40,19 @@ namespace Legends.World.Entities.Statistics
             ReplicationManager.UpdateBool(IsPhysicalImmune, 1, 5);
             ReplicationManager.UpdateBool(IsLifeStealImmune, 1, 6);
             ReplicationManager.UpdateFloat(AttackDamage.BaseValue, 1, 7);
-            ReplicationManager.UpdateFloat(Armor.Total, 1, 8);
-            ReplicationManager.UpdateFloat(MagicResistance.Total, 1, 9);
+            ReplicationManager.UpdateFloat(Armor.TotalSafe, 1, 8);
+            ReplicationManager.UpdateFloat(MagicResistance.TotalSafe, 1, 9);
             ReplicationManager.UpdateFloat(AttackSpeed.BaseBonus, 1, 10);
             ReplicationManager.UpdateFloat(AttackDamage.FlatBonus, 1, 11);
             ReplicationManager.UpdateFloat(AttackDamage.PercentBonus, 1, 12);
             ReplicationManager.UpdateFloat(AbilityPower.BaseBonus, 1, 13);
-            ReplicationManager.UpdateFloat(HpRegeneration.Total, 1, 14);
+            ReplicationManager.UpdateFloat(HpRegeneration.TotalSafe, 1, 14);
             ReplicationManager.UpdateFloat(Health.Current, 3, 0);
-            ReplicationManager.UpdateFloat(Health.Total, 3, 1);
-            ReplicationManager.UpdateFloat(PerceptionBubbleRadius.Total, 3, 2);
+            ReplicationManager.UpdateFloat(Health.TotalSafe, 3, 1);
+            ReplicationManager.UpdateFloat(PerceptionBubbleRadius.TotalSafe, 3, 2);
             ReplicationManager.UpdateFloat(PerceptionBubbleRadius.PercentBonus, 3, 3);
-            ReplicationManager.UpdateFloat(MoveSpeed.Total, 3, 4);
-            ReplicationManager.UpdateFloat(ModelSize.Total, 3, 5);
+            ReplicationManager.UpdateFloat(MoveSpeed.TotalSafe, 3, 4);
+            ReplicationManager.UpdateFloat(ModelSize.TotalSafe, 3, 5);
             ReplicationManager.UpdateBool(IsTargetable, 5, 0);
             ReplicationManager.UpdateUInt((uint)TargetableToTeam, 5, 1);
         }

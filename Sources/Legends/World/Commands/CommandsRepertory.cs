@@ -92,7 +92,7 @@ namespace Legends.World.Commands
         [Command("life")]
         public static void LifeCommand(LoLClient client)
         {
-            client.Hero.AIStats.Health.Current = client.Hero.AIStats.Health.Total;
+            client.Hero.AIStats.Health.Current = client.Hero.AIStats.Health.TotalSafe;
             client.Hero.UpdateStats();
         }
 

@@ -18,7 +18,7 @@ namespace Legends.Core.Protocol.Messages.Game
         public override Channel Channel => CHANNEL;
 
         public Vector2 position;
-        public int targetNetId;
+        public uint targetNetId;
         public PingTypeEnum pingType;
 
         public AttentionPingRequestMessage()
@@ -33,7 +33,7 @@ namespace Legends.Core.Protocol.Messages.Game
         public override void Deserialize(LittleEndianReader reader)
         {
             this.position = new Vector2(reader.ReadFloat(), reader.ReadFloat());
-            this.targetNetId = reader.ReadInt();
+            this.targetNetId = reader.ReadUInt();
             this.pingType = (PingTypeEnum)reader.ReadByte();
         }
     }

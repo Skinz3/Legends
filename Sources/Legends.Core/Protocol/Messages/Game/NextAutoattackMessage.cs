@@ -16,12 +16,12 @@ namespace Legends.Core.Protocol.Messages.Game
         public static Channel CHANNEL = Channel.CHL_S2C;
         public override Channel Channel => CHANNEL;
 
-        public int targetNetId;
-        public int futureProjectileNetId;
+        public uint targetNetId;
+        public uint futureProjectileNetId;
         public AttackSlotEnum attackSlot;
         public bool initial;
 
-        public NextAutoattackMessage(int sourceNetId, int targetNetId, int futureProjectileNetId, AttackSlotEnum attackSlot, bool initial) : base(sourceNetId)
+        public NextAutoattackMessage(uint sourceNetId, uint targetNetId, uint futureProjectileNetId, AttackSlotEnum attackSlot, bool initial) : base(sourceNetId)
         {
             this.targetNetId = targetNetId;
             this.futureProjectileNetId = futureProjectileNetId;
@@ -40,13 +40,13 @@ namespace Legends.Core.Protocol.Messages.Game
 
         public override void Serialize(LittleEndianWriter writer)
         {
-            writer.WriteInt(targetNetId);
+            writer.WriteUInt(targetNetId);
             if (initial)
                 writer.WriteByte(0x80); // extraTime
             else
                 writer.WriteByte(0x7F); // extraTime 0x7F
 
-            writer.WriteInt(futureProjectileNetId);
+            writer.WriteUInt(futureProjectileNetId);
 
             writer.WriteByte((byte)attackSlot); // attackSlot
 

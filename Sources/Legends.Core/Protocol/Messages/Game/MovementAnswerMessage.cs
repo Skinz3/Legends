@@ -21,10 +21,10 @@ namespace Legends.Core.Protocol.Game
         public override Channel Channel => CHANNEL;
 
         public Vector2[] wayPoints;
-        public int actorNetId;
+        public uint actorNetId;
         public Vector2 mapSize;
 
-        public MovementAnswerMessage(int netId, Vector2[] wayPoints, int actorNetId, Vector2 mapSize) : base(netId)
+        public MovementAnswerMessage(uint netId, Vector2[] wayPoints, uint actorNetId, Vector2 mapSize) : base(netId)
         {
             this.wayPoints = wayPoints;
             this.actorNetId = actorNetId;
@@ -46,7 +46,7 @@ namespace Legends.Core.Protocol.Game
 
             var numCoords = wayPoints.Count() * 2;
             writer.WriteByte((byte)numCoords);
-            writer.WriteInt((int)actorNetId);
+            writer.WriteUInt(actorNetId);
             writer.WriteBytes(MovementVector.EncodeWaypoints(wayPoints, mapSize));
 
         }

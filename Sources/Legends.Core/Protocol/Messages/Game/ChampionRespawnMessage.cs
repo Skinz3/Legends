@@ -18,7 +18,7 @@ namespace Legends.Core.Protocol.Messages.Game
 
         public Vector2 position;
 
-        public ChampionRespawnMessage(int netId, Vector2 position) : base(netId)
+        public ChampionRespawnMessage(uint netId, Vector2 position) : base(netId)
         {
             this.position = position;
         }

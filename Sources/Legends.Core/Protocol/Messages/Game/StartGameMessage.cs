@@ -18,7 +18,7 @@ namespace Legends.Core.Protocol.Game
         public static Channel CHANNEL = Channel.CHL_S2C;
         public override Channel Channel => CHANNEL;
 
-        public StartGameMessage(int netId) : base(netId)
+        public StartGameMessage(uint netId) : base(netId)
         {
                 
         }

@@ -44,7 +44,7 @@ namespace Legends.World.Entities.AI
         {
             get
             {
-                return AIStats.AttackRange.Total;
+                return AIStats.AttackRange.TotalSafe;
             }
         }
         public override bool IsMoving => PathManager.IsMoving;
@@ -88,7 +88,7 @@ namespace Legends.World.Entities.AI
         }
         public void Move(List<Vector2> waypoints, bool unsetTarget = true)
         {
-            if (AIStats.MoveSpeed.Total > 0)
+            if (AIStats.MoveSpeed.TotalSafe > 0)
             {
                 if (unsetTarget)
                 {
@@ -120,12 +120,12 @@ namespace Legends.World.Entities.AI
         [InDeveloppement(InDeveloppementState.THINK_ABOUT_IT, "Not sure about values...check again in RAF?")]
         public float GetAutoattackRange(AIUnit target)
         {
-            return AIStats.AttackRange.Total + (AIStats.AttackRange.Total * (float)Record.ChasingAttackRangePercent) + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
+            return AIStats.AttackRange.TotalSafe + (AIStats.AttackRange.TotalSafe * (float)Record.ChasingAttackRangePercent) + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.TotalSafe);
         }
         [InDeveloppement(InDeveloppementState.THINK_ABOUT_IT, "Not sure about values...check again in RAF?")]
         public float GetAutoattackRangeWhileChasing(AIUnit target)
         {
-            return AIStats.AttackRange.Total + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
+            return AIStats.AttackRange.TotalSafe + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.TotalSafe);
         }
         [InDeveloppement(InDeveloppementState.TODO,"We need to use pathfinding only for melee to join target.")]
         /// <summary>
@@ -149,7 +149,7 @@ namespace Legends.World.Entities.AI
             }
             else
             {
-                if (AIStats.MoveSpeed.Total > 0)
+                if (AIStats.MoveSpeed.TotalSafe > 0)
                 {
                     AttackManager.StopAttackTarget(); // on arrête d'attaquer l'éventuelle cible, car on va se déplacer.
 

@@ -17,7 +17,7 @@ namespace Legends.Core.Protocol.Messages.Game
 
         public float timer;
 
-        public ChampionDeathTimerMessage(int netId, float timer) : base(netId)
+        public ChampionDeathTimerMessage(uint netId, float timer) : base(netId)
         {
             this.timer = timer;
         }

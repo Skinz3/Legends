@@ -9,11 +9,11 @@ namespace Legends.Network
 {
     public class NetIdProvider
     {
-        private const int DEFAULT_NET_ID = 0x40000000;
+        private const uint DEFAULT_NET_ID = 0x40000000;
 
         private object locker = new object();
 
-        private int LastNetId
+        private uint LastNetId
         {
             get;
             set;
@@ -23,7 +23,7 @@ namespace Legends.Network
             this.LastNetId = DEFAULT_NET_ID;
         }
 
-        public int PopNextNetId()
+        public uint PopNextNetId()
         {
             lock (locker)
             {

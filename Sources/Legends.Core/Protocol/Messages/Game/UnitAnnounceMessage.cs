@@ -17,14 +17,14 @@ namespace Legends.Core.Protocol.Messages.Game
         public override Channel Channel => CHANNEL;
 
         public UnitAnnounceEnum announceEnum;
-        public int sourceNetId;
-        public int[] assitsNetIds;
+        public uint sourceNetId;
+        public uint[] assitsNetIds;
 
         public UnitAnnounceMessage()
         {
 
         }
-        public UnitAnnounceMessage(int netId, UnitAnnounceEnum announce, int sourceNetId, int[] assitsNetIds):base(netId)
+        public UnitAnnounceMessage(uint netId, UnitAnnounceEnum announce, uint sourceNetId, uint[] assitsNetIds):base(netId)
         {
             this.announceEnum = announce;
             this.sourceNetId = sourceNetId;

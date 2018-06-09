@@ -19,7 +19,7 @@ namespace Legends.Core.Protocol.Game
         public static Channel CHANNEL = Channel.CHL_S2C;
         public override Channel Channel => CHANNEL;
 
-        public int netId;
+        public uint netId;
         public int playerId;
         public TeamId team;
         public int skinId;
@@ -30,7 +30,7 @@ namespace Legends.Core.Protocol.Game
         {
 
         }
-        public HeroSpawnMessage(int netId,int playerId,TeamId team,int skinId,string name,string championType)
+        public HeroSpawnMessage(uint netId,int playerId,TeamId team,int skinId,string name,string championType)
         {
             this.netId = netId;
             this.playerId = playerId;
@@ -47,7 +47,7 @@ namespace Legends.Core.Protocol.Game
         public override void Serialize(LittleEndianWriter writer)
         {
             writer.WriteInt(0);
-            writer.WriteInt(netId);
+            writer.WriteUInt(netId);
             writer.WriteInt(playerId);
             writer.WriteByte(40); // net node id?
             writer.WriteByte(0); // botskilllevel

@@ -15,13 +15,13 @@ namespace Legends.Core.Protocol.Messages.Extended
         public static Channel CHANNEL = Channel.CHL_S2C;
         public override Channel Channel => CHANNEL;
 
-        public int sourceNetId;
+        public uint sourceNetId;
 
         public DieMessage()
         {
 
         }
-        public DieMessage(int sourceNetId,int targetNetId):base(targetNetId)
+        public DieMessage(uint sourceNetId,uint targetNetId):base(targetNetId)
         {
             this.sourceNetId = sourceNetId;
         }
@@ -34,7 +34,7 @@ namespace Legends.Core.Protocol.Messages.Extended
         {
             writer.WriteInt((int)0);
             writer.WriteByte((byte)0);
-            writer.WriteInt(sourceNetId);
+            writer.WriteUInt(sourceNetId);
             writer.WriteByte((byte)0); // unk
             writer.WriteByte((byte)7); // unk
             writer.WriteInt((int)0); // Flags?

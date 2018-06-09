@@ -85,7 +85,7 @@ namespace Legends.Scripts.Maps
 
             if (teamId != TeamId.UNKNOWN)
             {
-                int netId = (int)(BuildingProvider.TOWER_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(fullName)));
+                uint netId = (uint)(BuildingProvider.TOWER_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(fullName)));
                 AITurret turret = new AITurret(netId, aIUnitRecord, objectRecord, BuildingProvider.TOWER_SUFFIX);
                 turret.DefineGame(Game);
                 Game.AddUnit(turret, teamId);

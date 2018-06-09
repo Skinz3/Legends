@@ -81,7 +81,7 @@ namespace Legends.World.Entities.AI
         }
         public override string Name => Data.Name;
 
-        public override float PerceptionBubbleRadius => ((HeroStats)Stats).PerceptionBubbleRadius.Total;
+        public override float PerceptionBubbleRadius => ((HeroStats)Stats).PerceptionBubbleRadius.TotalSafe;
 
         public override bool DefaultAutoattackActivated => false;
 
@@ -145,13 +145,13 @@ namespace Legends.World.Entities.AI
             Score.DeathCount++;
             DeathTimer.OnDead();
             Game.Send(new ChampionDieMessage(500, NetId, source.NetId, DeathTimer.TimeLeftSeconds));
-            Game.UnitAnnounce(UnitAnnounceEnum.Death, NetId, source.NetId, new int[0]);
+            Game.UnitAnnounce(UnitAnnounceEnum.Death, NetId, source.NetId, new uint[0]);
             Client.Send(new ChampionDeathTimerMessage(NetId, DeathTimer.TimeLeftSeconds));
         }
         public void OnRevive()
         {
-            AIStats.Health.Current = AIStats.Health.Total;
-            AIStats.Mana.Current = AIStats.Mana.Total;
+            AIStats.Health.Current = AIStats.Health.TotalSafe;
+            AIStats.Mana.Current = AIStats.Mana.TotalSafe;
             Alive = true;
             Position = SpawnPosition;
             Game.Send(new ChampionRespawnMessage(NetId, Position));
@@ -184,7 +184,7 @@ namespace Legends.World.Entities.AI
         {
             Game.Send(new PlayerInfoMessage(NetId, Data.Summoner1Spell, Data.Summoner2Spell));
         }
-        public void AttentionPing(Vector2 position, int targetNetId, PingTypeEnum pingType)
+        public void AttentionPing(Vector2 position, uint targetNetId, PingTypeEnum pingType)
         {
             Team.Send(new AttentionPingAnswerMessage(position, targetNetId, NetId, pingType));
         }
@@ -213,7 +213,7 @@ namespace Legends.World.Entities.AI
         {
             Disconnected = true;
             Game.RemoveUnit(this); // maybe depend of reconnect system
-            Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, 0, new int[0]);
+            Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, 0, new uint[0]);
         }
 
        

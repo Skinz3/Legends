@@ -19,7 +19,7 @@ namespace Legends.Core.Protocol.Messages.Game
         {
 
         }
-        public LeaveVisionMessage(int netId) : base(netId)
+        public LeaveVisionMessage(uint netId) : base(netId)
         {
         }
 

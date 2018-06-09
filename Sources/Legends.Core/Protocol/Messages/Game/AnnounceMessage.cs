@@ -19,7 +19,7 @@ namespace Legends.Core.Protocol.Messages.Game
         public int mapId;
         public AnnounceEnum announce;
 
-        public AnnounceMessage(int netId, int mapId, AnnounceEnum announce) : base(netId)
+        public AnnounceMessage(uint netId, int mapId, AnnounceEnum announce) : base(netId)
         {
             this.mapId = mapId;
             this.announce = announce;

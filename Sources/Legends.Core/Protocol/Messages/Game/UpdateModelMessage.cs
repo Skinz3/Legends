@@ -19,7 +19,7 @@ namespace Legends.Core.Protocol.Messages.Game
         public bool useSpells;
         public int skinId;
 
-        public UpdateModelMessage(int netId, string modelName, bool useSpells, int skinId) : base(netId)
+        public UpdateModelMessage(uint netId, string modelName, bool useSpells, int skinId) : base(netId)
         {
             this.modelName = modelName;
             this.useSpells = useSpells;
