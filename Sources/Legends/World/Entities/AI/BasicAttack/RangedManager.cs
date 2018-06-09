@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.World.Entities.AI.Autoattack
+namespace Legends.World.Entities.AI.BasicAttack
 {
     public class RangedManager : AttackManager
     {
@@ -14,23 +14,12 @@ namespace Legends.World.Entities.AI.Autoattack
 
         public override void BeginAttackTarget(AIUnit target)
         {
-            if (IsAttacking == false)
-            {
-                CurrentAutoattack = new RangedBasicAttack(Unit, target, Unit.AIStats.CriticalStrike());
-                CurrentAutoattack.Notify();
-                Unit.OnTargetSet(target);
-            }
-            else if (IsAttacking == true && CurrentAutoattack.Cancelled && CurrentAutoattack.Hit)
-            {
-                CurrentAutoattack.RequiredNew = true;
-            }
+            
         }
 
         public override void NextAutoattack()
         {
-            bool critical = Unit.AIStats.CriticalStrike();
-            Unit.AttackManager.CurrentAutoattack = new RangedBasicAttack(Unit, CurrentAutoattack.Target, critical, false, DetermineNextSlot(critical));
-            CurrentAutoattack.Notify();
+           
         }
     }
 }

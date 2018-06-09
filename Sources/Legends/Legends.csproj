@@ -65,6 +65,7 @@
     <Compile Include="Handlers\GameHandler.cs" />
     <Compile Include="Handlers\LoadingScreenHandlers.cs" />
     <Compile Include="Handlers\OtherHandlers.cs" />
+    <Compile Include="Handlers\ShopHandler.cs" />
     <Compile Include="Handlers\SynchronizationHandler.cs" />
     <Compile Include="Network\LoLClient.cs" />
     <Compile Include="Network\LoLServer.cs" />

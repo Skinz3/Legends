@@ -22,9 +22,9 @@ namespace Legends.World.Commands
     class CommandsRepertory
     {
         [Command("addcrit")]
-        public static void CercleCommand(LoLClient client)
+        public static void CercleCommand(LoLClient client,float value)
         {
-            client.Hero.AIStats.CriticalHit.FlatBonus += 0.10f;
+            client.Hero.AIStats.CriticalHit.FlatBonus += value;
             client.Hero.UpdateStats();
 
         }
@@ -32,24 +32,6 @@ namespace Legends.World.Commands
         public static void Cercle2Command(LoLClient client)
         {
             var distance = (float)client.Hero.Record.AttackRange;
-
-            List<Vector2> results = new List<Vector2>();
-
-            float start = 0;
-
-            float end = (float)(2 * Math.PI);
-
-            for (float i = start; i < end; i += 0.5f)
-            {
-                var v = Geo.GetPointOnCircle(client.Hero.Position, i, distance);
-                client.Hero.AttentionPing(v, client.Hero.NetId, PingTypeEnum.Ping_OnMyWay);
-            }
-
-        }
-        [Command("chasingrange")] // chasing range
-        public static void Cercle3Command(LoLClient client)
-        {
-            var distance = (float)client.Hero.Record.AttackRange + (client.Hero.Record.AttackRange * (float)client.Hero.Record.ChasingAttackRangePercent);
 
             List<Vector2> results = new List<Vector2>();
 

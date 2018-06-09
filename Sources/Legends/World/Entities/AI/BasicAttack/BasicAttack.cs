@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.World.Entities.AI.Autoattack
+namespace Legends.World.Entities.AI.BasicAttack
 {
     public abstract class BasicAttack : IUpdatable
     {

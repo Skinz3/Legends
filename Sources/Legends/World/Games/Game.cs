@@ -31,10 +31,10 @@ namespace Legends.World.Games
         private Logger logger = new Logger();
 
         /// <summary>
-        /// Theorically 60fps
-        /// Aprox equal to 16.666
+        /// Theorically 30fps
+        /// Aprox equal to (16.666 * 2)
         /// </summary>
-        public const double REFRESH_RATE = (1000d / 60d);
+        public const double REFRESH_RATE = (1000d / 30d);
 
         public NetIdProvider NetIdProvider
         {
@@ -212,8 +212,6 @@ namespace Legends.World.Games
             }
 
 
-
-
             foreach (var turret in Map.Units.OfType<AITurret>())
             {
                 Send(new TurretSpawnMessage(0, turret.NetId, turret.GetClientName()));
@@ -255,10 +253,17 @@ namespace Legends.World.Games
         private void Timer_Elapsed()
         {
             long deltaTime = Stopwatch.ElapsedMilliseconds;
-            GameTime += deltaTime;
-            NextSyncTime += deltaTime;
-            Update(deltaTime);
-            Stopwatch = Stopwatch.StartNew();
+
+            if (deltaTime > 0)
+            {
+                GameTime += deltaTime;
+                NextSyncTime += deltaTime;
+
+                Console.Title = "Legends (FPS :" + 1000 / deltaTime + ")";
+
+                Update(deltaTime);
+                Stopwatch = Stopwatch.StartNew();
+            }
         }
         private void Update(long deltaTime)
         {

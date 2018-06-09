@@ -2,7 +2,7 @@
 using Legends.Core.Protocol;
 using Legends.Core.Protocol.Game;
 using Legends.Records;
-using Legends.World.Entities.AI.Autoattack;
+using Legends.World.Entities.AI.BasicAttack;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
@@ -43,7 +43,7 @@ namespace Legends.World.Entities.AI
         {
             get
             {
-                return AIStats.AttackRange.Total; // + 150?
+                return AIStats.AttackRange.Total;
             }
         }
         public override bool IsMoving => PathManager.IsMoving;
@@ -62,6 +62,7 @@ namespace Legends.World.Entities.AI
         }
         public AIUnit()
         {
+
         }
 
         public override void Initialize()
@@ -86,18 +87,19 @@ namespace Legends.World.Entities.AI
         }
         public void Move(List<Vector2> waypoints, bool unsetTarget = true)
         {
-            if (unsetTarget)
-                AttackManager.StopAttackTarget();
+            if (AIStats.MoveSpeed.Total > 0)
+            {
+                if (unsetTarget)
+                    AttackManager.StopAttackTarget();
 
-            PathManager.Move(waypoints);
-            OnMove();
-
+                PathManager.Move(waypoints);
+                OnMove();
+            }
 
         }
-        private void OnMove()
+        public virtual void OnMove()
         {
             SendVision(new MovementAnswerMessage(0, PathManager.GetWaypoints(), NetId, Game.Map.Size), Channel.CHL_LOW_PRIORITY);
-
         }
         public void MoveTo(Vector2 targetVector, bool unsetTarget = true)
         {
@@ -109,25 +111,11 @@ namespace Legends.World.Entities.AI
         }
         public float GetAutoattackRange(AIUnit target)
         {
-            if (Record.IsMelee)
-            {
-                return AIStats.AttackRange.Total + (AIStats.AttackRange.Total * (float)Record.ChasingAttackRangePercent) + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
-            }
-            else
-            {
-                return AIStats.AttackRange.Total;
-            }
+            return AIStats.AttackRange.Total + (AIStats.AttackRange.Total * (float)Record.ChasingAttackRangePercent) + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
         }
         public float GetAutoattackRangeWhileChasing(AIUnit target)
         {
-            if (Record.IsMelee)
-            {
-                return AIStats.AttackRange.Total + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
-            }
-            else
-            {
-                return AIStats.AttackRange.Total -50f;
-            }
+            return AIStats.AttackRange.Total + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
         }
         /// <summary>
         /// Try to autoattack target, if the unit dont have range, it follows target
@@ -135,7 +123,7 @@ namespace Legends.World.Entities.AI
         /// <param name="targetUnit"></param>
         public void TryAutoattack(AIUnit targetUnit)
         {
-            if (targetUnit.Alive == false)
+            if (!targetUnit.Alive)
             {
                 return;
             }
@@ -149,9 +137,12 @@ namespace Legends.World.Entities.AI
             }
             else
             {
-                Action onTargetReach = new Action(() => { TryAutoattack(targetUnit); }); // recursive call 
-                PathManager.MoveToTarget(targetUnit, onTargetReach, GetAutoattackRangeWhileChasing(targetUnit));
-                OnMove();
+                if (AIStats.MoveSpeed.Total > 0)
+                {
+                    Action onTargetReach = new Action(() => { TryAutoattack(targetUnit); }); // recursive call 
+                    PathManager.MoveToTarget(targetUnit, onTargetReach, GetAutoattackRangeWhileChasing(targetUnit));
+                    OnMove();
+                }
             }
 
         }

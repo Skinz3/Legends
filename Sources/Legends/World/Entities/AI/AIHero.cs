@@ -30,8 +30,6 @@ namespace Legends.World.Entities.AI
         public const float DEFAULT_START_GOLD = 475;
         public const float DEFAULT_COOLDOWN_REDUCTION = 0f;
 
-       
-
         public LoLClient Client
         {
             get;
@@ -162,11 +160,15 @@ namespace Legends.World.Entities.AI
         }
         public override void Update(long deltaTime)
         {
+          
             base.Update(deltaTime);
             DeathTimer.Update(deltaTime);
         }
 
-
+        public override void OnMove()
+        {
+            base.OnMove();
+        }
         public override void OnUnitEnterVision(Unit unit)
         {
 

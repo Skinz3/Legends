@@ -68,7 +68,7 @@ namespace Legends.World.Entities.Movements
             set;
         }
         public bool IsMoving => NextPosition != null && NextPosition != Unit.Position;
-
+        private bool End = false;
         public PathManager(AIUnit unit)
         {
             this.Unit = unit;
@@ -76,6 +76,7 @@ namespace Legends.World.Entities.Movements
             this.OnTargetReachAction = null;
             this.DistanceToTarget = 0f;
             this.TargetUnit = null;
+            End = false;
         }
         public void Move(List<Vector2> waypoints)
         {
@@ -84,6 +85,7 @@ namespace Legends.World.Entities.Movements
             this.TargetUnit = null;
             this.OnTargetReachAction = null;
             this.DistanceToTarget = 0f;
+            End = false;
         }
         /// <summary>
         /// Only use for auto attack
@@ -102,6 +104,7 @@ namespace Legends.World.Entities.Movements
                 targetPosition = Geo.GetPointOnCircle(target.Position, target.GetAngleBetween(Unit), distanceToTarget);
 
             Waypoints = new List<Vector2>() { Unit.Position, targetPosition };
+            End = false;
 
         }
         public Vector2[] GetWaypoints()
@@ -118,12 +121,12 @@ namespace Legends.World.Entities.Movements
         /// <param name="deltaTime"></param>
         private void InterpolateMovement(long deltaTime)
         {
-            if (IsMoving)
+            if (IsMoving && !End)
             {
                 float deltaMovement = Unit.AIStats.MoveSpeed.Total * 0.001f * deltaTime; // deltaTime
 
-                float xOffset = Direction.X * deltaMovement * 1.08f;
-                float yOffset = Direction.Y * deltaMovement * 1.08f;
+                float xOffset = Direction.X * deltaMovement * 1.06f;
+                float yOffset = Direction.Y * deltaMovement * 1.06f;
 
                 Unit.Position = new Vector2(Unit.Position.X + xOffset, Unit.Position.Y + yOffset);
               
@@ -132,6 +135,7 @@ namespace Legends.World.Entities.Movements
                     if (TargetUnit.GetDistanceTo(Unit) <= DistanceToTarget)
                     {
                         OnTargetReachAction();
+                        End = true;
                         return;
 
                     }
@@ -148,6 +152,7 @@ namespace Legends.World.Entities.Movements
                         if (TargetUnit != null)
                         {
                             OnTargetReachAction();
+                            End = true;
                         }
 
 

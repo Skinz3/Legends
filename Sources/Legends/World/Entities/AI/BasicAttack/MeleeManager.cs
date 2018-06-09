@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.World.Entities.AI.Autoattack
+namespace Legends.World.Entities.AI.BasicAttack
 {
     public class MeleeManager : AttackManager
     {
@@ -27,6 +27,10 @@ namespace Legends.World.Entities.AI.Autoattack
             }
             else if (IsAttacking == true && CurrentAutoattack.Cancelled && CurrentAutoattack.Hit)
             {
+                /* var test = new Action<MeleeBasicAttack>((MeleeBasicAttack atk) =>
+                 {
+
+                 });   */
                 CurrentAutoattack.RequiredNew = true;
             }
         }
