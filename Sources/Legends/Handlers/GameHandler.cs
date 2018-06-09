@@ -94,6 +94,11 @@ namespace Legends.Handlers
         {
 
         }
+        [MessageHandler(PacketCmd.PKT_C2S_AutoAttackOption)]
+        public static void HandleAutoAttackOptionMessage(AutoAttackOptionMessage message,LoLClient client)
+        {
+            client.Hero.SetAutoattackOption(message.Activated);
+        }
         [MessageHandler(PacketCmd.PKT_C2S_MoveReq)]
         public static void HandleMovementRequestMessage(MovementRequestMessage message, LoLClient client)
         {
@@ -121,7 +126,7 @@ namespace Legends.Handlers
                         return;
                     }
 
-                    client.Hero.TryAutoattack(target);
+                    client.Hero.TryBasicAttack(target);
 
 
                     break;

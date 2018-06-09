@@ -83,13 +83,15 @@ namespace Legends.World.Entities.AI
 
         public override float PerceptionBubbleRadius => ((HeroStats)Stats).PerceptionBubbleRadius.Total;
 
-        public override bool IsAttackAutomatic => false;
+        public override bool DefaultAutoattackActivated => false;
 
         private DeathTimer DeathTimer
         {
             get;
             set;
         }
+
+
         public AIHero(LoLClient client, PlayerData data)
         {
             Client = client;
@@ -108,6 +110,7 @@ namespace Legends.World.Entities.AI
             Score = new Score();
             base.Initialize();
         }
+        
         [InDeveloppement(InDeveloppementState.TODO, "Skill points")]
         public void AddExperience(float value)
         {
@@ -201,7 +204,10 @@ namespace Legends.World.Entities.AI
                 }
             }
         }
-    
+        public void SetAutoattackOption(bool automatic)
+        {
+            AttackManager.SetAutoattackActivated(automatic);
+        }
         [InDeveloppement(InDeveloppementState.STARTED)]
         public void OnDisconnect()
         {

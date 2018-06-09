@@ -72,7 +72,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             get;
             private set;
         }
-        public bool RequiredNew
+        public Func<BasicAttack, bool> OnBasicAttackEnded
         {
             get;
             set;
@@ -118,16 +118,15 @@ namespace Legends.World.Entities.AI.BasicAttack
 
             if (DeltaAnimationTime <= 0)
             {
-                if (Cancelled && Hit)
+
+                if (OnBasicAttackEnded != null)
                 {
-                    if (RequiredNew)
+                    if (OnBasicAttackEnded(this))
                     {
-                        Unit.AttackManager.StopAttackTarget();
-                        Unit.AttackManager.DestroyAutoattack();
-                        Unit.TryAutoattack(Target);
                         return;
                     }
                 }
+
                 if (Cancelled == false)
                 {
                     if (Target.Alive)
@@ -140,7 +139,7 @@ namespace Legends.World.Entities.AI.BasicAttack
                         {
                             Unit.AttackManager.StopAttackTarget();
                             Unit.AttackManager.DestroyAutoattack();
-                            Unit.TryAutoattack(Target);
+                            Unit.TryBasicAttack(Target);
                         }
                     }
                     else

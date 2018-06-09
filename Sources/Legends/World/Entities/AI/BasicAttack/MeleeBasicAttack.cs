@@ -40,7 +40,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             {
                 Unit.AttackManager.StopAttackTarget();
                 Unit.AttackManager.DestroyAutoattack();
-                Unit.TryAutoattack(Target);
+                Unit.TryBasicAttack(Target);
                 return;
             }
 

@@ -151,8 +151,8 @@ namespace Legends.World.Entities.Movements
                     {
                         if (TargetUnit != null)
                         {
-                            OnTargetReachAction();
                             End = true;
+                            OnTargetReachAction();
                         }
 
 

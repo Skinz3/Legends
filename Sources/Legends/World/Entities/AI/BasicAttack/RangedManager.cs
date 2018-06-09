@@ -8,7 +8,7 @@ namespace Legends.World.Entities.AI.BasicAttack
 {
     public class RangedManager : AttackManager
     {
-        public RangedManager(AIUnit unit, bool auto) : base(unit, auto)
+        public RangedManager(AIUnit unit) : base(unit)
         {
         }
 

@@ -33,11 +33,14 @@ namespace Legends.World.Entities.AI.BasicAttack
             get;
             private set;
         }
-        public AttackManager(AIUnit unit, bool auto)
+        public AttackManager(AIUnit unit)
         {
             this.Unit = unit;
-            this.Auto = auto;
             this.UnitsInRange = new List<Unit>();
+        }
+        public void SetAutoattackActivated(bool activated)
+        {
+            this.Auto = Auto;
         }
         #region UnitsInRange
         private List<Unit> UnitsInRange
@@ -63,14 +66,13 @@ namespace Legends.World.Entities.AI.BasicAttack
 
         #endregion
 
-
         public void Update(long deltaTime)
         {
-            if (Auto)
+            if (Auto && Unit.IsMoving == false && !IsAttacking)
             {
-                var a = GetUnitsInAttackRange();
-                if (a.Count > 0)
-                    BeginAttackTarget(a.Last().Key);
+                var unitsInRange = GetUnitsInAttackRange();
+                if (unitsInRange.Count > 0)
+                    BeginAttackTarget(unitsInRange.Last().Key); // the closest one is last
             }
             if (Unit.Alive == false)
             {
@@ -101,14 +103,10 @@ namespace Legends.World.Entities.AI.BasicAttack
         {
             if (IsAttacking)
             {
-                CurrentAutoattack.RequiredNew = false;
                 CurrentAutoattack.Cancel();
                 Unit.OnTargetUnset(CurrentAutoattack.Target);
 
-                if (!CurrentAutoattack.Hit)
-                {
-                    DestroyAutoattack();
-                }
+
 
             }
         }

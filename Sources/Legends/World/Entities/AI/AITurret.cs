@@ -23,7 +23,7 @@ namespace Legends.World.Entities.AI
 
         public override float PerceptionBubbleRadius => ((TurretStats)Stats).PerceptionBubbleRadius.Total;
 
-        
+        public override bool DefaultAutoattackActivated => true;
 
         private MapObjectRecord MapObjectRecord
         {
@@ -35,8 +35,6 @@ namespace Legends.World.Entities.AI
             get;
             set;
         }
-
-        public override bool IsAttackAutomatic => true;
 
         public AITurret(int netId, AIUnitRecord record, MapObjectRecord mapObject, string suffix)
         {

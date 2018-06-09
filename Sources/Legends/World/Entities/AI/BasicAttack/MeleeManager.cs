@@ -11,7 +11,7 @@ namespace Legends.World.Entities.AI.BasicAttack
 {
     public class MeleeManager : AttackManager
     {
-        public MeleeManager(AIUnit unit, bool auto) : base(unit, auto)
+        public MeleeManager(AIUnit unit) : base(unit)
         {
 
 
@@ -19,19 +19,43 @@ namespace Legends.World.Entities.AI.BasicAttack
 
         public override void BeginAttackTarget(AIUnit target)
         {
-            if (IsAttacking == false)
+            if (IsAttacking && target != CurrentAutoattack.Target) // Si la cible que l'on attaque est differente de target
+            {
+                StopAttackTarget(); // alors on cancel l'anim quoi qu'il arrive
+
+                if (CurrentAutoattack.Hit) // Si l'attaque précédante a touchée
+                {
+                    CurrentAutoattack.OnBasicAttackEnded = new Func<BasicAttack, bool>((BasicAttack attack) => // a la fin du delai l'attaque, on changera de cible (pas de cancel d'anim sur l'anim de l'auto).
+                    {
+                        DestroyAutoattack();
+                        Unit.TryBasicAttack(target);
+                        return true;
+                    });
+                }
+                else // Sinon on peut directment passer a la nouvelle auto
+                {
+                    DestroyAutoattack();
+                    Unit.TryBasicAttack(target);
+                }
+            }
+            if (IsAttacking == false) // osef, facile
             {
                 CurrentAutoattack = new MeleeBasicAttack(Unit, target, Unit.AIStats.CriticalStrike());
                 CurrentAutoattack.Notify();
                 Unit.OnTargetSet(target);
             }
-            else if (IsAttacking == true && CurrentAutoattack.Cancelled && CurrentAutoattack.Hit)
-            {
-                /* var test = new Action<MeleeBasicAttack>((MeleeBasicAttack atk) =>
+            else if (IsAttacking == true && CurrentAutoattack.Hit && target == CurrentAutoattack.Target)
+            { // Si l'on attaquait la cible, que l'ancienne auto a été cancel mais qu'elle a touchée, et que la cible n'a pas changée
+                CurrentAutoattack.OnBasicAttackEnded = new Func<BasicAttack, bool>((BasicAttack attack) =>
                  {
+                     // Unit.AttackManager.StopAttackTarget();
+                     Unit.AttackManager.DestroyAutoattack();
+                     Unit.TryBasicAttack(target);
 
-                 });   */
-                CurrentAutoattack.RequiredNew = true;
+                     return true;
+
+                 });
+
             }
         }
 
