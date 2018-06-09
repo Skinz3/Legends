@@ -19,11 +19,7 @@ namespace Legends.World.Entities
 {
     public abstract class AttackableUnit : Unit
     {
-        public bool Alive
-        {
-            get;
-            protected set;
-        }
+       
         public Stats Stats
         {
             get;
@@ -33,7 +29,7 @@ namespace Legends.World.Entities
 
         public AttackableUnit()
         {
-            Alive = true;
+             
         }
 
         public override void Initialize()

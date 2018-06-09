@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Legends.Core.Utils
+namespace Legends.Core.Time
 {
     public sealed class AsyncRandom : Random
     {

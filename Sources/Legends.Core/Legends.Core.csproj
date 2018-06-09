@@ -164,7 +164,7 @@
     <Compile Include="Protocol\Types\ReplicateStat.cs" />
     <Compile Include="Time\ActionTimer.cs" />
     <Compile Include="Time\HighResolutionTimer.cs" />
-    <Compile Include="Utils\AsyncRandom.cs" />
+    <Compile Include="Time\AsyncRandom.cs" />
     <Compile Include="IO\Inibin\InibinHashEnum.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="DesignPattern\Singleton.cs" />

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Entities.AI.Autoattack
 {
-    public class MeleeAutoattack : Autoattack
+    public class MeleeBasicAttack : BasicAttack
     {
         /// <summary>
         /// This constant represent the time frame where to auto hit.
@@ -26,12 +26,24 @@ namespace Legends.World.Entities.AI.Autoattack
             get;
             set;
         }
-        public MeleeAutoattack(AIUnit unit, AIUnit target, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1) : base(unit, target, first, slot)
+        public MeleeBasicAttack(AIUnit unit, AIUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1) : base(unit, target, critical, first, slot)
         {
             HitTimeCurrent = HitTime;
         }
+        private float GetAutocancelDistance()
+        {
+            return (float)Unit.GetAutoattackRange(Target) + 120f;
+        }
         public override void Update(long deltaTime)
         {
+            if (Hit && Unit.GetDistanceTo(Target) > GetAutocancelDistance() && !Cancelled)
+            {
+                Unit.AttackManager.StopAttackTarget();
+                Unit.AttackManager.DestroyAutoattack();
+                Unit.TryAutoattack(Target);
+                return;
+            }
+
             base.Update(deltaTime);
 
             if (Cancelled == false && !Hit)

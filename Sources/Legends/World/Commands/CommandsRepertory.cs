@@ -1,9 +1,10 @@
 ﻿using Legends.Core.DesignPattern;
+using Legends.Core.Geometry;
 using Legends.Core.Protocol.Enum;
 using Legends.Core.Protocol.Messages.Game;
 using Legends.Network;
 using Legends.World.Entities.AI;
-using Legends.World.Entities.AI.Autoattack;
+using Legends.World.Entities.AI.BasicAttack;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
@@ -11,6 +12,7 @@ using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,6 +21,49 @@ namespace Legends.World.Commands
 {
     class CommandsRepertory
     {
+        [Command("addcrit")]
+        public static void CercleCommand(LoLClient client)
+        {
+            client.Hero.AIStats.CriticalHit.FlatBonus += 0.10f;
+            client.Hero.UpdateStats();
+
+        }
+        [Command("baserange")]
+        public static void Cercle2Command(LoLClient client)
+        {
+            var distance = (float)client.Hero.Record.AttackRange;
+
+            List<Vector2> results = new List<Vector2>();
+
+            float start = 0;
+
+            float end = (float)(2 * Math.PI);
+
+            for (float i = start; i < end; i += 0.5f)
+            {
+                var v = Geo.GetPointOnCircle(client.Hero.Position, i, distance);
+                client.Hero.AttentionPing(v, client.Hero.NetId, PingTypeEnum.Ping_OnMyWay);
+            }
+
+        }
+        [Command("chasingrange")] // chasing range
+        public static void Cercle3Command(LoLClient client)
+        {
+            var distance = (float)client.Hero.Record.AttackRange + (client.Hero.Record.AttackRange * (float)client.Hero.Record.ChasingAttackRangePercent);
+
+            List<Vector2> results = new List<Vector2>();
+
+            float start = 0;
+
+            float end = (float)(2 * Math.PI);
+
+            for (float i = start; i < end; i += 0.5f)
+            {
+                var v = Geo.GetPointOnCircle(client.Hero.Position, i, distance);
+                client.Hero.AttentionPing(v, client.Hero.NetId, PingTypeEnum.Ping_OnMyWay);
+            }
+
+        }
         [Command("position")]
         public static void PositionCommand(LoLClient client)
         {
@@ -58,7 +103,7 @@ namespace Legends.World.Commands
             client.Hero.UpdateModel(client.Hero.Model, false, skinId);
         }
         [Command("exp")]
-        public static void AddExperienceCommand(LoLClient client,float exp)
+        public static void AddExperienceCommand(LoLClient client, float exp)
         {
             client.Hero.AddExperience(exp);
         }
@@ -68,7 +113,7 @@ namespace Legends.World.Commands
             client.Hero.AIStats.Health.Current = client.Hero.AIStats.Health.Total;
             client.Hero.UpdateStats();
         }
-       
+
         [Command("vision")]
         public static void VisionCommand(LoLClient client)
         {

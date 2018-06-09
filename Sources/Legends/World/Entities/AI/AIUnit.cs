@@ -43,7 +43,7 @@ namespace Legends.World.Entities.AI
         {
             get
             {
-                return AIStats.AttackRange.Total + 150; // + 150?
+                return AIStats.AttackRange.Total; // + 150?
             }
         }
         public override bool IsMoving => PathManager.IsMoving;
@@ -107,23 +107,27 @@ namespace Legends.World.Entities.AI
         {
             Move(new List<Vector2>() { Position }, unsetTarget);
         }
-        public bool InRangeToAutoAttack(AIUnit target)
+        public float GetAutoattackRange(AIUnit target)
         {
-            return this.GetDistanceTo(target) <= GetDistanceToAutoAttack(target);
+            if (Record.IsMelee)
+            {
+                return AIStats.AttackRange.Total + (AIStats.AttackRange.Total * (float)Record.ChasingAttackRangePercent) + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
+            }
+            else
+            {
+                return AIStats.AttackRange.Total;
+            }
         }
-        public bool InChasingRange(AIUnit target)
+        public float GetAutoattackRangeWhileChasing(AIUnit target)
         {
-            return this.GetDistanceTo(target) <= GetChasingRange(target);
-        }
-        private float GetChasingRange(AIUnit target)
-        {
-            return (AIStats.AttackRange.Total + (AIStats.AttackRange.Total * (float)Record.ChasingAttackRangePercent)) +
-            ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
-        }
-        public float GetDistanceToAutoAttack(AIUnit target)
-        {
-            return AIStats.AttackRange.Total +
-               ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
+            if (Record.IsMelee)
+            {
+                return AIStats.AttackRange.Total + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.Total);
+            }
+            else
+            {
+                return AIStats.AttackRange.Total -50f;
+            }
         }
         /// <summary>
         /// Try to autoattack target, if the unit dont have range, it follows target
@@ -135,7 +139,7 @@ namespace Legends.World.Entities.AI
             {
                 return;
             }
-            if (InChasingRange(targetUnit))
+            if (this.GetDistanceTo(targetUnit) <= GetAutoattackRange(targetUnit))
             {
                 if (IsMoving)
                 {
@@ -146,12 +150,10 @@ namespace Legends.World.Entities.AI
             else
             {
                 Action onTargetReach = new Action(() => { TryAutoattack(targetUnit); }); // recursive call 
-                PathManager.MoveToTarget(targetUnit, onTargetReach, GetDistanceToAutoAttack(targetUnit));
+                PathManager.MoveToTarget(targetUnit, onTargetReach, GetAutoattackRangeWhileChasing(targetUnit));
                 OnMove();
             }
 
         }
-
-
     }
 }

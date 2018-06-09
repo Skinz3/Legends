@@ -4,6 +4,7 @@ using Legends.World.Entities.AI;
 using Legends.World.Entities.Statistics.Replication;
 using System;
 using System.Collections.Generic;
+using Legends.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -162,7 +163,10 @@ namespace Legends.World.Entities.Statistics
             this.Gold = AIHero.DEFAULT_START_GOLD;
             this.GoldTotal = this.Gold;
         }
-
+        public bool CriticalStrike()
+        {
+            return Extensions.RandomAssertion(CriticalHit.Total);
+        }
         public void AddGold(float value)
         {
             Gold += value;

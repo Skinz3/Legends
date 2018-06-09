@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Entities.AI.Autoattack
 {
-    public abstract class Autoattack : IUpdatable
+    public abstract class BasicAttack : IUpdatable
     {
         /// <summary>
         /// L'autoattaque a t-elle appliquée les dégats?
@@ -72,10 +72,21 @@ namespace Legends.World.Entities.AI.Autoattack
             get;
             private set;
         }
-        public Autoattack(AIUnit unit, AIUnit target, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1)
+        public bool RequiredNew
+        {
+            get;
+            set;
+        }
+        public bool Critical
+        {
+            get;
+            private set;
+        }
+        public BasicAttack(AIUnit unit, AIUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1)
         {
             this.Unit = unit;
             this.Target = target;
+            this.Critical = critical;
             this.DeltaAnimationTime = AnimationTime;
             this.First = first;
             this.Slot = slot;
@@ -87,10 +98,9 @@ namespace Legends.World.Entities.AI.Autoattack
         }
         public void Notify()
         {
-            (Unit as AIHero).DebugMessage(Slot.ToString());
             if (First)
             {
-                Unit.Game.Send(new BeginAutoAttackMessage(Unit.NetId, Target.NetId, 0x80, 0, false, Target.Position, Unit.Position, Unit.Game.Map.Record.MiddleOfMap));
+                Unit.Game.Send(new BeginAutoAttackMessage(Unit.NetId, Target.NetId, 0x80, 0, Critical, Target.Position, Unit.Position, Unit.Game.Map.Record.MiddleOfMap));
             }
             else
             {
@@ -99,7 +109,7 @@ namespace Legends.World.Entities.AI.Autoattack
         }
         public void InflictDamages()
         {
-            Target.InflictDamages(new Damages(Unit, Target, Unit.AIStats.AttackDamage.Total, DamageType.DAMAGE_TYPE_PHYSICAL));
+            Target.InflictDamages(new Damages(Unit, Target, Unit.AIStats.AttackDamage.Total, Critical, DamageType.DAMAGE_TYPE_PHYSICAL));
             Hit = true;
         }
         public virtual void Update(long deltaTime)
@@ -108,11 +118,21 @@ namespace Legends.World.Entities.AI.Autoattack
 
             if (DeltaAnimationTime <= 0)
             {
+                if (Cancelled && Hit)
+                {
+                    if (RequiredNew)
+                    {
+                        Unit.AttackManager.StopAttackTarget();
+                        Unit.AttackManager.DestroyAutoattack();
+                        Unit.TryAutoattack(Target);
+                        return;
+                    }
+                }
                 if (Cancelled == false)
                 {
                     if (Target.Alive)
                     {
-                        if (Unit.InChasingRange(Target))
+                        if (Unit.GetDistanceTo(Target) <= Unit.GetAutoattackRange(Target))
                         {
                             Unit.AttackManager.NextAutoattack();
                         }
@@ -120,7 +140,6 @@ namespace Legends.World.Entities.AI.Autoattack
                         {
                             Unit.AttackManager.StopAttackTarget();
                             Unit.AttackManager.DestroyAutoattack();
-
                             Unit.TryAutoattack(Target);
                         }
                     }

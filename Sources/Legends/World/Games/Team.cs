@@ -29,11 +29,11 @@ namespace Legends.World.Games
             get;
             set;
         }
-        public AttackableUnit[] AliveUnits
+        public Unit[] AliveUnits
         {
             get
             {
-                return Array.FindAll(Units.Values.OfType<AttackableUnit>().ToArray(), x => x.Alive);
+                return Array.FindAll(Units.Values.OfType<Unit>().ToArray(), x => x.Alive);
             }
         }
         public int Size

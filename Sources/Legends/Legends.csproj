@@ -79,11 +79,12 @@
     <Compile Include="Scripts\Maps\MapScript.cs" />
     <Compile Include="Scripts\Maps\MapScriptsManager.cs" />
     <Compile Include="World\Entities\AI\AITurret.cs" />
-    <Compile Include="World\Entities\AI\Autoattack\AttackManager.cs" />
-    <Compile Include="World\Entities\AI\Autoattack\Autoattack.cs" />
-    <Compile Include="World\Entities\AI\Autoattack\MeleeAutoattack.cs" />
+    <Compile Include="World\Entities\AI\BasicAttack\AttackManager.cs" />
+    <Compile Include="World\Entities\AI\BasicAttack\BasicAttack.cs" />
+    <Compile Include="World\Entities\AI\BasicAttack\MeleeBasicAttack.cs" />
+    <Compile Include="World\Entities\AI\BasicAttack\RangedBasicAttack.cs" />
     <Compile Include="World\Entities\AI\DeathTimer.cs" />
-    <Compile Include="World\Entities\AI\Autoattack\RangedManager.cs" />
+    <Compile Include="World\Entities\AI\BasicAttack\RangedManager.cs" />
     <Compile Include="World\Entities\AI\Score.cs" />
     <Compile Include="World\Entities\Buildings\AnimatedBuilding.cs" />
     <Compile Include="World\Buildings\BuildingProvider.cs" />
@@ -99,7 +100,7 @@
     <Compile Include="World\Commands\CommandsRepertory.cs" />
     <Compile Include="World\Entities\Buildings\Building.cs" />
     <Compile Include="World\Entities\AI\AIMinion.cs" />
-    <Compile Include="World\Entities\AI\Autoattack\MeleeManager.cs" />
+    <Compile Include="World\Entities\AI\BasicAttack\MeleeManager.cs" />
     <Compile Include="World\Entities\Movements\PathManager.cs" />
     <Compile Include="World\Entities\Statistics\AIStats.cs" />
     <Compile Include="World\Entities\AttackableUnit.cs" />
@@ -126,6 +127,9 @@
     <Compile Include="World\Games\Team.cs" />
     <Compile Include="World\IUpdatable.cs" />
     <Compile Include="World\Spells\Damages.cs" />
+    <Compile Include="World\Spells\Projectiles\FreeProjectile.cs" />
+    <Compile Include="World\Spells\Projectiles\Projectile.cs" />
+    <Compile Include="World\Spells\Projectiles\TargetedProjectile.cs" />
     <Compile Include="World\Spells\Spell.cs" />
   </ItemGroup>
   <ItemGroup>

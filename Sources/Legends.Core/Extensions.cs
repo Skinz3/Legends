@@ -1,4 +1,5 @@
 ﻿using Legends.Core.IO;
+using Legends.Core.Time;
 using Legends.Core.Utils;
 using System;
 using System.Collections.Generic;
@@ -145,6 +146,18 @@ namespace Legends.Core
         public static T XMLDeserialize<T>(this string content)
         {
             return (T)XMLDeserialize(content, typeof(T));
+        }
+        public static bool RandomAssertion(float percentage)
+        {
+            if (percentage <= 0)
+            {
+                return false;
+            }
+            if (percentage >= 1)
+            {
+                return true;
+            }
+            return new AsyncRandom().NextDouble(0, 1) <= percentage;
         }
     }
 }

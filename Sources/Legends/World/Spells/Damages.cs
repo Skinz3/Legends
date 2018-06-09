@@ -37,17 +37,24 @@ namespace Legends.World.Spells
             get;
             private set;
         }
-        public Damages(AIUnit source, AIUnit target, float delta, DamageType type)
+        public bool Critical
+        {
+            get;
+            private set;
+        }
+        public Damages(AIUnit source, AIUnit target, float delta, bool critical, DamageType type)
         {
             this.Source = source;
             this.Target = target;
             this.Delta = delta;
             this.Type = type;
+            this.Critical = critical;
             this.Result = GenerateResult();
         }
         [InDeveloppement(InDeveloppementState.TODO, "Just todo ^.^")]
         private DamageResultEnum GenerateResult()
         {
+            
             if (Target.Stats.IsInvulnerable)
             {
                 return DamageResultEnum.DAMAGE_TEXT_INVULNERABLE;
@@ -64,7 +71,16 @@ namespace Legends.World.Spells
             {
                 return DamageResultEnum.DAMAGE_TEXT_INVULNERABLE;
             }
-            return DamageResultEnum.DAMAGE_TEXT_NORMAL;
+
+
+            if (Critical)
+            {
+                return DamageResultEnum.DAMAGE_TEXT_CRITICAL;
+            }
+            else
+            {
+                return DamageResultEnum.DAMAGE_TEXT_NORMAL;
+            }
         }
         /// <summary>
         /// http://fr.leagueoflegends.wikia.com/wiki/Armure
@@ -72,6 +88,11 @@ namespace Legends.World.Spells
         /// </summary>
         public void Apply()
         {
+            if (Critical)
+            {
+                Delta *= 2;
+            }
+
             if (Type == DamageType.DAMAGE_TYPE_PHYSICAL)
             {
                 ApplyBasicReduction(Target.Stats.Armor.Total);

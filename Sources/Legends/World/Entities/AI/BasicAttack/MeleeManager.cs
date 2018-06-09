@@ -21,15 +21,20 @@ namespace Legends.World.Entities.AI.Autoattack
         {
             if (IsAttacking == false)
             {
-                CurrentAutoattack = new MeleeAutoattack(Unit, target);
+                CurrentAutoattack = new MeleeBasicAttack(Unit, target, Unit.AIStats.CriticalStrike());
                 CurrentAutoattack.Notify();
                 Unit.OnTargetSet(target);
+            }
+            else if (IsAttacking == true && CurrentAutoattack.Cancelled && CurrentAutoattack.Hit)
+            {
+                CurrentAutoattack.RequiredNew = true;
             }
         }
 
         public override void NextAutoattack()
         {
-            Unit.AttackManager.CurrentAutoattack = new MeleeAutoattack(Unit, CurrentAutoattack.Target, false, DetermineNextSlot());
+            bool critical = Unit.AIStats.CriticalStrike();
+            Unit.AttackManager.CurrentAutoattack = new MeleeBasicAttack(Unit, CurrentAutoattack.Target, critical, false, DetermineNextSlot(critical));
             CurrentAutoattack.Notify();
         }
     }

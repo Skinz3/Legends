@@ -16,7 +16,7 @@ namespace Legends.World.Entities.AI.Autoattack
             get;
             private set;
         }
-        public Autoattack CurrentAutoattack
+        public BasicAttack CurrentAutoattack
         {
             get;
             set;
@@ -28,43 +28,50 @@ namespace Legends.World.Entities.AI.Autoattack
                 return CurrentAutoattack != null;
             }
         }
+        public bool Auto
+        {
+            get;
+            private set;
+        }
         public AttackManager(AIUnit unit, bool auto)
         {
             this.Unit = unit;
-
-            // this.UnitsInRange = new List<Unit>();
+            this.Auto = auto;
+            this.UnitsInRange = new List<Unit>();
         }
         #region UnitsInRange
-        /*  private List<Unit> UnitsInRange
-          {
-              get;
-              set;
-          }
-
-          private Dictionary<AIUnit, float> GetUnitsInAttackRange()
-          {
-              Dictionary<AIUnit, float> results = new Dictionary<AIUnit, float>();
-
-              foreach (var unit in Unit.GetOposedTeam().AliveUnits)
-              {
-                  float distance = Unit.GetDistanceTo(unit);
-                  if (distance <= Unit.AttackRange) // <= vs <
-                  {
-                      results.Add((AIUnit)unit, distance);
-                  }
-              }
-              return results.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-          }
-          */
-        #endregion
-        public float GetRequiredDistanceToAttack(AIUnit targetUnit)
+        private List<Unit> UnitsInRange
         {
-            return Unit.AIStats.AttackRange.Total +
-               ((float)targetUnit.Record.SelectionRadius * targetUnit.AIStats.ModelSize.Total);
+            get;
+            set;
         }
+
+        private Dictionary<AIUnit, float> GetUnitsInAttackRange()
+        {
+            Dictionary<AIUnit, float> results = new Dictionary<AIUnit, float>();
+
+            foreach (var unit in Unit.GetOposedTeam().AliveUnits.OfType<AIUnit>())
+            {
+                float distance = Unit.GetDistanceTo(unit);
+                if (distance <= Unit.GetAutoattackRangeWhileChasing(unit)) // <= vs <
+                {
+                    results.Add((AIUnit)unit, distance);
+                }
+            }
+            return results.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        #endregion
+
 
         public void Update(long deltaTime)
         {
+            if (Auto)
+            {
+                var a = GetUnitsInAttackRange();
+                if (a.Count > 0)
+                    BeginAttackTarget(a.Last().Key);
+            }
             if (Unit.Alive == false)
             {
                 DestroyAutoattack();
@@ -74,11 +81,15 @@ namespace Legends.World.Entities.AI.Autoattack
                 CurrentAutoattack.Update(deltaTime);
             }
         }
-        protected AttackSlotEnum DetermineNextSlot()
+        protected AttackSlotEnum DetermineNextSlot(bool critical)
         {
+            if (critical)
+            {
+                return AttackSlotEnum.BASIC_ATTACK_CRITICAL;
+            }
             var slot = AttackSlotEnum.BASIC_ATTACK_1;
 
-            if (CurrentAutoattack != null && CurrentAutoattack.Slot == AttackSlotEnum.BASIC_ATTACK_1)
+            if (CurrentAutoattack != null && CurrentAutoattack.Slot == AttackSlotEnum.BASIC_ATTACK_1 && Unit.Record.IsMelee == true)
             {
                 slot = AttackSlotEnum.BASIC_ATTACK_2;
             }
@@ -90,8 +101,8 @@ namespace Legends.World.Entities.AI.Autoattack
         {
             if (IsAttacking)
             {
+                CurrentAutoattack.RequiredNew = false;
                 CurrentAutoattack.Cancel();
-
                 Unit.OnTargetUnset(CurrentAutoattack.Target);
 
                 if (!CurrentAutoattack.Hit)

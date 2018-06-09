@@ -53,9 +53,14 @@ namespace Legends.World.Entities
             get;
             protected set;
         }
+        public bool Alive
+        {
+            get;
+            protected set;
+        }
         public Unit()
         {
-
+            this.Alive = true;
         }
 
         public Vector2 Position

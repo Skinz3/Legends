@@ -35,9 +35,15 @@ namespace Legends
             logger.OnStartup();
             StartupManager.Instance.Initialize(Assembly.GetAssembly(typeof(AIUnitRecord)));
             logger.Write("Server started");
-            Process.Start("StartGame.bat");
-            Process.Start("StartGame2.bat");
-            // Process.Start("StartGame3.bat");
+
+
+            if (Debugger.IsAttached)
+            {
+                Process.Start("StartGame.bat");
+                Process.Start("StartGame2.bat");
+             //   Process.Start("StartGame3.bat");
+            }
+           
             LoLServer.NetLoop();
 
             Console.ReadKey();
@@ -56,7 +62,7 @@ namespace Legends
         [StartupInvoke("Protocol", StartupInvokePriority.Second)]
         public static void LoadProtocol()
         {
-            ProtocolManager.Initialize(Assembly.GetExecutingAssembly(), true);
+            ProtocolManager.Initialize(Assembly.GetExecutingAssembly(), false);
         }
     }
 }
