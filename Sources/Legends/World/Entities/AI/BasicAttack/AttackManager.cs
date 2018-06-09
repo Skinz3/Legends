@@ -40,7 +40,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         }
         public void SetAutoattackActivated(bool activated)
         {
-            this.Auto = Auto;
+            this.Auto = activated;
         }
         #region UnitsInRange
         private List<Unit> UnitsInRange

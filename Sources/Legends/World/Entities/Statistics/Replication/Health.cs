@@ -29,9 +29,9 @@ namespace Legends.World.Entities.Statistics.Replication
                     return;
                 }
 
-                var percentHp = Current / Total;
+                var percentHp = Current / TotalSafe;
                 _baseBonus = value;
-                Current = Total * percentHp;
+                Current = TotalSafe * percentHp;
             }
         }
 

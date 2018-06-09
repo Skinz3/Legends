@@ -18,7 +18,7 @@ namespace Legends.World.Entities.Statistics.Replication
         {
             get
             {
-                return Total / BaseValue;
+                return TotalSafe / BaseValue;
             }
         }
         public override float Total => BaseValue * PercentBaseBonus * BaseBonus;

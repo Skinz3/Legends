@@ -88,6 +88,7 @@
     <Compile Include="Protocol\Enum\StatSecondaryId.cs" />
     <Compile Include="Protocol\Enum\StatPrimaryId.cs" />
     <Compile Include="Protocol\Enum\UnitAnnounceEnum.cs" />
+    <Compile Include="Protocol\Messages\Game\AutoAttackOptionMessage.cs" />
     <Compile Include="Protocol\Messages\Game\BeginAutoAttackMessage.cs" />
     <Compile Include="Protocol\Messages\Game\ChampionDeathTimerMessage.cs" />
     <Compile Include="Protocol\Messages\Game\ChampionDieMessage.cs" />

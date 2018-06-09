@@ -39,28 +39,32 @@ namespace Legends.World.Entities.Statistics.Replication
         {
 
         }
-
+        public float TotalSafe
+        {
+            get
+            {
+                float total = Total;
+                if (total < MinLimit)
+                {
+                    return MinLimit;
+                }
+                return Math.Min(total, MaxLimit);
+            }
+        }
         public virtual float Total
         {
             get
             {
                 var flat = BaseBonus + FlatBonus;
                 var percent = PercentBaseBonus + PercentBonus;
-
-                var total = BaseValue + flat + (flat * percent);
-
-                if (total < MinLimit)
-                {
-                    return MinLimit;
-                }
-
-                return Math.Min(total, MaxLimit);
+                return BaseValue + flat + (flat * percent);
+                
             }
         }
 
         public static explicit operator float(Stat s)
         {
-            return s.Total;
+            return s.TotalSafe;
         }
         public void SetBaseValue(float baseValue)
         {

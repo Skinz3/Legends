@@ -31,7 +31,7 @@ namespace Legends.Core.Protocol.Other
         public override void Serialize(LittleEndianWriter writer)
         {
             writer.WriteInt(0);
-            foreach (var b in Encoding.Default.GetBytes(message))
+            foreach (var b in Encoding.UTF8.GetBytes(message))
                 writer.WriteByte(b);
             writer.Fill(0, 512 - message.Length);
         }
