@@ -5,6 +5,7 @@ using Legends.Core.Protocol;
 using Legends.Core.Time;
 using Legends.Core.Utils;
 using Legends.Network;
+using Legends.Protocol.GameClient.LoadingScreen;
 using Legends.Records;
 using Legends.World.Champions;
 using Legends.World.Commands;
@@ -40,7 +41,7 @@ namespace Legends
             if (Debugger.IsAttached)
             {
                 Process.Start("StartGame.bat");
-                Process.Start("StartGame2.bat");
+                //  Process.Start("StartGame2.bat");
                 //   Process.Start("StartGame3.bat");
             }
 
@@ -57,12 +58,12 @@ namespace Legends
         [StartupInvoke("CSharp Scripts", StartupInvokePriority.Third)]
         public static void LoadScripts()
         {
-            InjectionManager.Instance.Initialize(new Assembly[] { Assembly.GetAssembly(typeof(AIUnitRecord)), Assembly.GetAssembly(typeof(Script)) });
+            InjectionManager.Instance.Initialize(new Assembly[] { Assembly.GetAssembly(typeof(AIUnitRecord)), Assembly.GetAssembly(typeof(Script)), Assembly.GetAssembly(typeof(KeyCheckMessage)) });
         }
         [StartupInvoke("Protocol", StartupInvokePriority.Second)]
         public static void LoadProtocol()
         {
-            ProtocolManager.Initialize(Assembly.GetExecutingAssembly(), false);
+            ProtocolManager.Initialize(Assembly.GetAssembly(typeof(KeyCheckMessage)), Assembly.GetExecutingAssembly(), false);
         }
     }
 }

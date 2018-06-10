@@ -1,7 +1,7 @@
 ﻿using Legends.Core.DesignPattern;
 using Legends.Core.Geometry;
-using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Messages.Game;
+using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Network;
 using Legends.World.Entities.AI;
 using Legends.World.Entities.AI.BasicAttack;
@@ -22,16 +22,16 @@ namespace Legends.World.Commands
     class CommandsRepertory
     {
         [Command("addcrit")]
-        public static void CercleCommand(LoLClient client,float value)
+        public static void CercleCommand(LoLClient client, float value)
         {
-            client.Hero.AIStats.CriticalHit.FlatBonus += value;
+            client.Hero.Stats.CriticalHit.FlatBonus += value;
             client.Hero.UpdateStats();
 
         }
-        [Command("baserange")]
+        [Command("range")]
         public static void Cercle2Command(LoLClient client)
         {
-            var distance = (float)client.Hero.Record.AttackRange;
+            var distance = (float)client.Hero.Record.AttackRange + (float)client.Hero.Record.PathfindingCollisionRadius;
 
             List<Vector2> results = new List<Vector2>();
 
@@ -52,25 +52,36 @@ namespace Legends.World.Commands
             client.Hero.DebugMessage(client.Hero.Position.ToString());
             client.Hero.AttentionPing(client.Hero.Position, client.Hero.NetId, PingTypeEnum.Ping_OnMyWay);
         }
-        [Command("test")]
-        public static void TestCommand(LoLClient client)
+        [Command("addlife")]
+        public static void AddLifeCommand(LoLClient client, float value)
         {
-            client.Hero.PlayerStats.AttackDamage.FlatBonus += 50f;
-            client.Hero.PlayerStats.AttackSpeed.BaseBonus += 0.3f;
-            client.Hero.Stats.Health.BaseBonus += 500;
+            client.Hero.Stats.Health.BaseBonus += value;
             client.Hero.UpdateStats();
+        }
+        [Command("adddamage")]
+        public static void AddDamageCommand(LoLClient client, float value)
+        {
+            client.Hero.Stats.AttackDamage.FlatBonus += value;
+            client.Hero.UpdateStats();
+        }
+        [Command("addas")]
+        public static void AddAttackSpeed(LoLClient client, float value)
+        {
+            client.Hero.Stats.AttackSpeed.BaseBonus += value;
+            client.Hero.UpdateStats();
+
         }
         [Command("speed")]
         public static void SpeedCommand(LoLClient client, float speed)
         {
-            client.Hero.PlayerStats.MoveSpeed.SetBaseValue(speed);
+            client.Hero.Stats.MoveSpeed.SetBaseValue(speed);
             client.Hero.UpdateStats(true);
         }
 
         [Command("size")]
         public static void SizeCommand(LoLClient client, float size)
         {
-            client.Hero.PlayerStats.ModelSize.SetBaseValue(size);
+            client.Hero.Stats.ModelSize.SetBaseValue(size);
             client.Hero.UpdateStats(true);
         }
         [InDeveloppement(InDeveloppementState.HAS_BUG, "When player leave vision, the model is swap back.")]
@@ -92,10 +103,14 @@ namespace Legends.World.Commands
         [Command("life")]
         public static void LifeCommand(LoLClient client)
         {
-            client.Hero.AIStats.Health.Current = client.Hero.AIStats.Health.TotalSafe;
+            client.Hero.Stats.Health.Current = client.Hero.Stats.Health.TotalSafe;
             client.Hero.UpdateStats();
         }
-
+        [Command("test")]
+        public static void TestCommand(LoLClient client)
+        {
+            
+        }
         [Command("vision")]
         public static void VisionCommand(LoLClient client)
         {

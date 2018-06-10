@@ -1,13 +1,11 @@
-﻿using Legends.Core.Protocol.Game;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using Legends.World.Entities;
-using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.LoadingScreen;
+using Legends.Protocol.GameClient.Enum;
 using System.Diagnostics;
 using System.Numerics;
 using Legends.Records;
@@ -35,7 +33,7 @@ namespace Legends.World.Games.Maps
             }
         }
 
-        public Unit GetUnit(int targetNetId)
+        public Unit GetUnit(uint targetNetId)
         {
             return Units.FirstOrDefault(x => x.NetId == targetNetId);
         }

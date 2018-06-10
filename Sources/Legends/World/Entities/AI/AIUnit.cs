@@ -1,9 +1,10 @@
 ﻿using Legends.Core.DesignPattern;
 using Legends.Core.Geometry;
 using Legends.Core.Protocol;
-using Legends.Core.Protocol.Game;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Records;
 using Legends.World.Entities.AI.BasicAttack;
+using Legends.World.Entities.Buildings;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
@@ -28,26 +29,21 @@ namespace Legends.World.Entities.AI
             get;
             private set;
         }
-        public AIStats AIStats
-        {
-            get
-            {
-                return (AIStats)Stats;
-            }
-        }
         public AIUnitRecord Record
         {
             get;
-            protected set;
+            private set;
         }
         public float AttackRange
         {
             get
             {
-                return AIStats.AttackRange.TotalSafe;
+                return Stats.AttackRange.TotalSafe;
             }
         }
         public override bool IsMoving => PathManager.IsMoving;
+
+        public override float SelectionRadius => (float)Record.SelectionRadius;
 
         public abstract bool DefaultAutoattackActivated
         {
@@ -61,9 +57,9 @@ namespace Legends.World.Entities.AI
         {
 
         }
-        public AIUnit()
+        public AIUnit(uint netId, AIUnitRecord record) : base(netId)
         {
-
+            this.Record = record;
         }
 
         public override void Initialize()
@@ -88,7 +84,7 @@ namespace Legends.World.Entities.AI
         }
         public void Move(List<Vector2> waypoints, bool unsetTarget = true)
         {
-            if (AIStats.MoveSpeed.TotalSafe > 0)
+            if (Stats.MoveSpeed.TotalSafe > 0)
             {
                 if (unsetTarget)
                 {
@@ -118,22 +114,26 @@ namespace Legends.World.Entities.AI
             Move(new List<Vector2>() { Position }, unsetTarget);
         }
         [InDeveloppement(InDeveloppementState.THINK_ABOUT_IT, "Not sure about values...check again in RAF?")]
-        public float GetAutoattackRange(AIUnit target)
+        public float GetAutoattackRange(AttackableUnit target)
         {
-            return AIStats.AttackRange.TotalSafe + (AIStats.AttackRange.TotalSafe * (float)Record.ChasingAttackRangePercent) + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.TotalSafe);
+            return Stats.AttackRange.TotalSafe + (Stats.AttackRange.TotalSafe * (float)Record.ChasingAttackRangePercent) + ((float)target.SelectionRadius * target.Stats.ModelSize.TotalSafe);
         }
         [InDeveloppement(InDeveloppementState.THINK_ABOUT_IT, "Not sure about values...check again in RAF?")]
-        public float GetAutoattackRangeWhileChasing(AIUnit target)
+        public float GetAutoattackRangeWhileChasing(AttackableUnit target)
         {
-            return AIStats.AttackRange.TotalSafe + ((float)target.Record.SelectionRadius * target.AIStats.ModelSize.TotalSafe);
+            if (target is Building)
+            {
+
+            }
+            return Stats.AttackRange.TotalSafe + ((float)target.SelectionRadius * target.Stats.ModelSize.TotalSafe);
         }
-        [InDeveloppement(InDeveloppementState.TODO,"We need to use pathfinding only for melee to join target.")]
+        [InDeveloppement(InDeveloppementState.TODO, "We need to use pathfinding only for melee to join target.")]
         /// <summary>
         /// On essaye d'auto attack une cible, Si elle est a portée on lance l'animation
         /// Sinon, on marche jusqu'a elle
         /// </summary>
         /// <param name="targetUnit"></param>
-        public void TryBasicAttack(AIUnit targetUnit)
+        public void TryBasicAttack(AttackableUnit targetUnit)
         {
             if (!targetUnit.Alive)
             {
@@ -149,13 +149,13 @@ namespace Legends.World.Entities.AI
             }
             else
             {
-                if (AIStats.MoveSpeed.TotalSafe > 0)
+                if (Stats.MoveSpeed.TotalSafe > 0)
                 {
                     AttackManager.StopAttackTarget(); // on arrête d'attaquer l'éventuelle cible, car on va se déplacer.
 
                     if (AttackManager.IsAttacking && !AttackManager.CurrentAutoattack.Hit) // Si on a cancel l'auto avant que les dégats soit infligés, alors on peut la disposer.
                     {
-                        AttackManager.DestroyAutoattack(); 
+                        AttackManager.DestroyAutoattack();
                     }
 
                     Action onTargetReach = new Action(() => { TryBasicAttack(targetUnit); }); // recursive call 

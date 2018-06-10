@@ -12,14 +12,13 @@ namespace Legends.World.Entities.AI.BasicAttack
         {
         }
 
-        public override void BeginAttackTarget(AIUnit target)
+        public override void BeginAttackTarget(AttackableUnit target)
         {
             
         }
-
         public override void NextAutoattack()
         {
-           
+
         }
     }
 }

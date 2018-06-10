@@ -1,4 +1,4 @@
-﻿using Legends.Core.Protocol.Enum;
+﻿using Legends.Protocol.GameClient.Enum;
 using Legends.World.Entities;
 using System;
 using System.Collections.Generic;

@@ -45,6 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomSyncs\BuildingSynchronizer.cs" />
+    <Compile Include="CustomSyncs\ExperienceSynchronizer.cs" />
+    <Compile Include="CustomSyncs\Helper.cs" />
+    <Compile Include="CustomSyncs\MapSynchronizer.cs" />
     <Compile Include="FieldSanitizer.cs" />
     <Compile Include="InibinHook.cs" />
     <Compile Include="Attributes\InibinMethod.cs" />

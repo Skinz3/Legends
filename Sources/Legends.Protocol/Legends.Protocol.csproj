@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6AD17CF4-EC08-4EE6-98CC-2818FD9B10A2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Legends.Protocol</RootNamespace>
+    <AssemblyName>Legends.Protocol</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GameClient\Enum\AnnounceEnum.cs" />
+    <Compile Include="GameClient\Enum\AttackSlotEnum.cs" />
+    <Compile Include="GameClient\Enum\ChampionEnum.cs" />
+    <Compile Include="GameClient\Enum\ChatChannelType.cs" />
+    <Compile Include="GameClient\Enum\DamageResultEnum.cs" />
+    <Compile Include="GameClient\Enum\DamageTypeEnum.cs" />
+    <Compile Include="GameClient\Enum\InhibitorStateEnum.cs" />
+    <Compile Include="GameClient\Enum\IsTargetableToTeamFlags.cs" />
+    <Compile Include="GameClient\Enum\MapIdEnum.cs" />
+    <Compile Include="GameClient\Enum\MovementType.cs" />
+    <Compile Include="GameClient\Enum\PingTypeEnum.cs" />
+    <Compile Include="GameClient\Enum\SpellCanCastBitsEnum.cs" />
+    <Compile Include="GameClient\Enum\StatActionStateEnum.cs" />
+    <Compile Include="GameClient\Enum\StatPrimaryId.cs" />
+    <Compile Include="GameClient\Enum\StatSecondaryId.cs" />
+    <Compile Include="GameClient\Enum\SummonerSpellId.cs" />
+    <Compile Include="GameClient\Enum\TeamId.cs" />
+    <Compile Include="GameClient\Enum\UnitAnnounceEnum.cs" />
+    <Compile Include="GameClient\Messages\Game\AnnounceMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\AttentionPingAnswerMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\AttentionPingRequestMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\AutoAttackOptionMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\BeginAutoAttackMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\ChampionDeathTimerMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\ChampionDieMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\ChampionRespawnMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\ChatBoxMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\ClickMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\DamageDoneMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\DashMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\DestroyObjectMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\DieMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\EnterVisionMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\FogUpdate2Message.cs" />
+    <Compile Include="GameClient\Messages\Game\GameTimerMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\GameTimerUpdateMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\HeartBeatMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\HeroSpawnMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\LeaveVisionMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\LevelUpMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\LockCameraRequestMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\MoveCameraMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\MovementAnswerMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\MovementConfirmationMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\MovementRequestMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\NextAutoattackMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\ObjectSpawnMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\PlayerInfoMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SetHealthMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SetTargetMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\ShowProjectileMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SkillUpRequestMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SpawnParticleMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SpellAnimationMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\StartGameMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\StartGameRequestMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\StopAutoAttackMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\TurretSpawnMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\UnitAnnounceMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\UpdateModelMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\UpdateStatsMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\ViewMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\ViewRequestMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\CharLoadedMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\ClientReadyMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\EndSpawnMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\KeyCheckMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\LoadScreenInfoMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\LoadScreenPlayerChampionMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\LoadScreenPlayerNameMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\PingLoadInfoAnswerMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\PingLoadInfoMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\PlayerInformations.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\QueryStatusAnswerMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\QueryStatusRequestMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\StartSpawnMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\SynchVersionAnswerMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\SynchVersionMessage.cs" />
+    <Compile Include="GameClient\Messages\LoadingScreen\WorldGameNumberMessage.cs" />
+    <Compile Include="GameClient\Messages\Other\DebugMessage.cs" />
+    <Compile Include="GameClient\Messages\Other\ExitMessage.cs" />
+    <Compile Include="GameClient\Other\WaypointsReader.cs" />
+    <Compile Include="GameClient\Types\ReplicateStat.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Legends.Core\Legends.Core.csproj">
+      <Project>{9075ff6e-824e-4468-851e-83d1354a7bce}</Project>
+      <Name>Legends.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Legends.World.Entities;
-using Legends.Core.Protocol.Enum;
+using Legends.Protocol.GameClient.Enum;
 using Legends.Core.Protocol;
 using ENet;
 using Legends.World.Entities.AI;
-using Legends.Core.Protocol.Game;
 using System.Numerics;
 using Legends.Core.DesignPattern;
-using Legends.Core.Protocol.Messages.Game;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.World.Games.Maps.Fog;
 using Legends.Network;
+using Legends.World.Entities.Buildings;
 
 namespace Legends.World.Games
 {
@@ -117,7 +117,7 @@ namespace Legends.World.Games
         }
         public void InitializeFog()
         {
-            foreach (var unit in Units.Values.OfType<AITurret>())
+            foreach (var unit in Array.FindAll(Units.Values.ToArray(),x=>x.AddFogUpdate))
             {
                 AddFogUpdate(new FogUpdate(Game.NetIdProvider.PopNextNetId(), Id, unit));
             }

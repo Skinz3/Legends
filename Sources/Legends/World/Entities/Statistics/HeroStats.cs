@@ -1,4 +1,4 @@
-﻿using Legends.Core.Protocol.Enum;
+﻿using Legends.Protocol.GameClient.Enum;
 using Legends.Records;
 using Legends.World.Entities.AI;
 using System;
@@ -23,7 +23,6 @@ namespace Legends.World.Entities.Statistics
 
         public override void UpdateReplication(bool partial = true)
         {
-
             ReplicationManager.UpdateFloat(Gold, 0, 0); // gold
             ReplicationManager.UpdateFloat(GoldTotal, 0, 1); // gold Total
 

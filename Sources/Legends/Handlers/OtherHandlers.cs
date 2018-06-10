@@ -1,6 +1,6 @@
 ﻿using Legends.Core.Protocol;
-using Legends.Core.Protocol.Other;
 using Legends.Network;
+using Legends.Protocol.GameClient.Other;
 using System;
 using System.Collections.Generic;
 using System.Linq;

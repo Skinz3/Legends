@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Legends.World.Games;
-using Legends.Core.Protocol.Enum;
+using Legends.Protocol.GameClient.Enum;
 
 namespace Legends.Scripts.Maps
 {
@@ -28,6 +28,16 @@ namespace Legends.Scripts.Maps
 
         public override void OnSpawn()
         {
+			SpawnNexus("HQ_T1");
+			SpawnNexus("HQ_T2");
+			
+			SpawnInhibitor("Barracks_T2_L1");
+			SpawnInhibitor("Barracks_T2_C1");
+			SpawnInhibitor("Barracks_T2_R1");
+			SpawnInhibitor("Barracks_T1_R1");
+			SpawnInhibitor("Barracks_T1_C1");
+			SpawnInhibitor("Barracks_T1_L1");
+
             SpawnAITurret("Turret_T1_R_03", "SRUAP_Turret_Order1");
             SpawnAITurret("Turret_T1_R_02", "SRUAP_Turret_Order2");
             SpawnAITurret("Turret_T1_C_07", "SRUAP_Turret_Order3_Test");

@@ -36,10 +36,10 @@ namespace Legends.Core.Protocol
         public static bool ShowProtocolMessage;
         /// <param name="messagesAssembly"></param>
         /// <param name="handlersAssembly"></param>
-        public static void Initialize(Assembly serverAssembly, bool showProtocolMessages)
+        public static void Initialize(Assembly messagesAssembly, Assembly handlersAssembly, bool showProtocolMessages)
         {
             ShowProtocolMessage = showProtocolMessages;
-            foreach (var type in Assembly.GetExecutingAssembly().GetTypes().Where(x => x.IsSubclassOf(typeof(Message))))
+            foreach (var type in messagesAssembly.GetTypes().Where(x => x.IsSubclassOf(typeof(Message))))
             {
                 FieldInfo numField = type.GetField(ID_MESSAGE_FIELD_NAME);
                 FieldInfo channelField = type.GetField(CHANNEL_MESSAGE_FIELD_NAME);
@@ -77,7 +77,7 @@ namespace Legends.Core.Protocol
                 }
             }
 
-            foreach (var item in serverAssembly.GetTypes())
+            foreach (var item in handlersAssembly.GetTypes())
             {
                 foreach (var subItem in item.GetMethods())
                 {
@@ -130,7 +130,7 @@ namespace Legends.Core.Protocol
             {
                 return null;
             }
-            Message message = Constructors.FirstOrDefault(x=>x.Key == id).Value[channel]();
+            Message message = Constructors.FirstOrDefault(x => x.Key == id).Value[channel]();
             if (message == null)
             {
                 return null;

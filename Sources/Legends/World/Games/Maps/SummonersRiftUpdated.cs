@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
-using Legends.Core.Protocol.Enum;
+using Legends.Protocol.GameClient.Enum;
 using Legends.Scripts.Maps;
 
 namespace Legends.World.Games.Maps

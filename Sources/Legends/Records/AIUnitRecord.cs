@@ -48,7 +48,12 @@ namespace Legends.Records
             get;
             set;
         }
-
+        [InibinField(InibinHashEnum.CHARACTER_PathfindingCollisionRadius)]
+        public double PathfindingCollisionRadius
+        {
+            get;
+            set;
+        }
         [InibinField(InibinHashEnum.CHARACTER_MoveSpeed)]
         public short BaseMovementSpeed
         {

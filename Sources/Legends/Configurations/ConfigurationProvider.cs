@@ -1,6 +1,5 @@
 ﻿using Legends.Core.DesignPattern;
-using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.LoadingScreen;
+using Legends.Protocol.GameClient.Enum;
 using Legends.Core.Utils;
 using Legends.World;
 using Newtonsoft.Json;
@@ -12,6 +11,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using YAXLib;
+using Legends.Protocol.GameClient.LoadingScreen;
 
 namespace Legends.Configurations
 {

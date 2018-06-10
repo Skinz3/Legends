@@ -1,5 +1,5 @@
 ﻿using Legends.Core.DesignPattern;
-using Legends.Core.Protocol.Messages.Game;
+using Legends.Protocol.GameClient.Messages.Game;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +51,7 @@ namespace Legends.World.Entities.AI
         [InDeveloppement(InDeveloppementState.STARTED, "Summoners Rifts Only, Howling abyss is different")]
         private float GetTimeLeft()
         {
-            float level = Hero.AIStats.Level;
+            float level = Hero.Stats.Level;
             float minutes = Hero.Game.GameTimeMinutes;
 
             float brw = level * 2.5f + 7.5f;

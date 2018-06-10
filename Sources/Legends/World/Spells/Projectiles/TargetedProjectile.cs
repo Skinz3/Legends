@@ -11,7 +11,7 @@ namespace Legends.World.Spells.Projectiles
 {
     public class TargetedProjectile : Projectile
     {
-        public TargetedProjectile(AIUnit unit, AIUnit target, Vector2 startPosition, float speed, Action onReach) : base(unit, target, startPosition, speed, onReach)
+        public TargetedProjectile(uint netId, AIUnit unit, AIUnit target, Vector2 startPosition, float speed, Action onReach) : base(netId, unit, target, startPosition, speed, onReach)
         {
 
         }
@@ -21,6 +21,8 @@ namespace Legends.World.Spells.Projectiles
         public override bool IsMoving => true;
 
         public override float PerceptionBubbleRadius => 200;
+
+        public override bool AddFogUpdate => false;// ??
 
         public override void OnUnitEnterVision(Unit unit)
         {

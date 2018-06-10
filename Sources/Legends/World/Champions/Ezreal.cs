@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Legends.World.Entities;
-using Legends.Core.Protocol.Enum;
+using Legends.Protocol.GameClient.Enum;
 using Legends.World.Entities.AI;
 
 namespace Legends.World.Champions

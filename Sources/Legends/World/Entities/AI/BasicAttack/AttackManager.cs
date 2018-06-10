@@ -1,5 +1,5 @@
-﻿using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Messages.Game;
+﻿using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
@@ -97,7 +97,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             }
             return slot;
         }
-        public abstract void BeginAttackTarget(AIUnit target);
+        public abstract void BeginAttackTarget(AttackableUnit target);
 
         public void StopAttackTarget()
         {

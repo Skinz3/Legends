@@ -1,12 +1,10 @@
 ﻿using Legends.Configurations;
 using Legends.Core.Cryptography;
 using Legends.Core.Protocol;
-using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Game;
-using Legends.Core.Protocol.LoadingScreen;
-using Legends.Core.Protocol.Other;
+using Legends.Protocol.GameClient.Enum;
 using Legends.Core.Utils;
 using Legends.Network;
+using Legends.Records;
 using Legends.World;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
@@ -17,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Legends.Protocol.GameClient.LoadingScreen;
 
 namespace Legends.Handlers
 {
@@ -58,7 +57,7 @@ namespace Legends.Handlers
                 logger.Write(userId + "try to connect a second time!", MessageState.WARNING);
                 return;
             }
-            client.DefinePlayer(new AIHero(client, datas));
+            client.DefinePlayer(new AIHero(client, datas,AIUnitRecord.GetAIUnitRecord(datas.ChampionName)));
 
             client.Hero.DefineGame(targetGame);
 

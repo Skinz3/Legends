@@ -1,6 +1,6 @@
 ﻿using Legends.Core.CSharp;
 using Legends.Core.DesignPattern;
-using Legends.Core.Protocol.Enum;
+using Legends.Protocol.GameClient.Enum;
 using Legends.World.Games;
 using System;
 using System.Collections.Generic;

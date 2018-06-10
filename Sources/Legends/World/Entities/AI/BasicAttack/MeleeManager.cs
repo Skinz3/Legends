@@ -1,5 +1,5 @@
-﻿using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Messages.Game;
+﻿using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace Legends.World.Entities.AI.BasicAttack
 
         }
 
-        public override void BeginAttackTarget(AIUnit target)
+        public override void BeginAttackTarget(AttackableUnit target)
         {
             if (IsAttacking && target != CurrentAutoattack.Target) // Si la cible que l'on attaque est differente de target
             {
@@ -40,7 +40,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             }
             if (IsAttacking == false) // osef, facile
             {
-                CurrentAutoattack = new MeleeBasicAttack(Unit, target, Unit.AIStats.CriticalStrike());
+                CurrentAutoattack = new MeleeBasicAttack(Unit, target, Unit.Stats.CriticalStrike());
                 CurrentAutoattack.Notify();
                 Unit.OnTargetSet(target);
             }
@@ -61,7 +61,7 @@ namespace Legends.World.Entities.AI.BasicAttack
 
         public override void NextAutoattack()
         {
-            bool critical = Unit.AIStats.CriticalStrike();
+            bool critical = Unit.Stats.CriticalStrike();
             Unit.AttackManager.CurrentAutoattack = new MeleeBasicAttack(Unit, CurrentAutoattack.Target, critical, false, DetermineNextSlot(critical));
             CurrentAutoattack.Notify();
         }

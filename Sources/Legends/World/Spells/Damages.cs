@@ -1,5 +1,5 @@
 ﻿using Legends.Core.DesignPattern;
-using Legends.Core.Protocol.Enum;
+using Legends.Protocol.GameClient.Enum;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using System;
@@ -17,7 +17,7 @@ namespace Legends.World.Spells
             get;
             private set;
         }
-        public AIUnit Target
+        public AttackableUnit Target
         {
             get;
             private set;
@@ -42,7 +42,7 @@ namespace Legends.World.Spells
             get;
             private set;
         }
-        public Damages(AIUnit source, AIUnit target, float delta, bool critical, DamageType type)
+        public Damages(AIUnit source, AttackableUnit target, float delta, bool critical, DamageType type)
         {
             this.Source = source;
             this.Target = target;
@@ -54,7 +54,7 @@ namespace Legends.World.Spells
         [InDeveloppement(InDeveloppementState.TODO, "Just todo ^.^")]
         private DamageResultEnum GenerateResult()
         {
-            
+
             if (Target.Stats.IsInvulnerable)
             {
                 return DamageResultEnum.DAMAGE_TEXT_INVULNERABLE;
@@ -88,6 +88,13 @@ namespace Legends.World.Spells
         /// </summary>
         public void Apply()
         {
+            if (Result == DamageResultEnum.DAMAGE_TEXT_MISS || Result == DamageResultEnum.DAMAGE_TEXT_INVULNERABLE ||
+                 Result == DamageResultEnum.DAMAGE_TEXT_DODGE)
+            {
+                Delta = 0;
+                return;
+            }
+
             if (Critical)
             {
                 Delta *= 2;
@@ -99,7 +106,7 @@ namespace Legends.World.Spells
             }
             else if (Type == DamageType.DAMAGE_TYPE_MAGICAL)
             {
-                ApplyBasicReduction(Target.AIStats.MagicResistance.TotalSafe);
+                ApplyBasicReduction(Target.Stats.MagicResistance.TotalSafe);
             }
 
         }

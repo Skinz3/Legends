@@ -1,9 +1,6 @@
 ﻿using Legends.Configurations;
-using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Game;
-using Legends.Core.Protocol.LoadingScreen;
-using Legends.Core.Protocol.Messages.Game;
-using Legends.Core.Protocol.Other;
+using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Network;
 using Legends.Records;
 using Legends.World.Champions;
@@ -20,8 +17,8 @@ using Legends.Core.Utils;
 using ENet;
 using Legends.World.Entities.Statistics;
 using Legends.Core.DesignPattern;
-using Legends.Core.Protocol.Messages;
 using Legends.World.Entities.Statistics.Replication;
+using Legends.Protocol.GameClient.Other;
 
 namespace Legends.World.Entities.AI
 {
@@ -62,13 +59,6 @@ namespace Legends.World.Entities.AI
             get;
             private set;
         }
-        public HeroStats PlayerStats
-        {
-            get
-            {
-                return Stats as HeroStats;
-            }
-        }
         public Score Score
         {
             get;
@@ -85,6 +75,8 @@ namespace Legends.World.Entities.AI
 
         public override bool DefaultAutoattackActivated => false;
 
+        public override bool AddFogUpdate => false;
+
         private DeathTimer DeathTimer
         {
             get;
@@ -92,7 +84,7 @@ namespace Legends.World.Entities.AI
         }
 
 
-        public AIHero(LoLClient client, PlayerData data)
+        public AIHero(LoLClient client, PlayerData data, AIUnitRecord record) : base(0, record)
         {
             Client = client;
             Data = data;
@@ -101,7 +93,6 @@ namespace Legends.World.Entities.AI
 
         public override void Initialize()
         {
-            Record = AIUnitRecord.GetAIUnitRecord(Data.ChampionName);
             Champion = ChampionProvider.Instance.GetChampion(this, (ChampionEnum)Enum.Parse(typeof(ChampionEnum), Data.ChampionName));
             Stats = new HeroStats(Record, Data.SkinId);
             Model = Data.ChampionName;
@@ -110,36 +101,36 @@ namespace Legends.World.Entities.AI
             Score = new Score();
             base.Initialize();
         }
-        
+
         [InDeveloppement(InDeveloppementState.TODO, "Skill points")]
         public void AddExperience(float value)
         {
-            int oldLevel = AIStats.Level;
-            AIStats.AddExperience(value);
+            int oldLevel = Stats.Level;
+            Stats.AddExperience(value);
 
-            if (AIStats.Level > oldLevel)
+            if (Stats.Level > oldLevel)
             {
-                int diff = AIStats.Level - oldLevel;
+                int diff = Stats.Level - oldLevel;
 
-                AIStats.Health.BaseBonus += (float)Record.HpPerLevel;
-                AIStats.Mana.BaseBonus += (float)Record.MpPerLevel;
-                AIStats.HpRegeneration.BaseBonus += (float)Record.HpRegenPerLevel;
-                AIStats.ManaRegeneration.BaseBonus += (float)Record.MPRegenPerLevel;
-                AIStats.AttackDamage.BaseBonus += (float)Record.DamagePerLevel;
-                AIStats.Armor.BaseBonus += (float)Record.ArmorPerLevel;
-                AIStats.AbilityPower.BaseBonus += (float)Record.AbilityPowerIncPerLevel;
-                AIStats.AttackSpeed.BaseBonus += (float)Record.AttackSpeedPerLevel;
-                AIStats.CriticalHit.BaseBonus += (float)Record.CritPerLevel;
-                AIStats.MagicResistance.BaseBonus += (float)Record.MagicResistPerLevel;
+                Stats.Health.BaseBonus += (float)Record.HpPerLevel;
+                Stats.Mana.BaseBonus += (float)Record.MpPerLevel;
+                Stats.HpRegeneration.BaseBonus += (float)Record.HpRegenPerLevel;
+                Stats.ManaRegeneration.BaseBonus += (float)Record.MPRegenPerLevel;
+                Stats.AttackDamage.BaseBonus += (float)Record.DamagePerLevel;
+                Stats.Armor.BaseBonus += (float)Record.ArmorPerLevel;
+                Stats.AbilityPower.BaseBonus += (float)Record.AbilityPowerIncPerLevel;
+                Stats.AttackSpeed.BaseBonus += (float)Record.AttackSpeedPerLevel;
+                Stats.CriticalHit.BaseBonus += (float)Record.CritPerLevel;
+                Stats.MagicResistance.BaseBonus += (float)Record.MagicResistPerLevel;
             }
 
-            Game.Send(new LevelUpMessage(NetId, (byte)AIStats.Level, 0)); // tdoo
+            Game.Send(new LevelUpMessage(NetId, (byte)Stats.Level, 0)); // tdoo
             UpdateStats();
         }
         public override void OnDead(AttackableUnit source) // we override base
         {
-            AIStats.Health.Current = 0;
-            AIStats.Mana.Current = 0;
+            Stats.Health.Current = 0;
+            Stats.Mana.Current = 0;
             UpdateStats();
             Alive = false;
             Score.DeathCount++;
@@ -147,11 +138,12 @@ namespace Legends.World.Entities.AI
             Game.Send(new ChampionDieMessage(500, NetId, source.NetId, DeathTimer.TimeLeftSeconds));
             Game.UnitAnnounce(UnitAnnounceEnum.Death, NetId, source.NetId, new uint[0]);
             Client.Send(new ChampionDeathTimerMessage(NetId, DeathTimer.TimeLeftSeconds));
+            base.OnDead(source);
         }
         public void OnRevive()
         {
-            AIStats.Health.Current = AIStats.Health.TotalSafe;
-            AIStats.Mana.Current = AIStats.Mana.TotalSafe;
+            Stats.Health.Current = Stats.Health.TotalSafe;
+            Stats.Mana.Current = Stats.Mana.TotalSafe;
             Alive = true;
             Position = SpawnPosition;
             Game.Send(new ChampionRespawnMessage(NetId, Position));
@@ -163,7 +155,7 @@ namespace Legends.World.Entities.AI
         }
         public override void Update(long deltaTime)
         {
-          
+
             base.Update(deltaTime);
             DeathTimer.Update(deltaTime);
         }
@@ -171,6 +163,7 @@ namespace Legends.World.Entities.AI
         public override void OnMove()
         {
             base.OnMove();
+            AttentionPing(PathManager.GetWaypoints().Last(), NetId, PingTypeEnum.Ping_OnMyWay);
         }
         public override void OnUnitEnterVision(Unit unit)
         {
@@ -188,22 +181,7 @@ namespace Legends.World.Entities.AI
         {
             Team.Send(new AttentionPingAnswerMessage(position, targetNetId, NetId, pingType));
         }
-        public override void UpdateStats(bool partial = true)
-        {
-            PlayerStats.UpdateReplication(partial);
-            Game.Send(new UpdateStatsMessage(0, NetId, PlayerStats.ReplicationManager.Values, partial));
 
-            if (partial)
-            {
-                foreach (var x in PlayerStats.ReplicationManager.Values)
-                {
-                    if (x != null)
-                    {
-                        x.Changed = false;
-                    }
-                }
-            }
-        }
         public void SetAutoattackOption(bool automatic)
         {
             AttackManager.SetAutoattackActivated(automatic);
@@ -216,6 +194,6 @@ namespace Legends.World.Entities.AI
             Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, 0, new uint[0]);
         }
 
-       
+
     }
 }

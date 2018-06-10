@@ -1,6 +1,6 @@
 ﻿using Legends.Core.Geometry;
-using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Messages.Game;
+using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.World.Entities.Movements;
 using Legends.World.Games;
 using Legends.World.Games.Maps;
@@ -58,11 +58,10 @@ namespace Legends.World.Entities
             get;
             protected set;
         }
-        public Unit()
+        public abstract bool AddFogUpdate
         {
-            this.Alive = true;
+            get;
         }
-
         public Vector2 Position
         {
             get;
@@ -83,7 +82,11 @@ namespace Legends.World.Entities
         {
             get;
         }
-
+        public Unit(uint netId)
+        {
+            this.NetId = netId;
+            this.Alive = true;
+        }
         public virtual void Initialize()
         {
 

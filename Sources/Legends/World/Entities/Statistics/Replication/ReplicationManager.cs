@@ -1,4 +1,4 @@
-﻿using Legends.Core.Protocol.Types;
+﻿using Legends.Protocol.GameClient.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -47,7 +47,7 @@ namespace Legends.World.Entities.Movements
             get;
             set;
         }
-        private AIUnit TargetUnit
+        private AttackableUnit TargetUnit
         {
             get;
             set;
@@ -92,7 +92,7 @@ namespace Legends.World.Entities.Movements
         /// </summary>
         /// <param name="unit"></param>
         /// <param name="target"></param>
-        public void MoveToTarget(AIUnit target, Action onTargetReach, float distanceToTarget = 0)
+        public void MoveToTarget(AttackableUnit target, Action onTargetReach, float distanceToTarget = 0)
         {
             this.TargetUnit = target;
             this.WaypointsIndex = 1;
@@ -123,7 +123,7 @@ namespace Legends.World.Entities.Movements
         {
             if (IsMoving && !End)
             {
-                float deltaMovement = Unit.AIStats.MoveSpeed.TotalSafe * 0.001f * deltaTime; // deltaTime
+                float deltaMovement = Unit.Stats.MoveSpeed.TotalSafe * 0.001f * deltaTime; // deltaTime
 
                 float xOffset = Direction.X * deltaMovement * 1.06f;
                 float yOffset = Direction.Y * deltaMovement * 1.06f;

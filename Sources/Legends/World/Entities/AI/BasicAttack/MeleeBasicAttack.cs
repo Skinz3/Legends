@@ -1,4 +1,4 @@
-﻿using Legends.Core.Protocol.Enum;
+﻿using Legends.Protocol.GameClient.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +26,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             get;
             set;
         }
-        public MeleeBasicAttack(AIUnit unit, AIUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1) : base(unit, target, critical, first, slot)
+        public MeleeBasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1) : base(unit, target, critical, first, slot)
         {
             HitTimeCurrent = HitTime;
         }

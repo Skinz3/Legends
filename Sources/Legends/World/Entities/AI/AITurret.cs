@@ -1,6 +1,5 @@
-﻿using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Messages.Extended;
-using Legends.Core.Protocol.Messages.Game;
+﻿using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Network;
 using Legends.Records;
 using Legends.World.Buildings;
@@ -25,6 +24,8 @@ namespace Legends.World.Entities.AI
 
         public override bool DefaultAutoattackActivated => true;
 
+        public override bool AddFogUpdate => true;
+
         private MapObjectRecord MapObjectRecord
         {
             get;
@@ -36,13 +37,12 @@ namespace Legends.World.Entities.AI
             set;
         }
 
-        public AITurret(uint netId, AIUnitRecord record, MapObjectRecord mapObject, string suffix)
+
+        public AITurret(uint netId, AIUnitRecord record, MapObjectRecord mapObject, string suffix) : base(netId, record)
         {
             this.NetId = netId;
-            this.Record = record;
             this.MapObjectRecord = mapObject;
             this.Position = new Vector2(mapObject.Position.X, mapObject.Position.Y);
-
             this.Suffix = suffix;
         }
         public override void Initialize()
@@ -71,6 +71,7 @@ namespace Legends.World.Entities.AI
         public override void OnDead(AttackableUnit source)
         {
             base.OnDead(source);
+            Game.Send(new DieMessage(source.NetId, NetId));
             Game.UnitAnnounce(UnitAnnounceEnum.TurretDestroyed, NetId, source.NetId, new uint[0]);
         }
         public string GetClientName()
@@ -78,23 +79,6 @@ namespace Legends.World.Entities.AI
             return Name + Suffix;
         }
 
-        public override void UpdateStats(bool partial)
-        {
-            TurretStats stats = ((TurretStats)Stats);
-            stats.UpdateReplication(partial);
-            Game.Send(new UpdateStatsMessage(0, NetId, stats.ReplicationManager.Values, partial));
-
-            if (partial)
-            {
-                foreach (var x in stats.ReplicationManager.Values)
-                {
-                    if (x != null)
-                    {
-                        x.Changed = false;
-                    }
-                }
-            }
-        }
 
         public override void OnUnitEnterVision(Unit unit)
         {

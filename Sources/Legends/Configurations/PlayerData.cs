@@ -1,5 +1,5 @@
-﻿using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.LoadingScreen;
+﻿using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.LoadingScreen;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

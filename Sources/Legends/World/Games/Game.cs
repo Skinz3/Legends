@@ -2,11 +2,8 @@
 using Legends.Core.Cryptography;
 using Legends.Core.IO.MOB;
 using Legends.Core.Protocol;
-using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Game;
-using Legends.Core.Protocol.LoadingScreen;
-using Legends.Core.Protocol.Messages.Game;
-using Legends.Core.Protocol.Other;
+using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Core.Time;
 using Legends.Core.Utils;
 using Legends.Network;
@@ -14,16 +11,19 @@ using Legends.Records;
 using Legends.World.Buildings;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
+using Legends.World.Entities.Buildings;
 using Legends.World.Games.Maps;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using Legends.Protocol.GameClient.LoadingScreen;
 
 namespace Legends.World.Games
 {
@@ -133,9 +133,9 @@ namespace Legends.World.Games
             set;
         }
         /// <summary>
-        /// ConcurentBag<T> is a threadsafe object.
+        /// ConcurrentStack<T> is a threadsafe object.
         /// </summary>
-        public ConcurrentBag<Action> SynchronizedActions
+        public ConcurrentStack<Action> SynchronizedActions
         {
             get;
             private set;
@@ -149,11 +149,11 @@ namespace Legends.World.Games
             this.PurpleTeam = new Team(this, TeamId.PURPLE);
             this.Map = Map.CreateMap(mapId, this);
             this.Timer = new HighResolutionTimer((int)REFRESH_RATE);
-            this.SynchronizedActions = new ConcurrentBag<Action>();
+            this.SynchronizedActions = new ConcurrentStack<Action>();
         }
         public void Invoke(Action action)
         {
-            SynchronizedActions.Add(action);
+            SynchronizedActions.Push(action);
         }
         /// <summary>
         /// Add player to the game and to his team 
@@ -202,6 +202,7 @@ namespace Legends.World.Games
 
             Map.Script.OnSpawn();
 
+
             Send(new StartSpawnMessage());
             foreach (var player in Map.Units.OfType<AIHero>())
             {
@@ -212,12 +213,17 @@ namespace Legends.World.Games
                 player.UpdateStats(false);
                 player.UpdateHeath();
             }
-
+           
             foreach (var turret in Map.Units.OfType<AITurret>())
             {
                 Send(new TurretSpawnMessage(0, turret.NetId, turret.GetClientName()));
                 turret.UpdateStats(false);
                 turret.UpdateHeath();
+            }
+            foreach (var building in Map.Units.OfType<Building>())
+            {
+                building.UpdateHeath();
+                building.UpdateStats(false);
             }
 
             BlueTeam.InitializeFog();
@@ -277,7 +283,7 @@ namespace Legends.World.Games
             {
                 action();
             }
-            SynchronizedActions = new ConcurrentBag<Action>();
+            SynchronizedActions.Clear();
 
             BlueTeam.Update(deltaTime);
             PurpleTeam.Update(deltaTime);

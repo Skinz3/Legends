@@ -1,5 +1,5 @@
 ﻿using Legends.Core.DesignPattern;
-using Legends.Core.Protocol.Enum;
+using Legends.Protocol.GameClient.Enum;
 using Legends.Core.Utils;
 using Legends.Records;
 using Legends.World.Entities.AI;
@@ -15,32 +15,32 @@ namespace Legends.World.Buildings
     public class BuildingProvider : Singleton<BuildingProvider>
     {
 
-        public static string TOWER_SUFFIX = TOWER_SEPARATOR + "A"; // ?
+        public static string TOWER_SUFFIX = BUILDING_SEPARATOR + "A"; // ?
 
-        public const string TOWER_BLUE_SIDE = "T1";
-        public const string TOWER_RED_SIDE = "T2";
+        public const string BUILDING_BLUE_SIDE = "T1";
+        public const string BUILDING_RED_SIDE = "T2";
 
-        public const char TOWER_SEPARATOR = '_';
+        public const char BUILDING_SEPARATOR = '_';
 
-        public const uint TOWER_NETID_X = 0xFF000000;
+        public const uint BUILDING_NETID_X = 0xFF000000;
 
-        public TeamId GetTeamId(string turretName)
+        public TeamId GetTeamId(string buildingName)
         {
-            string id = turretName.Split(TOWER_SEPARATOR)[1];
+            string id = buildingName.Split(BUILDING_SEPARATOR)[1];
 
             switch (id)
             {
-                case TOWER_BLUE_SIDE:
+                case BUILDING_BLUE_SIDE:
                     return TeamId.BLUE;
-                case TOWER_RED_SIDE:
+                case BUILDING_RED_SIDE:
                     return TeamId.PURPLE;
             }
 
-            if (turretName.ToLower().Contains("order"))
+            if (buildingName.ToLower().Contains("order"))
             {
                 return TeamId.BLUE;
             }
-            else if (turretName.ToLower().Contains("chaos"))
+            else if (buildingName.ToLower().Contains("chaos"))
             {
                 return TeamId.PURPLE;
             }

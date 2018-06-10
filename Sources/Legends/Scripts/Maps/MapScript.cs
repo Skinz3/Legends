@@ -1,12 +1,13 @@
 ﻿using Legends.Core.Cryptography;
 using Legends.Core.CSharp;
-using Legends.Core.Protocol.Enum;
+using Legends.Protocol.GameClient.Enum;
 using Legends.Core.Time;
 using Legends.Core.Utils;
 using Legends.Records;
 using Legends.World;
 using Legends.World.Buildings;
 using Legends.World.Entities.AI;
+using Legends.World.Entities.Buildings;
 using Legends.World.Games;
 using Legends.World.Games.Maps;
 using System;
@@ -62,6 +63,22 @@ namespace Legends.Scripts.Maps
         {
             Action(new Action(() => { Game.Announce(announce); }), delay);
         }
+        protected void SpawnNexus(string name)
+        {
+            uint netId = BuildingProvider.BUILDING_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(name));
+            Nexus nexus = new Nexus(netId, BuildingRecord.GetBuildingRecord(this.Game.Map.Id, name), Game.Map.Record.GetObject(name));
+            nexus.DefineGame(Game);
+            Game.AddUnit(nexus, BuildingProvider.Instance.GetTeamId(name));
+            Game.Map.AddUnit(nexus);
+        }
+        protected void SpawnInhibitor(string name)
+        {
+            uint netId = BuildingProvider.BUILDING_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(name));
+            Inhibitor inhibitor = new Inhibitor(netId, BuildingRecord.GetBuildingRecord(this.Game.Map.Id, name), Game.Map.Record.GetObject(name));
+            inhibitor.DefineGame(Game);
+            Game.AddUnit(inhibitor, BuildingProvider.Instance.GetTeamId(name));
+            Game.Map.AddUnit(inhibitor);
+        }
         protected void SpawnAITurret(string turretName, string aiUnitRecordName)
         {
             AIUnitRecord aIUnitRecord = AIUnitRecord.GetAIUnitRecord(aiUnitRecordName);
@@ -85,7 +102,7 @@ namespace Legends.Scripts.Maps
 
             if (teamId != TeamId.UNKNOWN)
             {
-                uint netId = (uint)(BuildingProvider.TOWER_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(fullName)));
+                uint netId = (uint)(BuildingProvider.BUILDING_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(fullName)));
                 AITurret turret = new AITurret(netId, aIUnitRecord, objectRecord, BuildingProvider.TOWER_SUFFIX);
                 turret.DefineGame(Game);
                 Game.AddUnit(turret, teamId);

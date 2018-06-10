@@ -1,6 +1,5 @@
 ﻿using Legends.Core.Protocol;
-using Legends.Core.Protocol.LoadingScreen;
-using Legends.Core.Protocol.Messages.Game;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Core.Utils;
 using Legends.Network;
 using System;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Legends.Protocol.GameClient.LoadingScreen;
 
 namespace Legends.Handlers
 {

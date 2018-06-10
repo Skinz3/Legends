@@ -1,5 +1,5 @@
-﻿using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Messages.Game;
+﻿using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
@@ -34,7 +34,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         {
             get
             {
-                return (1 / Unit.AIStats.AttackSpeed.TotalSafe) * 1000;
+                return (1 / Unit.Stats.AttackSpeed.TotalSafe) * 1000;
             }
         }
         /// <summary>
@@ -50,7 +50,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             get;
             set;
         }
-        public AIUnit Target
+        public AttackableUnit Target
         {
             get;
             private set;
@@ -82,7 +82,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             get;
             private set;
         }
-        public BasicAttack(AIUnit unit, AIUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1)
+        public BasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1)
         {
             this.Unit = unit;
             this.Target = target;
@@ -109,7 +109,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         }
         public void InflictDamages()
         {
-            Target.InflictDamages(new Damages(Unit, Target, Unit.AIStats.AttackDamage.TotalSafe, Critical, DamageType.DAMAGE_TYPE_PHYSICAL));
+            Target.InflictDamages(new Damages(Unit, Target, Unit.Stats.AttackDamage.TotalSafe, Critical, DamageType.DAMAGE_TYPE_PHYSICAL));
             Hit = true;
         }
         public virtual void Update(long deltaTime)

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Spells.Projectiles
 {
-    public abstract class Projectile : Unit 
+    public abstract class Projectile : Unit
     {
         public AIUnit Unit
         {
@@ -36,7 +36,7 @@ namespace Legends.World.Spells.Projectiles
             get;
             private set;
         }
-        public Projectile(AIUnit unit, AIUnit target, Vector2 startPosition, float speed, Action onReach)
+        public Projectile(uint netId, AIUnit unit, AIUnit target, Vector2 startPosition, float speed, Action onReach) : base(netId)
         {
             this.Unit = unit;
             this.Target = target;

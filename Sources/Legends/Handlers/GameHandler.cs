@@ -2,11 +2,8 @@
 using Legends.Core.Cryptography;
 using Legends.Core.Geometry;
 using Legends.Core.Protocol;
-using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Game;
-using Legends.Core.Protocol.LoadingScreen;
-using Legends.Core.Protocol.Messages.Game;
-using Legends.Core.Protocol.Other;
+using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Network;
 using Legends.World.Commands;
 using Legends.World.Entities;
@@ -19,6 +16,8 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Legends.Protocol.GameClient.LoadingScreen;
+using Legends.Protocol.GameClient.Other;
 
 namespace Legends.Handlers
 {
@@ -118,7 +117,7 @@ namespace Legends.Handlers
                 case MovementType.ATTACK:
 
                     // ThreadSafe important !! 
-                    var target = (AIUnit)client.Hero.Game.Map.GetUnit(message.targetNetId);
+                    var target = (AttackableUnit)client.Hero.Game.Map.GetUnit(message.targetNetId);
 
                     if (target == null)
                     {

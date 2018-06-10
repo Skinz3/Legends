@@ -1,7 +1,6 @@
 ﻿using Legends.Core.Protocol;
-using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Game;
-using Legends.Core.Protocol.Messages.Game;
+using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Network;
 using Legends.World.Commands;
 using System;

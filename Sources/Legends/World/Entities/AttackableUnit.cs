@@ -1,12 +1,11 @@
 ﻿using ENet;
 using Legends.Core.DesignPattern;
 using Legends.Core.Protocol;
-using Legends.Core.Protocol.Enum;
-using Legends.Core.Protocol.Game;
-using Legends.Core.Protocol.Messages.Extended;
-using Legends.Core.Protocol.Messages.Game;
+using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
+using Legends.World.Entities.Statistics.Replication;
 using Legends.World.Games;
 using Legends.World.Spells;
 using System;
@@ -19,7 +18,6 @@ namespace Legends.World.Entities
 {
     public abstract class AttackableUnit : Unit
     {
-       
         public Stats Stats
         {
             get;
@@ -27,9 +25,13 @@ namespace Legends.World.Entities
         }
         public override bool IsMoving => false;
 
-        public AttackableUnit()
+        public abstract float SelectionRadius
         {
-             
+            get;
+        }
+        public AttackableUnit(uint netId) : base(netId)
+        {
+
         }
 
         public override void Initialize()
@@ -39,12 +41,34 @@ namespace Legends.World.Entities
         /// <summary>
         /// todo ? for attackable unit only?
         /// </summary>
-        public abstract void UpdateStats(bool partial = true);
+        public virtual void UpdateStats(bool partial = true)
+        {
+            ReplicationStats stats = Stats as ReplicationStats;
+
+            if (stats == null)
+            {
+                throw new Exception("Try to update stats from non replicable object.");
+            }
+
+            stats.UpdateReplication(partial);
+            Game.Send(new UpdateStatsMessage(0, NetId, stats.ReplicationManager.Values, partial));
+
+            if (partial)
+            {
+                foreach (var x in stats.ReplicationManager.Values)
+                {
+                    if (x != null)
+                    {
+                        x.Changed = false;
+                    }
+                }
+            }
+        }
 
         public virtual void InflictDamages(Damages damages)
         {
             damages.Apply();
-            
+
             Stats.Health.Current -= damages.Delta;
             Game.Send(new DamageDoneMessage(damages.Result, damages.Type, damages.Delta, NetId, damages.Source.NetId));
             UpdateStats();
@@ -74,7 +98,6 @@ namespace Legends.World.Entities
         public virtual void OnDead(AttackableUnit source)
         {
             Alive = false;
-            Game.Send(new DieMessage(source.NetId, NetId));
         }
         public void UpdateHeath()
         {

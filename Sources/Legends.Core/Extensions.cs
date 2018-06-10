@@ -16,6 +16,17 @@ namespace Legends.Core
 {
     public static class Extensions
     {
+        public static T2 GetValueOrDefault<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key,T2 @default = default(T2))
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                return dictionary[key];
+            }
+            else
+            {
+                return @default;
+            }
+        }
         public static float GetValuePrct(this float value, float percentage)
         {
             return (value * (percentage / 100f));
