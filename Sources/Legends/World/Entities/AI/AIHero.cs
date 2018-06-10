@@ -155,7 +155,6 @@ namespace Legends.World.Entities.AI
         }
         public override void Update(long deltaTime)
         {
-
             base.Update(deltaTime);
             DeathTimer.Update(deltaTime);
         }
@@ -163,7 +162,6 @@ namespace Legends.World.Entities.AI
         public override void OnMove()
         {
             base.OnMove();
-            AttentionPing(PathManager.GetWaypoints().Last(), NetId, PingTypeEnum.Ping_OnMyWay);
         }
         public override void OnUnitEnterVision(Unit unit)
         {
