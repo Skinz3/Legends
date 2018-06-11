@@ -1,7 +1,7 @@
 ﻿using Legends.Core.IO.Inibin;
 using Legends.Core.IO.RAF;
-using Legends.Core.Protocol.Enum;
 using Legends.DatabaseSynchronizer.Attributes;
+using Legends.Protocol.GameClient.Enum;
 using Legends.Records;
 using System;
 using System.Collections.Generic;

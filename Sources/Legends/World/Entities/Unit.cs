@@ -4,6 +4,7 @@ using Legends.Protocol.GameClient.Messages.Game;
 using Legends.World.Entities.Movements;
 using Legends.World.Games;
 using Legends.World.Games.Maps;
+using Legends.World.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Entities
 {
-    public abstract class Unit : IUpdatable
+    public abstract class Unit : IUpdatable, IInitializable
     {
         public const float DEFAULT_MODEL_SIZE = 1f;
 
@@ -148,6 +149,6 @@ namespace Legends.World.Entities
             return Name;
         }
 
-     
+
     }
 }

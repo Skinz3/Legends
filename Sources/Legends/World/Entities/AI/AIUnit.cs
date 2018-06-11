@@ -45,6 +45,8 @@ namespace Legends.World.Entities.AI
 
         public override float SelectionRadius => (float)Record.SelectionRadius;
 
+        public override float PathfindingCollisionRadius => (float)Record.PathfindingCollisionRadius;
+
         public abstract bool DefaultAutoattackActivated
         {
             get;
@@ -121,10 +123,7 @@ namespace Legends.World.Entities.AI
         [InDeveloppement(InDeveloppementState.THINK_ABOUT_IT, "Not sure about values...check again in RAF?")]
         public float GetAutoattackRangeWhileChasing(AttackableUnit target)
         {
-            if (target is Building)
-            {
-
-            }
+            return Stats.AttackRange.TotalSafe + ((float)target.PathfindingCollisionRadius * target.Stats.ModelSize.TotalSafe);
             return Stats.AttackRange.TotalSafe + ((float)target.SelectionRadius * target.Stats.ModelSize.TotalSafe);
         }
         [InDeveloppement(InDeveloppementState.TODO, "We need to use pathfinding only for melee to join target.")]

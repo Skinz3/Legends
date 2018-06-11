@@ -19,6 +19,7 @@ using Legends.World.Entities.Statistics;
 using Legends.Core.DesignPattern;
 using Legends.World.Entities.Statistics.Replication;
 using Legends.Protocol.GameClient.Other;
+using Legends.World.Entities.AI.Deaths;
 
 namespace Legends.World.Entities.AI
 {
@@ -77,12 +78,11 @@ namespace Legends.World.Entities.AI
 
         public override bool AddFogUpdate => false;
 
-        private DeathTimer DeathTimer
+        private HeroDeath Death
         {
             get;
             set;
         }
-
 
         public AIHero(LoLClient client, PlayerData data, AIUnitRecord record) : base(0, record)
         {
@@ -96,7 +96,7 @@ namespace Legends.World.Entities.AI
             Champion = ChampionProvider.Instance.GetChampion(this, (ChampionEnum)Enum.Parse(typeof(ChampionEnum), Data.ChampionName));
             Stats = new HeroStats(Record, Data.SkinId);
             Model = Data.ChampionName;
-            DeathTimer = new DeathTimer(this);
+            Death = new HeroDeath(this);
             SkinId = Data.SkinId;
             Score = new Score();
             base.Initialize();
@@ -134,17 +134,18 @@ namespace Legends.World.Entities.AI
             UpdateStats();
             Alive = false;
             Score.DeathCount++;
-            DeathTimer.OnDead();
-            Game.Send(new ChampionDieMessage(500, NetId, source.NetId, DeathTimer.TimeLeftSeconds));
+            Death.OnDead();
+            Game.Send(new ChampionDieMessage(500, NetId, source.NetId, Death.TimeLeftSeconds));
             Game.UnitAnnounce(UnitAnnounceEnum.Death, NetId, source.NetId, new uint[0]);
-            Client.Send(new ChampionDeathTimerMessage(NetId, DeathTimer.TimeLeftSeconds));
+            Client.Send(new ChampionDeathTimerMessage(NetId, Death.TimeLeftSeconds));
             base.OnDead(source);
         }
-        public void OnRevive()
+        public override void OnRevive(AttackableUnit source)
         {
+            base.OnRevive(source);
             Stats.Health.Current = Stats.Health.TotalSafe;
             Stats.Mana.Current = Stats.Mana.TotalSafe;
-            Alive = true;
+            
             Position = SpawnPosition;
             Game.Send(new ChampionRespawnMessage(NetId, Position));
             UpdateStats();
@@ -156,7 +157,7 @@ namespace Legends.World.Entities.AI
         public override void Update(long deltaTime)
         {
             base.Update(deltaTime);
-            DeathTimer.Update(deltaTime);
+            Death.Update(deltaTime);
         }
 
         public override void OnMove()

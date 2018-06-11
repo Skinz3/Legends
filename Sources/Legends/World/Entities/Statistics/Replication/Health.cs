@@ -82,7 +82,12 @@ namespace Legends.World.Entities.Statistics.Replication
                 Current = TotalSafe * percentHp;
             }
         }
-
+        public override void SetBaseValue(float baseValue)
+        {
+            var percentHp = Current / TotalSafe;
+            base.SetBaseValue(baseValue);
+            this.Current = TotalSafe * percentHp;
+        }
         public Health(float baseValue) : base(baseValue, 0)
         {
             Current = baseValue;

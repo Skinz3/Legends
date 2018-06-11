@@ -79,6 +79,8 @@
     <Compile Include="GameClient\Messages\Game\GameTimerUpdateMessage.cs" />
     <Compile Include="GameClient\Messages\Game\HeartBeatMessage.cs" />
     <Compile Include="GameClient\Messages\Game\HeroSpawnMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\BuildingDieMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\InhibitorStateUpdateMessage.cs" />
     <Compile Include="GameClient\Messages\Game\LeaveVisionMessage.cs" />
     <Compile Include="GameClient\Messages\Game\LevelUpMessage.cs" />
     <Compile Include="GameClient\Messages\Game\LockCameraRequestMessage.cs" />

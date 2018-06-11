@@ -66,6 +66,10 @@
       <Project>{9075ff6e-824e-4468-851e-83d1354a7bce}</Project>
       <Name>Legends.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Legends.Protocol\Legends.Protocol.csproj">
+      <Project>{6ad17cf4-ec08-4ee6-98cc-2818fd9b10a2}</Project>
+      <Name>Legends.Protocol</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Legends\Legends.csproj">
       <Project>{08c77abf-5998-4dd1-a21f-f68fc58fd7f8}</Project>
       <Name>Legends</Name>

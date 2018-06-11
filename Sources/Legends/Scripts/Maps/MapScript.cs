@@ -18,6 +18,21 @@ using System.Threading.Tasks;
 
 namespace Legends.Scripts.Maps
 {
+    public struct BindingDescription
+    {
+        public string[] UnitsThatProtect;
+
+        public string[] UnitsProtected;
+
+        public bool AllDead;
+
+        public BindingDescription(string[] unitsThatProtect,string[] unitsProtected,bool alldead)
+        {
+            this.UnitsThatProtect = unitsThatProtect;
+            this.UnitsProtected = unitsProtected;
+            this.AllDead = alldead;
+        }
+    }
     public abstract class MapScript : Script, IUpdatable
     {
         protected Logger logger = new Logger();
@@ -35,15 +50,39 @@ namespace Legends.Scripts.Maps
             get;
             set;
         }
+        private List<BindingDescription> Bindings
+        {
+            get;
+            set;
+        }
+        private MapBindingManager BindingManager
+        {
+            get;
+            set;
+        }
         public MapScript(Game game)
         {
             this.Game = game;
             this.DelayedActions = new List<KeyValuePair<Action, float>>();
+            this.Bindings = new List<BindingDescription>();
+        }
+        public void AddBinding(string[] sources, string[] targets, bool allDead)
+        {
+            this.Bindings.Add(new BindingDescription(sources, targets, allDead));
         }
         /// <summary>
         /// 
         /// </summary>
         public abstract void OnSpawn();
+
+        public virtual void OnUnitsInitialized()
+        {
+            this.BindingManager = new MapBindingManager(Game, Bindings);
+            BindingManager.Initialize();
+            // create bindings for real
+        }
+
+        public abstract void CreateBindings();
 
         /// <summary>
         /// GameTime = 0
@@ -103,7 +142,7 @@ namespace Legends.Scripts.Maps
             if (teamId != TeamId.UNKNOWN)
             {
                 uint netId = (uint)(BuildingProvider.BUILDING_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(fullName)));
-                AITurret turret = new AITurret(netId, aIUnitRecord, objectRecord, BuildingProvider.TOWER_SUFFIX);
+                AITurret turret = new AITurret(netId, aIUnitRecord, objectRecord, BuildingRecord.GetBuildingRecord(Game.Map.Id, turretName), BuildingProvider.TOWER_SUFFIX);
                 turret.DefineGame(Game);
                 Game.AddUnit(turret, teamId);
                 Game.Map.AddUnit(turret);
@@ -113,7 +152,6 @@ namespace Legends.Scripts.Maps
                 logger.Write(string.Format(SPAWN_EX_STRING, turretName, "Unable to find a team."), MessageState.WARNING);
             }
         }
-
         public void Update(long deltaTime)
         {
             if (DelayedActions.Count > 0)

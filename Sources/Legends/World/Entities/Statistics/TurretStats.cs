@@ -23,7 +23,7 @@ namespace Legends.World.Entities.Statistics
         {
         }
 
-        public TurretStats(AIUnitRecord record) : base((float)record.BaseHp, (float)record.BaseMp, (float)record.BaseHpRegen, (float)record.BaseArmor,
+        public TurretStats(AIUnitRecord record, BuildingRecord buildingRecord) : base((float)record.BaseHp, (float)record.BaseMp, (float)record.BaseHpRegen, (float)record.BaseArmor,
              (float)record.BaseDamage, record.BaseAbilityPower, (float)record.BaseDodge, (float)record.BaseCritChance, (float)record.BaseMagicResist,
              (float)record.BaseMpRegen, record.AttackRange, (float)record.BaseAttackSpeed, (float)record.AttackDelayOffsetPercent, AIHero.DEFAULT_COOLDOWN_REDUCTION,
              0, 0, 0, 0, 0, DEFAULT_PERCEPTION_BUBBLE_RADIUS, record.BaseMovementSpeed, 1)

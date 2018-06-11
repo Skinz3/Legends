@@ -81,7 +81,22 @@ namespace Legends.World.Games
             unit.TeamNo = Size + 1;
             Units.Add(unit.TeamNo, unit);
         }
-
+        public T[] GetUnits<T>(Predicate<T> predicate)
+        {
+            return Array.FindAll<T>(Units.Values.OfType<T>().ToArray(), predicate);
+        }
+        public T GetUnit<T>(Func<T, bool> predicate) where T : Unit
+        {
+            return Units.Values.OfType<T>().FirstOrDefault(predicate);
+        }
+        public T GetUnit<T>(string name) where T : Unit
+        {
+            return GetUnit<T>(x => x.Name == name);
+        }
+        public T GetUnit<T>(uint netId) where T : Unit
+        {
+            return GetUnit<T>(x => x.NetId == netId);
+        }
         public void RemoveUnit(Unit unit)
         {
             Units.Remove(unit.TeamNo);
@@ -117,7 +132,7 @@ namespace Legends.World.Games
         }
         public void InitializeFog()
         {
-            foreach (var unit in Array.FindAll(Units.Values.ToArray(),x=>x.AddFogUpdate))
+            foreach (var unit in Array.FindAll(Units.Values.ToArray(), x => x.AddFogUpdate))
             {
                 AddFogUpdate(new FogUpdate(Game.NetIdProvider.PopNextNetId(), Id, unit));
             }
@@ -170,5 +185,12 @@ namespace Legends.World.Games
             }
         }
 
+        public void Initialize()
+        {
+            foreach (var unit in Units.Values)
+            {
+                unit.Initialize();
+            }
+        }
     }
 }

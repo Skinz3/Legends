@@ -46,10 +46,11 @@ namespace Legends.World.Entities.Statistics
             get;
             set;
         }
+
         public IsTargetableToTeamFlags TargetableToTeam
         {
             get;
-            private set;
+            set;
         }
         public Stat Armor
         {
@@ -187,18 +188,17 @@ namespace Legends.World.Entities.Statistics
             float baseAbilityPower, float baseDodge, float baseCriticalHit, float baseMagicResistance, float baseManaRegeneration,
             float baseAttackRange, float baseAttackSpeed, float attackDelayPercent, float baseCooldownReduction, float baseArmorPenetration,
             float baseMagicPenetration, float baseLifeSteal, float baseSpellVamp, float baseCCReduction, float basePerceptionBubbleRadius,
-            float baseMoveSpeed, float baseModelSize) 
+            float baseMoveSpeed, float baseModelSize)
         {
             this.Health = new Health(baseHeath);
             this.Mana = new Health(baseMana);
             this.IsInvulnerable = false;
             this.IsPhysicalImmune = false;
             this.IsMagicImmune = false;
-            this.IsTargetable = true;
             this.TargetableToTeam = IsTargetableToTeamFlags.TargetableToAll;
             this.Armor = new Stat(baseArmor);
             this.HpRegeneration = new Stat(baseHpRegen);
-
+            this.IsTargetable = true;
             this.ActionState = StatActionStateEnum.CanAttack | StatActionStateEnum.CanCast | StatActionStateEnum.CanMove | StatActionStateEnum.Unknown;
             this.IsLifeStealImmune = false;
             this.AttackDamage = new Stat(baseAttackDamage);

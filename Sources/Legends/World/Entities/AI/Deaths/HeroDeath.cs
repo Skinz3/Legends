@@ -7,52 +7,22 @@ using System.Text;
 using Legends.Core;
 using System.Threading.Tasks;
 
-namespace Legends.World.Entities.AI
+namespace Legends.World.Entities.AI.Deaths
 {
-    public class DeathTimer : IUpdatable
+    public class HeroDeath : Death<AIHero>
     {
-        public AIHero Hero
+        public HeroDeath(AIHero hero) : base(hero)
         {
-            get;
-            private set;
-        }
-        public float TimeLeft
-        {
-            get;
-            private set;
-        }
-        public float TimeLeftSeconds
-        {
-            get
-            {
-                return TimeLeft / 1000f;
-            }
-        }
-        public DeathTimer(AIHero hero)
-        {
-            this.Hero = hero;
-        }
-        public void Update(long deltaTime)
-        {
-            if (!Hero.Alive)
-            {
-                TimeLeft -= deltaTime;
-                if (TimeLeft <= 0)
-                {
-                    Hero.OnRevive();
-                    TimeLeft = 0;
-                }
-            }
         }
         /// <summary>
         /// http://leagueoflegends.wikia.com/wiki/Death
         /// </summary>
         /// <returns></returns>
         [InDeveloppement(InDeveloppementState.STARTED, "Summoners Rifts Only, Howling abyss is different")]
-        private float GetTimeLeft()
+        protected override float GetTimeLeftSeconds()
         {
-            float level = Hero.Stats.Level;
-            float minutes = Hero.Game.GameTimeMinutes;
+            float level = Unit.Stats.Level;
+            float minutes = Unit.Game.GameTimeMinutes;
 
             float brw = level * 2.5f + 7.5f;
 
@@ -74,11 +44,6 @@ namespace Legends.World.Entities.AI
             }
 
             return brw;
-        }
-        public void OnDead()
-        {
-            TimeLeft = GetTimeLeft() * 1000;
-            
         }
 
     }

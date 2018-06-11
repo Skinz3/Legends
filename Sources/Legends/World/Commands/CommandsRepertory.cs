@@ -16,11 +16,21 @@ using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Legends.World.Entities.Buildings;
 
 namespace Legends.World.Commands
 {
     class CommandsRepertory
     {
+        [Command("inhibitors")]
+        public static void RespawnInhibitorsCommand(LoLClient client)
+        {
+            foreach (var inhib in client.Hero.GetOposedTeam().GetUnits<Inhibitor>(x => !x.Alive))
+            {
+                inhib.Revive();
+            }
+        }
+
         [Command("addcrit")]
         public static void CercleCommand(LoLClient client, float value)
         {
@@ -109,7 +119,7 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-            
+
         }
         [Command("vision")]
         public static void VisionCommand(LoLClient client)

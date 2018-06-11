@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Legends.World.Entities.AI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

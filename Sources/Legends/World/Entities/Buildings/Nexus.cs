@@ -15,5 +15,10 @@ namespace Legends.World.Entities.Buildings
         {
         }
 
+        public override void OnRevive(AttackableUnit source)
+        {
+            base.OnRevive(source); // lol ? x)
+
+        }
     }
 }

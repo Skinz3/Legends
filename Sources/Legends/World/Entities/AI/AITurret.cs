@@ -18,7 +18,7 @@ namespace Legends.World.Entities.AI
 {
     public class AITurret : AIUnit
     {
-        public override string Name => MapObjectRecord.Name;
+        public override string Name => BuildingRecord.Name;
 
         public override float PerceptionBubbleRadius => ((TurretStats)Stats).PerceptionBubbleRadius.TotalSafe;
 
@@ -36,18 +36,23 @@ namespace Legends.World.Entities.AI
             get;
             set;
         }
-
-
-        public AITurret(uint netId, AIUnitRecord record, MapObjectRecord mapObject, string suffix) : base(netId, record)
+        private BuildingRecord BuildingRecord
+        {
+            get;
+            set;
+        }
+        public AITurret(uint netId, AIUnitRecord record, MapObjectRecord mapObject, BuildingRecord buildingRecord, string suffix) : base(netId, record)
         {
             this.NetId = netId;
             this.MapObjectRecord = mapObject;
             this.Position = new Vector2(mapObject.Position.X, mapObject.Position.Y);
             this.Suffix = suffix;
+            this.BuildingRecord = buildingRecord;
         }
         public override void Initialize()
         {
-            Stats = new TurretStats(Record);
+
+            Stats = new TurretStats(Record, BuildingRecord);
             base.Initialize();
         }
         protected void SetTarget(AttackableUnit unit)
@@ -79,7 +84,6 @@ namespace Legends.World.Entities.AI
             return Name + Suffix;
         }
 
-
         public override void OnUnitEnterVision(Unit unit)
         {
 
@@ -89,5 +93,7 @@ namespace Legends.World.Entities.AI
         {
 
         }
+
+
     }
 }

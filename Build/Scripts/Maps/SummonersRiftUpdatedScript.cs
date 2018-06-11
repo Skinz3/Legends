@@ -37,10 +37,18 @@ namespace Legends.Scripts.Maps
 			SpawnInhibitor("Barracks_T1_R1");
 			SpawnInhibitor("Barracks_T1_C1");
 			SpawnInhibitor("Barracks_T1_L1");
-
-            SpawnAITurret("Turret_T1_R_03", "SRUAP_Turret_Order1");
-            SpawnAITurret("Turret_T1_R_02", "SRUAP_Turret_Order2");
-            SpawnAITurret("Turret_T1_C_07", "SRUAP_Turret_Order3_Test");
+			
+			
+			// SpawnAITurret(TurretBuildingName,TurretAIName,UnitThatProtect
+			
+			
+			SpawnAITurret("Turret_T1_C_07", "SRUAP_Turret_Order3_Test");
+			SpawnAITurret("Turret_T1_R_02", "SRUAP_Turret_Order2");
+			SpawnAITurret("Turret_T1_R_03", "SRUAP_Turret_Order1");
+	
+          
+            
+            
             SpawnAITurret("Turret_T2_R_03", "SRUAP_Turret_Chaos1");
             SpawnAITurret("Turret_T2_R_02", "SRUAP_Turret_Chaos2");
             SpawnAITurret("Turret_T2_R_01", "SRUAP_Turret_Chaos3_Test");
@@ -63,5 +71,44 @@ namespace Legends.Scripts.Maps
             SpawnAITurret("Turret_T2_L_02", "SRUAP_Turret_Chaos2");
             SpawnAITurret("Turret_T2_L_01", "SRUAP_Turret_Chaos3_Test");
         }
+	
+		public override void CreateBindings()
+		{
+			// Top lane
+			AddBinding(new string[] { "Turret_T2_L_01"},new string[] { "Barracks_T2_L1" },true); 
+			AddBinding(new string[] { "Turret_T2_L_02"},new string[] {"Turret_T2_L_01" },true);
+			AddBinding(new string[] { "Turret_T2_L_03"},new string[] {"Turret_T2_L_02" },true);
+			
+			AddBinding(new string[] { "Turret_T1_L_03"},new string[] {"Turret_T1_L_02" },true);
+			AddBinding(new string[] { "Turret_T1_L_02"},new string[] {"Turret_T1_C_06" },true);
+			AddBinding(new string[] { "Turret_T1_C_06" },new string[] {"Barracks_T1_L1" },true);
+			
+			// Mid lane
+		    AddBinding(new string[] { "Turret_T2_C_03"}, new string[] {"Barracks_T2_C1" },true);
+			AddBinding(new string[] { "Turret_T2_C_04"}, new string[] {"Turret_T2_C_03" },true);
+			AddBinding(new string[] { "Turret_T2_C_05"}, new string[] {"Turret_T2_C_04" },true);
+			
+			AddBinding(new string[] { "Turret_T1_C_05"}, new string[] {"Turret_T1_C_04" },true);
+			AddBinding(new string[] { "Turret_T1_C_04"}, new string[] {"Turret_T1_C_03" },true);
+			AddBinding(new string[] { "Turret_T1_C_03"}, new string[] {"Barracks_T1_C1"  },true);
+			
+			// Bot lane
+			AddBinding(new string[] { "Turret_T1_R_03" },new string[] { "Turret_T1_R_02"},true);
+			AddBinding(new string[] { "Turret_T1_R_02" },new string[] { "Turret_T1_C_07"},true);
+			AddBinding(new string[] { "Turret_T1_C_07" },new string[] { "Barracks_T1_R1"},true);
+
+			AddBinding(new string[] { "Turret_T2_R_03" },new string[] { "Turret_T2_R_02"},true);
+			AddBinding(new string[] { "Turret_T2_R_02" },new string[] { "Turret_T2_R_01"},true);
+			AddBinding(new string[] { "Turret_T2_R_01" },new string[] { "Barracks_T2_R1"},true);
+			
+			// Nexus towers
+			AddBinding(new string[] { "Barracks_T1_R1", "Barracks_T1_C1" , "Barracks_T1_L1"},new string[] {"Turret_T1_C_01","Turret_T1_C_02"},false);
+			AddBinding(new string[] { "Barracks_T2_R1", "Barracks_T2_C1" , "Barracks_T2_L1"},new string[] {"Turret_T2_C_01","Turret_T2_C_02"},false);
+			
+			// Nexus
+			AddBinding(new string[] { "Turret_T1_C_01","Turret_T1_C_02" },new string[]{"HQ_T1"},true);
+			AddBinding(new string[] { "Turret_T2_C_01","Turret_T2_C_02" },new string[]{"HQ_T2"},true);
+			
+		}
     }
 }

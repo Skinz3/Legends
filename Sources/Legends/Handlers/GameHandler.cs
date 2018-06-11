@@ -30,8 +30,8 @@ namespace Legends.Handlers
 
             if (targetUnit != null)
             {
-              //  string msg = "You clicked on {0} Position : {1} Distance to me : {2}";
-               // client.Hero.DebugMessage(string.Format(msg, targetUnit.Name, targetUnit.Position, targetUnit.GetDistanceTo(client.Hero)));
+                string msg = "You clicked on {0} Position : {1} Distance to me : {2}";
+                client.Hero.DebugMessage(string.Format(msg, targetUnit.Name, targetUnit.Position, targetUnit.GetDistanceTo(client.Hero)));
             }
         }
 
@@ -94,7 +94,7 @@ namespace Legends.Handlers
 
         }
         [MessageHandler(PacketCmd.PKT_C2S_AutoAttackOption)]
-        public static void HandleAutoAttackOptionMessage(AutoAttackOptionMessage message,LoLClient client)
+        public static void HandleAutoAttackOptionMessage(AutoAttackOptionMessage message, LoLClient client)
         {
             client.Hero.SetAutoattackOption(message.Activated);
         }

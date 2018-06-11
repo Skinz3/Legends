@@ -14,5 +14,6 @@ namespace Legends.World.Entities.Buildings
         }
 
         public override bool AddFogUpdate => true;
+
     }
 }

@@ -15,7 +15,7 @@ namespace Legends.World.Entities.Statistics
 
         public HeroStats(AIUnitRecord record, int skinId) : base((float)record.BaseHp, (float)record.BaseMp, (float)record.BaseHpRegen, (float)record.BaseArmor,
             (float)record.BaseDamage, record.BaseAbilityPower, (float)record.BaseDodge, (float)record.BaseCritChance, (float)record.BaseMagicResist,
-            (float)record.BaseMpRegen, record.AttackRange, (float)record.BaseAttackSpeed,(float)record.AttackDelayOffsetPercent, AIHero.DEFAULT_COOLDOWN_REDUCTION,
+            (float)record.BaseMpRegen, record.AttackRange, (float)record.BaseAttackSpeed, (float)record.AttackDelayOffsetPercent, AIHero.DEFAULT_COOLDOWN_REDUCTION,
             0, 0, 0, 0, 0, DEFAULT_PERCEPTION_BUBBLE_RADIUS, record.BaseMovementSpeed, record.GetSkinScale(skinId)) // 1 = todo SkinRecord
         {
 

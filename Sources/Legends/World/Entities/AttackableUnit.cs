@@ -3,6 +3,7 @@ using Legends.Core.DesignPattern;
 using Legends.Core.Protocol;
 using Legends.Protocol.GameClient.Enum;
 using Legends.Protocol.GameClient.Messages.Game;
+using Legends.World.Entities.AI.Deaths;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
@@ -18,6 +19,15 @@ namespace Legends.World.Entities
 {
     public abstract class AttackableUnit : Unit
     {
+        /// <summary>
+        /// (AttackableUnit = Me,Unit (should be DeathCauses)  = source)
+        /// </summary>
+        public event Action<AttackableUnit, Unit> OnDeadEvent;
+        /// <summary>
+        /// (AttackableUnit = Me,Unit = source)
+        /// </summary>
+        public event Action<AttackableUnit, Unit> OnReviveEvent;
+
         public Stats Stats
         {
             get;
@@ -29,6 +39,12 @@ namespace Legends.World.Entities
         {
             get;
         }
+
+        public abstract float PathfindingCollisionRadius
+        {
+            get;
+        }
+
         public AttackableUnit(uint netId) : base(netId)
         {
 
@@ -98,8 +114,16 @@ namespace Legends.World.Entities
         public virtual void OnDead(AttackableUnit source)
         {
             Alive = false;
+
+            OnDeadEvent?.Invoke(this, source);
         }
-        public void UpdateHeath()
+        public virtual void OnRevive(AttackableUnit source)
+        {
+            Alive = true;
+
+            OnReviveEvent?.Invoke(this, source);
+        }
+        public virtual void UpdateHeath()
         {
             Game.Send(new SetHealthMessage(NetId, 0, Stats.Health.TotalSafe, Stats.Health.Current));
         }

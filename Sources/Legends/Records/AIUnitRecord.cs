@@ -128,7 +128,12 @@ namespace Legends.Records
             get;
             set;
         }
-
+        [InibinField(InibinHashEnum.CHARACTER_PerceptionBubbleRadius)]
+        public double PerceptionBubbleRadius
+        {
+            get;
+            set;
+        }
         [InibinField(InibinHashEnum.CHARACTER_HPRegenPerLevel)]
         public double HpRegenPerLevel
         {

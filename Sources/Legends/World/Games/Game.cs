@@ -172,7 +172,28 @@ namespace Legends.World.Games
                 unit.DefineTeam(PurpleTeam);
                 PurpleTeam.AddUnit(unit);
             }
-            unit.Initialize();
+        }
+        public T GetUnit<T>(string name) where T : Unit
+        {
+            return GetUnit<T>(x => x.Name == name);
+        }
+        public T GetUnit<T>(uint netId) where T : Unit
+        {
+            return GetUnit<T>(x => x.NetId == netId);
+        }
+        public T GetUnit<T>(Func<T, bool> predicate) where T : Unit
+        {
+            var blue = BlueTeam.GetUnit<T>(predicate);
+
+            if (blue != null)
+            {
+                return blue;
+            }
+            else
+            {
+                return PurpleTeam.GetUnit<T>(predicate);
+            }
+
         }
         public void RemoveUnit(Unit unit)
         {
@@ -200,8 +221,14 @@ namespace Legends.World.Games
                 Map.AddUnit(player);
             }
 
-            Map.Script.OnSpawn();
 
+            Map.Script.OnSpawn();
+            Map.Script.CreateBindings();
+
+            BlueTeam.Initialize();
+            PurpleTeam.Initialize();
+
+            Map.Script.OnUnitsInitialized();
 
             Send(new StartSpawnMessage());
             foreach (var player in Map.Units.OfType<AIHero>())
@@ -213,7 +240,7 @@ namespace Legends.World.Games
                 player.UpdateStats(false);
                 player.UpdateHeath();
             }
-           
+
             foreach (var turret in Map.Units.OfType<AITurret>())
             {
                 Send(new TurretSpawnMessage(0, turret.NetId, turret.GetClientName()));

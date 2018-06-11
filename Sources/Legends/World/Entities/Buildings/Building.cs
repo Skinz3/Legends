@@ -10,14 +10,15 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Entities.Buildings
 {
-    public abstract class Building : AttackableUnit
+    public abstract class Building : AttackableUnit 
     {
         public override string Name => BuildingRecord.Name;
 
         public override float PerceptionBubbleRadius => Stats.PerceptionBubbleRadius.TotalSafe;
 
-        public override float SelectionRadius => 350; // BuildingRecord.PathfindingCollisionRadius;
+        public override float SelectionRadius => BuildingRecord.SelectionRadius;
 
+        public override float PathfindingCollisionRadius => BuildingRecord.PathfindingCollisionRadius;
         protected BuildingRecord BuildingRecord
         {
             get;
@@ -44,12 +45,7 @@ namespace Legends.World.Entities.Buildings
 
         public override void OnUnitLeaveVision(Unit unit)
         {
-            
-        }
 
-        public override void UpdateStats(bool partial)
-        {
-            base.UpdateStats(partial);
         }
     }
 }

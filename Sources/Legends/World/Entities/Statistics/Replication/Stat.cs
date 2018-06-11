@@ -66,7 +66,7 @@ namespace Legends.World.Entities.Statistics.Replication
         {
             return s.TotalSafe;
         }
-        public void SetBaseValue(float baseValue)
+        public virtual void SetBaseValue(float baseValue)
         {
             this.BaseValue = baseValue;
         }

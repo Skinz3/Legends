@@ -78,6 +78,7 @@
     <Compile Include="Records\MapRecord.cs" />
     <Compile Include="Records\SkinRecord.cs" />
     <Compile Include="Records\SpellRecord.cs" />
+    <Compile Include="Scripts\Maps\MapBindingManager.cs" />
     <Compile Include="Scripts\Maps\MapScript.cs" />
     <Compile Include="Scripts\Maps\MapScriptsManager.cs" />
     <Compile Include="World\Entities\AI\AITurret.cs" />
@@ -85,8 +86,10 @@
     <Compile Include="World\Entities\AI\BasicAttack\BasicAttack.cs" />
     <Compile Include="World\Entities\AI\BasicAttack\MeleeBasicAttack.cs" />
     <Compile Include="World\Entities\AI\BasicAttack\RangedBasicAttack.cs" />
-    <Compile Include="World\Entities\AI\DeathTimer.cs" />
+    <Compile Include="World\Entities\AI\Deaths\Death.cs" />
+    <Compile Include="World\Entities\AI\Deaths\HeroDeath.cs" />
     <Compile Include="World\Entities\AI\BasicAttack\RangedManager.cs" />
+    <Compile Include="World\Entities\AI\Deaths\InhibitorDeath.cs" />
     <Compile Include="World\Entities\AI\Score.cs" />
     <Compile Include="World\Entities\Buildings\AnimatedBuilding.cs" />
     <Compile Include="World\Buildings\BuildingProvider.cs" />
@@ -128,7 +131,8 @@
     <Compile Include="World\Games\Maps\SummonersRiftUpdated.cs" />
     <Compile Include="World\Games\Maps\SummonersRift.cs" />
     <Compile Include="World\Games\Team.cs" />
-    <Compile Include="World\IUpdatable.cs" />
+    <Compile Include="World\Interfaces\IInitializable.cs" />
+    <Compile Include="World\Interfaces\IUpdatable.cs" />
     <Compile Include="World\Spells\Damages.cs" />
     <Compile Include="World\Spells\Projectiles\FreeProjectile.cs" />
     <Compile Include="World\Spells\Projectiles\Projectile.cs" />
@@ -160,6 +164,9 @@
       <Project>{0dc448d5-19c9-48df-af74-f2349d08ab22}</Project>
       <Name>SmartORM</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="World\Entities\Bind\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
