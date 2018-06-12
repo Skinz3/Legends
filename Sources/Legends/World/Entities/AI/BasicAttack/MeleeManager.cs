@@ -40,7 +40,8 @@ namespace Legends.World.Entities.AI.BasicAttack
             }
             if (IsAttacking == false) // osef, facile
             {
-                CurrentAutoattack = new MeleeBasicAttack(Unit, target, Unit.Stats.CriticalStrike());
+                bool critical = target.Stats.IsCriticalImmune ? false : Unit.Stats.CriticalStrike();
+                CurrentAutoattack = new MeleeBasicAttack(Unit, target, critical);
                 CurrentAutoattack.Notify();
                 Unit.OnTargetSet(target);
             }
@@ -61,7 +62,7 @@ namespace Legends.World.Entities.AI.BasicAttack
 
         public override void NextAutoattack()
         {
-            bool critical = Unit.Stats.CriticalStrike();
+            bool critical = CurrentAutoattack.Target.Stats.IsCriticalImmune ? false : Unit.Stats.CriticalStrike();
             Unit.AttackManager.CurrentAutoattack = new MeleeBasicAttack(Unit, CurrentAutoattack.Target, critical, false, DetermineNextSlot(critical));
             CurrentAutoattack.Notify();
         }
