@@ -8,6 +8,7 @@ using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
 using Legends.World.Games;
+using Legends.World.Items;
 using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,11 @@ namespace Legends.World.Entities
             get;
             protected set;
         }
+        public Inventory Inventory
+        {
+            get;
+            private set;
+        }
         public override bool IsMoving => false;
 
         public abstract float SelectionRadius
@@ -47,7 +53,7 @@ namespace Legends.World.Entities
 
         public AttackableUnit(uint netId) : base(netId)
         {
-
+            this.Inventory = new Inventory();
         }
 
         public override void Initialize()
@@ -81,14 +87,18 @@ namespace Legends.World.Entities
             }
         }
 
+
         public virtual void InflictDamages(Damages damages)
         {
             damages.Apply();
 
+            if (!Stats.IsLifeStealImmune)
+                damages.Source.Stats.Health.Heal(damages.Delta * damages.Source.Stats.LifeSteal.TotalSafe);
+
             Stats.Health.Current -= damages.Delta;
             Game.Send(new DamageDoneMessage(damages.Result, damages.Type, damages.Delta, NetId, damages.Source.NetId));
             UpdateStats();
-
+            damages.Source.UpdateStats();
             if (Stats.Health.Current <= 0)
             {
                 OnDead(damages.Source);

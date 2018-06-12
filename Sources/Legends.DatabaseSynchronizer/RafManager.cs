@@ -75,6 +75,23 @@ namespace Legends.DatabaseSynchronizer
             byte[] file = GetFile(path).GetContent(true);
             return new InibinFile(new MemoryStream(file));
         }
+        public RAFFileEntry[] GetFilesInDirectory(string dirPath, string extension)
+        {
+            var files = GetFiles(dirPath);
+            List<RAFFileEntry> results = new List<RAFFileEntry>();
+
+            foreach (var file in files)
+            {
+                var split = file.Path.Split('/');
+                string path = string.Join("/", split.Take(split.Length - 1).ToArray());
+
+                if (path == dirPath && Path.GetExtension(file.Path) == extension)
+                {
+                    results.Add(file);
+                }
+            }
+            return results.ToArray();
+        }
         public RAFFileEntry[] GetFiles(string containsPath)
         {
             List<RAFFileEntry> results = new List<RAFFileEntry>();

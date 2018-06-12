@@ -23,15 +23,15 @@ namespace Legends.Handlers
                 netId = message.netId,
                 loaded = message.loaded,
                 ping = message.ping,
-                unk1 = message.unk1, 
+                unk1 = message.unk1,
                 unk2 = message.unk2,
                 unk3 = message.unk3,
                 unk4 = message.unk4,
                 userId = client.UserId.Value,
-            }, Channel.CHL_LOW_PRIORITY, ENet.PacketFlags.None);
+            }, Channel.CHL_LOW_PRIORITY, ENet.PacketFlags.None); 
         }
         [MessageHandler(PacketCmd.PKT_C2S_HeartBeat)]
-        public static void HandleHeartBeat(HeartBeatMessage message,LoLClient client)
+        public static void HandleHeartBeat(HeartBeatMessage message, LoLClient client)
         {
             if (message.receiveTime > message.ackTime)
             {

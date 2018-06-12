@@ -75,6 +75,7 @@
     <Compile Include="Records\AIUnitRecord.cs" />
     <Compile Include="Records\BuildingRecord.cs" />
     <Compile Include="Records\ExperienceRecord.cs" />
+    <Compile Include="Records\ItemRecord.cs" />
     <Compile Include="Records\MapRecord.cs" />
     <Compile Include="Records\SkinRecord.cs" />
     <Compile Include="Records\SpellRecord.cs" />
@@ -133,6 +134,8 @@
     <Compile Include="World\Games\Team.cs" />
     <Compile Include="World\Interfaces\IInitializable.cs" />
     <Compile Include="World\Interfaces\IUpdatable.cs" />
+    <Compile Include="World\Items\Inventory.cs" />
+    <Compile Include="World\Items\Item.cs" />
     <Compile Include="World\Spells\Damages.cs" />
     <Compile Include="World\Spells\Projectiles\FreeProjectile.cs" />
     <Compile Include="World\Spells\Projectiles\Projectile.cs" />

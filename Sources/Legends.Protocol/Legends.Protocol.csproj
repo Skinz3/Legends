@@ -64,6 +64,7 @@
     <Compile Include="GameClient\Messages\Game\AttentionPingRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\AutoAttackOptionMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BeginAutoAttackMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\BuyItemRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ChampionDeathTimerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ChampionDieMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ChampionRespawnMessage.cs" />

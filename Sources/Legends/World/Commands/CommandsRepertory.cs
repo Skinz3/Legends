@@ -32,11 +32,16 @@ namespace Legends.World.Commands
         }
 
         [Command("addcrit")]
-        public static void CercleCommand(LoLClient client, float value)
+        public static void AddCritCommand(LoLClient client, float value)
         {
             client.Hero.Stats.CriticalHit.FlatBonus += value;
             client.Hero.UpdateStats();
-
+        }
+        [Command("addlifesteal")]
+        public static void AddLifeStealCommand(LoLClient client,float value)
+        {
+            client.Hero.Stats.LifeSteal.FlatBonus += value;
+            client.Hero.UpdateStats();
         }
         [Command("range")]
         public static void Cercle2Command(LoLClient client)

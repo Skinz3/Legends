@@ -86,7 +86,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         {
             this.Unit = unit;
             this.Target = target;
-            this.Critical = critical;
+            this.Critical = target.Stats.IsCriticalImmune ? false : critical;
             this.DeltaAnimationTime = AnimationTime;
             this.First = first;
             this.Slot = slot;

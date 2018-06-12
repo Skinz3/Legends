@@ -10,6 +10,10 @@ namespace Legends.World.Entities.Statistics
 {
     public class BuildingStats : ReplicationStats
     {
+        public override bool IsLifeStealImmune => true;
+
+        public override bool IsCriticalImmune => true;
+
         public BuildingStats(float baseHeath, float baseMana, float baseHpRegen, float baseArmor, float baseAttackDamage,
            float baseAbilityPower, float baseDodge, float baseCriticalHit, float baseMagicResistance, float baseManaRegeneration,
            float baseAttackRange, float baseAttackSpeed, float attackDelayPercent, float baseCooldownReduction, float baseArmorPenetration,

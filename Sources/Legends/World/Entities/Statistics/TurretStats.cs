@@ -12,6 +12,10 @@ namespace Legends.World.Entities.Statistics
     {
         public const float DEFAULT_PERCEPTION_BUBBLE_RADIUS = 1000;
 
+        public override bool IsLifeStealImmune => true;
+
+        public override bool IsCriticalImmune => true;
+
         public TurretStats(float baseHeath, float baseMana, float baseHpRegen,
             float baseArmor, float baseAttackDamage, float baseAbilityPower,
             float baseDodge, float baseCriticalHit, float baseMagicResistance,

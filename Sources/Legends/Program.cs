@@ -41,7 +41,7 @@ namespace Legends
             if (Debugger.IsAttached)
             {
                 Process.Start("StartGame.bat");
-                Process.Start("StartGame2.bat");
+                //  Process.Start("StartGame2.bat");
                 //   Process.Start("StartGame3.bat");
             }
 

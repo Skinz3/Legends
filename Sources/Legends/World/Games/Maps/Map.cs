@@ -45,6 +45,7 @@ namespace Legends.World.Games.Maps
         }
         /// <summary>
         /// int is team size and Vector2 are positions ([0] = first player, [1] = second, etc)
+        /// todo = put this in MapScript.cs
         /// </summary>
         public abstract Dictionary<int, Vector2[]> BlueSpawns
         {

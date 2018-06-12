@@ -39,7 +39,7 @@ namespace Legends.DatabaseSynchronizer
 
             var test = manager.GetFiles("ExpCurve.inibin");
 
-            // JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/spells.json","SPELLS");  
+          //  JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/items.json","ITEMS");  
             logger.OnStartup();
             var recordAssembly = Assembly.GetAssembly(typeof(AIUnitRecord));
 

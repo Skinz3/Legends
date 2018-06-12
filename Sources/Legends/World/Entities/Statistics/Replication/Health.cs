@@ -82,6 +82,17 @@ namespace Legends.World.Entities.Statistics.Replication
                 Current = TotalSafe * percentHp;
             }
         }
+        public void Heal(float amount)
+        {
+            if (Current + amount > TotalSafe)
+            {
+                Current = TotalSafe;
+            }
+            else
+            {
+                Current += amount;
+            }
+        }
         public override void SetBaseValue(float baseValue)
         {
             var percentHp = Current / TotalSafe;

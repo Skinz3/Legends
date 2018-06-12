@@ -60,7 +60,7 @@ namespace Legends.DatabaseSynchronizer
 
                     if (attribute2 != null)
                     {
-                        property.SetValue(record, Path.GetFileNameWithoutExtension(entry.Path));
+                        property.SetValue(record, Convert.ChangeType(Path.GetFileNameWithoutExtension(entry.Path), property.PropertyType)) ;
                     }
 
                     var attribute = property.GetCustomAttribute<InibinFieldAttribute>();
@@ -88,7 +88,7 @@ namespace Legends.DatabaseSynchronizer
                                 }
                                 else
                                 {
-                                    logger.Write(entry.Path + " has not value for" + property.Name, MessageState.WARNING);
+                                    //   logger.Write(entry.Path + " has no value for" + property.Name, MessageState.WARNING);
                                 }
                             }
                         }
@@ -96,7 +96,7 @@ namespace Legends.DatabaseSynchronizer
 
 
                 }
-              
+
                 records.Add(record);
             }
             return records.ToArray();

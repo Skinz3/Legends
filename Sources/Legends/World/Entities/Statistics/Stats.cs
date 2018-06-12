@@ -16,6 +16,13 @@ namespace Legends.World.Entities.Statistics
     /// </summary>
     public abstract class Stats
     {
+        /// <summary>
+        /// From LoL
+        /// </summary>
+        public const float MAX_LIFESTEAL = 0.20f;
+
+        public const float MAX_SPELLVAMP = 0.20f;
+
         public Health Health
         {
             get;
@@ -67,10 +74,13 @@ namespace Legends.World.Entities.Statistics
             get;
             set;
         }
-        public bool IsLifeStealImmune
+        public abstract bool IsLifeStealImmune
         {
             get;
-            private set;
+        }
+        public abstract bool IsCriticalImmune
+        {
+            get;
         }
         public Stat AttackDamage
         {
@@ -200,7 +210,6 @@ namespace Legends.World.Entities.Statistics
             this.HpRegeneration = new Stat(baseHpRegen);
             this.IsTargetable = true;
             this.ActionState = StatActionStateEnum.CanAttack | StatActionStateEnum.CanCast | StatActionStateEnum.CanMove | StatActionStateEnum.Unknown;
-            this.IsLifeStealImmune = false;
             this.AttackDamage = new Stat(baseAttackDamage);
             this.AbilityPower = new Stat(baseAbilityPower);
             this.Dodge = new Stat(baseDodge);
@@ -212,8 +221,8 @@ namespace Legends.World.Entities.Statistics
             this.CooldownReduction = new Stat(baseCooldownReduction);
             this.ArmorPenetration = new Stat(baseArmorPenetration);
             this.MagicPenetration = new Stat(baseMagicPenetration);
-            this.LifeSteal = new Stat(baseLifeSteal);
-            this.SpellVamp = new Stat(baseSpellVamp);
+            this.LifeSteal = new Stat(baseLifeSteal, 0, 20);
+            this.SpellVamp = new Stat(baseSpellVamp, 0, 20);
             this.CCReduction = new Stat(baseCCReduction);
             this.PerceptionBubbleRadius = new Stat(basePerceptionBubbleRadius);
             this.MoveSpeed = new Stat(baseMoveSpeed);
@@ -230,6 +239,10 @@ namespace Legends.World.Entities.Statistics
         {
             Gold += value;
             GoldTotal += value;
+        }
+        public void RemoveGold(float value)
+        {
+            Gold -= value;
         }
         public void AddExperience(float value)
         {

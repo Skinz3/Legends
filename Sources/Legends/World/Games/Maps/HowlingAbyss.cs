@@ -13,9 +13,15 @@ namespace Legends.World.Games.Maps
     {
         public override MapIdEnum Id => MapIdEnum.HowlingAbyss;
 
-        public override Dictionary<int, Vector2[]> BlueSpawns => throw new NotImplementedException();
+        public override Dictionary<int, Vector2[]> BlueSpawns => new Dictionary<int, Vector2[]>()
+        {
+             {1, new Vector2[] {  new Vector2(963,1100) } },
+        };
 
-        public override Dictionary<int, Vector2[]> PurpleSpawns => throw new NotImplementedException();
+        public override Dictionary<int, Vector2[]> PurpleSpawns => new Dictionary<int, Vector2[]>()
+        {
+             {1, new Vector2[] {  new Vector2(11649,11347) } },
+        };
 
         public HowlingAbyss(Game game) : base(game)
         {

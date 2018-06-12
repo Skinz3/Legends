@@ -14,6 +14,11 @@ namespace Legends.DatabaseSynchronizer
 {
     public class InibinHook
     {
+        [InibinMethod(typeof(ItemRecord))]
+        public static RAFFileEntry[] GetItemInibin(RafManager manager)
+        {
+            return manager.GetFilesInDirectory("DATA/Items", ".inibin");
+        }
         [InibinMethod(typeof(SkinRecord))]
         public static RAFFileEntry[] GetSkinsInibin(RafManager manager)
         {
@@ -25,15 +30,13 @@ namespace Legends.DatabaseSynchronizer
                 var values = Array.FindAll(manager.GetFiles(path), x => x.Path.Contains(".inibin"));
                 results.AddRange(values);
 
-
             }
             return results.ToArray();
         }
         [InibinMethod(typeof(SpellRecord))]
         public static RAFFileEntry[] GetSpellsInibin(RafManager manager)
         {
-            List<RAFFileEntry> results = new List<RAFFileEntry>();
-            return Array.FindAll(manager.GetFiles("DATA/Spells/"), x => x.Path.Contains(".inibin"));
+            return manager.GetFilesInDirectory("DATA/Spells", ".inibin");
         }
         [InibinMethod(typeof(AIUnitRecord))]
         public static RAFFileEntry[] GetChampionsInibin(RafManager manager)
@@ -42,7 +45,6 @@ namespace Legends.DatabaseSynchronizer
 
             var rf = manager.GetFiles("DATA/Characters/");
             rf = rf.ToList().FindAll(x => x.Path.Contains(".inibin")).ToArray();
-
 
 
             foreach (var f in rf)
@@ -57,7 +59,7 @@ namespace Legends.DatabaseSynchronizer
             }
 
             return results.ToArray();
-       
+
         }
     }
 }

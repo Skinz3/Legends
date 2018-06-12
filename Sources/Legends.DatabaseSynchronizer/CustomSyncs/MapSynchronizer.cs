@@ -54,6 +54,11 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                 {
                     var room = manager.GetFiles("room.dsc").FirstOrDefault(x => x.Path.Contains(record.Name)).GetContent(true);
                     var r = Encoding.ASCII.GetString(room);
+
+                    if (Helper.GetMapId(navGrid.Path) == 12)
+                    {
+
+                    }
                 }
 
                 if (ids.Contains(record.Id) == false)

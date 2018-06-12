@@ -33,6 +33,7 @@ namespace SmartORM.TableViewer
 
             if (result == DialogResult.OK)
             {
+                listBox1.Items.Clear();
                 TableView = new TableView(new SmartFile(openFileDialog1.FileName));
                 listBox1.Items.AddRange(TableView.GetDirectoriesNames());
             }
@@ -57,7 +58,7 @@ namespace SmartORM.TableViewer
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException("oops");
+            MessageBox.Show("Not implemented.");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -105,9 +106,17 @@ namespace SmartORM.TableViewer
             {
                 SearchResultIndex = 0;
             }
-            dataGridView1.FirstDisplayedScrollingRowIndex = SearchResults[SearchResultIndex].RowIndex;
-            SearchResultIndex++;
-            LastSearchWord = text;
+
+            if (SearchResults.Count > 0)
+            {
+                dataGridView1.FirstDisplayedScrollingRowIndex = SearchResults[SearchResultIndex].RowIndex;
+                SearchResultIndex++;
+                LastSearchWord = text;
+            }
+            else
+            {
+                MessageBox.Show("You search return no results.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
         }
     }
 }

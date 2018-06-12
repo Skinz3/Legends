@@ -38,9 +38,7 @@ namespace Legends.Scripts.Maps
 			SpawnInhibitor("Barracks_T1_C1");
 			SpawnInhibitor("Barracks_T1_L1");
 			
-			
-			// SpawnAITurret(TurretBuildingName,TurretAIName,UnitThatProtect
-			
+
 			
 			SpawnAITurret("Turret_T1_C_07", "SRUAP_Turret_Order3_Test");
 			SpawnAITurret("Turret_T1_R_02", "SRUAP_Turret_Order2");
