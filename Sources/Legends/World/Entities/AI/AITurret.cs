@@ -51,18 +51,12 @@ namespace Legends.World.Entities.AI
         }
         public override void Initialize()
         {
-
             Stats = new TurretStats(Record, BuildingRecord);
             base.Initialize();
-        }
-        protected void SetTarget(AttackableUnit unit)
-        {
-
         }
         public override void OnTargetSet(AttackableUnit target)
         {
             Game.Send(new SetTargetMessage(NetId, target.NetId));
-
         }
         public override void OnTargetUnset(AttackableUnit target)
         {

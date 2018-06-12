@@ -14,9 +14,14 @@ namespace Legends.Handlers
     class CommunicationHandler
     {
         [MessageHandler(PacketCmd.PKT_C2S_AttentionPing)]
-        public static void HandleAttentionPingRequestMessage(AttentionPingRequestMessage message,LoLClient client)
+        public static void HandleAttentionPingRequestMessage(AttentionPingRequestMessage message, LoLClient client)
         {
             client.Hero.AttentionPing(message.position, message.targetNetId, message.pingType);
+
+            if (message.pingType == PingTypeEnum.Ping_OnMyWay)
+            {
+                client.Hero.Teleport(message.position);
+            }
         }
         [MessageHandler(PacketCmd.PKT_ChatBoxMessage, Channel.CHL_COMMUNICATION)]
         public static void HandleChatBoxMessage(ChatBoxMessage message, LoLClient client)

@@ -9,11 +9,11 @@ namespace Legends.Core.Protocol
 {
     public abstract class GameMessage : BaseMessage
     {
-        public int ticks;
+        public int syncId;
 
-        public GameMessage(uint netId, int ticks) : base(netId)
+        public GameMessage(uint netId, int syncId) : base(netId)
         {
-            this.ticks = ticks;
+            this.syncId = syncId;
         }
         public GameMessage()
         {
@@ -24,13 +24,13 @@ namespace Legends.Core.Protocol
         {
             writer.WriteByte((byte)Cmd);
             writer.WriteUInt(netId);
-            writer.WriteInt(ticks);
+            writer.WriteInt(syncId);
             Serialize(writer);
         }
         public override void Unpack(LittleEndianReader reader)
         {
             this.netId = reader.ReadUInt();
-            this.ticks = reader.ReadInt();
+            this.syncId = reader.ReadInt();
             this.Deserialize(reader);
         }
     }

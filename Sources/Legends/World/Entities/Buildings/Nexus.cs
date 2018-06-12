@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Legends.Records;
+using Legends.Protocol.GameClient.Messages.Game;
 
 namespace Legends.World.Entities.Buildings
 {
@@ -14,7 +15,6 @@ namespace Legends.World.Entities.Buildings
         public Nexus(uint netId, BuildingRecord buildingRecord, MapObjectRecord mapObjectRecord) : base(netId, buildingRecord, mapObjectRecord)
         {
         }
-
         public override void OnRevive(AttackableUnit source)
         {
             base.OnRevive(source); // lol ? x)

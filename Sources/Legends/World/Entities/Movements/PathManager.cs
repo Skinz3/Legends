@@ -130,8 +130,6 @@ namespace Legends.World.Entities.Movements
 
                 Unit.Position = new Vector2(Unit.Position.X + xOffset, Unit.Position.Y + yOffset);
 
-                Console.WriteLine(Unit.Position);
-
                 if (TargetUnit != null)
                 {
                     if (TargetUnit.GetDistanceTo(Unit) <= DistanceToTarget)

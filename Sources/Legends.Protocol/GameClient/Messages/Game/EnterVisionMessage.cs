@@ -78,13 +78,13 @@ namespace Legends.Protocol.GameClient.Messages.Game
             writer.WriteByte((byte)((waypoints.Length - waypointsIndex + 1) * 2)); // coordCount
             writer.WriteUInt((uint)netId);
             writer.WriteByte((byte)0); // movement mask; 1=KeepMoving?
-            writer.WriteShort(MovementVector.TargetXToNormalFormat(position.X, middleOfMap));
-            writer.WriteShort(MovementVector.TargetYToNormalFormat(position.Y, middleOfMap));
+            writer.WriteShort((short)MovementVector.TargetXToNormalFormat(position.X, middleOfMap));
+            writer.WriteShort((short)MovementVector.TargetYToNormalFormat(position.Y, middleOfMap));
 
             for (int i = waypointsIndex; i < waypoints.Length; ++i)
             {
-                writer.WriteShort(MovementVector.TargetXToNormalFormat(waypoints[i].X, middleOfMap));
-                writer.WriteShort(MovementVector.TargetXToNormalFormat(waypoints[i].Y, middleOfMap));
+                writer.WriteShort((short)MovementVector.TargetXToNormalFormat(waypoints[i].X, middleOfMap));
+                writer.WriteShort((short)MovementVector.TargetXToNormalFormat(waypoints[i].Y, middleOfMap));
             }
         }
         public void SerializeStatic(LittleEndianWriter writer)

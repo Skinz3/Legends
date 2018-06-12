@@ -64,7 +64,6 @@ namespace Legends.World.Entities.Buildings
 
             Game.UnitAnnounce(UnitAnnounceEnum.InhibitorDestroyed, NetId, source.NetId, new uint[0]);
 
-            Game.Send(new BuildingDieMessage(source.NetId, NetId));
             Death.OnDead();
             Game.Send(new InhibitorStateUpdateMessage(NetId, InhibitorStateEnum.Dead));
             base.OnDead(source);

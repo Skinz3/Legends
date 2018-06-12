@@ -5,6 +5,7 @@ using Legends.Core.Protocol;
 using System.Threading.Tasks;
 using Legends.Core.IO;
 using System.Text;
+using Legends.Protocol.GameClient.Enum;
 
 namespace Legends.Protocol.GameClient.LoadingScreen
 {
@@ -20,12 +21,12 @@ namespace Legends.Protocol.GameClient.LoadingScreen
         public int mapId;
         public PlayerInformations[] players;
         public string version; // "NA1"
-        public string gameMode;
+        public GameModeEnum gameMode;
         public string region;
         public int gameFeatures; // 487826
 
         public SynchVersionAnswerMessage(uint netId, byte unk, int mapId, PlayerInformations[] players,
-            string version, string gameMode, string region, int gameFeatures) : base(netId)
+            string version, GameModeEnum gameMode, string region, int gameFeatures) : base(netId)
         {
             this.unk = unk;
             this.mapId = mapId;
@@ -63,10 +64,11 @@ namespace Legends.Protocol.GameClient.LoadingScreen
 
             writer.Fill(0, 256 - version.Length);
 
-            foreach (var b in Encoding.UTF8.GetBytes(gameMode))
+            string gameModeString = gameMode.ToString();
+            foreach (var b in Encoding.UTF8.GetBytes(gameModeString))
                 writer.WriteByte(b);
 
-            writer.Fill(0, 128 - gameMode.Length);
+            writer.Fill(0, 128 - gameModeString.Length);
 
             foreach (var b in Encoding.UTF8.GetBytes(region))
                 writer.WriteByte((byte)b);

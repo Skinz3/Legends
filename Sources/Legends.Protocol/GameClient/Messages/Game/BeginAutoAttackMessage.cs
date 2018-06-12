@@ -25,8 +25,8 @@ namespace Legends.Protocol.GameClient.Messages.Game
         public Vector2 sourcePosition;
         public Vector2 middleOfMap;
 
-        public BeginAutoAttackMessage(uint sourceNetId, uint targetNetId, byte extraTime, uint futureProjectileNetId, bool isCritical, 
-            Vector2 targetPosition,Vector2 sourcePosition,Vector2 middleOfMap) : base(sourceNetId)
+        public BeginAutoAttackMessage(uint sourceNetId, uint targetNetId, byte extraTime, uint futureProjectileNetId, bool isCritical,
+            Vector2 targetPosition, Vector2 sourcePosition, Vector2 middleOfMap) : base(sourceNetId)
         {
             this.extraTime = extraTime;
             this.futureProjectileNetId = futureProjectileNetId;
@@ -37,7 +37,7 @@ namespace Legends.Protocol.GameClient.Messages.Game
         }
         public BeginAutoAttackMessage()
         {
-            
+
         }
         public override void Deserialize(LittleEndianReader reader)
         {
@@ -57,10 +57,10 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
             writer.WriteByte((byte)0x80); // not sure what this is, but it should be correct (or maybe attacked x z y?) - 4.18
             writer.WriteByte((byte)0x01);
-            writer.WriteShort(MovementVector.TargetXToNormalFormat(targetPosition.X,middleOfMap));
+            writer.WriteShort((short)MovementVector.TargetXToNormalFormat(targetPosition.X, middleOfMap));
             writer.WriteByte((byte)0x80);
             writer.WriteByte((byte)0x01);
-            writer.WriteShort(MovementVector.TargetYToNormalFormat(targetPosition.Y, middleOfMap));
+            writer.WriteShort((short)MovementVector.TargetYToNormalFormat(targetPosition.Y, middleOfMap));
             writer.WriteByte((byte)0xCC);
             writer.WriteByte((byte)0x35);
             writer.WriteByte((byte)0xC4);

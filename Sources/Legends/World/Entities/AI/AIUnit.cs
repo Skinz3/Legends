@@ -103,6 +103,12 @@ namespace Legends.World.Entities.AI
             }
 
         }
+        public void Teleport(Vector2 position)
+        {
+            Position = position;
+            PathManager.Move(new List<Vector2>() { Position });
+            OnMove();
+        }
         public virtual void OnMove()
         {
             SendVision(new MovementAnswerMessage(0, PathManager.GetWaypoints(), NetId, Game.Map.Size), Channel.CHL_LOW_PRIORITY);

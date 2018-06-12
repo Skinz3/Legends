@@ -21,6 +21,7 @@ using SmartORM;
 using System.Collections.Concurrent;
 using Legends.Core.IO.CFG;
 using Legends.DatabaseSynchronizer.CustomSyncs;
+using Legends.Core.IO.Inibin;
 
 namespace Legends.DatabaseSynchronizer
 {

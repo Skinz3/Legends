@@ -101,7 +101,6 @@ namespace Legends.World.Entities.AI
             Score = new Score();
             base.Initialize();
         }
-
         [InDeveloppement(InDeveloppementState.TODO, "Skill points")]
         public void AddExperience(float value)
         {
@@ -145,11 +144,12 @@ namespace Legends.World.Entities.AI
             base.OnRevive(source);
             Stats.Health.Current = Stats.Health.TotalSafe;
             Stats.Mana.Current = Stats.Mana.TotalSafe;
-            
+
             Position = SpawnPosition;
             Game.Send(new ChampionRespawnMessage(NetId, Position));
             UpdateStats();
         }
+        
         public void DebugMessage(string content)
         {
             Client.Send(new DebugMessage(NetId, content));
@@ -193,6 +193,6 @@ namespace Legends.World.Entities.AI
             Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, 0, new uint[0]);
         }
 
-
+       
     }
 }

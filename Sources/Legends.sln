@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartORM.TableViewer", "Sma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends.Protocol", "Legends.Protocol\Legends.Protocol.csproj", "{6AD17CF4-EC08-4EE6-98CC-2818FD9B10A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends.Maestro", "Legends.Maestro\Legends.Maestro.csproj", "{2F099994-A963-4624-86C9-6B229E39DDC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{6AD17CF4-EC08-4EE6-98CC-2818FD9B10A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AD17CF4-EC08-4EE6-98CC-2818FD9B10A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AD17CF4-EC08-4EE6-98CC-2818FD9B10A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F099994-A963-4624-86C9-6B229E39DDC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F099994-A963-4624-86C9-6B229E39DDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F099994-A963-4624-86C9-6B229E39DDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F099994-A963-4624-86C9-6B229E39DDC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

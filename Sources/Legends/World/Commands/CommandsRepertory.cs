@@ -124,7 +124,8 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-
+            client.Send(new DashMessage(client.Hero.NetId, 30f, 10f, client.Hero.Position, true, client.Hero.NetId, client.Hero.Game.Map.Size,
+                new Vector2(500, 500),10f,10f,10f));
         }
         [Command("vision")]
         public static void VisionCommand(LoLClient client)

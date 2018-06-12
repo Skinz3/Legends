@@ -33,17 +33,17 @@ namespace Legends.Core.Geometry
             this.Y = y;
         }
 
-        public static short FormatCoordinate(float coordinate, float origin)
+        public static float FormatCoordinate(float coordinate, float origin)
         {
-            return (short)((coordinate - origin) / 2f);
+            return (coordinate - origin) / 2f;
         }
 
-        public static short TargetXToNormalFormat(float value, Vector2 middleOfMap)
+        public static float TargetXToNormalFormat(float value, Vector2 middleOfMap)
         {
             return FormatCoordinate(value, middleOfMap.X);
         }
 
-        public static short TargetYToNormalFormat(float value, Vector2 middleOfMap)
+        public static float TargetYToNormalFormat(float value, Vector2 middleOfMap)
         {
             return FormatCoordinate(value, middleOfMap.Y);
         }

@@ -57,7 +57,7 @@ namespace Legends.Handlers
                 logger.Write(userId + "try to connect a second time!", MessageState.WARNING);
                 return;
             }
-            client.DefinePlayer(new AIHero(client, datas,AIUnitRecord.GetAIUnitRecord(datas.ChampionName)));
+            client.DefinePlayer(new AIHero(client, datas, AIUnitRecord.GetAIUnitRecord(datas.ChampionName)));
 
             client.Hero.DefineGame(targetGame);
 
@@ -100,7 +100,7 @@ namespace Legends.Handlers
             {
                 var infos = ConfigurationProvider.Instance.GetPlayersInformations();
                 client.Send(new SynchVersionAnswerMessage(0, 1, (int)client.Hero.Game.Map.Id, infos,
-                LoLServer.CLIENT_REQUIRED_VERSION, "CLASSIC", "NA1", 487826), Channel.CHL_S2C);
+                LoLServer.CLIENT_REQUIRED_VERSION, GameModeEnum.CLASSIC, "NA1", 487826), Channel.CHL_S2C);
             }
         }
         [MessageHandler(PacketCmd.PKT_C2S_ClientReady, Channel.CHL_C2S)]
