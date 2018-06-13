@@ -231,6 +231,8 @@ namespace Legends.World.Games
             Map.Script.OnUnitsInitialized();
 
             Send(new StartSpawnMessage());
+
+         
             foreach (var player in Map.Units.OfType<AIHero>())
             {
                 Send(new HeroSpawnMessage(player.NetId, player.PlayerNo, player.Data.TeamId, player.SkinId, player.Data.Name,

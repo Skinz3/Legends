@@ -91,7 +91,7 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_C2S_SkillUp)]
         public static void HandleSkillUpRequestMessage(SkillUpRequestMessage message, LoLClient client)
         {
-
+            client.Hero.SpellManager.UpgradeSpell(message.skillId);
         }
         [MessageHandler(PacketCmd.PKT_C2S_AutoAttackOption)]
         public static void HandleAutoAttackOptionMessage(AutoAttackOptionMessage message, LoLClient client)

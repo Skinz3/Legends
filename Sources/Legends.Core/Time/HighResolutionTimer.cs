@@ -40,7 +40,7 @@ namespace Legends.Core.Time
          
         }
 
-        [InDeveloppement(InDeveloppementState.THINK_ABOUT_IT,"Thread.Sleep() still necessary?")]
+        [InDevelopment(InDevelopmentState.THINK_ABOUT_IT,"Thread.Sleep() still necessary?")]
         public void Stop()
         {
             int err = timeKillEvent(mTimerId);

@@ -88,6 +88,9 @@ namespace Legends.World.Entities.AI
 
         }
 
-
+        public override void OnSpellUpgraded(byte spellId,Spell targetSpell)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -8,7 +8,7 @@ using Legends.Core.DesignPattern;
 
 namespace Legends.World.Entities.AI.BasicAttack
 {
-    [InDeveloppement(InDeveloppementState.TODO, "just todo")]
+    [InDevelopment(InDevelopmentState.TODO, "just todo")]
     public class RangedBasicAttack : BasicAttack
     {
 

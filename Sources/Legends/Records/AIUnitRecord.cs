@@ -245,6 +245,37 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.CHARACTER_SPELL1)]
+        public string Spell1
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_SPELL2)]
+        public string Spell2
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_SPELL3)]
+        public string Spell3
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_SPELL4)]
+        public string Spell4
+        {
+            get;
+            set;
+        }
+        [JsonIgnore]
+        public SpellRecord[] Spells
+        {
+            get;
+            set;
+        }
+
         [JsonIgnore]
         public SkinRecord[] Skins
         {
@@ -256,52 +287,25 @@ namespace Legends.Records
         {
 
         }
-        public AIUnitRecord(int id, string name, double baseHp, double baseMp, short baseMovementSpeed,
-            short abilityPowerPerLevel, double armorPerLevel, short attackRange, double attackSpeedPerLevel,
-            short baseAbilityPower, double baseCriticalChance, double baseDamage, double critPerLevel,
-            double damagePerLevel, double hpPerLevel, double hpRegenPerLevel, bool isMelee, double mpPerLevel,
-            double mpRegenPerLevel, double baseArmor, double baseMagicResist, double baseHpRegen, double baseMpRegen,
-            double magicResistPerLevel, double attackDelayOffsetPercent, double baseDodge, double baseAttackSpeed,
-            double selectionHeight, double selectionRadius)
+        public SpellRecord GetSpellRecord(string spellName)
         {
-            this.Id = id;
-            this.Name = name;
-            this.BaseHp = baseHp;
-            this.BaseMp = baseMp;
-            this.BaseMovementSpeed = baseMovementSpeed;
-            this.AbilityPowerIncPerLevel = abilityPowerPerLevel;
-            this.ArmorPerLevel = armorPerLevel;
-            this.AttackRange = attackRange;
-            this.AttackSpeedPerLevel = attackSpeedPerLevel;
-            this.BaseAbilityPower = baseAbilityPower;
-            this.BaseCritChance = baseCriticalChance;
-            this.BaseDamage = baseDamage;
-            this.CritPerLevel = critPerLevel;
-            this.DamagePerLevel = damagePerLevel;
-            this.HpPerLevel = hpPerLevel;
-            this.HpRegenPerLevel = hpRegenPerLevel;
-            this.IsMelee = isMelee;
-            this.MpPerLevel = mpPerLevel;
-            this.MPRegenPerLevel = mpRegenPerLevel;
-            this.BaseMagicResist = baseMagicResist;
-            this.BaseArmor = baseArmor;
-            this.BaseMagicResist = baseMagicResist;
-            this.BaseHpRegen = baseHpRegen;
-            this.MagicResistPerLevel = magicResistPerLevel;
-            this.AttackDelayOffsetPercent = attackDelayOffsetPercent;
-            this.BaseMpRegen = baseMpRegen;
-            this.BaseDodge = baseDodge;
-            this.BaseAttackSpeed = baseAttackSpeed;
-            this.SelectionHeight = selectionHeight;
-            this.SelectionRadius = selectionRadius;
+            return Spells.FirstOrDefault(x => x.Name == spellName);
         }
-
         [StartupInvoke("Champion Hooks", StartupInvokePriority.Eighth)]
         public static void Initialize()
         {
             foreach (var record in AIUnitRecord.AIUnits)
             {
                 record.Skins = SkinRecord.GetSkins(record.Id);
+
+                record.Spells = (new SpellRecord[]
+                {
+                    SpellRecord.GetSpell(record.Spell1),
+                    SpellRecord.GetSpell(record.Spell2),
+                    SpellRecord.GetSpell(record.Spell3),
+                    SpellRecord.GetSpell(record.Spell4),
+                }).Where(x => x != null).ToArray();
+        
             }
         }
 

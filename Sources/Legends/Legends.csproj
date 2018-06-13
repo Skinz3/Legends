@@ -141,6 +141,8 @@
     <Compile Include="World\Spells\Projectiles\Projectile.cs" />
     <Compile Include="World\Spells\Projectiles\TargetedProjectile.cs" />
     <Compile Include="World\Spells\Spell.cs" />
+    <Compile Include="World\Spells\SpellManager.cs" />
+    <Compile Include="World\Spells\SpellProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -169,6 +171,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Scripts\Spells\" />
     <Folder Include="World\Entities\Bind\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

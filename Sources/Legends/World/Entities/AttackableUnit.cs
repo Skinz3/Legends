@@ -32,7 +32,7 @@ namespace Legends.World.Entities
         public Stats Stats
         {
             get;
-            protected set;
+            set;
         }
         public Inventory Inventory
         {
@@ -53,12 +53,20 @@ namespace Legends.World.Entities
 
         public AttackableUnit(uint netId) : base(netId)
         {
-            this.Inventory = new Inventory();
+            this.Inventory = new Inventory(this);
         }
 
         public override void Initialize()
         {
             base.Initialize();
+        }
+        public virtual void OnItemAdded(Item item)
+        {
+           
+        }
+        public virtual void OnItemRemoved(Item item)
+        {
+
         }
         /// <summary>
         /// todo ? for attackable unit only?
@@ -120,7 +128,7 @@ namespace Legends.World.Entities
                 oposedTeam.Send(message);
             }
         }
-        [InDeveloppement(InDeveloppementState.TODO, "The parametters should be DeathDescription.cs for assits")]
+        [InDevelopment(InDevelopmentState.TODO, "The parametters should be DeathDescription.cs for assits")]
         public virtual void OnDead(AttackableUnit source)
         {
             Alive = false;

@@ -50,7 +50,7 @@ namespace Legends.World.Entities.Statistics
             ReplicationManager.UpdateFloat(AttackDamage.FlatBonus, 1, 11);
             ReplicationManager.UpdateFloat(AttackDamage.PercentBonus, 1, 12);
             ReplicationManager.UpdateFloat(AbilityPower.BaseBonus, 1, 13);
-            ReplicationManager.UpdateFloat(HpRegeneration.TotalSafe, 1, 14);
+            ReplicationManager.UpdateFloat(HealthRegeneration.TotalSafe, 1, 14);
             ReplicationManager.UpdateFloat(Health.Current, 3, 0);
             ReplicationManager.UpdateFloat(Health.TotalSafe, 3, 1);
             ReplicationManager.UpdateFloat(PerceptionBubbleRadius.TotalSafe, 3, 2);

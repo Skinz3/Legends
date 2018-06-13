@@ -53,10 +53,28 @@ namespace Legends.DatabaseSynchronizer
             }
             this.Archives = rafs.ToArray();
         }
-        public bool Exists(string path)
+        public string[] GetDirectories(string path)
         {
-            return Archives.FirstOrDefault(x => x.Files.FirstOrDefault(f => f.Path == path) != null) != null;
+            List<string> results = new List<string>();
+
+            foreach (var archive in Archives)
+            {
+                var files = archive.Files.FindAll(x => x.Path.Contains(path));
+
+                foreach (var file in files)
+                {
+                    var splitted = file.Path.Substring(path.Length, file.Path.Length - path.Length).Split('/');
+
+                    if (splitted.Length > 1)
+                    {
+                        results.Add(splitted[1]);
+                    }
+                }
+            }
+         
+            return results.Distinct().ToArray();
         }
+
         public RAFFileEntry GetFile(string path) // "DATA/Characters/Aatrox/Aatrox.inibin"
         {
             foreach (var archive in Archives)
@@ -90,7 +108,7 @@ namespace Legends.DatabaseSynchronizer
                     results.Add(file);
                 }
             }
-            return results.ToArray();
+            return results.Distinct().ToArray();
         }
         public RAFFileEntry[] GetFiles(string containsPath)
         {

@@ -23,6 +23,7 @@ namespace Legends.Records
             get;
             set;
         }
+
         [InibinField(InibinHashEnum.SPELLS_AlternateName)]
         public string AlternateName
         {
@@ -41,5 +42,10 @@ namespace Legends.Records
             get;
             set;
         }
+        public static SpellRecord GetSpell(string spellName)
+        {
+            return Spells.Find(x => x.Name == spellName);
+        }
+      
     }
 }

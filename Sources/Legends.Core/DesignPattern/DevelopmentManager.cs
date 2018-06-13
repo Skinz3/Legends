@@ -23,7 +23,7 @@ namespace Legends.Core.DesignPattern
             Stopwatch stopwatch = Stopwatch.StartNew();
             foreach (var type in assembly.GetTypes())
             {
-                InDeveloppementAttribute attribute = type.GetCustomAttributes(false).OfType<InDeveloppementAttribute>().FirstOrDefault();
+                InDevelopmentAttribute attribute = type.GetCustomAttributes(false).OfType<InDevelopmentAttribute>().FirstOrDefault();
 
                 if (attribute != null)
                 {
@@ -33,7 +33,7 @@ namespace Legends.Core.DesignPattern
 
                 foreach (var method in type.GetMethods(BindingFlags))
                 {
-                    attribute = method.GetCustomAttributes(false).OfType<InDeveloppementAttribute>().FirstOrDefault();
+                    attribute = method.GetCustomAttributes(false).OfType<InDevelopmentAttribute>().FirstOrDefault();
 
                     if (attribute != null)
                     {
@@ -43,7 +43,7 @@ namespace Legends.Core.DesignPattern
                 }
                 foreach (var field in type.GetFields(BindingFlags))
                 {
-                    attribute = field.GetCustomAttributes(false).OfType<InDeveloppementAttribute>().FirstOrDefault();
+                    attribute = field.GetCustomAttributes(false).OfType<InDevelopmentAttribute>().FirstOrDefault();
 
                     if (attribute != null)
                     {
@@ -57,9 +57,9 @@ namespace Legends.Core.DesignPattern
         }
     }
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = false)]
-    public class InDeveloppementAttribute : Attribute
+    public class InDevelopmentAttribute : Attribute
     {
-        public InDeveloppementState State
+        public InDevelopmentState State
         {
             get;
             private set;
@@ -69,13 +69,13 @@ namespace Legends.Core.DesignPattern
             get;
             private set;
         }
-        public InDeveloppementAttribute(InDeveloppementState state = InDeveloppementState.TODO, string comment = null)
+        public InDevelopmentAttribute(InDevelopmentState state = InDevelopmentState.TODO, string comment = null)
         {
             this.State = state;
             this.Comment = comment;
         }
     }
-    public enum InDeveloppementState
+    public enum InDevelopmentState
     {
         TODO,
         STARTED,

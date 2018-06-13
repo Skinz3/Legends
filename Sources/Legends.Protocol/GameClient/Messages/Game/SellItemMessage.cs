@@ -8,17 +8,17 @@ using Legends.Core.IO;
 
 namespace Legends.Protocol.GameClient.Messages.Game
 {
-    public class BuyItemRequestMessage : BaseMessage
+    public class SellItemMessage : BaseMessage
     {
-        public static PacketCmd PACKET_CMD = PacketCmd.PKT_C2S_BuyItemReq;
+        public static PacketCmd PACKET_CMD = PacketCmd.PKT_C2S_SellItem;
         public override PacketCmd Cmd => PACKET_CMD;
 
         public static Channel CHANNEL = Channel.CHL_C2S;
         public override Channel Channel => CHANNEL;
 
-        public int itemId;
+        public byte slotId;
 
-        public BuyItemRequestMessage()
+        public SellItemMessage()
         {
 
         }
@@ -29,7 +29,7 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
         public override void Deserialize(LittleEndianReader reader)
         {
-            this.itemId = reader.ReadInt();
+            slotId = reader.ReadByte();
         }
     }
 }

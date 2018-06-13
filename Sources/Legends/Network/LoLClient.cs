@@ -71,17 +71,32 @@ namespace Legends.Network
             Message message = ProtocolManager.BuildMessage(this, channel, data);
             ProtocolManager.HandleMessage(message, this);
         }
-        [InDeveloppement(InDeveloppementState.THINK_ABOUT_IT, "A good synchronization method?")]
+        [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "A good synchronization method?")]
         public override void OnMessageHandle(Message message, Delegate handler)
         {
             if (Hero != null && Hero.Game != null && Hero.Game.Started)
             {
-                Hero.Game.Invoke(new Action(() => { handler.DynamicInvoke(null, message, this); }));
+                Hero.Game.Invoke(new Action(() =>
+                {
+                    Handle(message, handler);
+                }));
             }
             else
             {
 
+                Handle(message, handler);
+            }
+        }
+        private void Handle(Message message, Delegate handler)
+        {
+            try
+            {
                 handler.DynamicInvoke(null, message, this);
+            }
+
+            catch (Exception ex)
+            {
+                logger.Write("Exception on message (" + message.ToString() + "): " + ex.ToString(), MessageState.ERROR);
             }
         }
         public bool Send(byte[] buffer, Channel channelNo, PacketFlags flag = PacketFlags.Reliable)

@@ -80,7 +80,7 @@ namespace Legends.World.Entities.Statistics
             ReplicationManager.UpdateFloat(Armor.TotalSafe, 1, 9); // marmor
             ReplicationManager.UpdateFloat(MagicResistance.TotalSafe, 1, 10); // magicResist
 
-            ReplicationManager.UpdateFloat(HpRegeneration.TotalSafe, 1, 11); // hpRegenRate
+            ReplicationManager.UpdateFloat(HealthRegeneration.TotalSafe, 1, 11); // hpRegenRate
             ReplicationManager.UpdateFloat(ManaRegeneration.TotalSafe, 1, 12); // mpRegenRate
 
             ReplicationManager.UpdateFloat(AttackRange.TotalSafe, 1, 13); // mAttackRange
@@ -114,7 +114,7 @@ namespace Legends.World.Entities.Statistics
 
             ReplicationManager.UpdateFloat(ArmorPenetration.PercentBonus, 2, 0); // mPercentBonusArmorPenetration
             ReplicationManager.UpdateFloat(MagicPenetration.PercentBonus, 2, 1);  // mPercentBonusMagicPenetration
-            ReplicationManager.UpdateFloat(HpRegeneration.BaseValue, 2, 2); // mBaseHPRegenRate
+            ReplicationManager.UpdateFloat(HealthRegeneration.BaseValue, 2, 2); // mBaseHPRegenRate
             ReplicationManager.UpdateFloat(ManaRegeneration.BaseValue, 2, 3); //  mBasePARRegenRate
 
             ReplicationManager.UpdateFloat(Health.Current, 3, 0); // current hp

@@ -36,26 +36,45 @@ namespace Legends.DatabaseSynchronizer
         [InibinMethod(typeof(SpellRecord))]
         public static RAFFileEntry[] GetSpellsInibin(RafManager manager)
         {
-            return manager.GetFilesInDirectory("DATA/Spells", ".inibin");
+            List<RAFFileEntry> results = new List<RAFFileEntry>();
+
+            results.AddRange(manager.GetFilesInDirectory("DATA/Spells", ".inibin"));
+
+            var dirs = manager.GetDirectories("DATA/Characters");
+
+            foreach (var dir in dirs)
+            {
+                string path = "DATA/Characters/" + dir + "/Spells";
+
+                var files = manager.GetFilesInDirectory(path, ".inibin");
+
+                if (files.Length > 0)
+                {
+                    results.AddRange(files);
+                }
+            }
+
+            return results.ToArray();
+
         }
         [InibinMethod(typeof(AIUnitRecord))]
         public static RAFFileEntry[] GetChampionsInibin(RafManager manager)
         {
             List<RAFFileEntry> results = new List<RAFFileEntry>();
 
-            var rf = manager.GetFiles("DATA/Characters/");
-            rf = rf.ToList().FindAll(x => x.Path.Contains(".inibin")).ToArray();
+            var directories = manager.GetDirectories("DATA/Characters");
 
-
-            foreach (var f in rf)
+            foreach (var directory in directories)
             {
-                string aiName = f.Path.Split('/')[2];
+                string path = string.Format("DATA/Characters/{0}/{0}.inibin", directory);
 
-                string path = string.Format("DATA/Characters/{0}/{0}.inibin", aiName);
+                var result = manager.GetFile(path);
 
-
-                if (manager.Exists(path) && results.Find(x => x.Path == path) == null)
+                if (result != null && results.Find(x=>x.Path== path) == null)
+                {
                     results.Add(manager.GetFile(path));
+                }
+             
             }
 
             return results.ToArray();

@@ -20,6 +20,8 @@ using Legends.Core.DesignPattern;
 using Legends.World.Entities.Statistics.Replication;
 using Legends.Protocol.GameClient.Other;
 using Legends.World.Entities.AI.Deaths;
+using Legends.World.Items;
+using Legends.World.Spells;
 
 namespace Legends.World.Entities.AI
 {
@@ -34,6 +36,14 @@ namespace Legends.World.Entities.AI
             private set;
         }
 
+        public override void OnItemAdded(Item item)
+        {
+            Game.Send(new BuyItemAnswerMessage(NetId, item.Id, item.Slot, item.Stacks, (byte)0x29));
+        }
+        public override void OnItemRemoved(Item item)
+        {
+            Game.Send(new InventoryRemoveItemMessage(NetId, item.Slot, 0));
+        }
         public int PlayerNo
         {
             get;
@@ -101,7 +111,7 @@ namespace Legends.World.Entities.AI
             Score = new Score();
             base.Initialize();
         }
-        [InDeveloppement(InDeveloppementState.TODO, "Skill points")]
+        [InDevelopment(InDevelopmentState.TODO, "Skill points")]
         public void AddExperience(float value)
         {
             int oldLevel = Stats.Level;
@@ -113,7 +123,7 @@ namespace Legends.World.Entities.AI
 
                 Stats.Health.BaseBonus += (float)Record.HpPerLevel;
                 Stats.Mana.BaseBonus += (float)Record.MpPerLevel;
-                Stats.HpRegeneration.BaseBonus += (float)Record.HpRegenPerLevel;
+                Stats.HealthRegeneration.BaseBonus += (float)Record.HpRegenPerLevel;
                 Stats.ManaRegeneration.BaseBonus += (float)Record.MPRegenPerLevel;
                 Stats.AttackDamage.BaseBonus += (float)Record.DamagePerLevel;
                 Stats.Armor.BaseBonus += (float)Record.ArmorPerLevel;
@@ -139,6 +149,10 @@ namespace Legends.World.Entities.AI
             Client.Send(new ChampionDeathTimerMessage(NetId, Death.TimeLeftSeconds));
             base.OnDead(source);
         }
+        public override void OnSpellUpgraded(byte spellId, Spell targetSpell)
+        {
+            Client.Send(new SkillUpResponseMessage(NetId, spellId, targetSpell.Level, Stats.SkillPoints));
+        }
         public override void OnRevive(AttackableUnit source)
         {
             base.OnRevive(source);
@@ -149,7 +163,7 @@ namespace Legends.World.Entities.AI
             Game.Send(new ChampionRespawnMessage(NetId, Position));
             UpdateStats();
         }
-        
+
         public void DebugMessage(string content)
         {
             Client.Send(new DebugMessage(NetId, content));
@@ -185,7 +199,7 @@ namespace Legends.World.Entities.AI
         {
             AttackManager.SetAutoattackActivated(automatic);
         }
-        [InDeveloppement(InDeveloppementState.STARTED)]
+        [InDevelopment(InDevelopmentState.STARTED)]
         public void OnDisconnect()
         {
             Disconnected = true;
@@ -193,6 +207,6 @@ namespace Legends.World.Entities.AI
             Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, 0, new uint[0]);
         }
 
-       
+
     }
 }

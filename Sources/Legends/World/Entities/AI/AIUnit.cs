@@ -8,6 +8,7 @@ using Legends.World.Entities.Buildings;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
+using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,11 @@ namespace Legends.World.Entities.AI
             get;
             private set;
         }
+        public SpellManager SpellManager
+        {
+            get;
+            private set;
+        }
         public float AttackRange
         {
             get
@@ -44,6 +50,8 @@ namespace Legends.World.Entities.AI
         public override bool IsMoving => PathManager.IsMoving;
 
         public override float SelectionRadius => (float)Record.SelectionRadius;
+
+        public abstract void OnSpellUpgraded(byte spellId, Spell targetSpell);
 
         public override float PathfindingCollisionRadius => (float)Record.PathfindingCollisionRadius;
 
@@ -59,6 +67,7 @@ namespace Legends.World.Entities.AI
         {
 
         }
+
         public AIUnit(uint netId, AIUnitRecord record) : base(netId)
         {
             this.Record = record;
@@ -75,6 +84,7 @@ namespace Legends.World.Entities.AI
                 AttackManager = new RangedManager(this);
             }
             AttackManager.SetAutoattackActivated(DefaultAutoattackActivated);
+            SpellManager = new SpellManager(this);
             PathManager = new PathManager(this);
             base.Initialize();
         }
@@ -121,18 +131,18 @@ namespace Legends.World.Entities.AI
         {
             Move(new List<Vector2>() { Position }, unsetTarget);
         }
-        [InDeveloppement(InDeveloppementState.THINK_ABOUT_IT, "Not sure about values...check again in RAF?")]
+        [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "Not sure about values...check again in RAF?")]
         public float GetAutoattackRange(AttackableUnit target)
         {
             return Stats.AttackRange.TotalSafe + (Stats.AttackRange.TotalSafe * (float)Record.ChasingAttackRangePercent) + ((float)target.SelectionRadius * target.Stats.ModelSize.TotalSafe);
         }
-        [InDeveloppement(InDeveloppementState.THINK_ABOUT_IT, "Not sure about values...check again in RAF?")]
+        [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "Not sure about values...check again in RAF?")]
         public float GetAutoattackRangeWhileChasing(AttackableUnit target)
         {
             return Stats.AttackRange.TotalSafe + ((float)target.PathfindingCollisionRadius * target.Stats.ModelSize.TotalSafe);
             return Stats.AttackRange.TotalSafe + ((float)target.SelectionRadius * target.Stats.ModelSize.TotalSafe);
         }
-        [InDeveloppement(InDeveloppementState.TODO, "We need to use pathfinding only for melee to join target.")]
+        [InDevelopment(InDevelopmentState.TODO, "We need to use pathfinding only for melee to join target.")]
         /// <summary>
         /// On essaye d'auto attack une cible, Si elle est a portée on lance l'animation
         /// Sinon, on marche jusqu'a elle

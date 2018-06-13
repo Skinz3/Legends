@@ -18,7 +18,7 @@ namespace Legends.World.Entities.AI.Deaths
         /// http://leagueoflegends.wikia.com/wiki/Death
         /// </summary>
         /// <returns></returns>
-        [InDeveloppement(InDeveloppementState.STARTED, "Summoners Rifts Only, Howling abyss is different")]
+        [InDevelopment(InDevelopmentState.STARTED, "Summoners Rifts Only, Howling abyss is different")]
         protected override float GetTimeLeftSeconds()
         {
             float level = Unit.Stats.Level;

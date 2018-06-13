@@ -65,6 +65,7 @@
     <Compile Include="GameClient\Messages\Game\AttentionPingRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\AutoAttackOptionMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BeginAutoAttackMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\BuyItemAnswerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BuyItemRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ChampionDeathTimerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ChampionDieMessage.cs" />
@@ -83,7 +84,9 @@
     <Compile Include="GameClient\Messages\Game\HeroSpawnMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BuildingDieMessage.cs" />
     <Compile Include="GameClient\Messages\Game\InhibitorStateUpdateMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\InventoryRemoveItemMessage.cs" />
     <Compile Include="GameClient\Messages\Game\LeaveVisionMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\LevelPropSpawnMessage.cs" />
     <Compile Include="GameClient\Messages\Game\LevelUpMessage.cs" />
     <Compile Include="GameClient\Messages\Game\LockCameraRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\MoveCameraMessage.cs" />
@@ -93,10 +96,12 @@
     <Compile Include="GameClient\Messages\Game\NextAutoattackMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ObjectSpawnMessage.cs" />
     <Compile Include="GameClient\Messages\Game\PlayerInfoMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SellItemMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SetHealthMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SetTargetMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ShowProjectileMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SkillUpRequestMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SkillUpResponseMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SpawnParticleMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SpellAnimationMessage.cs" />
     <Compile Include="GameClient\Messages\Game\StartGameMessage.cs" />

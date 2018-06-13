@@ -251,6 +251,24 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.ITEMS_RecipeItem2)]
+        public int RecipeItem2
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.ITEMS_RecipeItem3)]
+        public int RecipeItem3
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.ITEMS_RecipeItem4)]
+        public int RecipeItem4
+        {
+            get;
+            set;
+        }
         /*
         ITEMS_RecipeItem2 = 973644273,
         ITEMS_RecipeItem3 = 973644274,

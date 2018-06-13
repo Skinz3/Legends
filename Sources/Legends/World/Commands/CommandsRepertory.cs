@@ -30,7 +30,14 @@ namespace Legends.World.Commands
                 inhib.Revive();
             }
         }
-
+        [Command("inventory")]
+        public static void InventoryCommand(LoLClient client)
+        {
+            foreach (var item in client.Hero.Inventory.GetItems())
+            {
+                client.Hero.DebugMessage("Id:" + item.Id + " Slot:" + item.Slot);
+            }
+        }
         [Command("addcrit")]
         public static void AddCritCommand(LoLClient client, float value)
         {
@@ -38,7 +45,7 @@ namespace Legends.World.Commands
             client.Hero.UpdateStats();
         }
         [Command("addlifesteal")]
-        public static void AddLifeStealCommand(LoLClient client,float value)
+        public static void AddLifeStealCommand(LoLClient client, float value)
         {
             client.Hero.Stats.LifeSteal.FlatBonus += value;
             client.Hero.UpdateStats();
@@ -99,7 +106,7 @@ namespace Legends.World.Commands
             client.Hero.Stats.ModelSize.SetBaseValue(size);
             client.Hero.UpdateStats(true);
         }
-        [InDeveloppement(InDeveloppementState.HAS_BUG, "When player leave vision, the model is swap back.")]
+        [InDevelopment(InDevelopmentState.HAS_BUG, "When player leave vision, the model is swap back.")]
         [Command("model")]
         public static void ModelCommand(LoLClient client, string model)
         {
@@ -125,19 +132,27 @@ namespace Legends.World.Commands
         public static void TestCommand(LoLClient client)
         {
             client.Send(new DashMessage(client.Hero.NetId, 30f, 10f, client.Hero.Position, true, client.Hero.NetId, client.Hero.Game.Map.Size,
-                new Vector2(500, 500),10f,10f,10f));
+                new Vector2(500, 500), 10f, 10f, 10f));
         }
         [Command("vision")]
         public static void VisionCommand(LoLClient client)
         {
             string str = "I have vision on : ";
+
             str += Environment.NewLine;
             foreach (var unit in client.Hero.Team.GetVisibleUnits())
             {
                 str += unit.Name + " distance: (" + unit.GetDistanceTo(client.Hero) + ")  ";
-
             }
+
             client.Hero.DebugMessage(str);
+
+        }
+        [Command("addgold")]
+        public static void AddGoldCommand(LoLClient client, int gold)
+        {
+            client.Hero.Stats.AddGold(gold);
+            client.Hero.UpdateStats();
         }
     }
 }

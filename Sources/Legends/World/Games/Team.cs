@@ -113,7 +113,7 @@ namespace Legends.World.Games
         {
             return VisibleUnits.Keys.ToArray();
         }
-        [InDeveloppement(InDeveloppementState.TEMPORARY)]
+        [InDevelopment(InDevelopmentState.TEMPORARY)]
         private void OnTeamEnterVision(Unit unit)
         {
             if (unit.IsMoving)

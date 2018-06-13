@@ -19,9 +19,16 @@ namespace Legends.World.Entities.Statistics
         /// <summary>
         /// From LoL
         /// </summary>
-        public const float MAX_LIFESTEAL = 0.20f;
+        public const float MAX_LIFESTEAL = 20f;
 
-        public const float MAX_SPELLVAMP = 0.20f;
+        public const float MAX_SPELLVAMP = 20f;
+
+        /// <summary>
+        /// 200% 
+        /// </summary>
+        public const float ATTACK_CRITICAL_RATIO = 2;
+
+        public const byte DEFAULT_SKILL_POINTS = 1;
 
         public Health Health
         {
@@ -64,7 +71,7 @@ namespace Legends.World.Entities.Statistics
             get;
             private set;
         }
-        public Stat HpRegeneration
+        public Stat HealthRegeneration
         {
             get;
             private set;
@@ -118,6 +125,11 @@ namespace Legends.World.Entities.Statistics
             private set;
         }
         public AttackSpeed AttackSpeed
+        {
+            get;
+            private set;
+        }
+        public Stat CriticalDamageRatio
         {
             get;
             private set;
@@ -194,6 +206,11 @@ namespace Legends.World.Entities.Statistics
             get;
             private set;
         }
+        public byte SkillPoints
+        {
+            get;
+            set;
+        }
         public Stats(float baseHeath, float baseMana, float baseHpRegen, float baseArmor, float baseAttackDamage,
             float baseAbilityPower, float baseDodge, float baseCriticalHit, float baseMagicResistance, float baseManaRegeneration,
             float baseAttackRange, float baseAttackSpeed, float attackDelayPercent, float baseCooldownReduction, float baseArmorPenetration,
@@ -207,7 +224,7 @@ namespace Legends.World.Entities.Statistics
             this.IsMagicImmune = false;
             this.TargetableToTeam = IsTargetableToTeamFlags.TargetableToAll;
             this.Armor = new Stat(baseArmor);
-            this.HpRegeneration = new Stat(baseHpRegen);
+            this.HealthRegeneration = new Stat(baseHpRegen);
             this.IsTargetable = true;
             this.ActionState = StatActionStateEnum.CanAttack | StatActionStateEnum.CanCast | StatActionStateEnum.CanMove | StatActionStateEnum.Unknown;
             this.AttackDamage = new Stat(baseAttackDamage);
@@ -219,16 +236,18 @@ namespace Legends.World.Entities.Statistics
             this.AttackRange = new Stat(baseAttackRange);
             this.AttackSpeed = new AttackSpeed(attackDelayPercent); // attakdelay , what is this?
             this.CooldownReduction = new Stat(baseCooldownReduction);
+            this.CriticalDamageRatio = new Stat(ATTACK_CRITICAL_RATIO);
             this.ArmorPenetration = new Stat(baseArmorPenetration);
             this.MagicPenetration = new Stat(baseMagicPenetration);
-            this.LifeSteal = new Stat(baseLifeSteal, 0, 20);
-            this.SpellVamp = new Stat(baseSpellVamp, 0, 20);
+            this.LifeSteal = new Stat(baseLifeSteal, 0, MAX_LIFESTEAL);
+            this.SpellVamp = new Stat(baseSpellVamp, 0, MAX_SPELLVAMP);
             this.CCReduction = new Stat(baseCCReduction);
             this.PerceptionBubbleRadius = new Stat(basePerceptionBubbleRadius);
             this.MoveSpeed = new Stat(baseMoveSpeed);
             this.ModelSize = new Stat(baseModelSize);
             this.Gold = AIHero.DEFAULT_START_GOLD;
             this.GoldTotal = this.Gold;
+            this.SkillPoints = DEFAULT_SKILL_POINTS;
         }
 
         public bool CriticalStrike()

@@ -51,7 +51,7 @@ namespace Legends.World.Spells
             this.Critical = critical;
             this.Result = GenerateResult();
         }
-        [InDeveloppement(InDeveloppementState.TODO, "Just todo ^.^")]
+        [InDevelopment(InDevelopmentState.TODO, "Just todo ^.^")]
         private DamageResultEnum GenerateResult()
         {
 
@@ -97,7 +97,7 @@ namespace Legends.World.Spells
 
             if (Critical)
             {
-                Delta *= 2;
+                Delta *= Source.Stats.CriticalDamageRatio.TotalSafe;
             }
 
             if (Type == DamageType.DAMAGE_TYPE_PHYSICAL)
