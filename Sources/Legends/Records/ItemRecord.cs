@@ -1,5 +1,9 @@
 ﻿using Legends.Core.Attributes;
+using Legends.Core.DesignPattern;
 using Legends.Core.IO.Inibin;
+using Legends.Protocol.GameClient.Enum;
+using Newtonsoft.Json;
+using Legends.Core;
 using SmartORM;
 using SmartORM.Attributes;
 using System;
@@ -24,7 +28,7 @@ namespace Legends.Records
             set;
         }
         [InibinField(InibinHashEnum.ITEMS_Price)]
-        public float Price
+        public int Price
         {
             get;
             set;
@@ -35,6 +39,13 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.ITEMS_Group)]
+        public string ItemGroup
+        {
+            get;
+            set;
+        }
+      
         [InibinField(InibinHashEnum.ITEMS_FlatArmorMod)]
         public float FlatArmorMod
         {
@@ -138,13 +149,13 @@ namespace Legends.Records
             set;
         }
         [InibinField(InibinHashEnum.ITEMS_ItemClass)]
-        public string ItemClass
+        public int ItemClass
         {
             get;
             set;
         }
         [InibinField(InibinHashEnum.ITEMS_ItemType)]
-        public string ItemType
+        public int ItemType
         {
             get;
             set;
@@ -269,14 +280,79 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.ITEMS_SellBackModifier)]
+        public float SellBackModifier
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.ITEMS_SpellName)]
+        public string SpellName
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.ITEMS_UseWhenAcquired)]
+        public byte UseWhenAcquired
+        {
+            get;
+            set;
+        }
+        [JsonIgnore]
+        public ItemRecord[] RecipeItemRecords
+        {
+            get;
+            private set;
+        }
+        [JsonIgnore]
+        public ItemGroupEnum Group
+        {
+            get;
+            private set;
+        }
+        public ItemRecord()
+        {
+
+        }
+        public int GetTotalPrice()
+        {
+            int result = Price;
+
+            foreach (var record in RecipeItemRecords)
+            {
+                result += record.GetTotalPrice();
+            }
+            return result;
+        }
+        [StartupInvoke("Items Hooks", StartupInvokePriority.Eighth)]
+        public static void Initialize()
+        {
+            foreach (var record in Items)
+            {
+                record.Group = record.ItemGroup != null ? record.ItemGroup.ToEnum<ItemGroupEnum>() : ItemGroupEnum.Undefined;
+
+                record.RecipeItemRecords = (new ItemRecord[4]
+                {
+                    GetItemRecord(record.RecipeItem1),
+                    GetItemRecord(record.RecipeItem2),
+                    GetItemRecord(record.RecipeItem3),
+                    GetItemRecord(record.RecipeItem4),
+
+              }).Where(x => x != null).ToArray();
+
+            }
+        }
+
+        public static ItemRecord GetItemRecord(int id)
+        {
+            return Items.FirstOrDefault(x => x.ItemId == id);
+        }
+        public static object GetItems(int itemId)
+        {
+            return Items.FindAll(x => x.ItemId == itemId);
+        }
         /*
-        ITEMS_RecipeItem2 = 973644273,
-        ITEMS_RecipeItem3 = 973644274,
-        ITEMS_RecipeItem4 = 973644275,
-        ITEMS_SellBackModifier = 3760373072,
-        ITEMS_SpellName = 4262394835,
-        ITEMS_UsableInStore = 883270180,
-        ITEMS_UseWhenAcquired = 3803087215,
+    
         ITEMS_flatBlockMod = 3562272462,
         ITEMS_flatEXPBonus = 1416335451,
         ITEMS_imagePath = 2414666880,
@@ -336,14 +412,6 @@ namespace Legends.Records
         ITEMS_SpellDamage = 771952745,
         
     */
-        public ItemRecord()
-        {
 
-        }
-
-        public static ItemRecord GetItemRecord(int id)
-        {
-            return Items.FirstOrDefault(x => x.ItemId == id);
-        }
     }
 }

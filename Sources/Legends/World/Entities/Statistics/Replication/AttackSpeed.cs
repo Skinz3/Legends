@@ -21,7 +21,7 @@ namespace Legends.World.Entities.Statistics.Replication
                 return TotalSafe / BaseValue;
             }
         }
-        public override float Total => BaseValue * PercentBaseBonus * BaseBonus;
+        public override float Total => BaseValue * PercentBonus * BaseBonus;
 
         public AttackSpeed(float attackDelay) : base(0.625f, 0.2f, 2.5f)
         {

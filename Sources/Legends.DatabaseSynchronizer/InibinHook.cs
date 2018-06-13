@@ -68,13 +68,13 @@ namespace Legends.DatabaseSynchronizer
             {
                 string path = string.Format("DATA/Characters/{0}/{0}.inibin", directory);
 
-                var result = manager.GetFile(path);
+                var result = manager.GetUpToDateFile(path);
 
-                if (result != null && results.Find(x=>x.Path== path) == null)
+                if (result != null)
                 {
-                    results.Add(manager.GetFile(path));
+                    results.Add(result);
                 }
-             
+
             }
 
             return results.ToArray();

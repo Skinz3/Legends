@@ -47,11 +47,8 @@ namespace Legends.World.Spells
         public void UpgradeSpell(byte spellId)
         {
             Spell targetSpell = GetSpell(spellId);
-
-            if (targetSpell.Upgrade())
-            {
-                Owner.OnSpellUpgraded(spellId, targetSpell);
-            }
+            targetSpell.Upgrade(spellId);
+            Owner.OnSpellUpgraded(spellId, targetSpell);
         }
         public Spell GetSpell(byte spellId)
         {

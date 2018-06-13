@@ -3,6 +3,7 @@ using Legends.Core.IO.Inibin;
 using Legends.Core.IO.RAF;
 using Legends.Core.Utils;
 using Legends.DatabaseSynchronizer.Attributes;
+using Legends.DatabaseSynchronizer.CustomSyncs;
 using Legends.Records;
 using SmartORM;
 using SmartORM.Attributes;
@@ -51,6 +52,7 @@ namespace Legends.DatabaseSynchronizer
 
             foreach (var entry in entries)
             {
+
                 var inibin = new InibinFile(new MemoryStream(entry.GetContent(true)));
 
                 var record = (ITable)Activator.CreateInstance(type);
@@ -60,7 +62,7 @@ namespace Legends.DatabaseSynchronizer
 
                     if (attribute2 != null)
                     {
-                        property.SetValue(record, Convert.ChangeType(Path.GetFileNameWithoutExtension(entry.Path), property.PropertyType)) ;
+                        property.SetValue(record, Convert.ChangeType(Path.GetFileNameWithoutExtension(entry.Path), property.PropertyType));
                     }
 
                     var attribute = property.GetCustomAttribute<InibinFieldAttribute>();
@@ -99,6 +101,7 @@ namespace Legends.DatabaseSynchronizer
 
                 records.Add(record);
             }
+
             return records.ToArray();
         }
         public void Sync()

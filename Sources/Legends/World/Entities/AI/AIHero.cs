@@ -119,21 +119,21 @@ namespace Legends.World.Entities.AI
 
             if (Stats.Level > oldLevel)
             {
-                int diff = Stats.Level - oldLevel;
-
-                Stats.Health.BaseBonus += (float)Record.HpPerLevel;
-                Stats.Mana.BaseBonus += (float)Record.MpPerLevel;
-                Stats.HealthRegeneration.BaseBonus += (float)Record.HpRegenPerLevel;
-                Stats.ManaRegeneration.BaseBonus += (float)Record.MPRegenPerLevel;
-                Stats.AttackDamage.BaseBonus += (float)Record.DamagePerLevel;
-                Stats.Armor.BaseBonus += (float)Record.ArmorPerLevel;
-                Stats.AbilityPower.BaseBonus += (float)Record.AbilityPowerIncPerLevel;
-                Stats.AttackSpeed.BaseBonus += (float)Record.AttackSpeedPerLevel;
-                Stats.CriticalHit.BaseBonus += (float)Record.CritPerLevel;
-                Stats.MagicResistance.BaseBonus += (float)Record.MagicResistPerLevel;
+                int offset = Stats.Level - oldLevel;
+                Stats.SkillPoints += (byte)offset;
+                Stats.Health.BaseBonus += (float)Record.HpPerLevel * offset;
+                Stats.Mana.BaseBonus += (float)Record.MpPerLevel * offset;
+                Stats.HealthRegeneration.BaseBonus += (float)Record.HpRegenPerLevel * offset;
+                Stats.ManaRegeneration.BaseBonus += (float)Record.MPRegenPerLevel * offset;
+                Stats.AttackDamage.BaseBonus += (float)Record.DamagePerLevel * offset;
+                Stats.Armor.BaseBonus += (float)Record.ArmorPerLevel * offset;
+                Stats.AbilityPower.BaseBonus += (float)Record.AbilityPowerIncPerLevel * offset;
+                Stats.AttackSpeed.BaseBonus += (float)(Record.AttackSpeedPerLevel / 100) * offset;
+                Stats.CriticalHit.BaseBonus += (float)Record.CritPerLevel * offset;
+                Stats.MagicResistance.BaseBonus += (float)Record.MagicResistPerLevel * offset;
             }
 
-            Game.Send(new LevelUpMessage(NetId, (byte)Stats.Level, 0)); // tdoo
+            Game.Send(new LevelUpMessage(NetId, (byte)Stats.Level, Stats.SkillPoints)); // tdoo
             UpdateStats();
         }
         public override void OnDead(AttackableUnit source) // we override base

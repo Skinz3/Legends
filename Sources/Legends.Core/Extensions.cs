@@ -16,6 +16,13 @@ namespace Legends.Core
 {
     public static class Extensions
     {
+        /// <summary>
+        /// T is Enum.
+        /// </summary>
+        public static T ToEnum<T>(this string value)
+        {
+            return (T)Enum.Parse(typeof(T), value);
+        }
         public static T2 GetValueOrDefault<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key,T2 @default = default(T2))
         {
             if (dictionary.ContainsKey(key))

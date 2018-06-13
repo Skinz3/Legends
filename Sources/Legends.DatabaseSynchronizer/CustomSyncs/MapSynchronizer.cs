@@ -34,7 +34,7 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                 record.Width = grid.MapWidth;
                 record.Height = grid.MapHeight;
 
-                var file = manager.GetFile("LEVELS/" + record.Name + "/Scene/MapObjects.mob");
+                var file = manager.GetUpToDateFile("LEVELS/" + record.Name + "/Scene/MapObjects.mob");
 
                 if (file != null) // Map do not use .mob file format, we use SCO from room.dsc
                 {

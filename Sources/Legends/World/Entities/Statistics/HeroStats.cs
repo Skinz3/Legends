@@ -108,7 +108,7 @@ namespace Legends.World.Entities.Statistics
             ReplicationManager.UpdateFloat(2f - MagicPenetration.PercentBonus, 1, 27);  //mPercentMagicPenetration
 
             ReplicationManager.UpdateFloat(LifeSteal.TotalSafe, 1, 28); // mPercentLifeStealMod
-            ReplicationManager.UpdateFloat(LifeSteal.PercentBonus, 1, 29); // mPercentSpellVampMod
+            ReplicationManager.UpdateFloat(SpellVamp.TotalSafe, 1, 29); // mPercentSpellVampMod
 
             ReplicationManager.UpdateFloat(CCReduction.TotalSafe, 1, 30); // mPercentCCReduction
 

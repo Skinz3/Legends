@@ -31,6 +31,7 @@ namespace Legends.DatabaseSynchronizer
     class Program
     {
         public const string LeagueOfLegendsPath = @"C:\Users\Skinz\Desktop\Emulateur LoL\League of Legends 4.20\League of Legends\";
+        public const string SmartFileOutputPath = @"C:\Users\Skinz\Desktop\Emulateur LoL\Legends\Build\database.smart";
 
         static Logger logger = new Logger();
 
@@ -44,7 +45,7 @@ namespace Legends.DatabaseSynchronizer
             logger.OnStartup();
             var recordAssembly = Assembly.GetAssembly(typeof(AIUnitRecord));
 
-            DatabaseManager.Instance.Initialize(Environment.CurrentDirectory + "/database.smart", recordAssembly);
+            DatabaseManager.Instance.Initialize(SmartFileOutputPath, recordAssembly);
             DatabaseManager.Instance.DropDatabase();
 
             BuildingSynchronizer.Synchronize(manager);

@@ -11,6 +11,10 @@ namespace Legends.World.Spells
 {
     public class Spell : IUpdatable
     {
+        public const byte NORMAL_SPELL_LEVELS = 5;
+
+        public const byte ULTIMATE_SPELL_LEVELS = 3;
+
         public SpellRecord Record
         {
             get;
@@ -32,9 +36,12 @@ namespace Legends.World.Spells
             this.Record = record;
         }
         [InDevelopment(InDevelopmentState.STARTED, "Slot max")]
-        public bool Upgrade()
+        public bool Upgrade(byte id)
         {
-            if (Level <= 3)
+            // 3 = Ultimate Spell.
+            byte maxLevel = id == 3 ? ULTIMATE_SPELL_LEVELS : NORMAL_SPELL_LEVELS;
+
+            if (Level + 1 <= maxLevel)
             {
                 Level++;
                 this.Owner.Stats.SkillPoints--;

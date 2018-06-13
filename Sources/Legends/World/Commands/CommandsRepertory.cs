@@ -22,6 +22,11 @@ namespace Legends.World.Commands
 {
     class CommandsRepertory
     {
+        [Command("item")]
+        public static void AddItemCommand(LoLClient client, int itemId)
+        {
+            client.Hero.Inventory.AddItem(itemId);
+        }
         [Command("inhibitors")]
         public static void RespawnInhibitorsCommand(LoLClient client)
         {

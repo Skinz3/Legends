@@ -291,14 +291,14 @@ namespace Legends.Records
         {
             return Spells.FirstOrDefault(x => x.Name == spellName);
         }
-        [StartupInvoke("Champion Hooks", StartupInvokePriority.Eighth)]
+        [StartupInvoke("AIUnits Hooks", StartupInvokePriority.Eighth)]
         public static void Initialize()
         {
             foreach (var record in AIUnitRecord.AIUnits)
             {
                 record.Skins = SkinRecord.GetSkins(record.Id);
 
-                record.Spells = (new SpellRecord[]
+                record.Spells = (new SpellRecord[4]
                 {
                     SpellRecord.GetSpell(record.Spell1),
                     SpellRecord.GetSpell(record.Spell2),

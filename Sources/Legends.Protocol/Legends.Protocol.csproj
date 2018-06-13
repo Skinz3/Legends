@@ -50,6 +50,7 @@
     <Compile Include="GameClient\Enum\GameModeEnum.cs" />
     <Compile Include="GameClient\Enum\InhibitorStateEnum.cs" />
     <Compile Include="GameClient\Enum\IsTargetableToTeamFlags.cs" />
+    <Compile Include="GameClient\Enum\ItemGroupEnum.cs" />
     <Compile Include="GameClient\Enum\MapIdEnum.cs" />
     <Compile Include="GameClient\Enum\MovementType.cs" />
     <Compile Include="GameClient\Enum\PingTypeEnum.cs" />

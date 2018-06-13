@@ -776,6 +776,7 @@ namespace Legends.Core.IO.Inibin
         ITEMS_ItemId = 1250849294,
         ITEMS_ItemType = 401384653,
         ITEMS_MaxStack = 4026184356,
+        ITEMS_Group = 3471506188,
         ITEMS_PercentArmorMod = 2684247432,
         ITEMS_PercentAttackSpeedMod = 4117873288,
         ITEMS_PercentCritChanceMod = 1761956015,

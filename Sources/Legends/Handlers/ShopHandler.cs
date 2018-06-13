@@ -1,4 +1,5 @@
-﻿using Legends.Core.Protocol;
+﻿using Legends.Core.DesignPattern;
+using Legends.Core.Protocol;
 using Legends.Network;
 using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Records;
@@ -13,19 +14,29 @@ namespace Legends.Handlers
 {
     public class ShopHandler
     {
-        public const float ITEM_SELL_SHOP_RATIO = 0.70f;
+        public const float ITEM_SELL_SHOP_RATIO_DEFAULT = 0.70f;
 
+        [InDevelopment(InDevelopmentState.STARTED, "Something wrong with gold... RemoveGold = Price + All Item Recipe cost price")]
         [MessageHandler(PacketCmd.PKT_C2S_BuyItemReq)]
         public static void HandleBuyItemRequestMessage(BuyItemRequestMessage message, LoLClient client)
         {
             ItemRecord itemRecord = ItemRecord.GetItemRecord(message.itemId);
+       
             if (client.Hero.Stats.Gold >= itemRecord.Price)
             {
+                Item[] recipeItems = client.Hero.Inventory.RemoveRecipeItem(itemRecord);
                 Item itemResult = client.Hero.Inventory.AddItem(itemRecord);
 
                 if (itemResult != null)
                 {
-                    client.Hero.Stats.RemoveGold(itemRecord.Price);
+                    int price = itemRecord.GetTotalPrice();
+
+                    foreach (var item in recipeItems)
+                    {
+                        price -= item.Record.GetTotalPrice();
+                    }
+
+                    client.Hero.Stats.RemoveGold(price);
                     client.Hero.UpdateStats();
 
                 }
@@ -39,7 +50,8 @@ namespace Legends.Handlers
         public static void HandleSellItem(SellItemMessage message, LoLClient client)
         {
             Item itemRemoved = client.Hero.Inventory.RemoveItem(message.slotId);
-            client.Hero.Stats.AddGold(itemRemoved.Record.Price * ITEM_SELL_SHOP_RATIO);
+            float sellRatio = itemRemoved.Record.SellBackModifier > 0 ? itemRemoved.Record.SellBackModifier : ITEM_SELL_SHOP_RATIO_DEFAULT;
+            client.Hero.Stats.AddGold(itemRemoved.Record.GetTotalPrice() * sellRatio);
             client.Hero.UpdateStats();
 
         }

@@ -71,32 +71,44 @@ namespace Legends.DatabaseSynchronizer
                     }
                 }
             }
-         
+
             return results.Distinct().ToArray();
         }
-
-        public RAFFileEntry GetFile(string path) // "DATA/Characters/Aatrox/Aatrox.inibin"
+        private RAFFileEntry[] GetFile(string path)
         {
+            List<RAFFileEntry> results = new List<RAFFileEntry>();
+
             foreach (var archive in Archives)
             {
-                var file = archive.Files.FirstOrDefault(x => x.Path == path);
+                var result = archive.Files.FirstOrDefault(x => x.Path == path);
 
-                if (file != null)
+                if (result != null)
                 {
-                    return file;
+                    results.Add(result);
                 }
             }
-            return null;
+            return results.ToArray();
         }
-        public InibinFile GetInibinFile(string path)
+        /// <summary>
+        /// .LastOrDefault() return the file up to date. (if there is two files, the first ones are previous version.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public RAFFileEntry GetUpToDateFile(string path) // "DATA/Characters/Aatrox/Aatrox.inibin"
         {
-            byte[] file = GetFile(path).GetContent(true);
-            return new InibinFile(new MemoryStream(file));
+            return GetFile(path).LastOrDefault();
         }
+        /// <summary>
+        /// Return up to date files
+        /// </summary>
+        /// <param name="dirPath"></param>
+        /// <param name="extension"></param>
+        /// <returns></returns>
         public RAFFileEntry[] GetFilesInDirectory(string dirPath, string extension)
         {
+            Dictionary<string, RAFFileEntry> results = new Dictionary<string, RAFFileEntry>();
+
             var files = GetFiles(dirPath);
-            List<RAFFileEntry> results = new List<RAFFileEntry>();
 
             foreach (var file in files)
             {
@@ -105,10 +117,18 @@ namespace Legends.DatabaseSynchronizer
 
                 if (path == dirPath && Path.GetExtension(file.Path) == extension)
                 {
-                    results.Add(file);
+                    if (results.ContainsKey(file.Path))
+                    {
+                        results[file.Path] = file;
+                    }
+                    else
+                    {
+                        results.Add(file.Path, file);
+                    }
                 }
             }
-            return results.Distinct().ToArray();
+
+            return results.Values.ToArray();
         }
         public RAFFileEntry[] GetFiles(string containsPath)
         {
