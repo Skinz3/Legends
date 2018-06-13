@@ -1,6 +1,9 @@
-﻿using Legends.Protocol.GameClient.Enum;
+﻿using Legends.Handlers;
+using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Records;
 using Legends.World.Entities;
+using Legends.World.Entities.AI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,21 +40,32 @@ namespace Legends.World.Items
             {
                 if (Items.FirstOrDefault(x => x.Key == i).Value == null)
                 {
-                    return (byte)(i);
+                    return i;
                 }
             }
 
             return 7;
         }
-        public Item[] RemoveRecipeItem(ItemRecord record)
+        /// <summary>
+        /// A recursive one ;)
+        /// </summary>
+        public int[] RemoveRecipeItem(ItemRecord record)
         {
-            List<Item> results = new List<Item>();
+            List<int> results = new List<int>();
 
             foreach (var itemRecipe in record.RecipeItemRecords)
             {
                 var removed = RemoveItem(itemRecipe.ItemId);
+
                 if (removed != null)
-                    results.Add(removed);
+                {
+                    results.Add(removed.Record.GetTotalPrice());
+                }
+                else
+                {
+                    results.AddRange(RemoveRecipeItem(itemRecipe));
+                }
+
             }
 
             return results.ToArray();
@@ -87,18 +101,54 @@ namespace Legends.World.Items
 
         }
 
+        public void SwapItems(byte slotFrom, byte slotTo)
+        {
+            if (Items.ContainsKey(slotFrom) == false)
+            {
+                return;
+            }
+            if (Items.ContainsKey(slotTo))
+            {
+                var temp = Items[slotFrom];
+                Items[slotFrom].Slot = slotTo;
+                Items[slotFrom] = Items[slotTo];
+
+
+                Items[slotTo].Slot = slotFrom;
+                Items[slotTo] = temp;
+
+            }
+            else
+            {
+
+                Items.Add(slotTo, Items[slotFrom]);
+                Items[slotTo].Slot = slotTo;
+                Items.Remove(slotFrom);
+            }
+
+        }
         public Item[] GetItems()
         {
             return Items.Values.ToArray();
         }
-
+        public Item FindItem(Func<Item, bool> func)
+        {
+            for (byte i = 0; i < 6; i++)
+            {
+                if (Items.ContainsKey(i) && func(Items[i]))
+                {
+                    return Items[i];
+                }
+            }
+            return null;
+        }
         public Item RemoveItem(int itemId)
         {
-            var pair = Items.FirstOrDefault(x => x.Value.Id == itemId);
+            var item = FindItem(x => x.Id == itemId);
 
-            if (pair.Value != null)
+            if (item != null)
             {
-                return RemoveItem(pair.Key);
+                return RemoveItem(item.Slot);
             }
             return null;
         }

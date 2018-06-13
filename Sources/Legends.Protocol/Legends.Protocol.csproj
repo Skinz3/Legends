@@ -108,6 +108,8 @@
     <Compile Include="GameClient\Messages\Game\StartGameMessage.cs" />
     <Compile Include="GameClient\Messages\Game\StartGameRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\StopAutoAttackMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SwapItemAnswerMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SwapItemRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\TurretSpawnMessage.cs" />
     <Compile Include="GameClient\Messages\Game\UnitAnnounceMessage.cs" />
     <Compile Include="GameClient\Messages\Game\UpdateModelMessage.cs" />

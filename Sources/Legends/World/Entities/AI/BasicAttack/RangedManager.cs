@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Legends.Protocol.GameClient.Enum;
 
 namespace Legends.World.Entities.AI.BasicAttack
 {
@@ -12,13 +13,9 @@ namespace Legends.World.Entities.AI.BasicAttack
         {
         }
 
-        public override void BeginAttackTarget(AttackableUnit target)
+        public override BasicAttack CreateBasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1)
         {
-            
-        }
-        public override void NextAutoattack()
-        {
-
+            return new RangedBasicAttack(unit, target, critical, first, slot);
         }
     }
 }

@@ -97,7 +97,6 @@ namespace Legends.World.Entities.AI.BasicAttack
             }
             return slot;
         }
-        public abstract void BeginAttackTarget(AttackableUnit target);
 
         public void StopAttackTarget()
         {
@@ -106,8 +105,6 @@ namespace Legends.World.Entities.AI.BasicAttack
                 CurrentAutoattack.Cancel();
                 Unit.OnTargetUnset(CurrentAutoattack.Target);
 
-
-
             }
         }
         public void DestroyAutoattack()
@@ -115,7 +112,57 @@ namespace Legends.World.Entities.AI.BasicAttack
             CurrentAutoattack = null;
         }
 
-        public abstract void NextAutoattack();
+        public abstract BasicAttack CreateBasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1);
+
+        public virtual void BeginAttackTarget(AttackableUnit target)
+        {
+            if (IsAttacking && target != CurrentAutoattack.Target) // Si la cible que l'on attaque est differente de target
+            {
+                StopAttackTarget(); // alors on cancel l'anim quoi qu'il arrive
+
+                if (CurrentAutoattack.Hit) // Si l'attaque précédante a touchée
+                {
+                    CurrentAutoattack.OnBasicAttackEnded = new Func<BasicAttack, bool>((BasicAttack attack) => // a la fin du delai l'attaque, on changera de cible (pas de cancel d'anim sur l'anim de l'auto).
+                    {
+                        DestroyAutoattack();
+                        Unit.TryBasicAttack(target);
+                        return true;
+                    });
+                }
+                else // Sinon on peut directment passer a la nouvelle auto
+                {
+                    DestroyAutoattack();
+                    Unit.TryBasicAttack(target);
+                }
+            }
+            if (IsAttacking == false) // osef, facile
+            {
+                bool critical = target.Stats.IsCriticalImmune ? false : Unit.Stats.CriticalStrike();
+                CurrentAutoattack = CreateBasicAttack(Unit, target, critical);
+                CurrentAutoattack.Notify();
+                Unit.OnTargetSet(target);
+            }
+            else if (IsAttacking == true && CurrentAutoattack.Hit && target == CurrentAutoattack.Target)
+            { // Si l'on attaquait la cible, que l'ancienne auto a été cancel mais qu'elle a touchée, et que la cible n'a pas changée
+                CurrentAutoattack.OnBasicAttackEnded = new Func<BasicAttack, bool>((BasicAttack attack) =>
+                {
+                    // Unit.AttackManager.StopAttackTarget();
+                    Unit.AttackManager.DestroyAutoattack();
+                    Unit.TryBasicAttack(target);
+
+                    return true;
+
+                });
+
+            }
+        }
+
+        public virtual void NextAutoattack()
+        {
+            bool critical = CurrentAutoattack.Target.Stats.IsCriticalImmune ? false : Unit.Stats.CriticalStrike();
+            Unit.AttackManager.CurrentAutoattack = CreateBasicAttack(Unit, CurrentAutoattack.Target, critical, false, DetermineNextSlot(critical)); 
+            CurrentAutoattack.Notify();
+        }
 
     }
 }

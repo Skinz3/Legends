@@ -23,7 +23,6 @@ namespace Legends.Records
             get;
             set;
         }
-
         [InibinField(InibinHashEnum.SPELLS_AlternateName)]
         public string AlternateName
         {

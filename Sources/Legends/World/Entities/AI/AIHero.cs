@@ -36,14 +36,6 @@ namespace Legends.World.Entities.AI
             private set;
         }
 
-        public override void OnItemAdded(Item item)
-        {
-            Game.Send(new BuyItemAnswerMessage(NetId, item.Id, item.Slot, item.Stacks, (byte)0x29));
-        }
-        public override void OnItemRemoved(Item item)
-        {
-            Game.Send(new InventoryRemoveItemMessage(NetId, item.Slot, 0));
-        }
         public int PlayerNo
         {
             get;
@@ -135,6 +127,15 @@ namespace Legends.World.Entities.AI
 
             Game.Send(new LevelUpMessage(NetId, (byte)Stats.Level, Stats.SkillPoints)); // tdoo
             UpdateStats();
+        }
+
+        public override void OnItemAdded(Item item)
+        {
+            Game.Send(new BuyItemAnswerMessage(NetId, item.Id, item.Slot, item.Stacks, (byte)0x29));
+        }
+        public override void OnItemRemoved(Item item)
+        {
+            Game.Send(new InventoryRemoveItemMessage(NetId, item.Slot, 0));
         }
         public override void OnDead(AttackableUnit source) // we override base
         {
