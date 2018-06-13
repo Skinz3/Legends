@@ -45,25 +45,16 @@ namespace Legends.World.Items
         }
         public Item[] RemoveRecipeItem(ItemRecord record)
         {
-            var recipeItems = Items.Where(x => x.Value.Id == record.RecipeItem1 || x.Value.Id == record.RecipeItem2 ||
-            x.Value.Id == record.RecipeItem3 || x.Value.Id == record.RecipeItem4).ToArray();
+            List<Item> results = new List<Item>();
 
-
-            Dictionary<byte, Item> temp = new Dictionary<byte, Item>();
-
-            foreach (var pair in recipeItems)
+            foreach (var itemRecipe in record.RecipeItemRecords)
             {
-                if (temp.Values.FirstOrDefault(x => pair.Value.Id == x.Id) == null)
-                {
-                    temp.Add(pair.Key, pair.Value);
-                }
+                var removed = RemoveItem(itemRecipe.ItemId);
+                if (removed != null)
+                    results.Add(removed);
             }
 
-            foreach (var recipeItem in temp)
-            {
-                RemoveItem(recipeItem.Key);
-            }
-            return temp.Values.ToArray();
+            return results.ToArray();
         }
         public Item AddItem(int itemId)
         {
@@ -101,7 +92,16 @@ namespace Legends.World.Items
             return Items.Values.ToArray();
         }
 
+        public Item RemoveItem(int itemId)
+        {
+            var pair = Items.FirstOrDefault(x => x.Value.Id == itemId);
 
+            if (pair.Value != null)
+            {
+                return RemoveItem(pair.Key);
+            }
+            return null;
+        }
         public Item RemoveItem(byte slot)
         {
             if (Items.ContainsKey(slot))

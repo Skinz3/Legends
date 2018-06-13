@@ -130,7 +130,7 @@ namespace Legends.Network
 
         public void OnDisconnect()
         {
-            Hero.OnDisconnect();
+            Hero?.OnDisconnect();
         }
     }
 }

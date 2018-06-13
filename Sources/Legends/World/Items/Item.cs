@@ -70,7 +70,7 @@ namespace Legends.World.Items
             this.Owner.Stats.ManaRegeneration.PercentBonus += Record.PercentMpRegenMod;
             this.Owner.Stats.AbilityPower.PercentBonus += Record.PercentAbilityPowerMod;
             this.Owner.Stats.MagicPenetration.PercentBonus += Record.PercentMagicPenetrationMod;
-            this.Owner.Stats.MoveSpeed.PercentBonus += Record.PercentMovementSpeedMod;
+            this.Owner.Stats.MoveSpeed.PercentBaseBonus += Record.PercentMovementSpeedMod;
 
             this.Owner.Stats.AttackDamage.PercentBonus += Record.PercentPhysicalDamageMod;
             this.Owner.Stats.MagicResistance.PercentBonus += Record.PercentMagicResistMod;
@@ -97,16 +97,16 @@ namespace Legends.World.Items
             this.Owner.Stats.CriticalDamageRatio.PercentBonus -= Record.PercentCritDamageMod;
             this.Owner.Stats.Health.PercentBonus -= Record.PercentHpPoolMod;
             this.Owner.Stats.HealthRegeneration.PercentBonus -= Record.PercentHpRegenMod;
-            this.Owner.Stats.LifeSteal.PercentBonus -= Record.PercentLifeStealMod;
+            this.Owner.Stats.LifeSteal.FlatBonus -= Record.PercentLifeStealMod;
             this.Owner.Stats.MagicResistance.FlatBonus -= Record.FlatMagicResistMod;
             this.Owner.Stats.ManaRegeneration.PercentBonus -= Record.PercentMpRegenMod;
             this.Owner.Stats.AbilityPower.PercentBonus -= Record.PercentAbilityPowerMod;
             this.Owner.Stats.MagicPenetration.PercentBonus -= Record.PercentMagicPenetrationMod;
-            this.Owner.Stats.MoveSpeed.PercentBonus -= Record.PercentMovementSpeedMod;
+            this.Owner.Stats.MoveSpeed.PercentBaseBonus -= Record.PercentMovementSpeedMod;
 
             this.Owner.Stats.AttackDamage.PercentBonus -= Record.PercentPhysicalDamageMod;
             this.Owner.Stats.MagicResistance.PercentBonus -= Record.PercentMagicResistMod;
-            this.Owner.Stats.SpellVamp.PercentBonus -= Record.PercentSpellVampMod;
+            this.Owner.Stats.SpellVamp.FlatBonus -= Record.PercentSpellVampMod;
             this.Owner.Stats.MagicPenetration.PercentBonus -= Record.PercentMagicPenetrationMod;
         }
     }
