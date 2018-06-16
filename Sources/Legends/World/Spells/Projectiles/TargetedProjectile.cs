@@ -50,7 +50,7 @@ namespace Legends.World.Spells.Projectiles
             this.Position = startPosition;
             this.Speed = speed;
             this.OnReach = onReach;
-            Speed = 1200f * Unit.Stats.AttackSpeed.TotalSafe;
+
         }
 
 
@@ -60,29 +60,30 @@ namespace Legends.World.Spells.Projectiles
         {
             return Geo.GetDistance(Position, other.Position);
         }
-        int test = 0;
+
         public void Update(long deltaTime)
         {
+            Speed = 1200f;
+
             if (!destroy)
             {
+
                 float deltaMovement = Speed * 0.001f * deltaTime; // deltaTime
 
+                float angle = Geo.GetAngle(Position, Target.Position);
 
-                float xOffset = 1 * deltaMovement;
-                float yOffset = 1 * deltaMovement;
+                float xOffset = (float)Math.Cos(angle) * deltaMovement;
+                float yOffset = (float)Math.Sin(angle) * deltaMovement;
+
 
                 Position = new Vector2(Position.X + xOffset, Position.Y + yOffset);
-                test++;
 
                 if (Target is AIHero)
                 {
-                    if (test >= 5)
-                    {
-                  //      (Target as AIHero).AttentionPing(Position, NetId, Protocol.GameClient.Enum.PingTypeEnum.Ping_OnMyWay);
-                        test = 0;
-                    }
+               //     (Target as AIHero).AttentionPing(Position, NetId, Protocol.GameClient.Enum.PingTypeEnum.Ping_OnMyWay);
                 }
-                if (this.GetDistanceTo(Target) <= 100)
+
+                if (this.GetDistanceTo(Target) <= 20f)
                 {
                     destroy = true;
                     OnReach();

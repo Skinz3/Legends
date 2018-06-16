@@ -132,12 +132,12 @@ namespace Legends.World.Entities.AI
             Move(new List<Vector2>() { Position }, unsetTarget);
         }
         [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "Not sure about values...check again in RAF?")]
-        public float GetAutoattackRange(AttackableUnit target)
+        public virtual float GetAutoattackRange(AttackableUnit target)
         {
-            return Stats.AttackRange.TotalSafe + (Stats.AttackRange.TotalSafe * (float)Record.ChasingAttackRangePercent) + ((float)target.SelectionRadius * target.Stats.ModelSize.TotalSafe);
+            return Stats.AttackRange.TotalSafe  + ((float)target.SelectionRadius * target.Stats.ModelSize.TotalSafe);
         }
         [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "Not sure about values...check again in RAF?")]
-        public float GetAutoattackRangeWhileChasing(AttackableUnit target)
+        public virtual float GetAutoattackRangeWhileChasing(AttackableUnit target)
         {
             return Stats.AttackRange.TotalSafe + ((float)target.PathfindingCollisionRadius * target.Stats.ModelSize.TotalSafe);
             return Stats.AttackRange.TotalSafe + ((float)target.SelectionRadius * target.Stats.ModelSize.TotalSafe);

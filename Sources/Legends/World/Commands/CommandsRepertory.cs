@@ -55,11 +55,9 @@ namespace Legends.World.Commands
             client.Hero.Stats.LifeSteal.FlatBonus += value;
             client.Hero.UpdateStats();
         }
-        [Command("range")]
-        public static void Cercle2Command(LoLClient client)
+        [Command("circle")]
+        public static void Cercle2Command(LoLClient client,float size)
         {
-            var distance = (float)client.Hero.Record.AttackRange + (float)client.Hero.Record.PathfindingCollisionRadius;
-
             List<Vector2> results = new List<Vector2>();
 
             float start = 0;
@@ -68,7 +66,7 @@ namespace Legends.World.Commands
 
             for (float i = start; i < end; i += 0.5f)
             {
-                var v = Geo.GetPointOnCircle(client.Hero.Position, i, distance);
+                var v = Geo.GetPointOnCircle(client.Hero.Position, i, size);
                 client.Hero.AttentionPing(v, client.Hero.NetId, PingTypeEnum.Ping_OnMyWay);
             }
 

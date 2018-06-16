@@ -66,7 +66,7 @@ namespace Legends.World.Entities.AI.BasicAttack
 
         #endregion
 
-        public void Update(long deltaTime)
+        public virtual void Update(long deltaTime)
         {
             if (Auto && Unit.IsMoving == false && !IsAttacking)
             {

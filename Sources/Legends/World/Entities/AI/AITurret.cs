@@ -67,6 +67,10 @@ namespace Legends.World.Entities.AI
             base.InflictDamages(damages);
             this.UpdateHeath();
         }
+        public override float GetAutoattackRangeWhileChasing(AttackableUnit target)
+        {
+            return Record.AttackRange + (float)Record.SelectionRadius;
+        }
         public override void OnDead(AttackableUnit source)
         {
             base.OnDead(source);
@@ -88,7 +92,7 @@ namespace Legends.World.Entities.AI
 
         }
 
-        public override void OnSpellUpgraded(byte spellId,Spell targetSpell)
+        public override void OnSpellUpgraded(byte spellId, Spell targetSpell)
         {
             throw new NotImplementedException();
         }

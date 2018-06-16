@@ -15,15 +15,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantome.Libraries.League", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends.Dev", "Legends.Dev\Legends.Dev.csproj", "{699816A7-6668-46BF-97F4-0D7374025180}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartORM", "SmartORM\SmartORM.csproj", "{0DC448D5-19C9-48DF-AF74-F2349D08AB22}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartORM.TableViewer", "SmartORM.TableViewer\SmartORM.TableViewer.csproj", "{C71AC29C-1645-4A21-A4D2-FC9E10544485}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends.Protocol", "Legends.Protocol\Legends.Protocol.csproj", "{6AD17CF4-EC08-4EE6-98CC-2818FD9B10A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends.Maestro", "Legends.Maestro\Legends.Maestro.csproj", "{2F099994-A963-4624-86C9-6B229E39DDC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends.LobbyServer", "Legends.LobbyServer\Legends.LobbyServer.csproj", "{51609439-B071-4893-9C4D-2D2CBEDA7E7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartORM", "SmartORM\SmartORM.csproj", "{0DC448D5-19C9-48DF-AF74-F2349D08AB22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartORM.TableViewer", "SmartORM.TableViewer\SmartORM.TableViewer.csproj", "{C71AC29C-1645-4A21-A4D2-FC9E10544485}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,14 +55,6 @@ Global
 		{699816A7-6668-46BF-97F4-0D7374025180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{699816A7-6668-46BF-97F4-0D7374025180}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{699816A7-6668-46BF-97F4-0D7374025180}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0DC448D5-19C9-48DF-AF74-F2349D08AB22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0DC448D5-19C9-48DF-AF74-F2349D08AB22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0DC448D5-19C9-48DF-AF74-F2349D08AB22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0DC448D5-19C9-48DF-AF74-F2349D08AB22}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C71AC29C-1645-4A21-A4D2-FC9E10544485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C71AC29C-1645-4A21-A4D2-FC9E10544485}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C71AC29C-1645-4A21-A4D2-FC9E10544485}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C71AC29C-1645-4A21-A4D2-FC9E10544485}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6AD17CF4-EC08-4EE6-98CC-2818FD9B10A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6AD17CF4-EC08-4EE6-98CC-2818FD9B10A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AD17CF4-EC08-4EE6-98CC-2818FD9B10A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,6 +67,14 @@ Global
 		{51609439-B071-4893-9C4D-2D2CBEDA7E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51609439-B071-4893-9C4D-2D2CBEDA7E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51609439-B071-4893-9C4D-2D2CBEDA7E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC448D5-19C9-48DF-AF74-F2349D08AB22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC448D5-19C9-48DF-AF74-F2349D08AB22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC448D5-19C9-48DF-AF74-F2349D08AB22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC448D5-19C9-48DF-AF74-F2349D08AB22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C71AC29C-1645-4A21-A4D2-FC9E10544485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71AC29C-1645-4A21-A4D2-FC9E10544485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C71AC29C-1645-4A21-A4D2-FC9E10544485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C71AC29C-1645-4A21-A4D2-FC9E10544485}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -32,16 +32,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         }
         public override void Update(long deltaTime)
         {
-            if (Hit && Unit.GetDistanceTo(Target) > GetAutocancelDistance() && !Cancelled)
-            {
-                Unit.AttackManager.StopAttackTarget();
-                Unit.AttackManager.DestroyAutoattack();
-                Unit.TryBasicAttack(Target);
-                return;
-            }
-           
             base.Update(deltaTime);
-
             if (Cancelled == false && !Hit)
             {
                 Projectile.Update(deltaTime);
