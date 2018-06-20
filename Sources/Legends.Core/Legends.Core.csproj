@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ENetCS, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ENetSharpLeague.1.1.0\lib\net461\ENetCS.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -90,12 +93,6 @@
     <Compile Include="IO\Inibin\InibinHashEnum.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="DesignPattern\Singleton.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ENetCS\ENetCS.csproj">
-      <Project>{D3AFF7FA-96F6-42B8-B03C-E508DC80EC3A}</Project>
-      <Name>ENetCS</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
