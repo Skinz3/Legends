@@ -1,3 +1,4 @@
+exit
 @echo off
 setlocal enabledelayedexpansion
 --------------------

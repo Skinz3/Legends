@@ -37,6 +37,7 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ENetCS, Version=1.3.1.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -153,10 +154,6 @@
     <Content Include="Todo List.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ENetCS\ENetCS.csproj">
-      <Project>{d3aff7fa-96f6-42b8-b03c-e508dc80ec3a}</Project>
-      <Name>ENetCS</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Legends.Core\Legends.Core.csproj">
       <Project>{9075ff6e-824e-4468-851e-83d1354a7bce}</Project>
       <Name>Legends.Core</Name>

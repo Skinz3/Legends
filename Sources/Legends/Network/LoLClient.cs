@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static ENet.Native;
 
+
 namespace Legends.Network
 {
     public unsafe class LoLClient : ENetClient

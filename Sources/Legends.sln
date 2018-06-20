@@ -7,11 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends", "Legends\Legends.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends.Core", "Legends.Core\Legends.Core.csproj", "{9075FF6E-824E-4468-851E-83D1354A7BCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ENetCS", "ENetCS\ENetCS.csproj", "{D3AFF7FA-96F6-42B8-B03C-E508DC80EC3A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends.DatabaseSynchronizer", "Legends.DatabaseSynchronizer\Legends.DatabaseSynchronizer.csproj", "{15DE79E5-6E1F-4810-A112-13774C7F4B41}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantome.Libraries.League", "Fantome.League\Fantome.Libraries.League.csproj", "{80F5DF93-19A2-4731-8CD1-982F165D7361}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legends.Dev", "Legends.Dev\Legends.Dev.csproj", "{699816A7-6668-46BF-97F4-0D7374025180}"
 EndProject
@@ -39,18 +35,10 @@ Global
 		{9075FF6E-824E-4468-851E-83D1354A7BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9075FF6E-824E-4468-851E-83D1354A7BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9075FF6E-824E-4468-851E-83D1354A7BCE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D3AFF7FA-96F6-42B8-B03C-E508DC80EC3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3AFF7FA-96F6-42B8-B03C-E508DC80EC3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3AFF7FA-96F6-42B8-B03C-E508DC80EC3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3AFF7FA-96F6-42B8-B03C-E508DC80EC3A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15DE79E5-6E1F-4810-A112-13774C7F4B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{15DE79E5-6E1F-4810-A112-13774C7F4B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15DE79E5-6E1F-4810-A112-13774C7F4B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15DE79E5-6E1F-4810-A112-13774C7F4B41}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80F5DF93-19A2-4731-8CD1-982F165D7361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80F5DF93-19A2-4731-8CD1-982F165D7361}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80F5DF93-19A2-4731-8CD1-982F165D7361}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80F5DF93-19A2-4731-8CD1-982F165D7361}.Release|Any CPU.Build.0 = Release|Any CPU
 		{699816A7-6668-46BF-97F4-0D7374025180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{699816A7-6668-46BF-97F4-0D7374025180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{699816A7-6668-46BF-97F4-0D7374025180}.Release|Any CPU.ActiveCfg = Release|Any CPU
