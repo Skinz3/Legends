@@ -38,14 +38,18 @@ namespace Legends.DatabaseSynchronizer
 
         static void Main(string[] args)
         {
+            logger.OnStartup();
+
             DatabaseManager.Instance.Initialize(Assembly.GetEntryAssembly(), "127.0.0.1", "legends", "root", "");
 
             RafManager manager = new RafManager(LeagueOfLegendsPath);
 
             var test = manager.GetFiles("ExpCurve.inibin");
 
-          //  JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/items.json","ITEMS");  
-            logger.OnStartup();
+            DatabaseManager.Instance.DropTables(Assembly.GetAssembly(typeof(AIUnitRecord)));
+           
+            //  JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/items.json","ITEMS");  
+            
             var recordAssembly = Assembly.GetAssembly(typeof(AIUnitRecord));
 
             BuildingSynchronizer.Synchronize(manager);

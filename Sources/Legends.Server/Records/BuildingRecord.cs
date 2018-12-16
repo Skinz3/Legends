@@ -118,27 +118,7 @@ namespace Legends.Records
         {
 
         }
-        public BuildingRecord(string name, int mapId, int skinId, string rot, string move, float maxHp, float baseStaticHpRegen,
-            float mana, float selectionHeight, float selectionRadius, float perceptionBubbleRadius,
-            string skinName1, string skinName2, float collisionRadius, float collisionHeight, float pathfidingCollisionRadius)
-        {
-            this.Name = name;
-            this.MapId = mapId;
-            this.SkinId = skinId;
-            this.Rot = rot;
-            this.Move = move;
-            this.Health = maxHp;
-            this.BaseStaticHpRegen = baseStaticHpRegen;
-            this.Mana = mana;
-            this.SelectionHeight = selectionHeight;
-            this.SelectionRadius = selectionRadius;
-            this.PerceptionBubbleRadius = perceptionBubbleRadius;
-            this.SkinName1 = skinName1;
-            this.SkinName2 = skinName2;
-            this.CollisionRadius = collisionRadius;
-            this.CollisionHeight = collisionHeight;
-            this.PathfindingCollisionRadius = pathfidingCollisionRadius;
-        }
+     
 
         public static BuildingRecord GetBuildingRecord(MapIdEnum id, string name)
         {

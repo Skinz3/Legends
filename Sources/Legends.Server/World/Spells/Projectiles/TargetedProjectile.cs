@@ -7,62 +7,33 @@ using System.Threading.Tasks;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using Legends.Core.Geometry;
+using Legends.Core.DesignPattern;
 
 namespace Legends.World.Spells.Projectiles
 {
-    public class TargetedProjectile
+    public class TargetedProjectile : Projectile
     {
-        public uint NetId
-        {
-            get;
-            private set;
-        }
-        public AIUnit Unit
-        {
-            get;
-            private set;
-        }
-        public AttackableUnit Target
-        {
-            get;
-            private set;
-        }
-        public float Speed
-        {
-            get;
-            private set;
-        }
-        public Action OnReach
-        {
-            get;
-            private set;
-        }
-        public Vector2 Position
-        {
-            get;
-            set;
-        }
         public TargetedProjectile(uint netId, AIUnit unit, AttackableUnit target, Vector2 startPosition, float speed, Action onReach)
+            : base(netId, unit, target, startPosition, speed, onReach)
         {
-            this.NetId = netId;
-            this.Unit = unit;
-            this.Target = target;
-            this.Position = startPosition;
-            this.Speed = speed;
-            this.OnReach = onReach;
 
         }
 
         public bool destroy = false;
 
-        public float GetDistanceTo(Unit other)
-        {
-            return Geo.GetDistance(Position, other.Position);
-        }
+        public override string Name => Unit.Name + " (Projectile)";
 
-        public void Update(long deltaTime)
+        /// <summary>
+        /// Ce n'est pas un mouvement dépendant de PathManager.cs
+        /// </summary>
+        public override bool IsMoving => false;
+
+        public override bool AddFogUpdate => false;
+
+        public override float PerceptionBubbleRadius => 0;
+
+        public override void Update(long deltaTime)
         {
-            Speed = 1200f;
 
             if (!destroy)
             {
@@ -77,18 +48,32 @@ namespace Legends.World.Spells.Projectiles
 
                 Position = new Vector2(Position.X + xOffset, Position.Y + yOffset);
 
-                if (Target is AIHero)
-                {
-                    //     (Target as AIHero).AttentionPing(Position, NetId, Protocol.GameClient.Enum.PingTypeEnum.Ping_OnMyWay);
-                }
+               // if (Unit is AIHero)
+                 //   ((AIHero)Unit).AttentionPing(Position, 0, Protocol.GameClient.Enum.PingTypeEnum.Ping_OnMyWay);
 
-                if (this.GetDistanceTo(Target) <= 20f)
+
+                var distanceToTarget = Target.GetDistanceTo(this);
+                if (distanceToTarget  <= deltaMovement)
                 {
                     destroy = true;
                     OnReach();
                 }
             }
+            else
+            {
+                throw new Exception("What the fuck are you doing");
+            }
+            base.Update(deltaTime);
         }
 
+        public override void OnUnitEnterVision(Unit unit)
+        {
+
+        }
+
+        public override void OnUnitLeaveVision(Unit unit)
+        {
+
+        }
     }
 }

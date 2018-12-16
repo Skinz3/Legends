@@ -41,7 +41,7 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
             int level = 1;
             for (int i = 0; i < cumulativeExps.Length; i++)
             {
-                records.Add(new ExperienceRecord(level, cumulativeExps[i]));
+                records.Add(new ExperienceRecord() { Level = level, CumulativeExp = cumulativeExps[i] });
                 level++;
             }
             DatabaseManager.Instance.CreateTable(typeof(ExperienceRecord));

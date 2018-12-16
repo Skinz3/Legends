@@ -20,13 +20,15 @@ namespace Legends.ORM
 
         private const string CREATE_TABLE = "CREATE TABLE if not exists {0} ({1})";
 
+        private const string DROP_TABLE = "DROP TABLE IF EXISTS {0}";
+
         internal MySqlConnection m_provider;
 
         public Assembly RecordsAssembly;
 
         public void Initialize(Assembly recordsAssembly, string host, string database, string user, string password)
         {
-          
+
             this.m_provider = new MySqlConnection(string.Format("Server={0};UserId={1};Password={2};Database={3}", host, user, password, database));
             this.RecordsAssembly = recordsAssembly;
         }
@@ -45,7 +47,7 @@ namespace Legends.ORM
 
             return connection;
         }
-    
+
         public void LoadTables()
         {
             var tables = RecordsAssembly.GetTypes().Where(x => x.GetInterface("ITable") != null).ToArray();
@@ -57,7 +59,7 @@ namespace Legends.ORM
                 var attribute = (TableAttribute)table.GetCustomAttribute(typeof(TableAttribute), false);
                 if (attribute == null)
                 {
-                    logger.Write(string.Format("Warning : the table type '{0}' hasn't got an attribute called 'TableAttribute'", table.Name),MessageState.WARNING);
+                    logger.Write(string.Format("Warning : the table type '{0}' hasn't got an attribute called 'TableAttribute'", table.Name), MessageState.WARNING);
                     continue;
                 }
 
@@ -113,19 +115,19 @@ namespace Legends.ORM
             this.m_provider.Close();
         }
 
-        public void ResetTables(Assembly assembly)
+        public void DropTables(Assembly assembly)
         {
-            var tables = assembly.GetTypes().Where(x => x.GetInterface("ITable") != null).Where(x => x.GetCustomAttribute(typeof(ResettableAttribute)) != null);
+            var tables = assembly.GetTypes().Where(x => x.GetInterface("ITable") != null);
 
             foreach (var table in tables)
             {
                 TableAttribute attribute = table.GetCustomAttribute(typeof(TableAttribute)) as TableAttribute;
-                Delete(attribute.tableName);
+                DropTable(attribute.tableName);
             }
         }
-        private void Delete(string tableName)
+        public void DropTable(string tableName)
         {
-            Query(string.Format("DELETE from {0}", tableName), UseProvider());
+            Query(string.Format(DROP_TABLE, tableName), UseProvider());
         }
         public void Query(string query, MySqlConnection connection)
         {
@@ -155,6 +157,11 @@ namespace Legends.ORM
             {
                 string propertyType = "mediumtext";
 
+                if (property.GetCustomAttribute<JsonAttribute>() != null)
+                {
+                    propertyType = "longtext";
+                }
+
                 if (primaryProperty == property)
                 {
                     propertyType = "int (40)";
@@ -169,7 +176,7 @@ namespace Legends.ORM
 
             this.Query(string.Format(CREATE_TABLE, tableName, str), UseProvider());
         }
-       
+
         public void CreateTable(ITable table)
         {
             CreateTable(table.GetType());

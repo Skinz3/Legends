@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Legends.Core.Geometry
 {
-    public class Geo
+    public static class Geo
     {
         public static float GetDistance(Vector2 p1, Vector2 p2)
         {
@@ -20,6 +20,22 @@ namespace Legends.Core.Geometry
         public static Vector2 GetPointOnCircle(Vector2 centerPoint, float angle, float distance)
         {
             return new Vector2((float)(centerPoint.X + (distance * Math.Cos(angle))), (float)(centerPoint.Y + (distance * Math.Sin(angle))));
+        }
+        public static Vector3 ForceSize(this Vector3 vector, int size)
+        {
+            if (size <= 2)
+            {
+                vector.Z = 0f;
+            }
+            if (size <= 1)
+            {
+                vector.Y = 0f;
+            }
+            if (size == 0)
+            {
+                vector.X = 0f;
+            }
+            return vector;
         }
     }
 }

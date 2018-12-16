@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="GameClient\Enum\AnnounceEnum.cs" />
     <Compile Include="GameClient\Enum\AttackSlotEnum.cs" />
+    <Compile Include="GameClient\Enum\AttackTypeEnum.cs" />
     <Compile Include="GameClient\Enum\ChampionEnum.cs" />
     <Compile Include="GameClient\Enum\ChatChannelType.cs" />
     <Compile Include="GameClient\Enum\DamageResultEnum.cs" />
@@ -68,6 +69,8 @@
     <Compile Include="GameClient\Messages\Game\BeginAutoAttackMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BuyItemAnswerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BuyItemRequestMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\CastSpellAnswerMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\CastSpellRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ChampionDeathTimerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ChampionDieMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ChampionRespawnMessage.cs" />
@@ -96,6 +99,7 @@
     <Compile Include="GameClient\Messages\Game\MovementRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\NextAutoattackMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ObjectSpawnMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\OnAttackMessage.cs" />
     <Compile Include="GameClient\Messages\Game\PlayerInfoMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SellItemMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SetHealthMessage.cs" />
@@ -104,6 +108,7 @@
     <Compile Include="GameClient\Messages\Game\SkillUpRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SkillUpResponseMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SpawnParticleMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SpawnProjectileMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SpellAnimationMessage.cs" />
     <Compile Include="GameClient\Messages\Game\StartGameMessage.cs" />
     <Compile Include="GameClient\Messages\Game\StartGameRequestMessage.cs" />

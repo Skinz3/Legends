@@ -83,6 +83,10 @@ namespace Legends.World.Entities
         {
             get;
         }
+        public float GetZ()
+        {
+            return Game.Map.Record.GetZ(Position);
+        }
         public Unit(uint netId)
         {
             this.NetId = netId;

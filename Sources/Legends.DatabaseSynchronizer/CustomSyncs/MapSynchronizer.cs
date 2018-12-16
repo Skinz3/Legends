@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,35 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                 record.MiddleOfMap = grid.MiddleOfMap;
                 record.Width = grid.MapWidth;
                 record.Height = grid.MapHeight;
+                record.XCellCount = grid.XCellCount;
+                record.YCellCount = grid.YCellCount;
+                record.MaxGridPos = new Vector3(grid.MaxGridPos.X, grid.MaxGridPos.Y, grid.MaxGridPos.Z);
+                record.MinGridPos = new Vector3(grid.MinGridPos.X, grid.MinGridPos.Y, grid.MinGridPos.Z);
+                List<MapCellRecord> cells = new List<MapCellRecord>();
+
+                foreach (var cell in grid.Cells)
+                {
+                    cells.Add(new MapCellRecord()
+                    {
+                        ActorList = cell.ActorList,
+                        AdditionalCost = cell.AdditionalCost,
+                        ArrivalCost = cell.ArrivalCost,
+                        AdditionalCostRefCount = cell.AdditionalCostRefCount,
+                        ArrivalDirection = cell.ArrivalDirection,
+                        HintAsGoodCell = cell.HintAsGoodCell,
+                        CenterHeight = cell.CenterHeight,
+                        GoodCellSessionId = cell.GoodCellSessionId,
+                        Heuristic = cell.Heuristic,
+                        Id = cell.Id,
+                        IsOpen = cell.IsOpen,
+                        RefHintNode = cell.RefHintNode,
+                        RefHintWeight = cell.RefHintWeight,
+                        SessionId = cell.SessionId,
+                        X = cell.X,
+                        Y = cell.Y,
+                    });
+                }
+                record.Cells = cells.ToArray();
 
                 var file = manager.GetUpToDateFile("LEVELS/" + record.Name + "/Scene/MapObjects.mob");
 
@@ -56,6 +86,7 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                     var r = Encoding.ASCII.GetString(room);
 
 
+                    record.Cells = new MapCellRecord[0];
                     record.Objects = new MapObjectRecord[0];
 
                   

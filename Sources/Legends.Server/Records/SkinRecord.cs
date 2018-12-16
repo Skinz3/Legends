@@ -1,4 +1,5 @@
 ﻿using Legends.Core.Attributes;
+using Legends.Core.DesignPattern;
 using Legends.Core.IO.Inibin;
 using Legends.ORM.Attributes;
 using Legends.ORM.Interfaces;
@@ -50,20 +51,18 @@ namespace Legends.Records
             get;
             private set;
         }
-        public SkinRecord()
+        [StartupInvoke(StartupInvokePriority.Eighth)]
+        public static void Initialize()
         {
+            foreach (var record in Skins)
+            {
+                string skinId = record.ChampionSkinId.Substring(record.ChampionSkinId.Length - 3);
+                record.SkinId = int.Parse(skinId);
+                record.ChampionId = int.Parse(new string(record.ChampionSkinId.Take(record.ChampionSkinId.Length - skinId.Length).ToArray()));
+            }
 
         }
-        public SkinRecord(string championSkinId, string name, float scale)
-        {
-            this.ChampionSkinId = championSkinId;
-            this.Name = name;
-            this.Scale = scale;
 
-            string skinId = ChampionSkinId.Substring(ChampionSkinId.Length - 3);
-            this.SkinId = int.Parse(skinId);
-            this.ChampionId = int.Parse(new string(championSkinId.Take(championSkinId.Length - skinId.Length).ToArray()));
-        }
 
         public static SkinRecord[] GetSkins(int championId)
         {

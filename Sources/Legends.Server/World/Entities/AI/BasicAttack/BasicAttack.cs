@@ -1,9 +1,11 @@
-﻿using Legends.Protocol.GameClient.Enum;
+﻿using Legends.Core.DesignPattern;
+using Legends.Protocol.GameClient.Enum;
 using Legends.Protocol.GameClient.Messages.Game;
 using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,9 +14,21 @@ namespace Legends.World.Entities.AI.BasicAttack
     public abstract class BasicAttack : IUpdatable
     {
         /// <summary>
-        /// L'autoattaque a t-elle appliquée les dégats?
+        /// Représente le moment ou l'autoattaque applique son effet (dégats pour les mélées, lancé de projectile pour les tireurs)
+        /// </summary>
+        public static float CAST_TIME_MULTIPLIER = 0.20f;
+        /// <summary>
+        /// L'autoattaque a t-elle appliquée les dégats? 
         /// </summary>
         public bool Hit
+        {
+            get;
+            set;
+        }
+        /// <summary>
+        /// L'autoattaque a t-elle atteint le stade d'animation 0.75 x AnimationTotalTime
+        /// </summary>
+        public bool Casted
         {
             get;
             set;
@@ -82,6 +96,8 @@ namespace Legends.World.Entities.AI.BasicAttack
             get;
             private set;
         }
+
+
         public BasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1)
         {
             this.Unit = unit;
@@ -92,7 +108,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             this.Slot = slot;
         }
 
-        public abstract void OnCancel();
+        protected abstract void OnCancel();
 
         public void Cancel()
         {
@@ -100,23 +116,93 @@ namespace Legends.World.Entities.AI.BasicAttack
             Unit.Game.Send(new StopAutoAttackMessage(Unit.NetId));
             OnCancel();
         }
+        [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "BeginAuto donne une position legerement differente au client")]
         public void Notify()
         {
             if (First)
             {
-                Unit.Game.Send(new BeginAutoAttackMessage(Unit.NetId, Target.NetId, 0x80, 0, Critical, Target.Position, Unit.Position, Unit.Game.Map.Record.MiddleOfMap));
+
+                // Unit.Game.Send(new BeginAutoAttackMessage(Unit.NetId, Target.NetId, 0x80, 0, Critical, Target.Position, Unit.Position, Unit.Game.Map.Record.MiddleOfMap));
+                Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, Target.NetId, 0, Slot, true));
             }
             else
             {
                 Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, Target.NetId, 0, Slot, false));
             }
+            Unit.Game.Send(new OnAttackMessage(Unit.NetId, AttackTypeEnum.ATTACK_TYPE_TARGETED, new Vector3(Target.Position, 0), Target.NetId));
+
+
         }
         public void InflictDamages()
         {
             Target.InflictDamages(new Damages(Unit, Target, Unit.Stats.AttackDamage.TotalSafe, Critical, DamageType.DAMAGE_TYPE_PHYSICAL));
             Hit = true;
         }
-        public abstract void Update(long deltaTime);
-       
+
+        protected abstract float GetAutocancelDistance();
+
+        protected abstract void OnCastTimeReach();
+
+        public void Update(long deltaTime)
+        {
+            if (Casted && Unit.GetDistanceTo(Target) > GetAutocancelDistance() && !Cancelled)
+            {
+                Unit.AttackManager.StopAttackTarget();
+                Unit.AttackManager.DestroyAutoattack();
+                Unit.TryBasicAttack(Target);
+
+                return;
+            }
+
+            DeltaAnimationTime -= deltaTime;
+
+            if (DeltaAnimationTime <= 0)
+            {
+                if (OnBasicAttackEnded != null)
+                {
+                    if (OnBasicAttackEnded(this))
+                    {
+                        return;
+                    }
+                }
+
+                if (Cancelled == false)
+                {
+                    if (Target.Alive)
+                    {
+                        if (Unit.GetDistanceTo(Target) <= Unit.GetAutoattackRange(Target))
+                        {
+                            Unit.AttackManager.NextAutoattack();
+                        }
+                        else
+                        {
+                            Unit.AttackManager.StopAttackTarget();
+                            Unit.AttackManager.DestroyAutoattack();
+                            Unit.TryBasicAttack(Target);
+                        }
+                    }
+                    else
+                    {
+                        Unit.AttackManager.StopAttackTarget();
+                        Unit.AttackManager.DestroyAutoattack();
+                    }
+                }
+                else
+                {
+                    Unit.AttackManager.DestroyAutoattack();
+                }
+            }
+
+            if (Cancelled == false && !Casted)
+            {
+                if (DeltaAnimationTime / AnimationTime <= (1 - CAST_TIME_MULTIPLIER))
+                {
+                    Casted = true;
+                    OnCastTimeReach();
+                }
+
+            }
+        }
+
     }
 }

@@ -17,6 +17,8 @@ namespace Legends.Records
     [Table("aiunits")]
     public class AIUnitRecord : ITable
     {
+        public const string BASIC_ATTACK_SPELL_FOOTER = "BasicAttack";
+
         private static List<AIUnitRecord> AIUnits = new List<AIUnitRecord>();
 
         [InibinField(InibinHashEnum.CHARACTER_championId)]
@@ -236,7 +238,6 @@ namespace Legends.Records
             get;
             set;
         }
-
         [InibinField(InibinHashEnum.CHARACTER_SelectionRadius)]
         public double SelectionRadius
         {
@@ -267,7 +268,37 @@ namespace Legends.Records
             get;
             set;
         }
-
+        [InibinField(InibinHashEnum.CHARACTER_ExtraAttack1)]
+        public string ExtraAttack1
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraAttack2)]
+        public string ExtraAttack2
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraAttack3)]
+        public string ExtraAttack3
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraAttack4)]
+        public string ExtraAttack4
+        {
+            get;
+            set;
+        }
+        [Ignore]
+        public SpellRecord BasicAttack
+        {
+            get;
+            set;
+        }
+        [InDevelopment(InDevelopmentState.TODO,"extra spells records")]
         [Ignore]
         public SpellRecord[] Spells
         {
@@ -290,7 +321,7 @@ namespace Legends.Records
         {
             return Spells.FirstOrDefault(x => x.Name == spellName);
         }
-        [StartupInvoke("AIUnits Hooks", StartupInvokePriority.Eighth)]
+        [StartupInvoke("AIUnits Hooks", StartupInvokePriority.Ninth)]
         public static void Initialize()
         {
             foreach (var record in AIUnitRecord.AIUnits)
@@ -304,6 +335,8 @@ namespace Legends.Records
                     SpellRecord.GetSpell(record.Spell3),
                     SpellRecord.GetSpell(record.Spell4),
                 }).Where(x => x != null).ToArray();
+
+                record.BasicAttack = SpellRecord.GetSpell(record.Name + BASIC_ATTACK_SPELL_FOOTER);
         
             }
         }

@@ -102,7 +102,7 @@ namespace Legends.World.Entities.AI
                 {
                     AttackManager.StopAttackTarget();
 
-                    if (AttackManager.IsAttacking && !AttackManager.CurrentAutoattack.Hit)
+                    if (AttackManager.IsAttacking && !AttackManager.CurrentAutoattack.Casted)
                     {
                         AttackManager.DestroyAutoattack();
                     }
@@ -172,7 +172,7 @@ namespace Legends.World.Entities.AI
                 {
                     AttackManager.StopAttackTarget(); // on arrête d'attaquer l'éventuelle cible, car on va se déplacer.
 
-                    if (AttackManager.IsAttacking && !AttackManager.CurrentAutoattack.Hit) // Si on a cancel l'auto avant que les dégats soit infligés, alors on peut la disposer.
+                    if (AttackManager.IsAttacking && !AttackManager.CurrentAutoattack.Casted) // Si on a cancel l'auto avant que les dégats soit infligés, alors on peut la disposer.
                     {
                         AttackManager.DestroyAutoattack();
                     }

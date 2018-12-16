@@ -31,11 +31,7 @@ namespace Legends.Records
         {
 
         }
-        public ExperienceRecord(int level, float cumulativeExp)
-        {
-            this.Level = level;
-            this.CumulativeExp = cumulativeExp;
-        }
+      
 
 
         [StartupInvoke(StartupInvokePriority.Eighth)]

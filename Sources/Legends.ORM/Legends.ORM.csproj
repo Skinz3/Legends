@@ -54,7 +54,6 @@
     <Compile Include="Attributes\IgnoreAttribute.cs" />
     <Compile Include="Attributes\PrimaryAttribute.cs" />
     <Compile Include="Attributes\RemoveWhereIdAttribute.cs" />
-    <Compile Include="Attributes\ResettableAttribute.cs" />
     <Compile Include="Attributes\TableAttribute.cs" />
     <Compile Include="Attributes\UpdateAttribute.cs" />
     <Compile Include="Attributes\JsonAttribute.cs" />

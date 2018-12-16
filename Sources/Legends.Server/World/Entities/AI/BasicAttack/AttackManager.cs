@@ -124,7 +124,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             {
                 StopAttackTarget(); // alors on cancel l'anim quoi qu'il arrive
 
-                if (CurrentAutoattack.Hit) // Si l'attaque précédante a touchée
+                if (CurrentAutoattack.Casted) // Si l'attaque précédante a touchée
                 {
                     CurrentAutoattack.OnBasicAttackEnded = new Func<BasicAttack, bool>((BasicAttack attack) => // a la fin du delai l'attaque, on changera de cible (pas de cancel d'anim sur l'anim de l'auto).
                     {
@@ -146,7 +146,7 @@ namespace Legends.World.Entities.AI.BasicAttack
                 CurrentAutoattack.Notify();
                 Unit.OnTargetSet(target);
             }
-            else if (IsAttacking == true && CurrentAutoattack.Hit && target == CurrentAutoattack.Target)
+            else if (IsAttacking == true && CurrentAutoattack.Casted && target == CurrentAutoattack.Target)
             { // Si l'on attaquait la cible, que l'ancienne auto a été cancel mais qu'elle a touchée, et que la cible n'a pas changée
                 CurrentAutoattack.OnBasicAttackEnded = new Func<BasicAttack, bool>((BasicAttack attack) =>
                 {

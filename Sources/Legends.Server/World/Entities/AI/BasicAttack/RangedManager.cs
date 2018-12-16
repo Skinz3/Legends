@@ -26,6 +26,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             {
                 projectile.Update(deltaTime);
             }
+            
             base.Update(deltaTime);
         }
         public void AddProjectile(TargetedProjectile projectile)

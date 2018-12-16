@@ -11,36 +11,39 @@ namespace Legends.World.Spells.Projectiles
 {
     public abstract class Projectile : Unit
     {
-        public AIUnit Unit
+        protected AIUnit Unit
         {
             get;
             private set;
         }
-        public AIUnit Target
+        protected AttackableUnit Target
         {
             get;
             private set;
         }
-        public Action OnReach
+        protected Action OnReach
         {
             get;
             private set;
         }
-        public Vector2 StartPosition
+        protected Vector2 StartPosition
         {
             get;
             private set;
         }
-        public float Speed
+        protected float Speed
         {
             get;
             private set;
         }
-        public Projectile(uint netId, AIUnit unit, AIUnit target, Vector2 startPosition, float speed, Action onReach) : base(netId)
+        public Projectile(uint netId, AIUnit unit, AttackableUnit target, Vector2 startPosition, float speed, Action onReach) : base(netId)
         {
             this.Unit = unit;
             this.Target = target;
             this.OnReach = onReach;
+            this.StartPosition = startPosition;
+            this.Position = startPosition;
+            this.Speed = speed;
         }
     }
 }
