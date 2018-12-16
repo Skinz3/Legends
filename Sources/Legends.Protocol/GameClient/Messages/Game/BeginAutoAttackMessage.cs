@@ -57,10 +57,17 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
             writer.WriteByte((byte)0x80); // not sure what this is, but it should be correct (or maybe attacked x z y?) - 4.18
             writer.WriteByte((byte)0x01);
+
             writer.WriteShort((short)MovementVector.TargetXToNormalFormat(targetPosition.X, middleOfMap));
             writer.WriteByte((byte)0x80);
             writer.WriteByte((byte)0x01);
-            writer.WriteShort((short)MovementVector.TargetYToNormalFormat(targetPosition.Y, middleOfMap));
+            writer.WriteShort((short)MovementVector.TargetYToNormalFormat(targetPosition.Y, middleOfMap)); 
+
+            //    writer.WriteFloat(targetPosition.X);
+            //    writer.WriteFloat(targetPosition.Y);
+
+
+
             writer.WriteByte((byte)0xCC);
             writer.WriteByte((byte)0x35);
             writer.WriteByte((byte)0xC4);

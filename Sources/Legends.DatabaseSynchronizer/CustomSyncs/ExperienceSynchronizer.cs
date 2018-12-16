@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SmartORM;
 using Legends.Records;
+using Legends.ORM;
 
 namespace Legends.DatabaseSynchronizer.CustomSyncs
 {
@@ -44,7 +44,8 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                 records.Add(new ExperienceRecord(level, cumulativeExps[i]));
                 level++;
             }
-            records.AddElements();
+            DatabaseManager.Instance.CreateTable(typeof(ExperienceRecord));
+            records.AddInstantElements(typeof(ExperienceRecord)); 
 
             logger.Write("Experiences synchronized");
         }

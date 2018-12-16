@@ -5,15 +5,16 @@ using Legends.Core.Utils;
 using Legends.DatabaseSynchronizer.Attributes;
 using Legends.DatabaseSynchronizer.CustomSyncs;
 using Legends.Records;
-using SmartORM;
-using SmartORM.Attributes;
 using System;
 using System.Collections.Generic;
+using Legends.ORM;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Legends.ORM.Interfaces;
+using Legends.ORM.Attributes;
 
 namespace Legends.DatabaseSynchronizer
 {
@@ -47,7 +48,6 @@ namespace Legends.DatabaseSynchronizer
         }
         public ITable[] GetRecords(Type type, RAFFileEntry[] entries)
         {
-
             List<ITable> records = new List<ITable>();
 
             foreach (var entry in entries)
@@ -117,8 +117,8 @@ namespace Legends.DatabaseSynchronizer
                 RAFFileEntry[] entries = (RAFFileEntry[])hook.Invoke(null, new object[] { RafManager });
 
                 ITable[] records = GetRecords(type, entries);
-
-                records.AddElements();
+                DatabaseManager.Instance.CreateTable(type);
+                ORMExtensions.AddInstantElements(records, type);
                 logger.Write("Synchronized: " + type.Name);
 
             }

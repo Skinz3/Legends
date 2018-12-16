@@ -17,11 +17,11 @@ using System.Diagnostics;
 using Legends.Core.IO.RAF;
 using Legends.Core.IO;
 using Legends.Core.IO.MOB;
-using SmartORM;
 using System.Collections.Concurrent;
 using Legends.Core.IO.CFG;
 using Legends.DatabaseSynchronizer.CustomSyncs;
 using Legends.Core.IO.Inibin;
+using Legends.ORM;
 
 namespace Legends.DatabaseSynchronizer
 {
@@ -35,8 +35,11 @@ namespace Legends.DatabaseSynchronizer
 
         static Logger logger = new Logger();
 
+
         static void Main(string[] args)
         {
+            DatabaseManager.Instance.Initialize(Assembly.GetEntryAssembly(), "127.0.0.1", "legends", "root", "");
+
             RafManager manager = new RafManager(LeagueOfLegendsPath);
 
             var test = manager.GetFiles("ExpCurve.inibin");
@@ -44,9 +47,6 @@ namespace Legends.DatabaseSynchronizer
           //  JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/items.json","ITEMS");  
             logger.OnStartup();
             var recordAssembly = Assembly.GetAssembly(typeof(AIUnitRecord));
-
-            DatabaseManager.Instance.Initialize(SmartFileOutputPath, recordAssembly);
-            DatabaseManager.Instance.DropDatabase();
 
             BuildingSynchronizer.Synchronize(manager);
             MapSynchronizer.Synchronize(manager);
@@ -56,7 +56,6 @@ namespace Legends.DatabaseSynchronizer
             InibinSynchronizer synchronizer = new InibinSynchronizer(LeagueOfLegendsPath, recordAssembly);
             synchronizer.Sync();
 
-            DatabaseManager.Instance.Save();
             Console.Read();
 
         }

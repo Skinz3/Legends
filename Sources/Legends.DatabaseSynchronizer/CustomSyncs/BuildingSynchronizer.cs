@@ -3,9 +3,9 @@ using Legends.Records;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Legends.ORM;
 using System.Text;
 using System.Threading.Tasks;
-using SmartORM;
 using Legends.Core;
 using System.Numerics;
 using Legends.Core.Utils;
@@ -49,7 +49,8 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                 }
             }
 
-            records.AddElements();
+            DatabaseManager.Instance.CreateTable(typeof(BuildingRecord));
+            records.AddInstantElements(typeof(BuildingRecord));
 
             logger.Write("Buildings Synchronized");
 

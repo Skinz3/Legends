@@ -1,6 +1,7 @@
 ﻿using Legends.Core.IO;
 using Legends.Core.Time;
 using Legends.Core.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,13 @@ namespace Legends.Core
         /// </summary>
         public static T ToEnum<T>(this string value)
         {
+            if (value == string.Empty)
+            {
+                return default(T);
+            }
             return (T)Enum.Parse(typeof(T), value);
         }
-        public static T2 GetValueOrDefault<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key,T2 @default = default(T2))
+        public static T2 GetValueOrDefault<T1, T2>(this Dictionary<T1, T2> dictionary, T1 key, T2 @default = default(T2))
         {
             if (dictionary.ContainsKey(key))
             {
@@ -137,10 +142,31 @@ namespace Legends.Core
         {
             return methodInfo.GetCustomAttributes(false).FirstOrDefault(x => x.GetType() == attributeType);
         }
+        public static string JsonSerialize(this object obj)
+        {
+            return JsonConvert.SerializeObject(obj);
+        }
+        public static object JsonDeserialize(this string content, Type type)
+        {
+            return JsonConvert.DeserializeObject(content, type);
+        }
+        public static T JsonDeserialize<T>(this string content)
+        {
+            return JsonConvert.DeserializeObject<T>(content);
+        }
+
         public static string XMLSerialize(this object obj)
         {
             YAXSerializer serializer = new YAXSerializer(obj.GetType());
             return serializer.Serialize(obj);
+        }
+        public static object GetDefault(this Type type)
+        {
+            if (type.IsValueType)
+            {
+                return Activator.CreateInstance(type);
+            }
+            return null;
         }
         public static object XMLDeserialize(this string content, Type type)
         {
@@ -150,17 +176,7 @@ namespace Legends.Core
             YAXSerializer serializer = new YAXSerializer(type);
             return Convert.ChangeType(serializer.Deserialize(content), type);
         }
-        /// <summary>
-        /// Less Faster then XMLDeserialize(this string content,Type type)
-        /// </summary>
-        /// <param name="content"></param>
-        /// <returns></returns>
-        public static object XMLDeserialize(this string content, Assembly assembly)
-        {
-            string typeAsString = new string(content.Split('>')[0].Skip(1).ToArray());
-            var type = assembly.GetTypes().FirstOrDefault(x => x.Name == typeAsString);
-            return XMLDeserialize(content, type);
-        }
+      
         public static T XMLDeserialize<T>(this string content)
         {
             return (T)XMLDeserialize(content, typeof(T));

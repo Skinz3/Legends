@@ -2,12 +2,12 @@
 using Legends.Core.IO.MOB;
 using Legends.Core.IO.NavGrid;
 using Legends.Core.Utils;
+using Legends.ORM;
 using Legends.Records;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using SmartORM;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,10 +55,10 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                     var room = manager.GetFiles("room.dsc").FirstOrDefault(x => x.Path.Contains(record.Name)).GetContent(true);
                     var r = Encoding.ASCII.GetString(room);
 
-                    if (Helper.GetMapId(navGrid.Path) == 12)
-                    {
 
-                    }
+                    record.Objects = new MapObjectRecord[0];
+
+                  
                 }
 
                 if (ids.Contains(record.Id) == false)
@@ -68,8 +68,8 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                 }
 
             }
-
-            records.AddElements();
+            DatabaseManager.Instance.CreateTable(typeof(MapRecord));
+            records.AddInstantElements(typeof(MapRecord));
             logger.Write("Map synchronized");
 
         }
