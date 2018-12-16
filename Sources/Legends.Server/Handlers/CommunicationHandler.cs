@@ -20,6 +20,7 @@ namespace Legends.Handlers
 
             if (message.pingType == PingTypeEnum.Ping_OnMyWay)
             {
+                client.Hero.StopMove();
                 client.Hero.Teleport(message.position);
             }
         }

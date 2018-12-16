@@ -145,9 +145,9 @@ namespace Legends.World.Entities.AI
             Alive = false;
             Score.DeathCount++;
             Death.OnDead();
-            Game.Send(new ChampionDieMessage(500, NetId, source.NetId, Death.TimeLeftSeconds));
+            Game.Send(new ChampionDieMessage(500, NetId, source.NetId, Death.TimeLeftSeconds - 1));
             Game.UnitAnnounce(UnitAnnounceEnum.Death, NetId, source.NetId, new uint[0]);
-            Client.Send(new ChampionDeathTimerMessage(NetId, Death.TimeLeftSeconds));
+            Client.Send(new ChampionDeathTimerMessage(NetId, Death.TimeLeftSeconds - 1));
             base.OnDead(source);
         }
         public override void OnSpellUpgraded(byte spellId, Spell targetSpell)
@@ -205,7 +205,7 @@ namespace Legends.World.Entities.AI
         {
             Disconnected = true;
             Game.RemoveUnit(this); // maybe depend of reconnect system
-            Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, 0, new uint[0]);
+            Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, NetId, new uint[0]);
         }
 
 

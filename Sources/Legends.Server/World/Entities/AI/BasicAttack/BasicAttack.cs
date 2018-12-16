@@ -96,6 +96,10 @@ namespace Legends.World.Entities.AI.BasicAttack
             get;
             private set;
         }
+        public abstract bool UseCastTime
+        {
+            get;
+        }
 
 
         public BasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1)
@@ -106,6 +110,12 @@ namespace Legends.World.Entities.AI.BasicAttack
             this.DeltaAnimationTime = AnimationTime;
             this.First = first;
             this.Slot = slot;
+            this.Casted = !UseCastTime;
+
+            if (Casted)
+            {
+                OnCastTimeReach();
+            }
         }
 
         protected abstract void OnCancel();
