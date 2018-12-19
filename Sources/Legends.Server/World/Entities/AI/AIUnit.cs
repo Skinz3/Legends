@@ -2,6 +2,7 @@
 using Legends.Core.Geometry;
 using Legends.Core.Protocol;
 using Legends.Protocol.GameClient.Messages.Game;
+using Legends.Protocol.GameClient.Types;
 using Legends.Records;
 using Legends.World.Entities.AI.BasicAttack;
 using Legends.World.Entities.Buildings;
@@ -192,6 +193,69 @@ namespace Legends.World.Entities.AI
                 }
             }
 
+        }
+        public virtual MovementData GetMovementData()
+        {
+            if (!IsMoving)
+            {
+                return new MovementDataNone();
+            }
+            else
+            {
+                List<Tuple<short, short>> wayPoints = new List<Tuple<short, short>>();
+
+                foreach (var way in PathManager.GetWaypoints())
+                {
+                    wayPoints.Add(new Tuple<short, short>((short)way.X, (short)way.Y));
+                }
+
+                return new MovementDataNormal()
+                {
+                    HasTeleportID = false,
+                    TeleportID = 0,
+                    TeleportNetID = 0,
+                    Waypoints = wayPoints,
+                };
+            }
+        }
+        public override VisibilityData GetVisibilityData()
+        {
+            VisibilityData result = null;
+
+            if (IsMoving)
+            {
+
+                result = new VisibilityDataAIBaseWithMovement()
+                {
+                    BuffCount = new List<KeyValuePair<byte, int>>(),
+                    CharacterDataStack = new List<CharacterStackData>(),
+                    Items = new List<ItemData>(),
+                    LookAtNetId = 0,
+                    LookAtPosition = new Vector3(),
+                    LookAtType = Protocol.GameClient.Enum.LookAtType.Unit,
+                    MovementData = GetMovementData(),
+                    MovementSyncID = Environment.TickCount,
+                    ShieldValues = new ShieldValues(),
+                    UnknownIsHero = false,
+                };
+            }
+            else
+            {
+                result = new VisibilityDataAIBase()
+                {
+                    BuffCount = new List<KeyValuePair<byte, int>>(),
+                    CharacterDataStack = new List<CharacterStackData>(),
+                    LookAtNetId = 0,
+                    LookAtPosition = new Vector3(),
+                    Items = new List<ItemData>(),
+                    LookAtType = Protocol.GameClient.Enum.LookAtType.Unit,
+                    ShieldValues = new ShieldValues(),
+                    UnknownIsHero = false,
+                };
+            }
+
+
+            return result;
         }
     }
 }

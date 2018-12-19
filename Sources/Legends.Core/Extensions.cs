@@ -80,6 +80,17 @@ namespace Legends.Core
             writer.WriteFloat(vector3.Z);
             writer.WriteFloat(vector3.Y);
         }
+        public static Vector2 DeserializeVector2(LittleEndianReader reader)
+        {
+            float x = reader.ReadFloat();
+            float y = reader.ReadFloat();
+            return new Vector2(x, y);
+        }
+        public static void Serialize(this Vector2 vector2, LittleEndianWriter writer)
+        {
+            writer.WriteFloat(vector2.X);
+            writer.WriteFloat(vector2.Y);
+        }
         public static T[] Random<T>(this IEnumerable<T> enumerable, int count)
         {
             T[] array = new T[count];

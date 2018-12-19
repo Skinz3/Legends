@@ -1,4 +1,5 @@
 ﻿using Legends.Protocol.GameClient.Messages.Game;
+using Legends.Protocol.GameClient.Types;
 using Legends.Records;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Entities.Buildings
 {
-    public abstract class Building : AttackableUnit 
+    public abstract class Building : AttackableUnit
     {
         public override string Name => BuildingRecord.Name;
 
@@ -38,6 +39,10 @@ namespace Legends.World.Entities.Buildings
         {
             Stats = new BuildingStats(BuildingRecord);
             base.Initialize();
+        }
+        public override VisibilityData GetVisibilityData()
+        {
+            return new VisibilityDataBuilding();
         }
         public override void OnUnitEnterVision(Unit unit)
         {

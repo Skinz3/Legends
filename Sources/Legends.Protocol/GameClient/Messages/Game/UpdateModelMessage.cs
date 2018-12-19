@@ -37,7 +37,7 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
         public override void Serialize(LittleEndianWriter writer)
         {
-            writer.WriteBoolean(useSpells); // Use spells from the new model
+            writer.WriteBool(useSpells); // Use spells from the new model
             writer.WriteByte((byte)0x00); // <-- These three bytes most likely form
             writer.WriteByte((byte)0x00); // <-- an int with the useSpells byte, but
             writer.WriteByte((byte)0x00); // <-- they don't seem to affect anything

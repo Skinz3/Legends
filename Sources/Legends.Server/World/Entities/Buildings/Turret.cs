@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Legends.Protocol.GameClient.Types;
 using Legends.Records;
 
 namespace Legends.World.Entities.Buildings
@@ -15,5 +16,9 @@ namespace Legends.World.Entities.Buildings
 
         public override bool AddFogUpdate => true;
 
+        public override VisibilityData GetVisibilityData()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

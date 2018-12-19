@@ -8,6 +8,7 @@ using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using Legends.Core.Geometry;
 using Legends.Core.DesignPattern;
+using Legends.Protocol.GameClient.Types;
 
 namespace Legends.World.Spells.Projectiles
 {
@@ -74,6 +75,11 @@ namespace Legends.World.Spells.Projectiles
         public override void OnUnitLeaveVision(Unit unit)
         {
 
+        }
+
+        public override VisibilityData GetVisibilityData()
+        {
+            throw new NotImplementedException();
         }
     }
 }

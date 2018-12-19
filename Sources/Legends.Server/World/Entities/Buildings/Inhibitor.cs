@@ -9,6 +9,7 @@ using Legends.World.Spells;
 using Legends.World.Entities.Statistics.Replication;
 using Legends.Protocol.GameClient.Messages.Game;
 using Legends.World.Entities.AI.Deaths;
+using Legends.Protocol.GameClient.Types;
 
 namespace Legends.World.Entities.Buildings
 {
@@ -81,5 +82,7 @@ namespace Legends.World.Entities.Buildings
             UpdateStats();
             Game.Send(new InhibitorStateUpdateMessage(NetId, InhibitorStateEnum.Alive));
         }
+
+      
     }
 }

@@ -116,15 +116,7 @@ namespace Legends.World.Games
         [InDevelopment(InDevelopmentState.TEMPORARY)]
         private void OnTeamEnterVision(Unit unit)
         {
-            if (unit.IsMoving)
-            {
-                AIUnit attackableUnit = (AIUnit)unit;
-                Send(new EnterVisionMessage(false, unit.NetId, unit.Position, attackableUnit.PathManager.WaypointsIndex, attackableUnit.PathManager.GetWaypoints(), Game.Map.Record.MiddleOfMap));
-            }
-            else
-            {
-                Send(new EnterVisionMessage(false, unit.NetId, unit.Position, 1, new Vector2[] { unit.Position, unit.Position }, Game.Map.Record.MiddleOfMap));
-            }
+            Send(new OnEnterVisiblityClientMessage(unit.NetId, unit.GetVisibilityData()));
         }
         private void OnTeamLeaveVision(Unit unit)
         {

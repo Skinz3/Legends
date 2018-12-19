@@ -271,7 +271,7 @@ namespace Legends.World.Games
         {
             foreach (var player in Players)
             {
-                player.Team.Send(new EnterVisionMessage(true, player.NetId, player.Position, player.PathManager.WaypointsIndex, player.PathManager.GetWaypoints(), player.Game.Map.Record.MiddleOfMap));
+              //  player.Team.Send(new OnEnterVisiblityClientMessage(player.NetId, player.GetVisibilityData()));
             }
 
             float gameTime = GameTime / 1000f;

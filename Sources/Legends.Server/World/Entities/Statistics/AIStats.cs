@@ -23,7 +23,7 @@ namespace Legends.World.Entities.Statistics
             baseMagicPenetration, baseLifeSteal, baseSpellVamp, baseCCReduction, basePerceptionBubbleRadius,
             baseMoveSpeed, baseModelSize)
         {
-
+            
         }
 
     }

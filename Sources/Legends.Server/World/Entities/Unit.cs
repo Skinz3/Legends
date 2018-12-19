@@ -1,6 +1,7 @@
 ﻿using Legends.Core.Geometry;
 using Legends.Protocol.GameClient.Enum;
 using Legends.Protocol.GameClient.Messages.Game;
+using Legends.Protocol.GameClient.Types;
 using Legends.World.Entities.Movements;
 using Legends.World.Games;
 using Legends.World.Games.Maps;
@@ -96,6 +97,9 @@ namespace Legends.World.Entities
         {
 
         }
+
+        public abstract VisibilityData GetVisibilityData();
+
         public virtual void UpdateModel(string newModel, bool updateSpells, int skinId)
         {
             Model = newModel;

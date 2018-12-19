@@ -5,6 +5,9 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Legends.Core;
+using System.IO;
+using Legends.Protocol.GameClient.Enum;
 
 namespace Legends.Protocol.GameClient.Types
 {
@@ -34,42 +37,71 @@ namespace Legends.Protocol.GameClient.Types
 
     public class VisibilityDataNeutralMinionHUD : VisibilityData
     {
-        public override void Deserialize(LittleEndianReader reader) { }
-        public override void Serialize(LittleEndianWriter writer) { }
+        public override void Deserialize(LittleEndianReader reader)
+        {
+
+        }
+        public override void Serialize(LittleEndianWriter writer)
+        {
+
+        }
     }
 
     public class VisibilityDataSpellMissile : VisibilityData
     {
-        public override void Deserialize(LittleEndianReader reader) { }
-        public override void Serialize(LittleEndianWriter writer) { }
+        public override void Deserialize(LittleEndianReader reader)
+        {
+
+        }
+        public override void Serialize(LittleEndianWriter writer)
+        {
+
+        }
     }
 
     public class VisibilityDataBuilding : VisibilityData
     {
-        public override void Deserialize(LittleEndianReader reader) { }
-        public override void Serialize(LittleEndianWriter writer) { }
+        public override void Deserialize(LittleEndianReader reader)
+        {
+
+        }
+        public override void Serialize(LittleEndianWriter writer)
+        {
+
+        }
     }
 
     public class VisibilityDataAILevelProp : VisibilityData
     {
-        public override void Deserialize(LittleEndianReader reader) { }
-        public override void Serialize(LittleEndianWriter writer) { }
+        public override void Deserialize(LittleEndianReader reader)
+        {
+
+        }
+        public override void Serialize(LittleEndianWriter writer)
+        {
+
+        }
     }
 
 
-    public class ShieldValues
-    {
-        public float Magical { get; set; }
-        public float Phyisical { get; set; }
-        public float MagicalAndPhysical { get; set; }
-    }
+
 
     public class VisibilityDataAIBase : VisibilityData
     {
-        public List<ItemData> Items { get; set; } = new List<ItemData>();
-        public ShieldValues ShieldValues { get; set; }
-        //TODO: should be same structure as in S2C_ChangeCharacterData
-        public List<CharacterStackData> CharacterDataStack { get; set; } = new List<CharacterStackData>();
+        public List<ItemData> Items
+        {
+            get;
+            set;
+        } = new List<ItemData>();
+        public ShieldValues ShieldValues
+        {
+            get;
+            set;
+        }
+        public List<CharacterStackData> CharacterDataStack
+        {
+            get; set;
+        } = new List<CharacterStackData>();
 
         public uint LookAtNetId
         {
@@ -77,15 +109,24 @@ namespace Legends.Protocol.GameClient.Types
         }
         public LookAtType LookAtType
         {
-            get; set;
+            get;
+            set;
         }
         public Vector3 LookAtPosition
         {
             get; set;
         }
-        public List<KeyValuePair<byte, int>> BuffCount { get; set; } = new List<KeyValuePair<byte, int>>();
+        public List<KeyValuePair<byte, int>> BuffCount
+        {
+            get;
+            set;
+        } = new List<KeyValuePair<byte, int>>();
 
-        public bool UnknownIsHero { get; set; }
+        public bool UnknownIsHero
+        {
+            get;
+            set;
+        }
 
 
         public override void Deserialize(LittleEndianReader reader)
@@ -94,27 +135,15 @@ namespace Legends.Protocol.GameClient.Types
             for (int i = 0; i < itemCount; i++)
             {
                 var item = new ItemData();
-                item.Deserialize(reader)
+                item.Deserialize(reader);
                 Items.Add(item);
-                item.Slot = reader.ReadByte();
-                item.ItemsInSlot = reader.ReadByte();
-                item.SpellCharges = reader.ReadByte();
-                item.ItemID = reader.ReadItemID();
-
-
-                ItemId = reader.ReadUInt();
-                Slot = reader.ReadByte();
-                ItemsInSlot = reader.ReadByte();
-                SpellCharges = reader.ReadByte();
             }
 
             bool hasShield = reader.ReadBool();
             if (hasShield)
             {
                 ShieldValues = new ShieldValues();
-                ShieldValues.Magical = reader.ReadFloat();
-                ShieldValues.Phyisical = reader.ReadFloat();
-                ShieldValues.MagicalAndPhysical = reader.ReadFloat();
+                ShieldValues.Deserialize(reader);
             }
 
             int countCharStack = reader.ReadInt();
@@ -125,15 +154,15 @@ namespace Legends.Protocol.GameClient.Types
                 CharacterDataStack.Add(data);
             }
 
-            LookAtNetId = reader.ReadNetID();
-            LookAtType = reader.ReadLookAtType();
-            LookAtPosition = reader.ReadVector3();
+            LookAtNetId = reader.ReadUInt();
+            LookAtType = (LookAtType)reader.ReadByte();
+            LookAtPosition = Core.Extensions.DeserializeVector3(reader);
 
-            int numOfBuffCount = reader.ReadInt32();
+            int numOfBuffCount = reader.ReadInt();
             for (int i = 0; i < numOfBuffCount; i++)
             {
                 byte slot = reader.ReadByte();
-                int count = reader.ReadInt32();
+                int count = reader.ReadInt();
                 BuffCount.Add(new KeyValuePair<byte, int>(slot, count));
             }
 
@@ -147,61 +176,47 @@ namespace Legends.Protocol.GameClient.Types
             {
                 throw new IOException("More than 255 items!");
             }
+
             writer.WriteByte((byte)itemCount);
             foreach (var item in Items)
             {
-                writer.WriteByte(item.Slot);
-                writer.WriteByte(item.ItemsInSlot);
-                writer.WriteByte(item.SpellCharges);
-                writer.WriteItemID(item.ItemID);
+                item.Serialize(writer);
             }
 
             if (ShieldValues != null)
             {
                 writer.WriteBool(true);
-                writer.WriteFloat(ShieldValues.Magical);
-                writer.WriteFloat(ShieldValues.Phyisical);
-                writer.WriteFloat(ShieldValues.MagicalAndPhysical);
+
             }
             else
             {
                 writer.WriteBool(false);
             }
 
-            writer.WriteInt32(CharacterDataStack.Count);
+            writer.WriteInt(CharacterDataStack.Count);
+
             foreach (var data in CharacterDataStack)
             {
-                writer.WriteSizedString(data.SkinName);
-                writer.WriteUInt32(data.SkinId);
-                byte bitfield = 0;
-                if (data.OverrideSpells)
-                    bitfield |= 1;
-                if (data.ModelOnly)
-                    bitfield |= 2;
-                if (data.ReplaceCharacterPackage)
-                {
-                    bitfield |= 4;
-                }
-                writer.WriteByte(bitfield);
-                writer.WriteUInt32(data.Id);
+                data.Serialize(writer);
             }
 
-            writer.WriteNetID(LookAtNetId);
-            writer.WriteLookAtType(LookAtType);
-            writer.WriteVector3(LookAtPosition);
+            writer.WriteUInt(LookAtNetId);
+            writer.WriteByte((byte)LookAtType);
+            LookAtPosition.Serialize(writer);
 
-            writer.WriteInt32(BuffCount.Count);
+            writer.WriteInt(BuffCount.Count);
+
             foreach (var kvp in BuffCount)
             {
                 writer.WriteByte(kvp.Key);
-                writer.WriteInt32(kvp.Value);
+                writer.WriteInt(kvp.Value);
             }
 
             writer.WriteBool(UnknownIsHero);
         }
     }
 
-    public abstract class VisibilityDataAIBaseWithMovement : VisibilityDataAIBase
+    public class VisibilityDataAIBaseWithMovement : VisibilityDataAIBase
     {
         public int MovementSyncID { get; set; }
         public MovementData MovementData { get; set; } = new MovementDataNone();
@@ -210,7 +225,7 @@ namespace Legends.Protocol.GameClient.Types
         {
             base.Deserialize(reader);
             MovementDataType movementType = reader.ReadMovementDataType();
-            MovementSyncID = reader.ReadInt32();
+            MovementSyncID = reader.ReadInt();
             MovementData = reader.ReadMovementData(movementType);
         }
 
@@ -218,16 +233,10 @@ namespace Legends.Protocol.GameClient.Types
         {
             base.Serialize(writer);
             writer.WriteMovementDataType(MovementData.Type);
-            writer.WriteInt32(MovementSyncID);
+            writer.WriteInt(MovementSyncID);
             writer.WriteMovementData(MovementData);
         }
     }
 
-    public class VisibilityDataAIHero : VisibilityDataAIBaseWithMovement
-    {
-    }
 
-    public class VisibilityDataAIMinion : VisibilityDataAIBaseWithMovement
-    {
-    }
 }

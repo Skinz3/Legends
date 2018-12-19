@@ -22,6 +22,7 @@ using Legends.Protocol.GameClient.Other;
 using Legends.World.Entities.AI.Deaths;
 using Legends.World.Items;
 using Legends.World.Spells;
+using Legends.Protocol.GameClient.Types;
 
 namespace Legends.World.Entities.AI
 {
@@ -203,7 +204,6 @@ namespace Legends.World.Entities.AI
             Game.RemoveUnit(this); // maybe depend of reconnect system
             Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, NetId, new uint[0]);
         }
-
-
+      
     }
 }

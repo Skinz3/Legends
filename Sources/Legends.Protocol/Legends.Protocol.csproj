@@ -50,6 +50,7 @@
     <Compile Include="GameClient\Enum\DamageTypeEnum.cs" />
     <Compile Include="GameClient\Enum\GameModeEnum.cs" />
     <Compile Include="GameClient\Enum\InhibitorStateEnum.cs" />
+    <Compile Include="GameClient\Enum\LookAtType.cs" />
     <Compile Include="GameClient\Enum\SpellFlags.cs" />
     <Compile Include="GameClient\Enum\ItemGroupEnum.cs" />
     <Compile Include="GameClient\Enum\MapIdEnum.cs" />
@@ -82,7 +83,7 @@
     <Compile Include="GameClient\Messages\Game\DashMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DestroyObjectMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DieMessage.cs" />
-    <Compile Include="GameClient\Messages\Game\EnterVisionMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\OnEnterVisiblityClientMessage.cs" />
     <Compile Include="GameClient\Messages\Game\FogUpdate2Message.cs" />
     <Compile Include="GameClient\Messages\Game\GameTimerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\GameTimerUpdateMessage.cs" />
@@ -142,7 +143,13 @@
     <Compile Include="GameClient\Messages\Other\DebugMessage.cs" />
     <Compile Include="GameClient\Messages\Other\ExitMessage.cs" />
     <Compile Include="GameClient\Other\WaypointsReader.cs" />
+    <Compile Include="GameClient\Types\CharacterStackData.cs" />
+    <Compile Include="GameClient\Types\ItemData.cs" />
+    <Compile Include="GameClient\Types\MovementData.cs" />
     <Compile Include="GameClient\Types\ReplicateStat.cs" />
+    <Compile Include="GameClient\Types\ShieldValues.cs" />
+    <Compile Include="GameClient\Types\SpeedParams.cs" />
+    <Compile Include="GameClient\Types\VisibiltyData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

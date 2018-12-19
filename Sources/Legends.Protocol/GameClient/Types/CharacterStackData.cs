@@ -54,6 +54,7 @@ namespace Legends.Protocol.GameClient.Types
             }
             writer.WriteByte(bitfield);
             writer.WriteUInt(Id);
+
         }
         public void Deserialize(LittleEndianReader reader)
         {
@@ -64,6 +65,9 @@ namespace Legends.Protocol.GameClient.Types
             ModelOnly = (bitfield & 2) != 0;
             ReplaceCharacterPackage = (bitfield & 4) != 0;
             Id = reader.ReadUInt();
+
+
+
         }
     }
 }

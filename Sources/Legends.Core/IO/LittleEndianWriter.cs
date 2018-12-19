@@ -110,7 +110,7 @@ namespace Legends.Core.IO
             this.m_writer.Write(@byte);
         }
 
-        public void WriteBoolean(bool @bool)
+        public void WriteBool(bool @bool)
         {
             if (@bool)
             {
