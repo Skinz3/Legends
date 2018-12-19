@@ -36,9 +36,9 @@ namespace Legends.Protocol.GameClient.Messages.Game
         }
         public override void Serialize(LittleEndianWriter writer)
         {
-            writer.WriteUTF(title, 128);
-            writer.WriteUTF(text, 128);
-            writer.WriteUTF(imagePath, 128);
+            writer.WriteString(title, 128);
+            writer.WriteString(text, 128);
+            writer.WriteString(imagePath, 128);
 
             writer.WriteByte((byte)command); 
             writer.WriteInt((int)base.netId);

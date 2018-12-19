@@ -5,7 +5,7 @@
   Base project : IntWars (https://github.com/Nisalon/IntWars), League SandBox https://github.com/LeagueSandbox
   
    ![alt text](https://image.ibb.co/kYeLFy/tp2.png) 
-    ![alt text](https://image.ibb.co/dikuay/tp1.png)
+   ![alt text](https://image.ibb.co/dikuay/tp1.png)
   
  
   
@@ -21,8 +21,10 @@
 
 ## Special Thanks
 
-   Jesus (Moonshadow) https://github.com/moonshadow565
+   Moonshadow565 https://github.com/moonshadow565 for all his knowledge about League Of Legends. 
+   League.Protocol has been written from https://github.com/moonshadow565/LeaguePackets
 
 ## Contacts
 
-  You can contact me : leafburst60@gmail.com
+  You can contact me : leafburst60@gmail.com, discord : Skinz#1128
+  

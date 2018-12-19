@@ -32,7 +32,7 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
         public override void Deserialize(LittleEndianReader reader)
         {
-            Activated = reader.ReadBoolean();
+            Activated = reader.ReadBool();
         }
     }
 }

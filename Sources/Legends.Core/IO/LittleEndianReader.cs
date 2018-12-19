@@ -33,10 +33,16 @@ namespace Legends.Core.IO
             }
         }
 
+        public byte[] ReadLeft()
+        {
+            return ReadBytes((int)(BaseStream.Length - Position));
+        }
+
         public LittleEndianReader()
         {
             this.m_reader = new BinaryReader(new MemoryStream(), Encoding.UTF8);
         }
+
 
         public LittleEndianReader(Stream stream)
         {
@@ -92,7 +98,7 @@ namespace Legends.Core.IO
             return this.m_reader.ReadBytes(n);
         }
 
-        public bool ReadBoolean()
+        public bool ReadBool()
         {
             return this.m_reader.ReadByte() == 1;
         }
@@ -115,7 +121,7 @@ namespace Legends.Core.IO
         {
             List<string> lines = new List<string>();
 
-            foreach (var line in m_reader.ReadString().Split(new string[] { "\r\n" }, StringSplitOptions.None)) 
+            foreach (var line in m_reader.ReadString().Split(new string[] { "\r\n" }, StringSplitOptions.None))
             {
                 lines.Add(line);
             }
@@ -124,6 +130,16 @@ namespace Legends.Core.IO
         public string ReadUTF()
         {
             return m_reader.ReadString();
+        }
+        public string ReadSizedString()
+        {
+            var count = ReadInt();
+            if (count <= 0)
+            {
+                return "";
+            }
+            var data = ReadBytes(count);
+            return Encoding.ASCII.GetString(data);
         }
 
         public void SkipBytes(int n)

@@ -42,6 +42,9 @@ namespace Legends.Core.IO
                 return array;
             }
         }
+
+        
+
         public void Fill(byte fillWith, int length)
         {
             for (int i = 0; i < length; i++)
@@ -134,16 +137,23 @@ namespace Legends.Core.IO
             this.m_writer.Write(@float);
         }
 
-        public void WriteUTF(string str)
+        public void WriteString(string str)
         {
             this.m_writer.Write(str);
         }
-        public void WriteUTF(string str,int length)
+        public void WriteString(string str,int length)
         {
             foreach (var b in Encoding.UTF8.GetBytes(str))
                 m_writer.Write((byte)b);
 
             this.Fill(0, length - str.Length);
+        }
+        public void WriteSizedString(string str)
+        {
+            var data = string.IsNullOrEmpty(str) ? new byte[0] : Encoding.UTF8.GetBytes(str);
+            var count = data.Length;
+            WriteInt(count);
+            WriteBytes(data);
         }
 
         public void WriteBytes(byte[] data)
