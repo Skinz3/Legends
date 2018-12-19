@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Legends.Core.IO;
 using System.Numerics;
 using Legends.Core.Geometry;
+using Legends.Protocol.GameClient.Enum;
 
 namespace Legends.Protocol.GameClient.Messages.Game
 {
@@ -20,17 +21,18 @@ namespace Legends.Protocol.GameClient.Messages.Game
         public uint targetNetId;
         public byte extraTime;
         public uint futureProjectileNetId;
-        public bool isCritical;
+        public AttackSlotEnum slot;
         public Vector2 targetPosition;
         public Vector2 sourcePosition;
         public Vector2 middleOfMap;
 
-        public BeginAutoAttackMessage(uint sourceNetId, uint targetNetId, byte extraTime, uint futureProjectileNetId, bool isCritical,
+
+        public BeginAutoAttackMessage(uint sourceNetId, uint targetNetId, byte extraTime, uint futureProjectileNetId, AttackSlotEnum slot,
             Vector2 targetPosition, Vector2 sourcePosition, Vector2 middleOfMap) : base(sourceNetId)
         {
             this.extraTime = extraTime;
             this.futureProjectileNetId = futureProjectileNetId;
-            this.isCritical = isCritical;
+            this.slot = slot;
             this.targetNetId = targetNetId;
             this.sourcePosition = sourcePosition;
             this.targetPosition = targetPosition;
@@ -50,10 +52,7 @@ namespace Legends.Protocol.GameClient.Messages.Game
             writer.WriteByte((byte)extraTime); // extraTime
             writer.WriteUInt(futureProjectileNetId); // Basic attack projectile ID, to be spawned later
 
-            if (isCritical)
-                writer.WriteByte((byte)0x49); // attackSlot
-            else
-                writer.WriteByte((byte)0x40); // attackSlot
+            writer.WriteByte((byte)slot); // attackSlot
 
             writer.WriteByte((byte)0x80); // not sure what this is, but it should be correct (or maybe attacked x z y?) - 4.18
             writer.WriteByte((byte)0x01);
@@ -61,7 +60,7 @@ namespace Legends.Protocol.GameClient.Messages.Game
             writer.WriteShort((short)MovementVector.TargetXToNormalFormat(targetPosition.X, middleOfMap));
             writer.WriteByte((byte)0x80);
             writer.WriteByte((byte)0x01);
-            writer.WriteShort((short)MovementVector.TargetYToNormalFormat(targetPosition.Y, middleOfMap)); 
+            writer.WriteShort((short)MovementVector.TargetYToNormalFormat(targetPosition.Y, middleOfMap));
 
             //    writer.WriteFloat(targetPosition.X);
             //    writer.WriteFloat(targetPosition.Y);

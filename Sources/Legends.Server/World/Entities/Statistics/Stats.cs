@@ -61,7 +61,7 @@ namespace Legends.World.Entities.Statistics
             set;
         }
 
-        public IsTargetableToTeamFlags TargetableToTeam
+        public SpellFlags TargetableToTeam
         {
             get;
             set;
@@ -222,7 +222,7 @@ namespace Legends.World.Entities.Statistics
             this.IsInvulnerable = false;
             this.IsPhysicalImmune = false;
             this.IsMagicImmune = false;
-            this.TargetableToTeam = IsTargetableToTeamFlags.TargetableToAll;
+            this.TargetableToTeam = SpellFlags.TargetableToAll;
             this.Armor = new Stat(baseArmor);
             this.HealthRegeneration = new Stat(baseHpRegen);
             this.IsTargetable = true;

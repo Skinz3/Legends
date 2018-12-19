@@ -21,9 +21,9 @@ namespace Legends.World.Entities.AI.BasicAttack
             set;
         }
 
-        public override bool UseCastTime => !(Unit is AITurret);
 
-        public RangedBasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1) : base(unit, target, critical, first, slot)
+        public RangedBasicAttack(AIUnit unit, AttackableUnit target,
+            bool critical, bool first, AttackSlotEnum slot) : base(unit, target, critical, first, slot)
         {
 
         

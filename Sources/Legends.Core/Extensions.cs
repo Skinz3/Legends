@@ -17,6 +17,21 @@ namespace Legends.Core
 {
     public static class Extensions
     {
+        public static uint HashString(this string str)
+        {
+            uint hash = 0;
+            var mask = 0xF0000000;
+            for (var i = 0; i < str.Length; i++)
+            {
+                hash = char.ToLower(str[i]) + 0x10 * hash;
+                if ((hash & mask) > 0)
+                {
+                    hash ^= hash & mask ^ (hash & mask) >> 24;
+                }
+            }
+
+            return hash;
+        }
         /// <summary>
         /// T is Enum.
         /// </summary>

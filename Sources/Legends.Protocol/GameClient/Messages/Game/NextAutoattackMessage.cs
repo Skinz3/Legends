@@ -4,7 +4,9 @@ using System.Linq;
 using Legends.Core.Protocol;
 using System.Threading.Tasks;
 using Legends.Core.IO;
+using Legends.Core;
 using Legends.Protocol.GameClient.Enum;
+using System.Numerics;
 
 namespace Legends.Protocol.GameClient.Messages.Game
 {
@@ -40,6 +42,7 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
         public override void Serialize(LittleEndianWriter writer)
         {
+
             writer.WriteUInt(targetNetId);
             if (initial)
                 writer.WriteByte(0x80); // extraTime

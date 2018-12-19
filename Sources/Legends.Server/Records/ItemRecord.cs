@@ -31,12 +31,6 @@ namespace Legends.Records
             get;
             set;
         }
-        [InibinField(InibinHashEnum.ITEMS_Description)]
-        public string Description
-        {
-            get;
-            set;
-        }
         [InibinField(InibinHashEnum.ITEMS_Group)]
         public string ItemGroup
         {
@@ -286,12 +280,6 @@ namespace Legends.Records
         }
         [InibinField(InibinHashEnum.ITEMS_SpellName)]
         public string SpellName
-        {
-            get;
-            set;
-        }
-        [InibinField(InibinHashEnum.ITEMS_UseWhenAcquired)]
-        public byte UseWhenAcquired
         {
             get;
             set;

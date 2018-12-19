@@ -19,6 +19,15 @@ namespace Legends.Protocol.GameClient.Messages.Game
         {
             throw new NotImplementedException();
         }
+        public SpawnParticleMessage()
+        {
+
+
+        }
+        public SpawnParticleMessage(uint netId):base(netId)
+        {
+
+        }
 
         public override void Serialize(LittleEndianWriter writer)
         {

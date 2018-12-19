@@ -83,9 +83,9 @@ namespace Legends.World.Entities
         {
             get;
         }
-        public float GetZ()
+        public Vector3 GetPositionVector3()
         {
-            return Game.Map.Record.GetZ(Position);
+            return new Vector3(Position.X, Position.Y, Game.Map.Record.GetZ(Position));
         }
         public Unit(uint netId)
         {

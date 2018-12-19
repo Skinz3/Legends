@@ -102,7 +102,7 @@ namespace Legends.Core.IO
             this.m_writer.Write(@byte);
         }
 
-        public void WriteSByte(sbyte @byte)
+        public void WriteSByte(SByte @byte)
         {
             this.m_writer.Write(@byte);
         }
@@ -137,6 +137,13 @@ namespace Legends.Core.IO
         public void WriteUTF(string str)
         {
             this.m_writer.Write(str);
+        }
+        public void WriteUTF(string str,int length)
+        {
+            foreach (var b in Encoding.UTF8.GetBytes(str))
+                m_writer.Write((byte)b);
+
+            this.Fill(0, length - str.Length);
         }
 
         public void WriteBytes(byte[] data)

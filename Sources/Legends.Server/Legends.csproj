@@ -164,5 +164,8 @@
   <ItemGroup>
     <Folder Include="Scripts\Spells\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Todo List.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

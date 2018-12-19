@@ -119,7 +119,7 @@ namespace Legends.Core.Protocol
         PKT_S2C_ChangeCharacterData = 0x97,
         PKT_S2C_DisconnectedAnnouncement = 0x98,
         PKT_C2S_CastSpell = 0x9A,
-        PKT_S2C_TurretSpawn = 0x9D,
+        PKT_S2C_CreateTurret = 0x9D,
         PKT_S2C_BroadcastDeath = 0x9E,
         PKT_S2C_SetItemStacks = 0x9F,
         PKT_S2C_MessageBoxRight = 0xA0,

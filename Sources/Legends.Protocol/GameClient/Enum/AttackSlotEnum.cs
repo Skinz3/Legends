@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Legends.Protocol.GameClient.Enum
 {
-    public enum AttackSlotEnum
+    public enum AttackSlotEnum : uint
     {
         BASIC_ATTACK_1 = 0x40,
         BASIC_ATTACK_2 = 0x41,

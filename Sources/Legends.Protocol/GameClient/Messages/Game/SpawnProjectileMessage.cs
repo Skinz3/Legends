@@ -20,17 +20,36 @@ namespace Legends.Protocol.GameClient.Messages.Game
         public Vector3 projectilePosition;
         public Vector3 targetPosition;
         public float projectileSpeed;
-        public bool isSimpleTarget;
+        public bool targeted;
         public int projectileHash;
+        public int ownerNetId;
+        public bool ownerIsChampion;
+        public int ownerChampionHash;
+        public uint projectileNetId;
+        public uint targetNetId;
 
         public SpawnProjectileMessage()
         {
 
         }
-        public SpawnProjectileMessage(uint netId) : base(netId)
+        public SpawnProjectileMessage(uint netId, Vector3 projectilePosition, Vector3 targetPosition, float projectileSpeed,
+            bool targeted, int projHash, int ownerNetId, bool ownerIsChampion, int ownerChampionHash, uint projectileNetId, 
+            uint targetNetId) : base(netId)
         {
+            this.netId = netId;
+            this.projectilePosition = projectilePosition;
+            this.targetPosition = targetPosition;
+            this.projectileSpeed = projectileSpeed;
+            this.targeted = targeted;
+            this.projectileHash = projHash;
+            this.ownerNetId = ownerNetId;
+            this.ownerIsChampion = ownerIsChampion;
+            this.ownerChampionHash = ownerChampionHash;
+            this.projectileNetId = projectileNetId;
+            this.targetNetId = targetNetId;
+
         }
- 
+
 
         public override void Deserialize(LittleEndianReader reader)
         {
@@ -39,90 +58,91 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
         public override void Serialize(LittleEndianWriter writer)
         {
-           /* float targetZ = Game.Map.NavGrid.GetHeightAtLocation(p.Target.X, p.Target.Y);
 
-            buffer.Write((float)p.X);
-            buffer.Write((float)p.GetZ() + 100.0f);
-            buffer.Write((float)p.Y);
-            buffer.Write((float)p.X);
-            buffer.Write((float)p.GetZ());
-            buffer.Write((float)p.Y);
-            buffer.Write((float)-0.992436f); // Rotation X
-            buffer.Write((int)0); // Rotation Z
-            buffer.Write((float)-0.122766f); // Rotation Y
-            buffer.Write((float)-1984.871338f); // Unk
-            buffer.Write((float)-166.666656f); // Unk
-            buffer.Write((float)-245.531418f); // Unk
-            buffer.Write((float)p.X);
-            buffer.Write((float)p.GetZ() + 100.0f);
-            buffer.Write((float)p.Y);
-            buffer.Write((float)p.Target.X);
-            buffer.Write((float)Game.Map.NavGrid.GetHeightAtLocation(p.Target.X, p.Target.Y));
-            buffer.Write((float)p.Target.Y);
-            buffer.Write((float)p.X);
-            buffer.Write((float)p.GetZ());
-            buffer.Write((float)p.Y);
-            buffer.Write((int)0); // Unk ((float)castDelay ?)
-            buffer.Write((float)p.getMoveSpeed()); // Projectile speed
-            buffer.Write((int)0); // Unk
-            buffer.Write((int)0); // Unk
-            buffer.Write((int)0x7f7fffff); // Unk
-            buffer.Write((byte)0); // Unk
-            if (!p.Target.IsSimpleTarget)
+            writer.WriteFloat((float)projectilePosition.X);
+            writer.WriteFloat((float)projectilePosition.Z + 100.0f);
+            writer.WriteFloat((float)projectilePosition.Y);
+            writer.WriteFloat((float)projectilePosition.X);
+            writer.WriteFloat((float)projectilePosition.Z);
+            writer.WriteFloat((float)projectilePosition.Y);
+            writer.WriteFloat((float)-0.992436f); // Rotation X
+            writer.WriteInt((int)0); // Rotation Z
+            writer.WriteFloat((float)-0.122766f); // Rotation Y
+            writer.WriteFloat((float)-1984.871338f); // Unk
+            writer.WriteFloat((float)-166.666656f); // Unk
+            writer.WriteFloat((float)-245.531418f); // Unk
+            writer.WriteFloat((float)projectilePosition.X);
+            writer.WriteFloat((float)projectilePosition.Z + 100.0f);
+            writer.WriteFloat((float)projectilePosition.Y);
+            writer.WriteFloat((float)targetPosition.X);
+            writer.WriteFloat((float)targetPosition.Z);
+            writer.WriteFloat((float)targetPosition.Y);
+            writer.WriteFloat((float)projectilePosition.X);
+            writer.WriteFloat((float)projectilePosition.Z);
+            writer.WriteFloat((float)projectilePosition.Y);
+            writer.WriteInt((int)0); // Unk ((float)castDelay ?)
+            writer.WriteFloat((float)projectileSpeed); // Projectile speed
+            writer.WriteInt((int)0); // Unk
+            writer.WriteInt((int)0); // Unk
+            writer.WriteInt((int)0x7f7fffff); // Unk
+            writer.WriteByte((byte)0); // Unk
+            if (targeted)
             {
-                buffer.Write((short)0x6B); // Buffer size from here
+                writer.WriteShort((short)0x6B); // writer size from here
             }
             else
             {
-                buffer.Write((short)0x66); // Buffer size from here
+                writer.WriteShort((short)0x66); // writer size from here
             }
-            buffer.Write((int)p.ProjectileId); // projectile ID (hashed name)
-            buffer.Write((int)0); // Second net ID
-            buffer.Write((byte)0); // spellLevel
-            buffer.Write((float)1.0f); // attackSpeedMod
-            buffer.Write((int)p.Owner.NetId);
-            buffer.Write((int)p.Owner.NetId);
+            writer.WriteInt((int)projectileHash); // projectile ID (hashed name)
+            writer.WriteInt((int)0); // Second net ID
+            writer.WriteByte((byte)0); // spellLevel
+            writer.WriteFloat((float)1.0f); // attackSpeedMod
+            writer.WriteInt((int)ownerNetId);
+            writer.WriteInt((int)ownerNetId);
 
-            var c = p.Owner as Champion;
-            if (c != null)
+
+            if (ownerIsChampion)
             {
-                buffer.Write((int)c.getChampionHash());
+                writer.WriteInt(ownerChampionHash);
             }
             else
             {
-                buffer.Write((int)0);
+                writer.WriteInt((int)0);
             }
 
-            buffer.Write((int)p.NetId);
-            buffer.Write((float)p.Target.X);
-            buffer.Write((float)Game.Map.NavGrid.GetHeightAtLocation(p.Target.X, p.Target.Y));
-            buffer.Write((float)p.Target.Y);
-            buffer.Write((float)p.Target.X);
-            buffer.Write((float)Game.Map.NavGrid.GetHeightAtLocation(p.Target.X, p.Target.Y) + 100.0f);
-            buffer.Write((float)p.Target.Y);
-            if (!p.Target.IsSimpleTarget)
+            writer.WriteUInt(projectileNetId);
+            writer.WriteFloat(targetPosition.X);
+            writer.WriteFloat(targetPosition.Z);
+            writer.WriteFloat(targetPosition.X);
+            writer.WriteFloat(targetPosition.X);
+            writer.WriteFloat(targetPosition.Z + 100f);
+            writer.WriteFloat(targetPosition.Y);
+
+            if (targeted)
             {
-                buffer.Write((byte)0x01); // numTargets
-                buffer.Write((p.Target as AttackableUnit).NetId);
-                buffer.Write((byte)0); // hitResult
+                writer.WriteByte((byte)0x01); // numTargets
+                writer.WriteUInt(targetNetId);
+                writer.WriteByte((byte)0); // hitResult
             }
             else
             {
-                buffer.Write((byte)0); // numTargets
+                writer.WriteByte((byte)0); // numTargets
             }
-            buffer.Write((float)1.0f); // designerCastTime -- Doesn't seem to matter
-            buffer.Write((int)0); // extraTimeForCast -- Doesn't seem to matter
-            buffer.Write((float)1.0f); // designerTotalTime -- Doesn't seem to matter
-            buffer.Write((float)0.0f); // cooldown -- Doesn't seem to matter
-            buffer.Write((float)0.0f); // startCastTime -- Doesn't seem to matter
-            buffer.Write((byte)0x00); // flags?
-            buffer.Write((byte)0x30); // slot?
-            buffer.Write((float)0.0f); // manaCost?
-            buffer.Write((float)p.X);
-            buffer.Write((float)p.GetZ());
-            buffer.Write((float)p.Y);
-            buffer.Write((int)0); // Unk
-            buffer.Write((int)0); // Unk   */
+
+            writer.WriteFloat(1.0f); // designerCastTime -- Doesn't seem to matter
+            writer.WriteInt(0); // extraTimeForCast -- Doesn't seem to matter
+            writer.WriteFloat(1.0f); // designerTotalTime -- Doesn't seem to matter
+            writer.WriteFloat(0.0f); // cooldown -- Doesn't seem to matter
+            writer.WriteFloat(0.0f); // startCastTime -- Doesn't seem to matter
+            writer.WriteByte((byte)0x00); // flags?
+            writer.WriteByte((byte)0x30); // slot?
+            writer.WriteFloat(0.0f); // manaCost?
+            writer.WriteFloat(projectilePosition.X);
+            writer.WriteFloat(projectilePosition.Z);
+            writer.WriteFloat(projectilePosition.Y);
+            writer.WriteInt(0); // Unk
+            writer.WriteInt(0); // Unk
         }
     }
 }

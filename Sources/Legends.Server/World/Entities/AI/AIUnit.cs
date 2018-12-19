@@ -8,6 +8,7 @@ using Legends.World.Entities.Buildings;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
+using Legends.World.Items;
 using Legends.World.Spells;
 using System;
 using System.Collections.Generic;
@@ -112,6 +113,14 @@ namespace Legends.World.Entities.AI
                 OnMove();
             }
 
+        }
+        public override void OnItemAdded(Item item)
+        {
+            Game.Send(new BuyItemAnswerMessage(NetId, item.Id, item.Slot, item.Stacks, (byte)0x29));
+        }
+        public override void OnItemRemoved(Item item)
+        {
+            Game.Send(new InventoryRemoveItemMessage(NetId, item.Slot, 0));
         }
         public T GetAttackManager<T>() where T : AttackManager
         {

@@ -36,10 +36,10 @@ namespace Legends.World.Entities.AI
             get;
             set;
         }
-        private BuildingRecord BuildingRecord
+        public BuildingRecord BuildingRecord
         {
             get;
-            set;
+            private set;
         }
         public AITurret(uint netId, AIUnitRecord record, MapObjectRecord mapObject, BuildingRecord buildingRecord, string suffix) : base(netId, record)
         {

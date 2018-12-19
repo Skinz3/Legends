@@ -2,17 +2,35 @@
 
 A fix
 
-Player.cs  Client.Send(new EnterVisionMessage()) im done.. >.<
+Player.cs  Client.Send(new EnterVisionMessage()) im done.. >.< (USE MOON PACKET TO CLEAN IT)
 AIStats.cs AttackSpeed(attackdelay = ? what is this)
-
+AITurret.cs see for activation (nexus and inhib turrets) currently, basic attack is not working
+Add items to turret and activate it
+Make turret hit more when time elapsed
+Synchronize clients even if server is lagging.
+Shop , potion stacks
+wards	
+Connection, thread safe, weird?
 
 A faire
 
-Tourelles
+Tourelle de Nexus
 Sorts
-minions
-jungle
-vla
+Minions
+Jungle
+LevelProp
+Visibility from bush
+Walk to target auto, with A*
+Items Name, with metadata and remove usless Hashes
+
+
+
 PlayerInfoMessage a partir de lsb
 
 Map Object pour toute les maps !! important SCO files
+
+Terminé
+
+Autoattaque
+Shop
+Début tourelle

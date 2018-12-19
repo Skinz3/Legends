@@ -56,7 +56,7 @@ namespace Legends.World.Commands
             client.Hero.UpdateStats();
         }
         [Command("circle")]
-        public static void Cercle2Command(LoLClient client,float size)
+        public static void Cercle2Command(LoLClient client, float size)
         {
             List<Vector2> results = new List<Vector2>();
 
@@ -134,8 +134,32 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-            client.Send(new DashMessage(client.Hero.NetId, 30f, 10f, client.Hero.Position, true, client.Hero.NetId, client.Hero.Game.Map.Size,
-                new Vector2(500, 500), 10f, 10f, 10f));
+            var t = client.Hero.Game.GetUnit<AITurret>("Turret_T2_C_03");
+
+        //    client.Hero.Game.Send(new UpdateModelMessage(t.NetId, "SRUAP_Turret_Chaos1", true, 0));
+
+            client.Hero.Game.Send(new SpawnParticleMessage(t.NetId));
+
+            client.Hero.BlueTip("Legends", "This is for developpement purpose only!", "", TipCommandEnum.ACTIVATE_TIP_DIALOGUE);
+            return;
+            var turret = client.Hero.Game.GetUnit<AITurret>("Turret_T2_C_01");
+
+            List<short> items = new List<short>()
+            {
+              1501, 1502, 1503, 1505
+            };
+
+            int x = 0;
+
+            foreach (var item in items)
+            {
+                client.Hero.Game.Send(new BuyItemAnswerMessage(turret.NetId, item, (byte)x, 3, (byte)0x29));
+                x++;
+            }
+
+            turret.Stats.ActionState = StatActionStateEnum.CanMove | StatActionStateEnum.Unknown | Protocol.GameClient.Enum.StatActionStateEnum.CanAttack | Protocol.GameClient.Enum.StatActionStateEnum.ForceRenderParticles | StatActionStateEnum.NoRender;
+
+            turret.UpdateStats();
         }
         [Command("vision")]
         public static void VisionCommand(LoLClient client)

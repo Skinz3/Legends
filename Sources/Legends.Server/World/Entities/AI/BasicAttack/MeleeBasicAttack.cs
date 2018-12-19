@@ -15,7 +15,6 @@ namespace Legends.World.Entities.AI.BasicAttack
           
         }
 
-        public override bool UseCastTime => true;
 
         protected override float GetAutocancelDistance()
         {

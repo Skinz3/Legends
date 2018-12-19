@@ -21,6 +21,10 @@ namespace Legends.Core.Geometry
         {
             return new Vector2((float)(centerPoint.X + (distance * Math.Cos(angle))), (float)(centerPoint.Y + (distance * Math.Sin(angle))));
         }
+        public static Vector3 ToVector3(this Vector2 vector)
+        {
+            return new Vector3(vector.X, vector.Y, 0);
+        }
         public static Vector3 ForceSize(this Vector3 vector, int size)
         {
             if (size <= 2)

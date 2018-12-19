@@ -8,6 +8,8 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Legends.Core;
+using Legends.Core.Geometry;
 
 namespace Legends.World.Entities.AI.BasicAttack
 {
@@ -96,11 +98,6 @@ namespace Legends.World.Entities.AI.BasicAttack
             get;
             private set;
         }
-        public abstract bool UseCastTime
-        {
-            get;
-        }
-
 
         public BasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1)
         {
@@ -110,12 +107,6 @@ namespace Legends.World.Entities.AI.BasicAttack
             this.DeltaAnimationTime = AnimationTime;
             this.First = first;
             this.Slot = slot;
-            this.Casted = !UseCastTime;
-
-            if (Casted)
-            {
-                OnCastTimeReach();
-            }
         }
 
         protected abstract void OnCancel();
@@ -131,15 +122,14 @@ namespace Legends.World.Entities.AI.BasicAttack
         {
             if (First)
             {
-
-                // Unit.Game.Send(new BeginAutoAttackMessage(Unit.NetId, Target.NetId, 0x80, 0, Critical, Target.Position, Unit.Position, Unit.Game.Map.Record.MiddleOfMap));
-                Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, Target.NetId, 0, Slot, true));
+                // Unit.Game.Send(new BeginAutoAttackMessage(Unit.NetId, Target.NetId, 0x80, 0, Slot, Target.Position, Unit.Position, Unit.Game.Map.Record.MiddleOfMap));
+                Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, Target.NetId, Unit.Game.NetIdProvider.PopNextNetId(), Slot, true));
             }
             else
             {
-                Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, Target.NetId, 0, Slot, false));
+                // Unit.Game.Send(new BeginAutoAttackMessage(Unit.NetId, Target.NetId, 0x80, 0, Slot, Target.Position, Unit.Position, Unit.Game.Map.Record.MiddleOfMap));
+                Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, Target.NetId, Unit.Game.NetIdProvider.PopNextNetId(), Slot, false));
             }
-            Unit.Game.Send(new OnAttackMessage(Unit.NetId, AttackTypeEnum.ATTACK_TYPE_TARGETED, new Vector3(Target.Position, 0), Target.NetId));
 
 
         }

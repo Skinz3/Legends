@@ -245,9 +245,13 @@ namespace Legends.World.Games
 
             foreach (var turret in Map.Units.OfType<AITurret>())
             {
-                Send(new TurretSpawnMessage(0, turret.NetId, turret.GetClientName()));
+                var test = turret.GetClientName();
+                Send(new CreateTurretMessage(turret.NetId, turret.NetId, turret.GetClientName()));
+
                 turret.UpdateStats(false);
                 turret.UpdateHeath();
+
+
             }
             foreach (var building in Map.Units.OfType<Building>())
             {

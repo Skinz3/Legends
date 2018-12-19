@@ -50,7 +50,7 @@
     <Compile Include="GameClient\Enum\DamageTypeEnum.cs" />
     <Compile Include="GameClient\Enum\GameModeEnum.cs" />
     <Compile Include="GameClient\Enum\InhibitorStateEnum.cs" />
-    <Compile Include="GameClient\Enum\IsTargetableToTeamFlags.cs" />
+    <Compile Include="GameClient\Enum\SpellFlags.cs" />
     <Compile Include="GameClient\Enum\ItemGroupEnum.cs" />
     <Compile Include="GameClient\Enum\MapIdEnum.cs" />
     <Compile Include="GameClient\Enum\MovementType.cs" />
@@ -61,12 +61,14 @@
     <Compile Include="GameClient\Enum\StatSecondaryId.cs" />
     <Compile Include="GameClient\Enum\SummonerSpellId.cs" />
     <Compile Include="GameClient\Enum\TeamId.cs" />
+    <Compile Include="GameClient\Enum\TipCommandEnum.cs" />
     <Compile Include="GameClient\Enum\UnitAnnounceEnum.cs" />
     <Compile Include="GameClient\Messages\Game\AnnounceMessage.cs" />
     <Compile Include="GameClient\Messages\Game\AttentionPingAnswerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\AttentionPingRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\AutoAttackOptionMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BeginAutoAttackMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\BlueTipMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BuyItemAnswerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BuyItemRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\CastSpellAnswerMessage.cs" />
@@ -115,7 +117,7 @@
     <Compile Include="GameClient\Messages\Game\StopAutoAttackMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SwapItemAnswerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SwapItemRequestMessage.cs" />
-    <Compile Include="GameClient\Messages\Game\TurretSpawnMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\CreateTurretMessage.cs" />
     <Compile Include="GameClient\Messages\Game\UnitAnnounceMessage.cs" />
     <Compile Include="GameClient\Messages\Game\UpdateModelMessage.cs" />
     <Compile Include="GameClient\Messages\Game\UpdateStatsMessage.cs" />

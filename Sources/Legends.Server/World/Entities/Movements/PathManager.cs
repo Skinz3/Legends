@@ -1,4 +1,5 @@
-﻿using Legends.Core.Geometry;
+﻿using Legends.Core.DesignPattern;
+using Legends.Core.Geometry;
 using Legends.World.Entities.AI;
 using System;
 using System.Collections.Generic;
@@ -87,6 +88,7 @@ namespace Legends.World.Entities.Movements
             this.DistanceToTarget = 0f;
             End = false;
         }
+        [InDevelopment(InDevelopmentState.TODO, "Use A* to calculate Waypoints")]
         /// <summary>
         /// Only use for auto attack
         /// </summary>
@@ -103,7 +105,7 @@ namespace Legends.World.Entities.Movements
             if (distanceToTarget > 0)
                 targetPosition = Geo.GetPointOnCircle(target.Position, target.GetAngleBetween(Unit), distanceToTarget);
 
-            Waypoints = new List<Vector2>() { Unit.Position, targetPosition };
+            Waypoints = new List<Vector2>() { Unit.Position, targetPosition }; // A* right here
             End = false;
 
         }

@@ -19,23 +19,30 @@ using System.Threading.Tasks;
 using Legends.Protocol.GameClient.LoadingScreen;
 using Legends.Protocol.GameClient.Other;
 using Legends.Records;
+using Legends.Core;
 
 namespace Legends.Handlers
 {
     class GameHandler
     {
+        static uint netId = 1299;
+
         [MessageHandler(PacketCmd.PKT_C2S_CastSpell)]
         public static void HandleCastSpellRequest(CastSpellRequestMessage message, LoLClient client)
         {
+            netId++;
             client.Hero.StopMove();
 
-            client.Hero.AttentionPing(new Vector2(message.x, message.y), 0, PingTypeEnum.Ping_Assist);
+            //         client.Hero.AttentionPing(new Vector2(message.x, message.y), 0, PingTypeEnum.Ping_Assist);
 
-           /* client.Hero.Game.Send(new CastSpellAnswerMessage(client.Hero.NetId, Environment.TickCount,
-                0, 0x66, "EzrealMysticShot".GetHashCode(), 349, 1, 1.0f, client.Hero.NetId, client.Hero.NetId,
-                "Ezreal".GetHashCode(), 0, message.x, 0,
-                message.y, message.x2, 0, message.y2, 0, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
-                0, 0, 50, client.Hero.Position.X, client.Hero.Position.Y, 0, 1)); */
+            client.Hero.Game.Send(new SpawnProjectileMessage(0, client.Hero.GetPositionVector3(), new Vector3(message.x, 0, message.y),
+                1200, false, (int)"BrandBlazeMissile".HashString(), (int)client.Hero.NetId, true, (int)"Ahri".HashString(), netId, 0));
+
+            client.Hero.Game.Send(new CastSpellAnswerMessage(client.Hero.NetId, Environment.TickCount,
+                 0, 0x66, (int)"AhriFoxFire".HashString(), 395, 1, 1.0f, client.Hero.NetId, client.Hero.NetId,
+                 (int)"Ahri".HashString(), netId, message.x, 0,
+                 message.y, message.x, 0, message.y, 0, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+                 0, 0, 50, client.Hero.Position.X, client.Hero.Position.Y, 0, 1));
 
         }
         [MessageHandler(PacketCmd.PKT_C2S_Click, Channel.CHL_C2S)]

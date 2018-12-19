@@ -128,15 +128,11 @@ namespace Legends.World.Entities.AI
             Game.Send(new LevelUpMessage(NetId, (byte)Stats.Level, Stats.SkillPoints)); // tdoo
             UpdateStats();
         }
-
-        public override void OnItemAdded(Item item)
+        public void BlueTip(string title,string text,string imagePath,TipCommandEnum command)
         {
-            Game.Send(new BuyItemAnswerMessage(NetId, item.Id, item.Slot, item.Stacks, (byte)0x29));
+            Client.Send(new BlueTipMessage(text, title, imagePath, command, NetId));
         }
-        public override void OnItemRemoved(Item item)
-        {
-            Game.Send(new InventoryRemoveItemMessage(NetId, item.Slot, 0));
-        }
+       
         public override void OnDead(AttackableUnit source) // we override base
         {
             Stats.Health.Current = 0;
@@ -145,9 +141,9 @@ namespace Legends.World.Entities.AI
             Alive = false;
             Score.DeathCount++;
             Death.OnDead();
-            Game.Send(new ChampionDieMessage(500, NetId, source.NetId, Death.TimeLeftSeconds - 1));
+            Game.Send(new ChampionDieMessage(500, NetId, source.NetId, Death.TimeLeftSeconds));
             Game.UnitAnnounce(UnitAnnounceEnum.Death, NetId, source.NetId, new uint[0]);
-            Client.Send(new ChampionDeathTimerMessage(NetId, Death.TimeLeftSeconds - 1));
+            Client.Send(new ChampionDeathTimerMessage(NetId, Death.TimeLeftSeconds));
             base.OnDead(source);
         }
         public override void OnSpellUpgraded(byte spellId, Spell targetSpell)

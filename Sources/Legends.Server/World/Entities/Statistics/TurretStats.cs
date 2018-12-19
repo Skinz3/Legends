@@ -22,7 +22,9 @@ namespace Legends.World.Entities.Statistics
              (float)record.BaseMpRegen, record.AttackRange, (float)record.BaseAttackSpeed, (float)record.AttackDelayOffsetPercent, AIHero.DEFAULT_COOLDOWN_REDUCTION,
              0, 0, 0, 0, 0, DEFAULT_PERCEPTION_BUBBLE_RADIUS, record.BaseMovementSpeed, 1)
         {
+
            
+
         }
         public override void UpdateReplication(bool partial = true)
         {

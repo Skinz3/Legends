@@ -48,7 +48,7 @@ namespace Legends.World.Entities.AI.Deaths
         }
         public virtual void OnDead()
         {
-            TimeLeft = GetTimeLeftSeconds() * 1000f;
+            TimeLeft = (GetTimeLeftSeconds()) * 1000f;
         }
 
         protected abstract float GetTimeLeftSeconds();

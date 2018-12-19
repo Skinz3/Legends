@@ -81,7 +81,7 @@ namespace Legends.World.Entities.AI.BasicAttack
                 if (unitsInRange.Count > 0)
                     BeginAttackTarget(unitsInRange.Last().Key); // the closest one is last
             }
-       
+
             if (CurrentAutoattack != null && CurrentAutoattack.Finished == false)
             {
                 CurrentAutoattack.Update(deltaTime);
@@ -95,7 +95,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             }
             var slot = AttackSlotEnum.BASIC_ATTACK_1;
 
-            if (CurrentAutoattack != null && CurrentAutoattack.Slot == AttackSlotEnum.BASIC_ATTACK_1 && Unit.Record.IsMelee == true)
+            if (CurrentAutoattack != null && CurrentAutoattack.Slot == AttackSlotEnum.BASIC_ATTACK_1 && Unit.Record.IsMelee)
             {
                 slot = AttackSlotEnum.BASIC_ATTACK_2;
             }
