@@ -31,18 +31,9 @@ namespace Legends.Handlers
         public static void HandleCastSpellRequest(CastSpellRequestMessage message, LoLClient client)
         {
             netId++;
-            client.Hero.StopMove();
+            client.Hero.StopMove(true, false);
 
             //         client.Hero.AttentionPing(new Vector2(message.x, message.y), 0, PingTypeEnum.Ping_Assist);
-
-            client.Hero.Game.Send(new SpawnProjectileMessage(0, client.Hero.GetPositionVector3(), new Vector3(message.x, 0, message.y),
-                1200, false, (int)"BrandBlazeMissile".HashString(), (int)client.Hero.NetId, true, (int)"Ahri".HashString(), netId, 0));
-
-            client.Hero.Game.Send(new CastSpellAnswerMessage(client.Hero.NetId, Environment.TickCount,
-                 0, 0x66, (int)"AhriFoxFire".HashString(), 395, 1, 1.0f, client.Hero.NetId, client.Hero.NetId,
-                 (int)"Ahri".HashString(), netId, message.x, 0,
-                 message.y, message.x, 0, message.y, 0, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-                 0, 0, 50, client.Hero.Position.X, client.Hero.Position.Y, 0, 1));
 
         }
         [MessageHandler(PacketCmd.PKT_C2S_Click, Channel.CHL_C2S)]

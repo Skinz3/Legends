@@ -20,7 +20,7 @@ namespace Legends.Records
         private static List<ItemRecord> Items = new List<ItemRecord>();
 
         [InibinFieldFileName]
-        public int ItemId
+        public uint ItemId
         {
             get;
             set;

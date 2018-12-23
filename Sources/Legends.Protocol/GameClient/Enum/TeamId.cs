@@ -10,6 +10,7 @@ namespace Legends.Protocol.GameClient.Enum
     {
         UNKNOWN = 0x00,
         BLUE = 0x64,
-        PURPLE = 0xC8
+        PURPLE = 0xC8,
+        NEUTRAL = 0x12C,
     };
 }

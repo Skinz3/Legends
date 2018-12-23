@@ -13,7 +13,7 @@ namespace Legends.Protocol.GameClient.LoadingScreen
         public static PacketCmd PACKET_CMD = PacketCmd.PKT_S2C_LoadName;
         public override PacketCmd Cmd => PACKET_CMD;
 
-        public static Channel CHANNEL = Channel.CHL_S2C;
+        public static Channel CHANNEL = Channel.CHL_LOADING_SCREEN;
         public override Channel Channel => CHANNEL;
 
         public long userId;

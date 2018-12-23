@@ -1,4 +1,5 @@
 ﻿using Legends.Core.DesignPattern;
+using Legends.Protocol.GameClient.Types;
 using Legends.Records;
 using Legends.World.Entities;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Items
 {
-    public class Item
+    public class Item : IProtocolable<ItemData>
     {
         public ItemRecord Record
         {
@@ -21,7 +22,7 @@ namespace Legends.World.Items
             get;
             private set;
         }
-        public int Id
+        public uint Id
         {
             get
             {
@@ -44,6 +45,16 @@ namespace Legends.World.Items
             this.Owner = owner;
             this.Slot = slot;
             this.Stacks = 1;
+        }
+        public ItemData GetProtocolObject()
+        {
+            return new ItemData()
+            {
+                ItemId = Id,
+                ItemsInSlot = Slot,
+                Slot = Slot,
+                SpellCharges = 0,
+            };
         }
         [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "Mana != Energy ?")]
         public void ApplyStats()

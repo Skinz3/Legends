@@ -1,5 +1,7 @@
 ﻿using Legends.Core.DesignPattern;
 using Legends.Core.Geometry;
+using Legends.Protocol.GameClient.Enum;
+using Legends.Protocol.GameClient.Types;
 using Legends.World.Entities.AI;
 using System;
 using System.Collections.Generic;
@@ -41,6 +43,7 @@ namespace Legends.World.Entities.Movements
             get
             {
                 return Vector2.Normalize(NextPosition.Value - Unit.Position);
+          
             }
         }
         private List<Vector2> Waypoints
@@ -113,7 +116,24 @@ namespace Legends.World.Entities.Movements
         {
             return Waypoints.ToArray();
         }
+        /// <summary>
+        /// Cells coords
+        /// </summary>
+        /// <returns></returns>
+        public TranslatedWaypoint[] GetWaypointsTranslated()
+        {
+            List<TranslatedWaypoint> result = new List<TranslatedWaypoint>();
+            var mapSize = Unit.Game.Map.Size;
+            var wayPoints = GetWaypoints();
 
+            result.Add(TranslatedWaypoint.TranslateCenter(Unit.Position, mapSize));
+
+            for (int i = WaypointsIndex; i < wayPoints.Length; i++)
+            {
+                result.Add(TranslatedWaypoint.TranslateCenter(wayPoints[i], mapSize));
+            }
+            return result.ToArray();
+        }
         /// <summary>
         /// Créer une interpolation entre un point a et b, avec a la position actuelle
         /// et b le prochain noeud du pathfinding (waypoints).
@@ -127,8 +147,8 @@ namespace Legends.World.Entities.Movements
             {
                 float deltaMovement = Unit.Stats.MoveSpeed.TotalSafe * 0.001f * deltaTime; // deltaTime
 
-                float xOffset = Direction.X * deltaMovement * 1.06f;
-                float yOffset = Direction.Y * deltaMovement * 1.06f;
+                float xOffset = Direction.X * deltaMovement * 1.07f;
+                float yOffset = Direction.Y * deltaMovement * 1.07f;
 
                 Unit.Position = new Vector2(Unit.Position.X + xOffset, Unit.Position.Y + yOffset);
 
@@ -161,8 +181,8 @@ namespace Legends.World.Entities.Movements
                     }
                 }
 
-                //     var p = ((AIHero)Unit); p.AttentionPing(p.Position, p.NetId, Core.Protocol.Enum.PingTypeEnum.Ping_OnMyWay);
             }
+           
         }
         public override string ToString()
         {

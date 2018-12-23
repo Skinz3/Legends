@@ -13,6 +13,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Legends.Protocol.GameClient.Types;
 
 namespace Legends.World.Entities.AI
 {
@@ -20,7 +21,7 @@ namespace Legends.World.Entities.AI
     {
         public override string Name => BuildingRecord.Name;
 
-        public override float PerceptionBubbleRadius => ((TurretStats)Stats).PerceptionBubbleRadius.TotalSafe;
+        public override float PerceptionBubbleRadius => Stats.PerceptionBubbleRadius.TotalSafe;
 
         public override bool DefaultAutoattackActivated => true;
 
@@ -95,6 +96,29 @@ namespace Legends.World.Entities.AI
         public override void OnSpellUpgraded(byte spellId, Spell targetSpell)
         {
             throw new NotImplementedException();
+        }
+
+        public override VisibilityData GetVisibilityData()
+        {
+            return new VisibilityDataAIBase()
+            {
+                BuffCount = new List<KeyValuePair<byte, int>>(),
+                CharacterDataStack = GetCharacterStackDatas(),
+                Items = Inventory.GetItemDatas(),
+                LookAtNetId = 0,
+                LookAtType = LookAtType.Direction,
+                LookAtPosition = new Vector3(),
+                ShieldValues = GetShieldValues(),
+                UnknownIsHero = false,
+            };
+        }
+
+        public override void Create()
+        {
+            Game.Send(new CreateTurretMessage(NetId, NetId, GetClientName()));
+
+            UpdateStats(false);
+            UpdateHeath();
         }
     }
 }

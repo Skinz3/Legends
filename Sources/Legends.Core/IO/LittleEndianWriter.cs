@@ -43,7 +43,7 @@ namespace Legends.Core.IO
             }
         }
 
-        
+
 
         public void Fill(byte fillWith, int length)
         {
@@ -61,6 +61,18 @@ namespace Legends.Core.IO
         {
             m_writer = new BinaryWriter(stream);
         }
+
+        public void WriteZeroTerminatedString(string str)
+        {
+            WriteBytes(string.IsNullOrEmpty(str) ? new byte[0] : Encoding.UTF8.GetBytes(str));
+            WriteByte(0);
+        }
+
+        public void WriteFixedStringLast(string str, int maxLength)
+        {
+            WriteZeroTerminatedString(str);
+        }
+
         public LittleEndianWriter(byte[] tab)
         {
             this.m_writer = new BinaryWriter(new MemoryStream(), Encoding.UTF8);
@@ -141,7 +153,7 @@ namespace Legends.Core.IO
         {
             this.m_writer.Write(str);
         }
-        public void WriteString(string str,int length)
+        public void WriteString(string str, int length)
         {
             foreach (var b in Encoding.UTF8.GetBytes(str))
                 m_writer.Write((byte)b);

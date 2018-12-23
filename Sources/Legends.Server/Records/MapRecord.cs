@@ -136,21 +136,18 @@ namespace Legends.Records
             return Maps.Find(x => x.Id == id);
         }
 
-        [StartupInvoke(StartupInvokePriority.Eighth)]
+        [StartupInvoke(StartupInvokePriority.Ninth)]
         public static void Initialize()
         {
             foreach (var map in MapRecord.Maps)
             {
-                if (map.TranslationMaxGridPos == null)
+                map.TranslationMaxGridPos = new Vector3
                 {
-                    map.TranslationMaxGridPos = new Vector3
-                    {
-                        X = map.XCellCount / map.MaxGridPos.X,
-                        Z = map.YCellCount / map.MaxGridPos.Z
-                    };
-                }
+                    X = map.XCellCount / map.MaxGridPos.X,
+                    Z = map.YCellCount / map.MaxGridPos.Z
+                };
             }
-           
+
         }
     }
     public class MapCellRecord

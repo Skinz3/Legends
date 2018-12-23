@@ -3,6 +3,7 @@ using Legends.Core.DesignPattern;
 using Legends.Core.Protocol;
 using Legends.Protocol.GameClient.Enum;
 using Legends.Protocol.GameClient.Messages.Game;
+using Legends.Protocol.GameClient.Types;
 using Legends.World.Entities.AI.Deaths;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
@@ -34,6 +35,11 @@ namespace Legends.World.Entities
             get;
             set;
         }
+        public ShieldValues Shields
+        {
+            get;
+            private set;
+        }
         public Inventory Inventory
         {
             get;
@@ -54,19 +60,36 @@ namespace Legends.World.Entities
         public AttackableUnit(uint netId) : base(netId)
         {
             this.Inventory = new Inventory(this);
+            this.Shields = new ShieldValues();
         }
 
         public override void Initialize()
         {
             base.Initialize();
         }
+        public virtual int GetGoldFromLastHit
+        {
+            get
+            {
+                return 0;
+            }
+        }
         public virtual void OnItemAdded(Item item)
         {
-           
+
         }
         public virtual void OnItemRemoved(Item item)
         {
 
+        }
+        public virtual void AddGold(float value, bool floatingText = false)
+        {
+            Stats.Gold += value;
+            Stats.GoldTotal += value;
+        }
+        public virtual void RemoveGold(float value)
+        {
+            Stats.Gold -= value;
         }
         /// <summary>
         /// todo ? for attackable unit only?
@@ -94,7 +117,14 @@ namespace Legends.World.Entities
                 }
             }
         }
-
+        public virtual void OnShieldModified(bool magical, bool physical, float value)
+        {
+            SendVision(new ModifyShieldMessage(NetId, physical, magical, true, value));
+        }
+        protected ShieldValues GetShieldValues()
+        {
+            return Shields.Ignorable() ? null : Shields;
+        }
 
         public virtual void InflictDamages(Damages damages)
         {
@@ -103,8 +133,36 @@ namespace Legends.World.Entities
             if (!Stats.IsLifeStealImmune)
                 damages.Source.Stats.Health.Heal(damages.Delta * damages.Source.Stats.LifeSteal.TotalSafe);
 
-            Stats.Health.Current -= damages.Delta;
-            Game.Send(new DamageDoneMessage(damages.Result, damages.Type, damages.Delta, NetId, damages.Source.NetId));
+            if (Shields.Magical > 0 && damages.Type == DamageType.DAMAGE_TYPE_MAGICAL)
+            {
+                float value = Shields.UseMagicalShield(damages.Delta);
+                Stats.Health.Current -= value;
+                float shieldLoss = -(damages.Delta - value);
+                OnShieldModified(true, false, shieldLoss);
+            }
+            else if (Shields.Physical > 0 && damages.Type == DamageType.DAMAGE_TYPE_PHYSICAL)
+            {
+                float value = Shields.UsePhysicalShield(damages.Delta);
+                Stats.Health.Current -= value;
+                float shieldLoss = -(damages.Delta - value);
+                OnShieldModified(false, true, shieldLoss);
+            }
+            else if (Shields.MagicalAndPhysical > 0)
+            {
+
+                float value = Shields.UseMagicalAndPhysicalShield(damages.Delta);
+                Stats.Health.Current -= value;
+                float shieldLoss = -(damages.Delta - value);
+                OnShieldModified(true, true, shieldLoss);
+            }
+            else
+            {
+                Stats.Health.Current -= damages.Delta;
+                Game.Send(new DamageDoneMessage(damages.Result, damages.Type, damages.Delta, NetId, damages.Source.NetId));
+            }
+
+
+
             UpdateStats();
             damages.Source.UpdateStats();
             if (Stats.Health.Current <= 0)
@@ -121,29 +179,30 @@ namespace Legends.World.Entities
         {
             Team.Send(message, channel, flags);
 
-            Team oposedTeam = GetOposedTeam();
-
-            if (oposedTeam.HasVision(this))
+            foreach (var oposedTeam in Team.GetOposedTeams())
             {
-                oposedTeam.Send(message);
+                if (oposedTeam.HasVision(this))
+                {
+                    oposedTeam.Send(message);
+                }
             }
+
+
         }
         [InDevelopment(InDevelopmentState.TODO, "The parametters should be DeathDescription.cs for assits")]
         public virtual void OnDead(AttackableUnit source)
         {
             Alive = false;
-
             OnDeadEvent?.Invoke(this, source);
         }
         public virtual void OnRevive(AttackableUnit source)
         {
             Alive = true;
-
             OnReviveEvent?.Invoke(this, source);
         }
         public virtual void UpdateHeath()
         {
-            Game.Send(new SetHealthMessage(NetId, 0, Stats.Health.TotalSafe, Stats.Health.Current));
+            Game.Send(new OnEnterLocalVisiblityClient(NetId, Stats.Health.TotalSafe, Stats.Health.Current));
         }
     }
 }

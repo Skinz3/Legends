@@ -39,7 +39,18 @@ namespace Legends.Records
             get;
             set;
         }
-      
+        [InibinField(InibinHashEnum.SPELLS_AIRange)]
+        public float AIRange
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.SPELLS_CastRange)]
+        public float CastRange
+        {
+            get;
+            set;
+        }
         public static SpellRecord GetSpell(string spellName)
         {
             return Spells.Find(x => x.Name == spellName);

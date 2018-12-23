@@ -1,8 +1,12 @@
-﻿using Legends.Core.Geometry;
+﻿using Legends.Core.DesignPattern;
+using Legends.Core.Geometry;
+using Legends.Core.Utils;
 using Legends.Protocol.GameClient.Enum;
 using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Protocol.GameClient.Types;
+using Legends.Records;
 using Legends.World.Entities.Movements;
+using Legends.World.Entities.Statistics;
 using Legends.World.Games;
 using Legends.World.Games.Maps;
 using Legends.World.Interfaces;
@@ -17,6 +21,8 @@ namespace Legends.World.Entities
 {
     public abstract class Unit : IUpdatable, IInitializable
     {
+        static Logger logger = new Logger();
+
         public const float DEFAULT_MODEL_SIZE = 1f;
 
         public uint NetId
@@ -55,6 +61,7 @@ namespace Legends.World.Entities
             get;
             protected set;
         }
+
         public bool Alive
         {
             get;
@@ -92,6 +99,7 @@ namespace Legends.World.Entities
         {
             this.NetId = netId;
             this.Alive = true;
+
         }
         public virtual void Initialize()
         {
@@ -100,12 +108,7 @@ namespace Legends.World.Entities
 
         public abstract VisibilityData GetVisibilityData();
 
-        public virtual void UpdateModel(string newModel, bool updateSpells, int skinId)
-        {
-            Model = newModel;
-            SkinId = skinId;
-            Game.Send(new UpdateModelMessage(NetId, newModel, updateSpells, skinId));
-        }
+
         /// <summary>
         /// Called by Game.AddUnit()
         /// </summary>
@@ -122,14 +125,12 @@ namespace Legends.World.Entities
         {
 
         }
+
         public abstract void OnUnitEnterVision(Unit unit);
 
         public abstract void OnUnitLeaveVision(Unit unit);
 
-        public Team GetOposedTeam()
-        {
-            return Team.Id == TeamId.BLUE ? Game.PurpleTeam : Game.BlueTeam;
-        }
+
         public bool InFieldOfView(Unit other)
         {
             var dist = this.GetDistanceTo(other);
@@ -157,6 +158,9 @@ namespace Legends.World.Entities
             return Name;
         }
 
+        public virtual void OnGameStart()
+        {
 
+        }
     }
 }

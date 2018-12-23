@@ -11,6 +11,7 @@ using Legends.Records;
 using Legends.World.Champions;
 using Legends.World.Commands;
 using System;
+using Legends.Core;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -43,7 +44,7 @@ namespace Legends
             {
                 for (int i = 0; i < ConfigurationProvider.Instance.Configuration.Players.Count; i++)
                 {
-                    Process.Start("StartGame"+(i+1)+".bat");
+                    Process.Start("StartGame" + (i + 1) + ".bat");
                 }
             }
 
@@ -52,7 +53,7 @@ namespace Legends
             Console.ReadKey();
         }
 
-       
+
 
         [StartupInvoke("Database", StartupInvokePriority.First)]
         public static void LoadDatabase()

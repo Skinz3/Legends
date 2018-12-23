@@ -23,7 +23,37 @@ namespace Legends.Protocol.GameClient.Types
         {
             get; set;
         }
+        public bool Ignorable()
+        {
+            return Physical == 0 && Magical == 0 && MagicalAndPhysical == 0;
+        }
+        public float UseMagicalShield(float damagesDelta)
+        {
+            float num = Magical -= damagesDelta;
 
+            if (Magical < 0)
+                Magical = 0;
+
+            return num < 0 ? -num : 0;
+        }
+        public float UsePhysicalShield(float damagesDelta)
+        {
+            float num = Physical -= damagesDelta;
+
+            if (Physical < 0)
+                Physical = 0;
+
+            return num < 0 ? -num : 0;
+        }
+        public float UseMagicalAndPhysicalShield(float damagesDelta)
+        {
+            float num = MagicalAndPhysical -= damagesDelta;
+
+            if (MagicalAndPhysical < 0)
+                MagicalAndPhysical = 0;
+
+            return num < 0 ? -num : 0;
+        }
         public void Serialize(LittleEndianWriter writer)
         {
             writer.WriteFloat(Magical);

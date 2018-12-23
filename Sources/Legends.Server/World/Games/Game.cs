@@ -52,6 +52,7 @@ namespace Legends.World.Games
             get;
             private set;
         }
+        [Obsolete("slow")]
         public AIHero[] Players
         {
             get
@@ -65,6 +66,11 @@ namespace Legends.World.Games
             private set;
         }
         public Team PurpleTeam
+        {
+            get;
+            private set;
+        }
+        public Team NeutralTeam
         {
             get;
             private set;
@@ -145,8 +151,11 @@ namespace Legends.World.Games
             this.NetIdProvider = new NetIdProvider();
             this.Id = id;
             this.Name = name;
-            this.BlueTeam = new Team(this, TeamId.BLUE);
-            this.PurpleTeam = new Team(this, TeamId.PURPLE);
+
+            this.BlueTeam = new BlueTeam(this);
+            this.PurpleTeam = new PurpleTeam(this);
+            this.NeutralTeam = new NeutralTeam(this);
+
             this.Map = Map.CreateMap(mapId, this);
             this.Timer = new HighResolutionTimer((int)REFRESH_RATE);
             this.SynchronizedActions = new ConcurrentStack<Action>();
@@ -159,7 +168,7 @@ namespace Legends.World.Games
         /// Add player to the game and to his team 
         /// </summary>
         /// <param name="player"></param>
-        public void AddUnit(Unit unit, TeamId teamId)
+        public void AddUnitToTeam(Unit unit, TeamId teamId)
         {
             if (teamId == TeamId.BLUE)
             {
@@ -172,6 +181,16 @@ namespace Legends.World.Games
                 unit.DefineTeam(PurpleTeam);
                 PurpleTeam.AddUnit(unit);
             }
+            else if (teamId == TeamId.NEUTRAL)
+            {
+                unit.DefineTeam(NeutralTeam);
+                NeutralTeam.AddUnit(unit);
+            }
+            else
+            {
+                throw new Exception("Unknown team...(" + teamId + ")!");
+            }
+
         }
         public T GetUnit<T>(string name) where T : Unit
         {
@@ -191,7 +210,16 @@ namespace Legends.World.Games
             }
             else
             {
-                return PurpleTeam.GetUnit<T>(predicate);
+                var purple = PurpleTeam.GetUnit<T>(predicate);
+
+                if (purple == null)
+                {
+                    return NeutralTeam.GetUnit<T>(predicate);
+                }
+                else
+                {
+                    return purple;
+                }
             }
 
         }
@@ -227,32 +255,18 @@ namespace Legends.World.Games
 
             BlueTeam.Initialize();
             PurpleTeam.Initialize();
+            NeutralTeam.Initialize();
 
             Map.Script.OnUnitsInitialized();
 
             Send(new StartSpawnMessage());
 
 
-            foreach (var player in Map.Units.OfType<AIHero>())
+            foreach (var unit in Map.Units.OfType<AIUnit>())
             {
-                Send(new HeroSpawnMessage(player.NetId, player.PlayerNo, player.Data.TeamId, player.SkinId, player.Data.Name,
-                    player.Model));
-
-                player.UpdateInfos();
-                player.UpdateStats(false);
-                player.UpdateHeath();
+                unit.Create();
             }
-
-            foreach (var turret in Map.Units.OfType<AITurret>())
-            {
-                var test = turret.GetClientName();
-                Send(new CreateTurretMessage(turret.NetId, turret.NetId, turret.GetClientName()));
-
-                turret.UpdateStats(false);
-                turret.UpdateHeath();
-
-
-            }
+           
             foreach (var building in Map.Units.OfType<Building>())
             {
                 building.UpdateHeath();
@@ -261,6 +275,7 @@ namespace Legends.World.Games
 
             BlueTeam.InitializeFog();
             PurpleTeam.InitializeFog();
+            NeutralTeam.InitializeFog();
 
             Send(new EndSpawnMessage());
 
@@ -269,15 +284,21 @@ namespace Legends.World.Games
         }
         public void Start()
         {
+
             foreach (var player in Players)
             {
-              //  player.Team.Send(new OnEnterVisiblityClientMessage(player.NetId, player.GetVisibilityData()));
+                player.Team.Send(new OnEnterVisiblityClientMessage(player.NetId, player.GetVisibilityData()));
             }
 
             float gameTime = GameTime / 1000f;
 
             Send(new GameTimerMessage(0, gameTime));
             Send(new GameTimerUpdateMessage(0, gameTime));
+
+            foreach (var unit in Map.Units)
+            {
+                unit.OnGameStart();
+            }
             StartCallback();
             this.Started = true;
             Map.Script.OnStart();
@@ -300,8 +321,10 @@ namespace Legends.World.Games
                 NextSyncTime += deltaTime;
 
                 Console.Title = "Legends (FPS :" + 1000 / deltaTime + ")";
+              
 
                 Update(deltaTime);
+
                 Stopwatch = Stopwatch.StartNew();
             }
         }
@@ -320,6 +343,7 @@ namespace Legends.World.Games
 
             BlueTeam.Update(deltaTime);
             PurpleTeam.Update(deltaTime);
+            NeutralTeam.Update(deltaTime);
             Map.Update(deltaTime);
         }
         public void Announce(AnnounceEnum announce)

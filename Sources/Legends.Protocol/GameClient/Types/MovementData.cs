@@ -11,7 +11,6 @@ using System.IO;
 
 namespace Legends.Protocol.GameClient.Types
 {
-
     public enum MovementDataType : byte
     {
         None = 0,
@@ -31,6 +30,7 @@ namespace Legends.Protocol.GameClient.Types
 
     public static class MovementDataExtension
     {
+
         public static MovementData ReadMovementData(this LittleEndianReader reader, MovementDataType type)
         {
             switch (type)
@@ -98,11 +98,11 @@ namespace Legends.Protocol.GameClient.Types
         public uint TeleportNetID { get; set; }
         public bool HasTeleportID { get; set; }
         public byte TeleportID { get; set; }
-        public List<Tuple<short, short>> Waypoints { get; set; }
+        public TranslatedWaypoint[] Waypoints { get; set; }
 
         public override void Write(LittleEndianWriter writer)
         {
-            int waypointsSize = Waypoints.Count;
+            int waypointsSize = Waypoints.Length;
             if (waypointsSize > 0x7F)
             {
                 throw new Exception("Too many paths > 0x7F!");
@@ -156,7 +156,7 @@ namespace Legends.Protocol.GameClient.Types
         public SpeedParams SpeedParams { get; set; } = new SpeedParams();
         public override void Write(LittleEndianWriter writer)
         {
-            int waypointsSize = Waypoints.Count;
+            int waypointsSize = Waypoints.Length;
             if (waypointsSize > 0x7F)
             {
                 throw new Exception("Too many paths > 0x7F!");
@@ -214,9 +214,9 @@ namespace Legends.Protocol.GameClient.Types
             writer.WriteByte((byte)type);
         }
 
-        public static List<Tuple<short, short>> ReadCompressedWaypoints(this LittleEndianReader reader, uint size)
+        public static TranslatedWaypoint[] ReadCompressedWaypoints(this LittleEndianReader reader, uint size)
         {
-            var data = new List<Tuple<short, short>>();
+            var data = new List<TranslatedWaypoint>();
             BitArray flags;
             if (size >= 2)
             {
@@ -229,7 +229,7 @@ namespace Legends.Protocol.GameClient.Types
             }
             short lastX = reader.ReadShort();
             short lastZ = reader.ReadShort();
-            data.Add(new Tuple<short, short>(lastX, lastZ));
+            data.Add(new TranslatedWaypoint(lastX, lastZ));
 
             for (int i = 1, flag = 0; i < size; i++)
             {
@@ -251,14 +251,14 @@ namespace Legends.Protocol.GameClient.Types
                     lastZ = reader.ReadShort();
                 }
                 flag++;
-                data.Add(new Tuple<short, short>(lastX, lastZ));
+                data.Add(new TranslatedWaypoint(lastX, lastZ));
             }
-            return data;
+            return data.ToArray();
         }
 
-        public static void WriteCompressedWaypoints(this LittleEndianWriter writer, List<Tuple<short, short>> data)
+        public static void WriteCompressedWaypoints(this LittleEndianWriter writer, TranslatedWaypoint[] data)
         {
-            int size = data.Count;
+            int size = data.Length;
             if (size < 1)
             {
                 throw new IOException("Need at least 1 waypoint!");
@@ -275,36 +275,36 @@ namespace Legends.Protocol.GameClient.Types
             var flags = new BitArray(flagsBuffer);
             for (int i = 1, flag = 0; i < size; i++)
             {
-                int relativeX = data[i].Item1 - data[i - 1].Item1;
+                int relativeX = data[i].X - data[i - 1].X;
                 flags[flag] = (relativeX <= SByte.MaxValue && relativeX >= SByte.MinValue);
                 flag++;
 
-                int realtiveZ = data[i].Item2 - data[i - 1].Item2;
+                int realtiveZ = data[i].Y - data[i - 1].Y;
                 flags[flag] = (realtiveZ <= SByte.MaxValue && realtiveZ >= SByte.MinValue);
                 flag++;
             }
             flags.CopyTo(flagsBuffer, 0);
             writer.WriteBytes(flagsBuffer);
-            writer.WriteShort(data[0].Item1);
-            writer.WriteShort(data[0].Item2);
+            writer.WriteShort(data[0].X);
+            writer.WriteShort(data[0].Y);
             for (int i = 1, flag = 0; i < size; i++)
             {
                 if (flags[flag])
                 {
-                    writer.WriteSByte((SByte)(data[i].Item1 - data[i - 1].Item1));
+                    writer.WriteSByte((SByte)(data[i].X - data[i - 1].X));
                 }
                 else
                 {
-                    writer.WriteShort(data[i].Item1);
+                    writer.WriteShort(data[i].X);
                 }
                 flag++;
                 if (flags[flag])
                 {
-                    writer.WriteSByte((SByte)(data[i].Item2 - data[i - 1].Item2));
+                    writer.WriteSByte((SByte)(data[i].Y - data[i - 1].Y));
                 }
                 else
                 {
-                    writer.WriteShort(data[i].Item2);
+                    writer.WriteShort(data[i].Y);
                 }
                 flag++;
             }

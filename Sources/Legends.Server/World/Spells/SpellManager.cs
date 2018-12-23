@@ -1,4 +1,5 @@
-﻿using Legends.World.Entities;
+﻿using Legends.Records;
+using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,13 @@ namespace Legends.World.Spells
             this.Spell3 = SpellProvider.Instance.GetSpell(Owner, owner.Record.Spell3);
             this.Spell4 = SpellProvider.Instance.GetSpell(Owner, owner.Record.Spell4);
         }
-
+        public void SetSpells(AIUnitRecord record)
+        {
+            this.Spell1 = SpellProvider.Instance.GetSpell(Owner, record.Spell1);
+            this.Spell2 = SpellProvider.Instance.GetSpell(Owner, record.Spell2);
+            this.Spell3 = SpellProvider.Instance.GetSpell(Owner, record.Spell3);
+            this.Spell4 = SpellProvider.Instance.GetSpell(Owner, record.Spell4);
+        }
         public void UpgradeSpell(byte spellId)
         {
             Spell targetSpell = GetSpell(spellId);

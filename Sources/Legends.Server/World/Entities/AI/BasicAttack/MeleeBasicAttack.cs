@@ -10,7 +10,7 @@ namespace Legends.World.Entities.AI.BasicAttack
     public class MeleeBasicAttack : BasicAttack
     {
       
-        public MeleeBasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1) : base(unit, target, critical, first, slot)
+        public MeleeBasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASE_ATTACK_1) : base(unit, target, critical, first, slot)
         {
           
         }

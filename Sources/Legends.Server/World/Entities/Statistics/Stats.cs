@@ -194,12 +194,12 @@ namespace Legends.World.Entities.Statistics
         public float Gold
         {
             get;
-            protected set;
+            set;
         }
         public float GoldTotal
         {
             get;
-            protected set;
+            set;
         }
         public int NeutralMinionsKilled
         {
@@ -254,15 +254,8 @@ namespace Legends.World.Entities.Statistics
         {
             return Extensions.RandomAssertion(CriticalHit.TotalSafe);
         }
-        public void AddGold(float value)
-        {
-            Gold += value;
-            GoldTotal += value;
-        }
-        public void RemoveGold(float value)
-        {
-            Gold -= value;
-        }
+
+
         public void AddExperience(float value)
         {
             Experience += value;

@@ -23,6 +23,7 @@ using Legends.World.Entities.AI.Deaths;
 using Legends.World.Items;
 using Legends.World.Spells;
 using Legends.Protocol.GameClient.Types;
+using Legends.Core.Time;
 
 namespace Legends.World.Entities.AI
 {
@@ -86,7 +87,11 @@ namespace Legends.World.Entities.AI
             get;
             set;
         }
-
+        private UpdateTimer StatsUpdateTimer
+        {
+            get;
+            set;
+        }
         public AIHero(LoLClient client, PlayerData data, AIUnitRecord record) : base(0, record)
         {
             Client = client;
@@ -102,7 +107,13 @@ namespace Legends.World.Entities.AI
             Death = new HeroDeath(this);
             SkinId = Data.SkinId;
             Score = new Score();
+            this.StatsUpdateTimer = new UpdateTimer(1000);
             base.Initialize();
+        }
+        public override void OnGameStart()
+        {
+            StatsUpdateTimer.Start();
+            base.OnGameStart();
         }
         [InDevelopment(InDevelopmentState.TODO, "Skill points")]
         public void AddExperience(float value)
@@ -129,11 +140,27 @@ namespace Legends.World.Entities.AI
             Game.Send(new LevelUpMessage(NetId, (byte)Stats.Level, Stats.SkillPoints)); // tdoo
             UpdateStats();
         }
-        public void BlueTip(string title,string text,string imagePath,TipCommandEnum command)
+        public override void OnShieldModified(bool magical, bool physical, float value)
+        {
+            base.OnShieldModified(magical, physical, value);
+        }
+        public void BlueTip(string title, string text, string imagePath, TipCommandEnum command)
         {
             Client.Send(new BlueTipMessage(text, title, imagePath, command, NetId));
         }
-       
+        public void FloatingText(FloatTextEnum floatTextEnum, int param, string message)
+        {
+            Client.Send(new DisplayFloatingTextMessage(NetId, floatTextEnum, param, message));
+        }
+        public override void AddGold(float value, bool floatingText)
+        {
+            base.AddGold(value);
+            if (floatingText)
+                FloatingText(FloatTextEnum.Gold, 0, "+" + value);
+
+            UpdateStats();
+        }
+
         public override void OnDead(AttackableUnit source) // we override base
         {
             Stats.Health.Current = 0;
@@ -166,12 +193,25 @@ namespace Legends.World.Entities.AI
         {
             Client.Send(new DebugMessage(NetId, content));
         }
+        
         public override void Update(long deltaTime)
         {
+            if (StatsUpdateTimer.Finished())
+            {
+                UpdateStats(true);
+            }
+
+            GenerateGold(deltaTime);
+            StatsUpdateTimer.Update(deltaTime);
             base.Update(deltaTime);
             Death.Update(deltaTime);
-        }
 
+          
+        }
+        private void GenerateGold(long deltaTime)
+        {
+            base.AddGold(Game.Map.Script.GoldsPerSeconds * 0.001f * deltaTime);
+        }
         public override void OnMove()
         {
             base.OnMove();
@@ -204,6 +244,32 @@ namespace Legends.World.Entities.AI
             Game.RemoveUnit(this); // maybe depend of reconnect system
             Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, NetId, new uint[0]);
         }
-      
+
+        public override VisibilityData GetVisibilityData()
+        {
+            return new VisibilityDataAIHero()
+            {
+                BuffCount = new List<KeyValuePair<byte, int>>(),
+                CharacterDataStack = GetCharacterStackDatas(),
+                LookAtNetId = 0,
+                Items = Inventory.GetItemDatas(),
+                LookAtPosition = new Vector3(),
+                LookAtType = LookAtType.Direction,
+                MovementData = GetMovementData(),
+                MovementSyncID = Environment.TickCount,
+                ShieldValues = GetShieldValues(),
+                UnknownIsHero = false,
+            };
+        }
+
+        public override void Create()
+        {
+            Game.Send(new HeroSpawnMessage(NetId, PlayerNo, Data.TeamId, SkinId, Data.Name,
+                   Model));
+
+            UpdateInfos();
+            UpdateStats(false);
+            UpdateHeath();
+        }
     }
 }

@@ -9,8 +9,13 @@ Add items to turret and activate it
 Make turret hit more when time elapsed
 Synchronize clients even if server is lagging.
 Shop , potion stacks
+A*
 wards	
+Movespeed x1.07f
+jungle monster group
 Connection, thread safe, weird?
+CharacterStacks,
+handle channels in protocol properly
 
 A faire
 

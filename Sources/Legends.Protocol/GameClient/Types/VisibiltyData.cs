@@ -20,7 +20,6 @@ namespace Legends.Protocol.GameClient.Types
         public abstract void Serialize(LittleEndianWriter writer);
     }
 
-
     public class VisibilityDataUnknown : VisibilityData
     {
         public byte[] Data { get; set; } = new byte[0];
@@ -88,20 +87,20 @@ namespace Legends.Protocol.GameClient.Types
 
     public class VisibilityDataAIBase : VisibilityData
     {
-        public List<ItemData> Items
+        public ItemData[] Items
         {
             get;
             set;
-        } = new List<ItemData>();
+        }
         public ShieldValues ShieldValues
         {
             get;
             set;
         }
-        public List<CharacterStackData> CharacterDataStack
+        public CharacterStackData[] CharacterDataStack
         {
             get; set;
-        } = new List<CharacterStackData>();
+        }
 
         public uint LookAtNetId
         {
@@ -120,7 +119,7 @@ namespace Legends.Protocol.GameClient.Types
         {
             get;
             set;
-        } = new List<KeyValuePair<byte, int>>();
+        }
 
         public bool UnknownIsHero
         {
@@ -132,11 +131,12 @@ namespace Legends.Protocol.GameClient.Types
         public override void Deserialize(LittleEndianReader reader)
         {
             byte itemCount = reader.ReadByte();
+            Items = new ItemData[itemCount];
             for (int i = 0; i < itemCount; i++)
             {
                 var item = new ItemData();
                 item.Deserialize(reader);
-                Items.Add(item);
+                Items[i] = item;
             }
 
             bool hasShield = reader.ReadBool();
@@ -147,11 +147,14 @@ namespace Legends.Protocol.GameClient.Types
             }
 
             int countCharStack = reader.ReadInt();
+
+            CharacterDataStack = new CharacterStackData[countCharStack];
+
             for (int i = 0; i < countCharStack; i++)
             {
                 var data = new CharacterStackData();
                 data.Deserialize(reader);
-                CharacterDataStack.Add(data);
+                CharacterDataStack[i] = data;
             }
 
             LookAtNetId = reader.ReadUInt();
@@ -171,7 +174,7 @@ namespace Legends.Protocol.GameClient.Types
 
         public override void Serialize(LittleEndianWriter writer)
         {
-            int itemCount = Items.Count;
+            int itemCount = Items.Length;
             if (itemCount > 0xFF)
             {
                 throw new IOException("More than 255 items!");
@@ -186,6 +189,7 @@ namespace Legends.Protocol.GameClient.Types
             if (ShieldValues != null)
             {
                 writer.WriteBool(true);
+                ShieldValues.Serialize(writer);
 
             }
             else
@@ -193,7 +197,7 @@ namespace Legends.Protocol.GameClient.Types
                 writer.WriteBool(false);
             }
 
-            writer.WriteInt(CharacterDataStack.Count);
+            writer.WriteInt(CharacterDataStack.Length);
 
             foreach (var data in CharacterDataStack)
             {
@@ -216,7 +220,8 @@ namespace Legends.Protocol.GameClient.Types
         }
     }
 
-    public class VisibilityDataAIBaseWithMovement : VisibilityDataAIBase
+
+    public abstract class VisibilityDataAIBaseWithMovement : VisibilityDataAIBase
     {
         public int MovementSyncID { get; set; }
         public MovementData MovementData { get; set; } = new MovementDataNone();
@@ -237,6 +242,9 @@ namespace Legends.Protocol.GameClient.Types
             writer.WriteMovementData(MovementData);
         }
     }
+    public class VisibilityDataAIHero : VisibilityDataAIBaseWithMovement { }
+
+    public class VisibilityDataAIMinion : VisibilityDataAIBaseWithMovement { }
 
 
 }

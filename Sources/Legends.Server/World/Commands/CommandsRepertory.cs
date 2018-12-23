@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Legends.World.Entities.Buildings;
+using Legends.Protocol.GameClient.Types;
 
 namespace Legends.World.Commands
 {
@@ -30,7 +31,7 @@ namespace Legends.World.Commands
         [Command("inhibitors")]
         public static void RespawnInhibitorsCommand(LoLClient client)
         {
-            foreach (var inhib in client.Hero.GetOposedTeam().GetUnits<Inhibitor>(x => !x.Alive))
+            foreach (var inhib in client.Hero.Team.GetOposedTeams()[0].GetUnits<Inhibitor>(x => !x.Alive))
             {
                 inhib.Revive();
             }
@@ -55,6 +56,18 @@ namespace Legends.World.Commands
             client.Hero.Stats.LifeSteal.FlatBonus += value;
             client.Hero.UpdateStats();
         }
+        [Command("addshield")]
+        public static void AddShieldCommand(LoLClient client, float value)
+        {
+            client.Hero.Shields.MagicalAndPhysical += value;
+            client.Hero.OnShieldModified(true, true, value);
+        }
+        [Command("addmshield")]
+        public static void AddMagicalShieldCommand(LoLClient client, float value)
+        {
+            client.Hero.Shields.Magical += value;
+            client.Hero.OnShieldModified(true, false, value);
+        }
         [Command("circle")]
         public static void Cercle2Command(LoLClient client, float size)
         {
@@ -74,7 +87,7 @@ namespace Legends.World.Commands
         [Command("position")]
         public static void PositionCommand(LoLClient client)
         {
-            client.Hero.DebugMessage(client.Hero.Position.ToString());
+            client.Hero.BlueTip("Position",client.Hero.Position.ToString(),string.Empty,TipCommandEnum.ACTIVATE_TIP_DIALOGUE);
             client.Hero.AttentionPing(client.Hero.Position, client.Hero.NetId, PingTypeEnum.Ping_OnMyWay);
         }
         [Command("addlife")]
@@ -109,16 +122,15 @@ namespace Legends.World.Commands
             client.Hero.Stats.ModelSize.SetBaseValue(size);
             client.Hero.UpdateStats(true);
         }
-        [InDevelopment(InDevelopmentState.HAS_BUG, "When player leave vision, the model is swap back.")]
         [Command("model")]
         public static void ModelCommand(LoLClient client, string model)
         {
-            client.Hero.UpdateModel(model, false, 0);
+            client.Hero.AddStackData(model, 0, true, false, true);
         }
         [Command("skin")]
-        public static void SkinCommand(LoLClient client, int skinId)
+        public static void SkinCommand(LoLClient client, uint skinId)
         {
-            client.Hero.UpdateModel(client.Hero.Model, false, skinId);
+            client.Hero.AddStackData(client.Hero.Model, skinId, false, true, true);
         }
         [Command("exp")]
         public static void AddExperienceCommand(LoLClient client, float exp)
@@ -134,11 +146,43 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-            var t = client.Hero.Game.GetUnit<AITurret>("Turret_T2_C_03");
+            client.Send(new DisplayFloatingTextMessage(client.Hero.NetId, FloatTextEnum.Gold, 0, "400"));
+            return;
+            uint netId = client.Hero.Game.NetIdProvider.PopNextNetId();
 
-        //    client.Hero.Game.Send(new UpdateModelMessage(t.NetId, "SRUAP_Turret_Chaos1", true, 0));
+            var visibilityData = new VisibilityDataAIMinion()
+            {
+                MovementSyncID = Environment.TickCount,
+                MovementData = new MovementDataStop()
+                {
+                    Position = client.Hero.Position,
+                    Forward = client.Hero.Position,
+                },
+                BuffCount = new List<KeyValuePair<byte, int>>(),
+                Items = new ItemData[0],
+                LookAtNetId = 0,
+                LookAtPosition = new Vector3(),
+                LookAtType = LookAtType.Direction,
+                CharacterDataStack = new CharacterStackData[0],
+                ShieldValues = null,
+                UnknownIsHero = false,
 
-            client.Hero.Game.Send(new SpawnParticleMessage(t.NetId));
+            };
+            client.Hero.Game.Send(new CreateNeutralMessage(netId, NetNodeEnum.Map, client.Hero.GetPositionVector3(), client.Hero.GetPositionVector3(),
+                new Vector3(), "camp", "SRU_Baron", "wtf", "SRU_Baron_spawn", TeamId.NEUTRAL, 0, 0, MinionRoamState.Inactive, 1, 1, 2, 1, 10, 30, 0, ""));
+
+            client.Hero.Game.Send(new OnEnterVisiblityClientMessage(netId, visibilityData));
+
+
+            client.Hero.Game.Send(new OnEnterLocalVisiblityClient(netId, 1000, 1000));
+
+            client.Hero.Game.Send(new PlayAnimationMessage(netId, 100, 0, 1, "SRU_Baron_spawn"));
+
+
+            return;
+            //    client.Hero.Game.Send(new UpdateModelMessage(t.NetId, "SRUAP_Turret_Chaos1", true, 0));
+
+
 
             client.Hero.BlueTip("Legends", "This is for developpement purpose only!", "", TipCommandEnum.ACTIVATE_TIP_DIALOGUE);
             return;
@@ -149,17 +193,6 @@ namespace Legends.World.Commands
               1501, 1502, 1503, 1505
             };
 
-            int x = 0;
-
-            foreach (var item in items)
-            {
-                client.Hero.Game.Send(new BuyItemAnswerMessage(turret.NetId, item, (byte)x, 3, (byte)0x29));
-                x++;
-            }
-
-            turret.Stats.ActionState = StatActionStateEnum.CanMove | StatActionStateEnum.Unknown | Protocol.GameClient.Enum.StatActionStateEnum.CanAttack | Protocol.GameClient.Enum.StatActionStateEnum.ForceRenderParticles | StatActionStateEnum.NoRender;
-
-            turret.UpdateStats();
         }
         [Command("vision")]
         public static void VisionCommand(LoLClient client)
@@ -178,7 +211,7 @@ namespace Legends.World.Commands
         [Command("addgold")]
         public static void AddGoldCommand(LoLClient client, int gold)
         {
-            client.Hero.Stats.AddGold(gold);
+            client.Hero.AddGold(gold, true);
             client.Hero.UpdateStats();
         }
     }

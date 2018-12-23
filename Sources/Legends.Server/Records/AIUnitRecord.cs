@@ -34,7 +34,7 @@ namespace Legends.Records
             get;
             set;
         }
-
+        
         [InibinField(InibinHashEnum.CHARACTER_BaseHP)]
         public double BaseHp
         {
@@ -292,6 +292,19 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.CHARACTER_GlobalGoldGivenOnDeath)]
+        public float GlobalGoldGivenOnDeath
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_LocalGoldGivenOnDeath)]
+        public float LocalGoldGivenOnDeath
+        {
+            get;
+            set;
+        }
+
         [Ignore]
         public SpellRecord BasicAttack
         {
@@ -335,7 +348,6 @@ namespace Legends.Records
                     SpellRecord.GetSpell(record.Spell3),
                     SpellRecord.GetSpell(record.Spell4),
                 }).Where(x => x != null).ToArray();
-
                 record.BasicAttack = SpellRecord.GetSpell(record.Name + BASIC_ATTACK_SPELL_FOOTER);
         
             }

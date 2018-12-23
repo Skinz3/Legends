@@ -37,7 +37,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         {
             this.Projectiles.Remove(projectile);
         }
-        public override BasicAttack CreateBasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1)
+        public override BasicAttack CreateBasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASE_ATTACK_1)
         {
             return new RangedBasicAttack(unit, target, critical, first, slot);
         }

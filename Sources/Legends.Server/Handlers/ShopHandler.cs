@@ -35,7 +35,7 @@ namespace Legends.Handlers
                         priceTotal -= price;
                     }
 
-                    client.Hero.Stats.RemoveGold(priceTotal);
+                    client.Hero.RemoveGold(priceTotal);
                     client.Hero.UpdateStats();
 
                 }
@@ -46,7 +46,7 @@ namespace Legends.Handlers
         {
             Item itemRemoved = client.Hero.Inventory.RemoveItem(message.slotId);
             float sellRatio = itemRemoved.Record.SellBackModifier > 0 ? itemRemoved.Record.SellBackModifier : ITEM_SELL_SHOP_RATIO_DEFAULT;
-            client.Hero.Stats.AddGold(itemRemoved.Record.GetTotalPrice() * sellRatio);
+            client.Hero.AddGold(itemRemoved.Record.GetTotalPrice() * sellRatio, false);
             client.Hero.UpdateStats();
 
         }

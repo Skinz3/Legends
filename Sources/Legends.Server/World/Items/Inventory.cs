@@ -1,6 +1,7 @@
 ﻿using Legends.Handlers;
 using Legends.Protocol.GameClient.Enum;
 using Legends.Protocol.GameClient.Messages.Game;
+using Legends.Protocol.GameClient.Types;
 using Legends.Records;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
@@ -131,6 +132,10 @@ namespace Legends.World.Items
         {
             return Items.Values.ToArray();
         }
+        public ItemData[] GetItemDatas()
+        {
+            return Array.ConvertAll(GetItems(), x => x.GetProtocolObject());
+        }
         public Item FindItem(Func<Item, bool> func)
         {
             for (byte i = 0; i < 6; i++)
@@ -142,7 +147,7 @@ namespace Legends.World.Items
             }
             return null;
         }
-        public Item RemoveItem(int itemId)
+        public Item RemoveItem(uint itemId)
         {
             var item = FindItem(x => x.Id == itemId);
 

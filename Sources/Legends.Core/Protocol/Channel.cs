@@ -16,4 +16,5 @@ namespace Legends.Core.Protocol
         CHL_COMMUNICATION = 5,
         CHL_LOADING_SCREEN = 7,
     };
+
 }

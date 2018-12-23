@@ -130,7 +130,16 @@ namespace Legends.Core.Protocol
             {
                 return null;
             }
-            Message message = Constructors.FirstOrDefault(x => x.Key == id).Value[channel]();
+            var c = Constructors.FirstOrDefault(x => x.Key == id).Value;
+
+            if (c.ContainsKey(channel) == false)
+            {
+                logger.Write("Message (" + id + ") not handled on channel " + channel, MessageState.WARNING);
+                return null;
+            }
+
+            var message = c[channel]();
+
             if (message == null)
             {
                 return null;

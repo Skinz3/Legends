@@ -33,8 +33,17 @@ namespace Legends.Core.Protocol
         }
         public virtual void Pack(LittleEndianWriter writer)
         {
-            writer.WriteByte((byte)Cmd);
+            WriteHeader(writer);
             Serialize(writer);
+        }
+        public void WriteHeader(LittleEndianWriter writer)
+        {
+            int cmd = (int)Cmd;
+
+            if (cmd > 0xFFFF)
+                cmd = cmd >> 16;
+
+            writer.WriteByte((byte)cmd);
         }
         
     }

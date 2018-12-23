@@ -22,12 +22,13 @@ namespace Legends.World.Games.Maps
         public override Dictionary<int, Vector2[]> PurpleSpawns => new Dictionary<int, Vector2[]>()
         {
              {1, new Vector2[] {  new Vector2(14284, 14361) } },
+             {2, new Vector2[] {  new Vector2(14284, 14361), new Vector2(14284, 14361) } },
         };
 
         public SummonersRiftUpdated(Game game) : base(game)
         {
 
         }
-       
+
     }
 }

@@ -53,13 +53,17 @@ namespace Legends.World.Entities.AI.BasicAttack
         {
             Dictionary<AIUnit, float> results = new Dictionary<AIUnit, float>();
 
-            foreach (var unit in Unit.GetOposedTeam().AliveUnits.OfType<AIUnit>())
+            foreach (var team in Unit.Team.GetOposedTeams())
             {
-                float distance = Unit.GetDistanceTo(unit);
-                if (distance <= Unit.GetAutoattackRangeWhileChasing(unit)) // <= vs <
+                foreach (var unit in team.AliveUnits.OfType<AIUnit>())
                 {
-                    results.Add((AIUnit)unit, distance);
+                    float distance = Unit.GetDistanceTo(unit);
+                    if (distance <= Unit.GetAutoattackRangeWhileChasing(unit)) // <= vs <
+                    {
+                        results.Add((AIUnit)unit, distance);
+                    }
                 }
+
             }
             return results.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
@@ -93,11 +97,11 @@ namespace Legends.World.Entities.AI.BasicAttack
             {
                 return AttackSlotEnum.BASIC_ATTACK_CRITICAL;
             }
-            var slot = AttackSlotEnum.BASIC_ATTACK_1;
+            var slot = AttackSlotEnum.BASE_ATTACK_1;
 
-            if (CurrentAutoattack != null && CurrentAutoattack.Slot == AttackSlotEnum.BASIC_ATTACK_1 && Unit.Record.IsMelee)
+            if (CurrentAutoattack != null && CurrentAutoattack.Slot == AttackSlotEnum.BASE_ATTACK_1 && (Unit is AIHero))
             {
-                slot = AttackSlotEnum.BASIC_ATTACK_2;
+                slot = AttackSlotEnum.BASE_ATTACK_2;
             }
             return slot;
         }
@@ -116,7 +120,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             CurrentAutoattack = null;
         }
 
-        public abstract BasicAttack CreateBasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1);
+        public abstract BasicAttack CreateBasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASE_ATTACK_1);
 
         public virtual void BeginAttackTarget(AttackableUnit target)
         {

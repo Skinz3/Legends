@@ -10,15 +10,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Legends.Core;
 using Legends.Core.Geometry;
+using Legends.Protocol.GameClient.Types;
 
 namespace Legends.World.Entities.AI.BasicAttack
 {
-    public abstract class BasicAttack : IUpdatable
+    public abstract class BasicAttack : IProtocolable<ProtocolBasicAttack>, IUpdatable
     {
         /// <summary>
         /// Représente le moment ou l'autoattaque applique son effet (dégats pour les mélées, lancé de projectile pour les tireurs)
         /// </summary>
-        public static float CAST_TIME_MULTIPLIER = 0.20f;
+        public static float CAST_TIME_MULTIPLIER = 0.25f;
         /// <summary>
         /// L'autoattaque a t-elle appliquée les dégats? 
         /// </summary>
@@ -99,7 +100,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             private set;
         }
 
-        public BasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASIC_ATTACK_1)
+        public BasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASE_ATTACK_1)
         {
             this.Unit = unit;
             this.Target = target;
@@ -117,19 +118,11 @@ namespace Legends.World.Entities.AI.BasicAttack
             Unit.Game.Send(new StopAutoAttackMessage(Unit.NetId));
             OnCancel();
         }
+
         [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "BeginAuto donne une position legerement differente au client")]
         public void Notify()
         {
-            if (First)
-            {
-                // Unit.Game.Send(new BeginAutoAttackMessage(Unit.NetId, Target.NetId, 0x80, 0, Slot, Target.Position, Unit.Position, Unit.Game.Map.Record.MiddleOfMap));
-                Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, Target.NetId, Unit.Game.NetIdProvider.PopNextNetId(), Slot, true));
-            }
-            else
-            {
-                // Unit.Game.Send(new BeginAutoAttackMessage(Unit.NetId, Target.NetId, 0x80, 0, Slot, Target.Position, Unit.Position, Unit.Game.Map.Record.MiddleOfMap));
-                Unit.Game.Send(new NextAutoattackMessage(Unit.NetId, Target.NetId, Unit.Game.NetIdProvider.PopNextNetId(), Slot, false));
-            }
+            Unit.Game.Send(new BasicAttackMessage(Unit.NetId, GetProtocolObject()));
 
 
         }
@@ -204,5 +197,16 @@ namespace Legends.World.Entities.AI.BasicAttack
             }
         }
 
+        public ProtocolBasicAttack GetProtocolObject()
+        {
+            return new ProtocolBasicAttack()
+            {
+                AttackSlot = Slot,
+                ExtraTime = 0,
+                MissileNextId = 0,
+                TargetNetId = Target.NetId,
+                TargetPosition = Target.GetPositionVector3(),
+            };
+        }
     }
 }

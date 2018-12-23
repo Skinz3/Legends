@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace Legends.Scripts.Maps
 {
@@ -26,7 +27,7 @@ namespace Legends.Scripts.Maps
 
         public bool AllDead;
 
-        public BindingDescription(string[] unitsThatProtect,string[] unitsProtected,bool alldead)
+        public BindingDescription(string[] unitsThatProtect, string[] unitsProtected, bool alldead)
         {
             this.UnitsThatProtect = unitsThatProtect;
             this.UnitsProtected = unitsProtected;
@@ -60,6 +61,10 @@ namespace Legends.Scripts.Maps
             get;
             set;
         }
+        public abstract float GoldsPerSeconds
+        {
+            get;
+        }
         public MapScript(Game game)
         {
             this.Game = game;
@@ -79,7 +84,6 @@ namespace Legends.Scripts.Maps
         {
             this.BindingManager = new MapBindingManager(Game, Bindings);
             BindingManager.Initialize();
-            // create bindings for real
         }
 
         public abstract void CreateBindings();
@@ -107,7 +111,7 @@ namespace Legends.Scripts.Maps
             uint netId = BuildingProvider.BUILDING_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(name));
             Nexus nexus = new Nexus(netId, BuildingRecord.GetBuildingRecord(this.Game.Map.Id, name), Game.Map.Record.GetObject(name));
             nexus.DefineGame(Game);
-            Game.AddUnit(nexus, BuildingProvider.Instance.GetTeamId(name));
+            Game.AddUnitToTeam(nexus, BuildingProvider.Instance.GetTeamId(name));
             Game.Map.AddUnit(nexus);
         }
         protected void SpawnInhibitor(string name)
@@ -115,8 +119,24 @@ namespace Legends.Scripts.Maps
             uint netId = BuildingProvider.BUILDING_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(name));
             Inhibitor inhibitor = new Inhibitor(netId, BuildingRecord.GetBuildingRecord(this.Game.Map.Id, name), Game.Map.Record.GetObject(name));
             inhibitor.DefineGame(Game);
-            Game.AddUnit(inhibitor, BuildingProvider.Instance.GetTeamId(name));
+            Game.AddUnitToTeam(inhibitor, BuildingProvider.Instance.GetTeamId(name));
             Game.Map.AddUnit(inhibitor);
+        }
+       
+        protected AIUnit GetAIUnit(string name)
+        {
+            return Game.GetUnit<AIUnit>(name);
+        }
+        protected void SpawnMonster(string name, Vector2 position, int delay)
+        {
+            uint netId = Game.NetIdProvider.PopNextNetId();
+            AIUnitRecord record = AIUnitRecord.GetAIUnitRecord(name);
+            AIMonster monster = new AIMonster(netId, record, delay);
+            monster.SpawnPosition = position;
+            monster.Position = position;
+            monster.DefineGame(Game);
+            Game.AddUnitToTeam(monster, TeamId.NEUTRAL);
+            Game.Map.AddUnit(monster);
         }
         protected void SpawnAITurret(string turretName, string aiUnitRecordName)
         {
@@ -144,7 +164,7 @@ namespace Legends.Scripts.Maps
                 uint netId = (uint)(BuildingProvider.BUILDING_NETID_X | CRC32.Compute(Encoding.ASCII.GetBytes(fullName)));
                 AITurret turret = new AITurret(netId, aIUnitRecord, objectRecord, BuildingRecord.GetBuildingRecord(Game.Map.Id, turretName), BuildingProvider.TOWER_SUFFIX);
                 turret.DefineGame(Game);
-                Game.AddUnit(turret, teamId);
+                Game.AddUnitToTeam(turret, teamId);
                 Game.Map.AddUnit(turret);
             }
             else

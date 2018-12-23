@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Legends.Core.Protocol
 {
-    public enum PacketCmd : short
+    public enum PacketCmd : int
     {
         PKT_KeyCheck = 0x0,
         PKT_S2C_RestrictCameraMovement = 0x6,
@@ -15,7 +15,7 @@ namespace Legends.Core.Protocol
         PKT_C2S_SellItem = 0x9,
         PKT_UnpauseGame = 0xA,
         PKT_S2C_RemoveItem = 0xB,
-        PKT_S2C_NextAutoAttack = 0xC,
+        PKT_S2C_BasicAttack = 0xC,
         PKT_S2C_EditMessageBoxTop = 0xD,
         PKT_S2C_UnlockCamera = 0xE,
         PKT_S2C_AddXP = 0x10,
@@ -30,7 +30,7 @@ namespace Legends.Core.Protocol
         PKT_S2C_FloatingTextWithValue = 0x19,
         PKT_S2C_UpdateBuffCount = 0x1C,
         PKT_C2S_SwapItems = 0x20,
-        PKT_S2C_BeginAutoAttack = 0x1A,
+        PKT_S2C_Basic_Attack_Pos = 0x1A,
         PKT_S2C_ForceDie = 0x1B,
         PKT_S2C_EditBuff = 0x1C,
         PKT_S2C_SetAutoCast = 0x1F,
@@ -83,6 +83,7 @@ namespace Legends.Core.Protocol
         PKT_S2C_ChampionDie = 0x5E,
         PKT_S2C_MoveAns = 0x61,
         PKT_S2C_StartSpawn = 0x62,
+        PKT_S2C_CreateNeutral = 0x63,
         PKT_S2C_Dash = 0x64, PKT_C2S_ClientReady = 0x64,
         PKT_S2C_DamageDone = 0x65, PKT_S2C_LoadHero = 0x65,
         PKT_S2C_LoadName = 0x66, PKT_S2C_ModifyShield = 0x66,
@@ -135,7 +136,7 @@ namespace Legends.Core.Protocol
         PKT_S2C_EnableFOW = 0xAB,
         PKT_S2C_SetHealth = 0xAE,
         PKT_C2S_Click = 0xAF,
-        PKT_S2C_SpellAnimation = 0xB0,
+        PKT_S2C_Animation = 0xB0,
         PKT_S2C_EditMessageBoxRight = 0xB1,
         PKT_S2C_SetFadeOut_Push = 0xB2,
         PKT_S2C_BasicTutorialMessageWindow = 0xB3,
@@ -207,7 +208,7 @@ namespace Legends.Core.Protocol
         PKT_S2C_IncrementMinionKills = 0x11F,
         PKT_S2C_UpdateAttackSpeedOverrides = 0x120,
         PKT_S2C_NotifyContextualSituation = 0x121,
-        PKT_S2C_CreateMonsterCamp = 0x122,
+        PKT_S2C_CreateMinionCamp = 0x122,
         PKT_S2C_ChangeSpell_OwnerOnly = 0x125,
         PKT_S2C_SetInventory_MapView = 0x127,
         PKT_S2C_Die_MapView = 0x126,
@@ -217,5 +218,15 @@ namespace Legends.Core.Protocol
         PKT_S2C_LockCamera = 0x12B,
         PKT_S2C_SetFadeOut = 0x12D,
         PKT_S2C_UnlockAnimation = 0x12F,
+
+  /*   Playload packets
+        RequestJoinTeam = 0x64,
+        RequestResking = 0x65,
+        RequestRename = 0x66,
+        TeamRosterUpdate = 0x67,
+        Chat = 0x68,
+        QuickChat = 0x69,
+
+        */
     }
 }

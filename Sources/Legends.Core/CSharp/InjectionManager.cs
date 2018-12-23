@@ -20,6 +20,7 @@ namespace Legends.Core.CSharp
         {
             "System.dll",
             "System.Linq.dll",
+            "System.Numerics.dll"
         };
         private Assembly[] ReferencedAssemblies
         {
@@ -49,6 +50,7 @@ namespace Legends.Core.CSharp
 
             if (NotifyErrors(results))
             {
+                Console.Read();
                 return new Type[0];
             }
             else

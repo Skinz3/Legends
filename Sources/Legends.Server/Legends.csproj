@@ -88,6 +88,7 @@
     <Compile Include="World\Commands\CommandsRepertory.cs" />
     <Compile Include="World\Entities\AI\AIHero.cs" />
     <Compile Include="World\Entities\AI\AIMinion.cs" />
+    <Compile Include="World\Entities\AI\AIMonster.cs" />
     <Compile Include="World\Entities\AI\AITurret.cs" />
     <Compile Include="World\Entities\AI\AIUnit.cs" />
     <Compile Include="World\Entities\AI\BasicAttack\AttackManager.cs" />
@@ -106,10 +107,13 @@
     <Compile Include="World\Entities\Buildings\Inhibitor.cs" />
     <Compile Include="World\Entities\Buildings\Nexus.cs" />
     <Compile Include="World\Entities\Buildings\Turret.cs" />
+    <Compile Include="World\Entities\Loot\LootManager.cs" />
     <Compile Include="World\Entities\Movements\PathManager.cs" />
     <Compile Include="World\Entities\Statistics\AIStats.cs" />
     <Compile Include="World\Entities\Statistics\BuildingStats.cs" />
+    <Compile Include="World\Entities\Statistics\CharacterStack.cs" />
     <Compile Include="World\Entities\Statistics\HeroStats.cs" />
+    <Compile Include="World\Entities\Statistics\MinionStats.cs" />
     <Compile Include="World\Entities\Statistics\Replication\AttackSpeed.cs" />
     <Compile Include="World\Entities\Statistics\Replication\Health.cs" />
     <Compile Include="World\Entities\Statistics\Replication\ReplicationManager.cs" />
@@ -119,6 +123,7 @@
     <Compile Include="World\Entities\Statistics\Stats.cs" />
     <Compile Include="World\Entities\Statistics\TurretStats.cs" />
     <Compile Include="World\Entities\Unit.cs" />
+    <Compile Include="World\Games\Teams\BlueTeam.cs" />
     <Compile Include="World\Games\Game.cs" />
     <Compile Include="World\Games\GameProvider.cs" />
     <Compile Include="World\Games\Interfaces\IInitializable.cs" />
@@ -128,7 +133,9 @@
     <Compile Include="World\Games\Maps\Map.cs" />
     <Compile Include="World\Games\Maps\SummonersRift.cs" />
     <Compile Include="World\Games\Maps\SummonersRiftUpdated.cs" />
-    <Compile Include="World\Games\Team.cs" />
+    <Compile Include="World\Games\Teams\NeutralTeam.cs" />
+    <Compile Include="World\Games\Teams\PurpleTeam.cs" />
+    <Compile Include="World\Games\Teams\Team.cs" />
     <Compile Include="World\Items\Inventory.cs" />
     <Compile Include="World\Items\Item.cs" />
     <Compile Include="World\Spells\Damages.cs" />
