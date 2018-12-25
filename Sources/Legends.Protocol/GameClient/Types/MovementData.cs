@@ -98,7 +98,7 @@ namespace Legends.Protocol.GameClient.Types
         public uint TeleportNetID { get; set; }
         public bool HasTeleportID { get; set; }
         public byte TeleportID { get; set; }
-        public TranslatedWaypoint[] Waypoints { get; set; }
+        public GridPosition[] Waypoints { get; set; }
 
         public override void Write(LittleEndianWriter writer)
         {
@@ -214,9 +214,9 @@ namespace Legends.Protocol.GameClient.Types
             writer.WriteByte((byte)type);
         }
 
-        public static TranslatedWaypoint[] ReadCompressedWaypoints(this LittleEndianReader reader, uint size)
+        public static GridPosition[] ReadCompressedWaypoints(this LittleEndianReader reader, uint size)
         {
-            var data = new List<TranslatedWaypoint>();
+            var data = new List<GridPosition>();
             BitArray flags;
             if (size >= 2)
             {
@@ -229,7 +229,7 @@ namespace Legends.Protocol.GameClient.Types
             }
             short lastX = reader.ReadShort();
             short lastZ = reader.ReadShort();
-            data.Add(new TranslatedWaypoint(lastX, lastZ));
+            data.Add(new GridPosition(lastX, lastZ));
 
             for (int i = 1, flag = 0; i < size; i++)
             {
@@ -251,12 +251,12 @@ namespace Legends.Protocol.GameClient.Types
                     lastZ = reader.ReadShort();
                 }
                 flag++;
-                data.Add(new TranslatedWaypoint(lastX, lastZ));
+                data.Add(new GridPosition(lastX, lastZ));
             }
             return data.ToArray();
         }
 
-        public static void WriteCompressedWaypoints(this LittleEndianWriter writer, TranslatedWaypoint[] data)
+        public static void WriteCompressedWaypoints(this LittleEndianWriter writer, GridPosition[] data)
         {
             int size = data.Length;
             if (size < 1)

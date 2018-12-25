@@ -5,6 +5,7 @@ using Legends.Protocol.GameClient.Enum;
 using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Protocol.GameClient.Types;
 using Legends.World.Entities.AI.Deaths;
+using Legends.World.Entities.Loot;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
@@ -193,8 +194,14 @@ namespace Legends.World.Entities
         public virtual void OnDead(AttackableUnit source)
         {
             Alive = false;
+            ApplyGoldLoot(source);
+            ApplyExperienceLoot(source);
             OnDeadEvent?.Invoke(this, source);
         }
+
+        protected abstract void ApplyGoldLoot(AttackableUnit source);
+        protected abstract void ApplyExperienceLoot(AttackableUnit source);
+
         public virtual void OnRevive(AttackableUnit source)
         {
             Alive = true;

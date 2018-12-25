@@ -33,7 +33,7 @@ namespace Legends.World.Spells.Projectiles
 
         public override float PerceptionBubbleRadius => 0;
 
-        public override void Update(long deltaTime)
+        public override void Update(float deltaTime)
         {
 
             if (!destroy)

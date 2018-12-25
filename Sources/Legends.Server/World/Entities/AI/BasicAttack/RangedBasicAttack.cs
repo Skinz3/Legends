@@ -26,14 +26,15 @@ namespace Legends.World.Entities.AI.BasicAttack
             bool critical, bool first, AttackSlotEnum slot) : base(unit, target, critical, first, slot)
         {
 
-        
+
         }
         private void CastProjectile()
         {
             SpellRecord basicAttackRecord = Unit.Record.BasicAttack;
             if (basicAttackRecord == null)
             {
-                throw new Exception("No basic attack data for this unit.");
+                logger.Write("No basic attack data for unit " + Unit.Name, MessageState.WARNING);
+                return;
             }
             if (basicAttackRecord.MissileSpeed == 0)
             {
@@ -59,7 +60,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         }
         protected override void OnCancel()
         {
-          
+
         }
 
         protected override void OnCastTimeReach()

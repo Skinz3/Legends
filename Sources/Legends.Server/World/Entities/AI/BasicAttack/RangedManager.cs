@@ -20,7 +20,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         {
             this.Projectiles = new List<TargetedProjectile>();
         }
-        public override void Update(long deltaTime)
+        public override void Update(float deltaTime)
         {
             foreach (var projectile in Projectiles.ToArray())
             {

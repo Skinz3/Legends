@@ -32,6 +32,8 @@ namespace Legends.World.Entities.AI
         public const float DEFAULT_START_GOLD = 475;
         public const float DEFAULT_COOLDOWN_REDUCTION = 0f;
 
+        public const long STATS_REFRESH_DELAY = 1000;
+
         public LoLClient Client
         {
             get;
@@ -58,11 +60,6 @@ namespace Legends.World.Entities.AI
         {
             get;
             set;
-        }
-        public Champion Champion
-        {
-            get;
-            private set;
         }
         public Score Score
         {
@@ -101,19 +98,28 @@ namespace Legends.World.Entities.AI
 
         public override void Initialize()
         {
-            Champion = ChampionProvider.Instance.GetChampion(this, (ChampionEnum)Enum.Parse(typeof(ChampionEnum), Data.ChampionName));
             Stats = new HeroStats(Record, Data.SkinId);
             Model = Data.ChampionName;
             Death = new HeroDeath(this);
             SkinId = Data.SkinId;
             Score = new Score();
-            this.StatsUpdateTimer = new UpdateTimer(1000);
+            this.StatsUpdateTimer = new UpdateTimer(STATS_REFRESH_DELAY);
             base.Initialize();
         }
         public override void OnGameStart()
         {
             StatsUpdateTimer.Start();
             base.OnGameStart();
+        }
+        [InDevelopment(InDevelopmentState.STARTED, "gold en fonction de la série meutrière")]
+        protected override void ApplyGoldLoot(AttackableUnit source)
+        {
+            source.AddGold(300f, true);
+        }
+        [InDevelopment(InDevelopmentState.TODO, "assistances... http://leagueoflegends.wikia.com/wiki/Experience_(champion)")]
+        protected override void ApplyExperienceLoot(AttackableUnit source)
+        {
+
         }
         [InDevelopment(InDevelopmentState.TODO, "Skill points")]
         public void AddExperience(float value)
@@ -144,6 +150,7 @@ namespace Legends.World.Entities.AI
         {
             base.OnShieldModified(magical, physical, value);
         }
+        [InDevelopment(InDevelopmentState.HAS_BUG)]
         public void BlueTip(string title, string text, string imagePath, TipCommandEnum command)
         {
             Client.Send(new BlueTipMessage(text, title, imagePath, command, NetId));
@@ -156,7 +163,7 @@ namespace Legends.World.Entities.AI
         {
             base.AddGold(value);
             if (floatingText)
-                FloatingText(FloatTextEnum.Gold, 0, "+" + value);
+                FloatingText(FloatTextEnum.Gold, 0, "+" + (int)value);
 
             UpdateStats();
         }
@@ -193,8 +200,8 @@ namespace Legends.World.Entities.AI
         {
             Client.Send(new DebugMessage(NetId, content));
         }
-        
-        public override void Update(long deltaTime)
+
+        public override void Update(float deltaTime)
         {
             if (StatsUpdateTimer.Finished())
             {
@@ -206,9 +213,9 @@ namespace Legends.World.Entities.AI
             base.Update(deltaTime);
             Death.Update(deltaTime);
 
-          
+
         }
-        private void GenerateGold(long deltaTime)
+        private void GenerateGold(float deltaTime)
         {
             base.AddGold(Game.Map.Script.GoldsPerSeconds * 0.001f * deltaTime);
         }
@@ -241,8 +248,8 @@ namespace Legends.World.Entities.AI
         public void OnDisconnect()
         {
             Disconnected = true;
-            Game.RemoveUnit(this); // maybe depend of reconnect system
             Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, NetId, new uint[0]);
+            Game.RemoveUnitFromTeam(this); // maybe depend of reconnect system
         }
 
         public override VisibilityData GetVisibilityData()

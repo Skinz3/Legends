@@ -62,6 +62,7 @@
     <Compile Include="GameClient\Enum\MovementType.cs" />
     <Compile Include="GameClient\Enum\PingTypeEnum.cs" />
     <Compile Include="GameClient\Enum\SpellCanCastBitsEnum.cs" />
+    <Compile Include="GameClient\Enum\SpellStateEnum.cs" />
     <Compile Include="GameClient\Enum\StatActionStateEnum.cs" />
     <Compile Include="GameClient\Enum\StatPrimaryId.cs" />
     <Compile Include="GameClient\Enum\StatSecondaryId.cs" />
@@ -161,7 +162,7 @@
     <Compile Include="GameClient\Types\ReplicateStat.cs" />
     <Compile Include="GameClient\Types\ShieldValues.cs" />
     <Compile Include="GameClient\Types\SpeedParams.cs" />
-    <Compile Include="GameClient\Types\TranslatedWaypoint.cs" />
+    <Compile Include="GameClient\Types\GridPosition.cs" />
     <Compile Include="GameClient\Types\VisibiltyData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

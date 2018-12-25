@@ -39,17 +39,21 @@ namespace Legends.World.Spells
         public SpellManager(AIUnit owner)
         {
             this.Owner = owner;
-            this.Spell1 = SpellProvider.Instance.GetSpell(Owner, owner.Record.Spell1);
-            this.Spell2 = SpellProvider.Instance.GetSpell(Owner, owner.Record.Spell2);
-            this.Spell3 = SpellProvider.Instance.GetSpell(Owner, owner.Record.Spell3);
-            this.Spell4 = SpellProvider.Instance.GetSpell(Owner, owner.Record.Spell4);
+            SetSpells(Owner.Record);
+        }
+        public void Update(float deltaTime)
+        {
+            Spell1?.Update(deltaTime);
+            Spell2?.Update(deltaTime);
+            Spell3?.Update(deltaTime);
+            Spell4?.Update(deltaTime);
         }
         public void SetSpells(AIUnitRecord record)
         {
-            this.Spell1 = SpellProvider.Instance.GetSpell(Owner, record.Spell1);
-            this.Spell2 = SpellProvider.Instance.GetSpell(Owner, record.Spell2);
-            this.Spell3 = SpellProvider.Instance.GetSpell(Owner, record.Spell3);
-            this.Spell4 = SpellProvider.Instance.GetSpell(Owner, record.Spell4);
+            this.Spell1 = SpellProvider.Instance.GetSpell(Owner,0,record.Spell1);
+            this.Spell2 = SpellProvider.Instance.GetSpell(Owner,1, record.Spell2);
+            this.Spell3 = SpellProvider.Instance.GetSpell(Owner,2, record.Spell3);
+            this.Spell4 = SpellProvider.Instance.GetSpell(Owner,3, record.Spell4);
         }
         public void UpgradeSpell(byte spellId)
         {
@@ -57,9 +61,9 @@ namespace Legends.World.Spells
             targetSpell.Upgrade(spellId);
             Owner.OnSpellUpgraded(spellId, targetSpell);
         }
-        public Spell GetSpell(byte spellId)
+        public Spell GetSpell(byte slot)
         {
-            switch (spellId)
+            switch (slot)
             {
                 case 0:
                     return Spell1;

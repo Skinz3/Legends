@@ -39,7 +39,6 @@ namespace Legends.Protocol.GameClient.Messages.Game
             writer.WriteString(title, 128);
             writer.WriteString(text, 128);
             writer.WriteString(imagePath, 128);
-
             writer.WriteByte((byte)command); 
             writer.WriteInt((int)base.netId);
         }

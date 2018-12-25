@@ -51,10 +51,62 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.SPELLS_Cooldown)]
+        public float Cooldown
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.SPELLS_Cooldown1)]
+        public float Cooldown1
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.SPELLS_Cooldown2)]
+        public float Cooldown2
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.SPELLS_Cooldown3)]
+        public float Cooldown3
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.SPELLS_Cooldown4)]
+        public float Cooldown4
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.SPELLS_Cooldown5)]
+        public float Cooldown5
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.SPELLS_Cooldown6)]
+        public float Cooldown6
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.SPELLS_DelayCastOffsetPercent)]
+        public float DelayCastOffsetPercent
+        {
+            get;
+            set;
+        }
+        public float GetCastTime()
+        {
+            return (1.0f + DelayCastOffsetPercent) / 2.0f;
+        }
         public static SpellRecord GetSpell(string spellName)
         {
             return Spells.Find(x => x.Name == spellName);
         }
-      
+
     }
 }

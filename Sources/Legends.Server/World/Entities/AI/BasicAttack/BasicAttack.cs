@@ -136,7 +136,7 @@ namespace Legends.World.Entities.AI.BasicAttack
 
         protected abstract void OnCastTimeReach();
 
-        public void Update(long deltaTime)
+        public void Update(float deltaTime)
         {
             if (Casted && Unit.GetDistanceTo(Target) > GetAutocancelDistance() && !Cancelled)
             {
@@ -203,7 +203,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             {
                 AttackSlot = Slot,
                 ExtraTime = 0,
-                MissileNextId = 0,
+                MissileNextId = Unit.Game.NetIdProvider.PopNextNetId(),
                 TargetNetId = Target.NetId,
                 TargetPosition = Target.GetPositionVector3(),
             };

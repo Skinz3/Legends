@@ -20,21 +20,30 @@ using Legends.Protocol.GameClient.LoadingScreen;
 using Legends.Protocol.GameClient.Other;
 using Legends.Records;
 using Legends.Core;
+using Legends.Protocol.GameClient.Types;
 
 namespace Legends.Handlers
 {
     class GameHandler
     {
-        static uint netId = 1299;
+
 
         [MessageHandler(PacketCmd.PKT_C2S_CastSpell)]
         public static void HandleCastSpellRequest(CastSpellRequestMessage message, LoLClient client)
         {
-            netId++;
-            client.Hero.StopMove(true, false);
+            client.Hero.StopMove();
+            client.Hero.CastSpell(message.slot, message.position, message.endPosition);
 
-            //         client.Hero.AttentionPing(new Vector2(message.x, message.y), 0, PingTypeEnum.Ping_Assist);
 
+            /*    //
+               
+                 */
+
+
+            /*
+         
+            //client.Hero.AttentionPing(new Vector2(endPoint.X, endPoint.Y), 0, PingTypeEnum.Ping_Assist);
+            //client.Hero.Teleport(new Vector2(endPoint.X, endPoint.Y)); */
         }
         [MessageHandler(PacketCmd.PKT_C2S_Click, Channel.CHL_C2S)]
         public static void HandleClickMessage(ClickMessage message, LoLClient client)

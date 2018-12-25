@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -192,7 +193,6 @@ namespace Legends.Core.IO.NavGrid
 
                 offset += 4;
             }
-
 
             var header = new byte[]
             {

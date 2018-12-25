@@ -54,8 +54,9 @@ namespace Legends.World.Entities.AI
         public override void OnDead(AttackableUnit source)
         {
             Game.Send(new DieMessage(source.NetId, NetId));
-            source.AddGold(LootManager.Instance.GetGoldLoot(this), true);
             base.OnDead(source);
+            Game.Map.RemoveUnit(this);
+            Game.RemoveUnitFromTeam(this);
         }
         public override void Initialize()
         {

@@ -122,7 +122,7 @@ namespace Legends.Scripts.Maps
             Game.AddUnitToTeam(inhibitor, BuildingProvider.Instance.GetTeamId(name));
             Game.Map.AddUnit(inhibitor);
         }
-       
+
         protected AIUnit GetAIUnit(string name)
         {
             return Game.GetUnit<AIUnit>(name);
@@ -138,9 +138,9 @@ namespace Legends.Scripts.Maps
             Game.AddUnitToTeam(monster, TeamId.NEUTRAL);
             Game.Map.AddUnit(monster);
         }
-        protected void SpawnAITurret(string turretName, string aiUnitRecordName)
+        protected void SpawnAITurret(string turretName, string aiUnitRecordName, string customAIUnitRecord = null)
         {
-            AIUnitRecord aIUnitRecord = AIUnitRecord.GetAIUnitRecord(aiUnitRecordName);
+            AIUnitRecord aIUnitRecord = AIUnitRecord.GetAIUnitRecord(customAIUnitRecord != null ? customAIUnitRecord : aiUnitRecordName);
 
             MapObjectRecord objectRecord = Game.Map.Record.GetObject(turretName);
 
@@ -166,13 +166,18 @@ namespace Legends.Scripts.Maps
                 turret.DefineGame(Game);
                 Game.AddUnitToTeam(turret, teamId);
                 Game.Map.AddUnit(turret);
+
+                if (customAIUnitRecord != null)
+                {
+                    turret.AddStackData(customAIUnitRecord, 0, false, true, true, false);
+                }
             }
             else
             {
                 logger.Write(string.Format(SPAWN_EX_STRING, turretName, "Unable to find a team."), MessageState.WARNING);
             }
         }
-        public void Update(long deltaTime)
+        public void Update(float deltaTime)
         {
             if (DelayedActions.Count > 0)
             {

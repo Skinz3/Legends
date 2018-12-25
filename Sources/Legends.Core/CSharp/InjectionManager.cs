@@ -20,7 +20,8 @@ namespace Legends.Core.CSharp
         {
             "System.dll",
             "System.Linq.dll",
-            "System.Numerics.dll"
+            "System.Numerics.dll",
+            "Legends.ORM.dll"
         };
         private Assembly[] ReferencedAssemblies
         {
@@ -38,7 +39,7 @@ namespace Legends.Core.CSharp
 
         public Type[] GetScripts(string path)
         {
-            string[] files = Directory.GetFiles(path);
+            string[] files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
 
             string language = CodeDomProvider.GetLanguageFromExtension(Path.GetExtension(files[0]));
             CodeDomProvider codeDomProvider = CodeDomProvider.CreateProvider(language);

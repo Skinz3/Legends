@@ -13,6 +13,8 @@ namespace Legends.World.Entities.Buildings
 {
     public abstract class Building : AttackableUnit
     {
+        public const float GOLD_GIVEN_AT_DEATH = 50f;
+
         public override string Name => BuildingRecord.Name;
 
         public override float PerceptionBubbleRadius => Stats.PerceptionBubbleRadius.TotalSafe;
@@ -51,6 +53,14 @@ namespace Legends.World.Entities.Buildings
         public override void OnUnitLeaveVision(Unit unit)
         {
 
+        }
+        protected override void ApplyExperienceLoot(AttackableUnit source)
+        {
+           
+        }
+        protected override void ApplyGoldLoot(AttackableUnit source)
+        {
+            source.AddGold(GOLD_GIVEN_AT_DEATH, true);
         }
     }
 }

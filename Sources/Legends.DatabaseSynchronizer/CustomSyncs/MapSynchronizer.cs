@@ -35,6 +35,7 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                 record.Width = grid.MapWidth;
                 record.Height = grid.MapHeight;
                 record.XCellCount = grid.XCellCount;
+                record.CellFlags = grid.CellFlags;
                 record.YCellCount = grid.YCellCount;
                 record.MaxGridPos = new Vector3(grid.MaxGridPos.X, grid.MaxGridPos.Y, grid.MaxGridPos.Z);
                 record.MinGridPos = new Vector3(grid.MinGridPos.X, grid.MinGridPos.Y, grid.MinGridPos.Z);
@@ -54,7 +55,6 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                         GoodCellSessionId = cell.GoodCellSessionId,
                         Heuristic = cell.Heuristic,
                         Id = cell.Id,
-                        IsOpen = cell.IsOpen,
                         RefHintNode = cell.RefHintNode,
                         RefHintWeight = cell.RefHintWeight,
                         SessionId = cell.SessionId,
@@ -89,7 +89,7 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                     record.Cells = new MapCellRecord[0];
                     record.Objects = new MapObjectRecord[0];
 
-                  
+
                 }
 
                 if (ids.Contains(record.Id) == false)

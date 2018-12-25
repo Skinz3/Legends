@@ -12,10 +12,6 @@ namespace Legends.Core.CSharp
         {
 
         }
-        public virtual void Update()
-        {
-
-        }
         public virtual void Initialize()
         {
 

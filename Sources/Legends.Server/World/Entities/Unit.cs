@@ -1,5 +1,6 @@
 ﻿using Legends.Core.DesignPattern;
 using Legends.Core.Geometry;
+using Legends.Core.IO.NavGrid;
 using Legends.Core.Utils;
 using Legends.Protocol.GameClient.Enum;
 using Legends.Protocol.GameClient.Messages.Game;
@@ -34,6 +35,13 @@ namespace Legends.World.Entities
         {
             get;
             private set;
+        }
+        public MapCellRecord Cell
+        {
+            get
+            {
+                return Game.Map.Record.GetCell(Position);
+            }
         }
         public abstract string Name
         {
@@ -121,7 +129,7 @@ namespace Legends.World.Entities
         {
             this.Game = game;
         }
-        public virtual void Update(long deltaTime)
+        public virtual void Update(float deltaTime)
         {
 
         }
@@ -131,10 +139,16 @@ namespace Legends.World.Entities
         public abstract void OnUnitLeaveVision(Unit unit);
 
 
-        public bool InFieldOfView(Unit other)
+        public bool IsVisible(Unit other)
         {
-            var dist = this.GetDistanceTo(other);
-            return dist <= PerceptionBubbleRadius;
+            bool fov = this.GetDistanceTo(other) <= PerceptionBubbleRadius;
+            // bool inBrush = other.CellHasFlag(NavigationGridCellFlags.HasGrass);
+            return fov;//&& !inBrush;
+
+        }
+        public bool CellHasFlag(NavigationGridCellFlags flags)
+        {
+            return Cell.HasFlag(Game.Map.Record, flags);
         }
         public float GetDistanceTo(Unit other)
         {

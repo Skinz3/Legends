@@ -54,6 +54,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealTrueshotBarrage.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealMysticShot.cs" />
     <Compile Include="Configurations\Configuration.cs" />
     <Compile Include="Configurations\ConfigurationProvider.cs" />
     <Compile Include="Configurations\PlayerData.cs" />
@@ -78,11 +80,11 @@
     <Compile Include="Scripts\Maps\MapBindingManager.cs" />
     <Compile Include="Scripts\Maps\MapScript.cs" />
     <Compile Include="Scripts\Maps\MapScriptsManager.cs" />
+    <Compile Include="Scripts\Spells\SpellScript.cs" />
+    <Compile Include="Scripts\Spells\SpellScriptManager.cs" />
     <Compile Include="World\Buildings\BuildingProvider.cs" />
     <Compile Include="World\Champions\Champion.cs" />
-    <Compile Include="World\Champions\ChampionProvider.cs" />
     <Compile Include="World\Champions\Dummy.cs" />
-    <Compile Include="World\Champions\Ezreal.cs" />
     <Compile Include="World\Commands\CommandAttribute.cs" />
     <Compile Include="World\Commands\CommandsProvider.cs" />
     <Compile Include="World\Commands\CommandsRepertory.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="World\Entities\Buildings\Nexus.cs" />
     <Compile Include="World\Entities\Buildings\Turret.cs" />
     <Compile Include="World\Entities\Loot\LootManager.cs" />
+    <Compile Include="World\Entities\Movements\Node.cs" />
     <Compile Include="World\Entities\Movements\PathManager.cs" />
     <Compile Include="World\Entities\Statistics\AIStats.cs" />
     <Compile Include="World\Entities\Statistics\BuildingStats.cs" />
@@ -138,6 +141,7 @@
     <Compile Include="World\Games\Teams\Team.cs" />
     <Compile Include="World\Items\Inventory.cs" />
     <Compile Include="World\Items\Item.cs" />
+    <Compile Include="World\JungleManager.cs" />
     <Compile Include="World\Spells\Damages.cs" />
     <Compile Include="World\Spells\Projectiles\FreeProjectile.cs" />
     <Compile Include="World\Spells\Projectiles\Projectile.cs" />
@@ -168,9 +172,7 @@
       <Name>Legends.Protocol</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\Spells\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Todo List.txt" />
   </ItemGroup>

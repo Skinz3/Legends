@@ -19,6 +19,7 @@ namespace Legends.Core.IO.Inibin
         CHARACTER_AssetCategory = 2539498542,
         CHARACTER_AttackSpeed = 1276447327,
         CHARACTER_AttackDelayCastOffsetPercent = 3373177976,
+                        
         CHARACTER_AttackDelayCastOffsetPercentAttackSpeedRatio = 3136453924,
         CHARACTER_AttackDelayOffsetPercent = 2191293239,
         CHARACTER_AttackRange = 1387461685,
@@ -367,6 +368,7 @@ namespace Legends.Core.IO.Inibin
         SPELLS_FloatVarsDecimals2 = 1183899360,
         SPELLS_FloatVarsDecimals3 = 1183899361,
         SPELLS_AttackDelayCastOffsetPercent = 3776584848,
+        SPELLS_DelayCastOffsetPercent = 2965805064,
         SPELLS_DelayTotalTimePercent = 3144779583,
         SPELLS_Description = 3431853604,
         SPELLS_DisplayName = 1805538005,

@@ -18,7 +18,7 @@ namespace Legends.World.Entities.Buildings
         /// <summary>
         /// Values from .cfg file is wrong (3000, 5500) 
         /// </summary>
-        public const float INIBITOR_LIFE = 4000.0f;
+        public const float INHIBITOR_LIFE = 4000.0f;
         /// <summary>
         /// 5 Minutes
         /// </summary>
@@ -47,20 +47,20 @@ namespace Legends.World.Entities.Buildings
         public override void Initialize()
         {
             base.Initialize();
-            this.Stats.Health.SetBaseValue(INIBITOR_LIFE);
+            this.Stats.Health.SetBaseValue(INHIBITOR_LIFE);
         }
         public override void UpdateHeath()
         {
             base.UpdateHeath();
         }
-        public override void Update(long deltaTime)
+        public override void Update(float deltaTime)
         {
             Death.Update(deltaTime);
             base.Update(deltaTime);
         }
         public override void OnDead(AttackableUnit source)
         {
-            Stats.IsTargetable = false; 
+            Stats.IsTargetable = false;
             UpdateStats();
 
             Game.UnitAnnounce(UnitAnnounceEnum.InhibitorDestroyed, NetId, source.NetId, new uint[0]);

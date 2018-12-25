@@ -120,17 +120,17 @@ namespace Legends.World.Entities.Movements
         /// Cells coords
         /// </summary>
         /// <returns></returns>
-        public TranslatedWaypoint[] GetWaypointsTranslated()
+        public GridPosition[] GetWaypointsTranslated()
         {
-            List<TranslatedWaypoint> result = new List<TranslatedWaypoint>();
+            List<GridPosition> result = new List<GridPosition>();
             var mapSize = Unit.Game.Map.Size;
             var wayPoints = GetWaypoints();
 
-            result.Add(TranslatedWaypoint.TranslateCenter(Unit.Position, mapSize));
+            result.Add(GridPosition.TranslateCenter(Unit.Position, mapSize));
 
             for (int i = WaypointsIndex; i < wayPoints.Length; i++)
             {
-                result.Add(TranslatedWaypoint.TranslateCenter(wayPoints[i], mapSize));
+                result.Add(GridPosition.TranslateCenter(wayPoints[i], mapSize));
             }
             return result.ToArray();
         }
@@ -141,14 +141,14 @@ namespace Legends.World.Entities.Movements
         /// si l'on envoit pas MovementAnswerMessage pour pouvoir tester la qualitée de notre interpolation.
         /// </summary>
         /// <param name="deltaTime"></param>
-        private void InterpolateMovement(long deltaTime)
+        private void InterpolateMovement(float deltaTime)
         {
             if (IsMoving && !End)
             {
                 float deltaMovement = Unit.Stats.MoveSpeed.TotalSafe * 0.001f * deltaTime; // deltaTime
 
-                float xOffset = Direction.X * deltaMovement * 1.07f;
-                float yOffset = Direction.Y * deltaMovement * 1.07f;
+                float xOffset = Direction.X * deltaMovement * 1.00f;
+                float yOffset = Direction.Y * deltaMovement * 1.00f;
 
                 Unit.Position = new Vector2(Unit.Position.X + xOffset, Unit.Position.Y + yOffset);
 
@@ -180,6 +180,7 @@ namespace Legends.World.Entities.Movements
 
                     }
                 }
+                (Unit as AIHero).AttentionPing(Unit.Position, 0, PingTypeEnum.Ping_Assist);
 
             }
            
@@ -188,7 +189,7 @@ namespace Legends.World.Entities.Movements
         {
             return string.Join(",", Waypoints) + " Index is : " + WaypointsIndex;
         }
-        public void Update(long deltaTime)
+        public void Update(float deltaTime)
         {
             InterpolateMovement(deltaTime);
         }

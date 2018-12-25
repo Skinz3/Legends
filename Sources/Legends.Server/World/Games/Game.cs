@@ -157,7 +157,7 @@ namespace Legends.World.Games
             this.NeutralTeam = new NeutralTeam(this);
 
             this.Map = Map.CreateMap(mapId, this);
-            this.Timer = new HighResolutionTimer((int)REFRESH_RATE);
+            this.Timer = new HighResolutionTimer(1);
             this.SynchronizedActions = new ConcurrentStack<Action>();
         }
         public void Invoke(Action action)
@@ -223,9 +223,11 @@ namespace Legends.World.Games
             }
 
         }
-        public void RemoveUnit(Unit unit)
+        public void RemoveUnitFromTeam(Unit unit)
         {
             unit.Team.RemoveUnit(unit);
+            unit.DefineTeam(null);
+            unit.DefineGame(null);
         }
         public bool Contains(long userId)
         {
@@ -266,7 +268,7 @@ namespace Legends.World.Games
             {
                 unit.Create();
             }
-           
+
             foreach (var building in Map.Units.OfType<Building>())
             {
                 building.UpdateHeath();
@@ -313,38 +315,49 @@ namespace Legends.World.Games
 
         private void Timer_Elapsed()
         {
-            long deltaTime = Stopwatch.ElapsedMilliseconds;
+            float deltaTime = (float)Stopwatch.Elapsed.TotalMilliseconds;
 
             if (deltaTime > 0)
             {
-                GameTime += deltaTime;
-                NextSyncTime += deltaTime;
+                if (Stopwatch.Elapsed.TotalMilliseconds + 1.0 > REFRESH_RATE)
+                {
+                    //deltaTime += 1.8f;
+                    Update(deltaTime);
 
-                Console.Title = "Legends (FPS :" + 1000 / deltaTime + ")";
-              
 
-                Update(deltaTime);
+                    GameTime += deltaTime;
+                    NextSyncTime += deltaTime;
 
-                Stopwatch = Stopwatch.StartNew();
+                    Console.Title = "Legends (FPS :" + (deltaTime / REFRESH_RATE) * 30 + ")";
+
+
+
+                    Stopwatch.Restart();
+                }
+               
             }
+
+
         }
-        private void Update(long deltaTime)
+        private void Update(float deltaTime)
         {
             if (NextSyncTime >= 10 * 1000)
             {
                 Send(new GameTimerMessage(0, GameTime / 1000f));
                 NextSyncTime = 0;
             }
-            foreach (var action in SynchronizedActions)
-            {
-                action();
-            }
-            SynchronizedActions.Clear();
+        
 
             BlueTeam.Update(deltaTime);
             PurpleTeam.Update(deltaTime);
             NeutralTeam.Update(deltaTime);
             Map.Update(deltaTime);
+
+            foreach (var action in SynchronizedActions)
+            {
+                action();
+            }
+            SynchronizedActions.Clear();
         }
         public void Announce(AnnounceEnum announce)
         {

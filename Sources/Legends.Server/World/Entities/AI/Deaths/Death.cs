@@ -29,7 +29,7 @@ namespace Legends.World.Entities.AI.Deaths
         {
             this.Unit = unit;
         }
-        public virtual void Update(long deltaTime)
+        public virtual void Update(float deltaTime)
         {
             if (!Unit.Alive)
             {

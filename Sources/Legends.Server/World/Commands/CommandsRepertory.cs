@@ -18,6 +18,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Legends.World.Entities.Buildings;
 using Legends.Protocol.GameClient.Types;
+using Legends.Records;
+using Legends.Core.Protocol;
+using System.Diagnostics;
 
 namespace Legends.World.Commands
 {
@@ -87,7 +90,7 @@ namespace Legends.World.Commands
         [Command("position")]
         public static void PositionCommand(LoLClient client)
         {
-            client.Hero.BlueTip("Position",client.Hero.Position.ToString(),string.Empty,TipCommandEnum.ACTIVATE_TIP_DIALOGUE);
+            client.Hero.DebugMessage(client.Hero.Position.ToString());
             client.Hero.AttentionPing(client.Hero.Position, client.Hero.NetId, PingTypeEnum.Ping_OnMyWay);
         }
         [Command("addlife")]
@@ -143,41 +146,19 @@ namespace Legends.World.Commands
             client.Hero.Stats.Health.Current = client.Hero.Stats.Health.TotalSafe;
             client.Hero.UpdateStats();
         }
+        [Command("spawn")]
+        public static void SpawnCommand(LoLClient client, string monsterName)
+        {
+            JungleManager.Instance.SpawnCamp(monsterName, client.Hero.Game, client.Hero.Position);
+        }
+        [Command("cell")]
+        public static void CellCommand(LoLClient client)
+        {
+            client.Hero.DebugMessage("(" + client.Hero.Cell.X + "," + client.Hero.Cell.Y + ")");
+        }
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-            client.Send(new DisplayFloatingTextMessage(client.Hero.NetId, FloatTextEnum.Gold, 0, "400"));
-            return;
-            uint netId = client.Hero.Game.NetIdProvider.PopNextNetId();
-
-            var visibilityData = new VisibilityDataAIMinion()
-            {
-                MovementSyncID = Environment.TickCount,
-                MovementData = new MovementDataStop()
-                {
-                    Position = client.Hero.Position,
-                    Forward = client.Hero.Position,
-                },
-                BuffCount = new List<KeyValuePair<byte, int>>(),
-                Items = new ItemData[0],
-                LookAtNetId = 0,
-                LookAtPosition = new Vector3(),
-                LookAtType = LookAtType.Direction,
-                CharacterDataStack = new CharacterStackData[0],
-                ShieldValues = null,
-                UnknownIsHero = false,
-
-            };
-            client.Hero.Game.Send(new CreateNeutralMessage(netId, NetNodeEnum.Map, client.Hero.GetPositionVector3(), client.Hero.GetPositionVector3(),
-                new Vector3(), "camp", "SRU_Baron", "wtf", "SRU_Baron_spawn", TeamId.NEUTRAL, 0, 0, MinionRoamState.Inactive, 1, 1, 2, 1, 10, 30, 0, ""));
-
-            client.Hero.Game.Send(new OnEnterVisiblityClientMessage(netId, visibilityData));
-
-
-            client.Hero.Game.Send(new OnEnterLocalVisiblityClient(netId, 1000, 1000));
-
-            client.Hero.Game.Send(new PlayAnimationMessage(netId, 100, 0, 1, "SRU_Baron_spawn"));
-
 
             return;
             //    client.Hero.Game.Send(new UpdateModelMessage(t.NetId, "SRUAP_Turret_Chaos1", true, 0));

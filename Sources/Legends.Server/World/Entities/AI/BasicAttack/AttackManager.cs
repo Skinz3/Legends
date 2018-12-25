@@ -70,7 +70,7 @@ namespace Legends.World.Entities.AI.BasicAttack
 
         #endregion
 
-        public virtual void Update(long deltaTime)
+        public virtual void Update(float deltaTime)
         {
             if (Unit.Alive == false)
             {

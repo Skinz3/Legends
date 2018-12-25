@@ -7,6 +7,7 @@ using Legends.Protocol.GameClient.Types;
 using Legends.Records;
 using Legends.World.Entities.AI.BasicAttack;
 using Legends.World.Entities.Buildings;
+using Legends.World.Entities.Loot;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
 using Legends.World.Entities.Statistics.Replication;
@@ -23,6 +24,8 @@ namespace Legends.World.Entities.AI
 {
     public abstract class AIUnit : AttackableUnit
     {
+        public const float LOCAL_RANGE = 1000f;
+
         static Logger logger = new Logger();
 
         public PathManager PathManager
@@ -104,7 +107,7 @@ namespace Legends.World.Entities.AI
         }
         [InDevelopment(InDevelopmentState.TODO, "Gérer ça correctement lorsque je passerais sur les spells :3")]
         public virtual void AddStackData(string newModel, uint skinId, bool modelOnly, bool overrideSpells,
-            bool replaceCharacterPackage)
+            bool replaceCharacterPackage, bool notif = true)
         {
             CharacterStacks.Clear();
 
@@ -117,7 +120,8 @@ namespace Legends.World.Entities.AI
                 var characterStack = new CharacterStack(record, id, modelOnly, overrideSpells, replaceCharacterPackage, skinId);
                 CharacterStacks.Add(id, characterStack);
 
-                Game.Send(new ChangeCharacterDataMessage(NetId, characterStack.GetProtocolObject()));
+                if (notif)
+                    Game.Send(new ChangeCharacterDataMessage(NetId, characterStack.GetProtocolObject()));
             }
             else
             {
@@ -132,9 +136,43 @@ namespace Legends.World.Entities.AI
 
         public abstract void Create();
 
-        public override void Update(long deltaTime)
+        [InDevelopment(InDevelopmentState.TODO)]
+        protected override void ApplyExperienceLoot(AttackableUnit source)
+        {
+
+        }
+        protected override void ApplyGoldLoot(AttackableUnit source)
+        {
+            float goldFromLastHit = LootManager.Instance.GetGoldLoot(this);
+
+            if (goldFromLastHit != 0)
+            {
+                source.AddGold(goldFromLastHit, true);
+            }
+
+            float goldGlobal = Record.GlobalGoldGivenOnDeath;
+
+            if (goldGlobal != 0)
+            {
+                source.Team.Iteration<AIUnit>(x => x.AddGold(goldGlobal, true));
+            }
+
+            float goldLocal = Record.LocalGoldGivenOnDeath;
+
+            if (goldLocal != 0)
+            {
+                var units = source.Team.GetUnits<AIUnit>(x => x.GetDistanceTo(this) < LOCAL_RANGE);
+
+                foreach (var unit in units)
+                {
+                    unit.AddGold(goldLocal, true);
+                }
+            }
+        }
+        public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
+            SpellManager.Update(deltaTime);
             PathManager.Update(deltaTime);
             this.AttackManager.Update(deltaTime);
         }
@@ -173,12 +211,15 @@ namespace Legends.World.Entities.AI
         }
         public void Teleport(Vector2 position)
         {
+            position = Game.Map.Record.GetClosestTerrainExit(position);
             Position = position;
             PathManager.Move(new List<Vector2>() { Position });
             OnMove();
         }
         public virtual void OnMove()
         {
+            SendVision(new WaypointListMessage(NetId, Environment.TickCount, PathManager.GetWaypoints()));
+            return;
             if (IsMoving)
             {
                 SendVision(new WaypointGroupMessage(NetId, Environment.TickCount, new List<MovementDataNormal>() { (MovementDataNormal)GetMovementData() }), Channel.CHL_LOW_PRIORITY);
@@ -246,6 +287,15 @@ namespace Legends.World.Entities.AI
                 }
             }
 
+        }
+        public void CastSpell(byte spellSlot, Vector2 position, Vector2 endPosition)
+        {
+            Spell spell = SpellManager.GetSpell(spellSlot);
+            spell.Cast(position, endPosition);
+            SendVision(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(
+                new Vector3(position.X, position.Y, Game.Map.Record.GetZ(position)),
+                new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition)), 
+                spell.Record.Name)));
         }
         public virtual MovementData GetMovementData()
         {

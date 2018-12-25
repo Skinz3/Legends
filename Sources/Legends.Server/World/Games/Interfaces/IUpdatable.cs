@@ -8,6 +8,6 @@ namespace Legends.World
 {
     public interface IUpdatable
     {
-        void Update(long deltaTime);
+        void Update(float deltaTime);
     }
 }

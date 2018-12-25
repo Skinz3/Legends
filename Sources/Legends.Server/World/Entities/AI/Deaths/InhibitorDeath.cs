@@ -29,7 +29,7 @@ namespace Legends.World.Entities.AI.Deaths
             this.RespawingSoonTimeSeconds = respawingSoonTimeSeconds;
             this.DeltaRespawningSoonTime = respawingSoonTimeSeconds * 1000f;
         }
-        public override void Update(long deltaTime)
+        public override void Update(float deltaTime)
         {
             if (!Unit.Alive && !AnnounceNotified)
             {
