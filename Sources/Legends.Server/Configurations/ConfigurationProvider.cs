@@ -30,15 +30,23 @@ namespace Legends.Configurations
         {
             Configuration = new Configuration()
             {
+                ServerIp = "127.0.0.1",
                 ServerPort = 5119,
+                DatabaseName = "legends",
+                LeaguePath = @"C:\Users\Skinz\Desktop\Emulateur LoL\League of Legends 4.20\League of Legends\RADS\solutions\lol_game_client_sln\releases\0.0.1.68\deploy\",
+                MySQLHost = "127.0.0.1",
+                MySQLUser = "root",
+                MySQLPassword = "",
+                StartClient = true,
+
                 Players = new List<PlayerData>()
                 {
                     new PlayerData()
                     {
                         UserId = 1,
                         Name = "Skinz",
-                        ChampionName = "Riven",
-                        SkinId = 0,
+                        ChampionName = "Ezreal",
+                        SkinId = 5,
                         Summoner1 = "FLASH",
                         Summoner2 = "TELEPORT",
                         Team = "PURPLE",
@@ -49,7 +57,7 @@ namespace Legends.Configurations
                     new PlayerData()
                     {
                         UserId = 2,
-                        Name = "Test",
+                        Name = "Skinz2",
                         ChampionName = "Yasuo",
                         SkinId = 1,
                         Team = "BLUE",
@@ -70,7 +78,7 @@ namespace Legends.Configurations
             return Configuration.Players.FirstOrDefault(x => x.UserId == userId);
         }
 
-        [StartupInvoke("Configuration",StartupInvokePriority.Primitive)]
+        [StartupInvoke("Configuration", StartupInvokePriority.Primitive)]
         public void LoadConfiguration()
         {
             if (File.Exists(PATH) == false)

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\InibinFieldAttribute.cs" />
+    <Compile Include="ClientHooks.cs" />
     <Compile Include="Cryptography\BlowFish.cs" />
     <Compile Include="Cryptography\CRC32.cs" />
     <Compile Include="Cryptography\Crypto.cs" />

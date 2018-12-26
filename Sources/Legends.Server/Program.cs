@@ -41,14 +41,19 @@ namespace Legends
             logger.Write("Server started");
 
 
-            if (Debugger.IsAttached)
+            if (ConfigurationProvider.Instance.Configuration.StartClient)
             {
-                for (int i = 0; i < ConfigurationProvider.Instance.Configuration.Players.Count; i++)
+                foreach (var player in ConfigurationProvider.Instance.Configuration.Players)
                 {
-                    Process.Start("StartGame" + (i + 1) + ".bat");
-                }
-            }
+                    logger.WriteColor1("Starting League of Legends for userId: " + player.UserId);
 
+                    ClientHooks.StartClient(ConfigurationProvider.Instance.Configuration.LeaguePath,
+                 ConfigurationProvider.Instance.Configuration.ServerIp,
+                 ConfigurationProvider.Instance.Configuration.ServerPort,
+                 LoLServer.SERVER_KEY, player.UserId);
+                }
+
+            }
 
             GameProvider.GameLoop();
 
@@ -61,7 +66,10 @@ namespace Legends
         [StartupInvoke("Database", StartupInvokePriority.First)]
         public static void LoadDatabase()
         {
-            DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(AIUnitRecord)), "127.0.0.1", "legends", "root", "");
+            DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(AIUnitRecord)),
+               ConfigurationProvider.Instance.Configuration.MySQLHost, ConfigurationProvider.Instance.Configuration.DatabaseName
+               , ConfigurationProvider.Instance.Configuration.MySQLUser, ConfigurationProvider.Instance.Configuration.MySQLPassword);
+
             DatabaseManager.Instance.LoadTables();
         }
         [StartupInvoke("CSharp Scripts", StartupInvokePriority.Third)]

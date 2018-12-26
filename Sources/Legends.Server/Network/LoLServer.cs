@@ -20,7 +20,6 @@ namespace Legends.Network
     public unsafe class LoLServer
     {
         private static uint SERVER_HOST = ENET_HOST_ANY;
-        public const int SERVER_PORT = 5119;
 
         public const string SERVER_KEY = "17BLOhi6KZsTtldTsizvHg==";
         public const string CLIENT_REQUIRED_VERSION = "Version 4.20.0.315 [PUBLIC]";
