@@ -5,8 +5,8 @@
   * Base project : IntWars (https://github.com/Nisalon/IntWars)
   * League SandBox https://github.com/LeagueSandbox
   
-   ![alt text](https://ibb.co/wCND0wD) 
-   ![alt text](https://ibb.co/bRnYHDw)
+   ![alt text](https://i.ibb.co/gwMsjPs/cover-900.jpg) 
+   ![alt text](https://i.ibb.co/84VGztv/dofus-2018-11-24-13-19-37-Sourire-Denfer.png)
   
  
   
