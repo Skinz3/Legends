@@ -18,6 +18,7 @@
   Visual Studio 2017
   .NET Framework 4.6 (included in visual studio)
   League of Legends 4.30 (https://mega.nz/#!iU5ziY4a!qmbFiZgedkyE4Ozj8IHbmV_oq5ge3vjJjqKI25Fx9Uc)
+  MySQL (and execute legends.sql)
 
 ## Special Thanks
 
