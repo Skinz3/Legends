@@ -23,10 +23,10 @@
 
 ## Special Thanks
 
-   Moonshadow565 https://github.com/moonshadow565 for all his knowledge about League Of Legends. 
-   League.Protocol has been written from https://github.com/moonshadow565/LeaguePackets
+   * Moonshadow565 https://github.com/moonshadow565 for all his knowledge about League Of Legends. 
+   * League.Protocol has been written from https://github.com/moonshadow565/LeaguePackets
 
 ## Contacts
 
-  You can contact me : Discord : Skinz#1128
+  * You can contact me : Discord : Skinz#1128
   
