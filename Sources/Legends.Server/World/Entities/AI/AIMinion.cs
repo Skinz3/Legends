@@ -55,8 +55,7 @@ namespace Legends.World.Entities.AI
         {
             Game.Send(new DieMessage(source.NetId, NetId));
             base.OnDead(source);
-            Game.Map.RemoveUnit(this);
-            Game.RemoveUnitFromTeam(this);
+            Game.DestroyUnit(this);
         }
         public override void Initialize()
         {

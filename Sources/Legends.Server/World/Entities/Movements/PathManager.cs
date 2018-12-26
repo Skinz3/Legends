@@ -180,8 +180,6 @@ namespace Legends.World.Entities.Movements
 
                     }
                 }
-                (Unit as AIHero).AttentionPing(Unit.Position, 0, PingTypeEnum.Ping_Assist);
-
             }
            
         }

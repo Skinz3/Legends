@@ -31,11 +31,7 @@ namespace Legends.World.Games
     {
         private Logger logger = new Logger();
 
-        /// <summary>
-        /// Theorically 30fps
-        /// Aprox equal to (16.666 * 2)
-        /// </summary>
-        public const double REFRESH_RATE = (1000d / 30d);
+
 
         public NetIdProvider NetIdProvider
         {
@@ -59,6 +55,11 @@ namespace Legends.World.Games
             {
                 return BlueTeam.Units.Values.OfType<AIHero>().Concat(PurpleTeam.Units.Values.OfType<AIHero>()).ToArray();
             }
+        }
+        private List<Unit> UnitsToRemove
+        {
+            get;
+            set;
         }
         public Team BlueTeam
         {
@@ -104,16 +105,7 @@ namespace Legends.World.Games
             get;
             private set;
         }
-        private HighResolutionTimer Timer
-        {
-            get;
-            set;
-        }
-        private Stopwatch Stopwatch
-        {
-            get;
-            set;
-        }
+      
         public float GameTime
         {
             get;
@@ -138,14 +130,6 @@ namespace Legends.World.Games
             get;
             set;
         }
-        /// <summary>
-        /// ConcurrentStack<T> is a threadsafe object.
-        /// </summary>
-        public ConcurrentStack<Action> SynchronizedActions
-        {
-            get;
-            private set;
-        }
         public Game(int id, string name, int mapId) // Enum MapType, switch -> instance
         {
             this.NetIdProvider = new NetIdProvider();
@@ -157,12 +141,9 @@ namespace Legends.World.Games
             this.NeutralTeam = new NeutralTeam(this);
 
             this.Map = Map.CreateMap(mapId, this);
-            this.Timer = new HighResolutionTimer(1);
-            this.SynchronizedActions = new ConcurrentStack<Action>();
-        }
-        public void Invoke(Action action)
-        {
-            SynchronizedActions.Push(action);
+
+            this.UnitsToRemove = new List<Unit>();
+  
         }
         /// <summary>
         /// Add player to the game and to his team 
@@ -223,11 +204,9 @@ namespace Legends.World.Games
             }
 
         }
-        public void RemoveUnitFromTeam(Unit unit)
+        public void DestroyUnit(Unit unit)
         {
-            unit.Team.RemoveUnit(unit);
-            unit.DefineTeam(null);
-            unit.DefineGame(null);
+            UnitsToRemove.Add(unit);
         }
         public bool Contains(long userId)
         {
@@ -301,63 +280,39 @@ namespace Legends.World.Games
             {
                 unit.OnGameStart();
             }
-            StartCallback();
-            this.Started = true;
             Map.Script.OnStart();
             Send(new StartGameMessage(0));
-        }
-        public void StartCallback()
-        {
-            Stopwatch = Stopwatch.StartNew();
-            Timer.Elapsed += Timer_Elapsed;
-            Timer.Start();
-        }
-
-        private void Timer_Elapsed()
-        {
-            float deltaTime = (float)Stopwatch.Elapsed.TotalMilliseconds;
-
-            if (deltaTime > 0)
-            {
-                if (Stopwatch.Elapsed.TotalMilliseconds + 1.0 > REFRESH_RATE)
-                {
-                    //deltaTime += 1.8f;
-                    Update(deltaTime);
+            this.Started = true;
 
 
-                    GameTime += deltaTime;
-                    NextSyncTime += deltaTime;
-
-                    Console.Title = "Legends (FPS :" + (deltaTime / REFRESH_RATE) * 30 + ")";
-
-
-
-                    Stopwatch.Restart();
-                }
-               
-            }
-
+         
 
         }
-        private void Update(float deltaTime)
+       
+        public void Update(float deltaTime)
         {
             if (NextSyncTime >= 10 * 1000)
             {
                 Send(new GameTimerMessage(0, GameTime / 1000f));
                 NextSyncTime = 0;
             }
-        
+
 
             BlueTeam.Update(deltaTime);
             PurpleTeam.Update(deltaTime);
             NeutralTeam.Update(deltaTime);
             Map.Update(deltaTime);
 
-            foreach (var action in SynchronizedActions)
+            foreach (var unit in UnitsToRemove)
             {
-                action();
+                Map.RemoveUnit(unit);
+                unit.Team.RemoveUnit(unit);
+                unit.DefineTeam(null);
+                unit.DefineGame(null);
             }
-            SynchronizedActions.Clear();
+
+            UnitsToRemove.Clear();
+
         }
         public void Announce(AnnounceEnum announce)
         {

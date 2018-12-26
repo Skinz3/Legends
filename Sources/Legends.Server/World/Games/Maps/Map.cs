@@ -43,11 +43,7 @@ namespace Legends.World.Games.Maps
             get;
             private set;
         }
-        private List<Unit> UnitsToRemove
-        {
-            get;
-            set;
-        }
+      
         /// <summary>
         /// int is team size and Vector2 are positions ([0] = first player, [1] = second, etc)
         /// todo = put this in MapScript.cs
@@ -77,24 +73,20 @@ namespace Legends.World.Games.Maps
             Script = CreateScript(game);
             Game = game;
             Units = new List<Unit>();
-            UnitsToRemove = new List<Unit>();
         }
 
-        public void RemoveUnit(AIUnit unit)
+        public void RemoveUnit(Unit unit)
         {
-            UnitsToRemove.Add(unit);
+            Units.Remove(unit);
         }
 
         public virtual void Update(float deltaTime)
         {
-            foreach (var unit in Units)
+            foreach (var unit in Units.ToArray())
             {
                 unit.Update(deltaTime);
             }
-            foreach (var unit in UnitsToRemove)
-            {
-                Units.Remove(unit);
-            }
+         
             Script.Update(deltaTime);
         }
         public void AddUnit(Unit unit)

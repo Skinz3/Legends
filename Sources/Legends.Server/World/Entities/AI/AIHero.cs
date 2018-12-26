@@ -249,7 +249,7 @@ namespace Legends.World.Entities.AI
         {
             Disconnected = true;
             Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, NetId, new uint[0]);
-            Game.RemoveUnitFromTeam(this); // maybe depend of reconnect system
+            Game.DestroyUnit(this); // maybe depend of reconnect system
         }
 
         public override VisibilityData GetVisibilityData()

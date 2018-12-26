@@ -855,6 +855,7 @@ namespace Legends.Core.IO.Inibin
         ITEMS_CriticalStrike = 4138078719,
         ITEMS_Consumable = 3723078833,
         ITEMS_CooldownReduction = 1836107546,
+        ITEMS_PercentCooldownMod = 331225348,
         ITEMS_Health = 3444378282,
         ITEMS_HealthRegen = 4123527635,
         ITEMS_Mana = 577028501,

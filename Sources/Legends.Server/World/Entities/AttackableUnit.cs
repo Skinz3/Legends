@@ -131,7 +131,7 @@ namespace Legends.World.Entities
         {
             damages.Apply();
 
-            if (!Stats.IsLifeStealImmune)
+            if (!Stats.IsLifeStealImmune && damages.ApplyAutoAttack && damages.Type == DamageType.DAMAGE_TYPE_PHYSICAL)
                 damages.Source.Stats.Health.Heal(damages.Delta * damages.Source.Stats.LifeSteal.TotalSafe);
 
             if (Shields.Magical > 0 && damages.Type == DamageType.DAMAGE_TYPE_MAGICAL)
@@ -150,7 +150,6 @@ namespace Legends.World.Entities
             }
             else if (Shields.MagicalAndPhysical > 0)
             {
-
                 float value = Shields.UseMagicalAndPhysicalShield(damages.Delta);
                 Stats.Health.Current -= value;
                 float shieldLoss = -(damages.Delta - value);

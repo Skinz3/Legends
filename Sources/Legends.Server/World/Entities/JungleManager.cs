@@ -11,7 +11,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.World
+namespace Legends.World.Entities
 {
     public class JungleManager : Singleton<JungleManager>
     {

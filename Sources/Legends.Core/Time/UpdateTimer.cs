@@ -13,6 +13,21 @@ namespace Legends.Core.Time
         private bool running;
 
         private bool finished;
+
+        /// <summary>
+        /// Temps restant, en secondes
+        /// </summary>
+        public float Current
+        {
+            get
+            {
+                return intervalCurrent / 1000f;
+            }
+            set
+            {
+                intervalCurrent = value * 1000f;
+            }
+        }
         public UpdateTimer(float interval)
         {
             this.interval = interval;

@@ -16,7 +16,7 @@ jungle monster group
 Connection, thread safe, weird?
 CharacterStacks,
 handle channels in protocol properly
-
+item cooldown reduction
 A faire
 
 Tourelle de Nexus

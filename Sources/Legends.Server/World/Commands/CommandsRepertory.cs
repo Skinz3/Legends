@@ -21,6 +21,7 @@ using Legends.Protocol.GameClient.Types;
 using Legends.Records;
 using Legends.Core.Protocol;
 using System.Diagnostics;
+using Legends.World.Entities;
 
 namespace Legends.World.Commands
 {
@@ -156,10 +157,17 @@ namespace Legends.World.Commands
         {
             client.Hero.DebugMessage("(" + client.Hero.Cell.X + "," + client.Hero.Cell.Y + ")");
         }
+        [Command("addcdr")]
+        public static void AddCooldownReductionCommand(LoLClient client, float value)
+        {
+            client.Hero.Stats.CooldownReduction.FlatBonus += value;
+
+            client.Hero.DebugMessage("Cooldown Reduction :" + client.Hero.Stats.CooldownReduction);
+        }
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-
+            client.Hero.Stats.CooldownReduction.FlatBonus += 50f;
             return;
             //    client.Hero.Game.Send(new UpdateModelMessage(t.NetId, "SRUAP_Turret_Chaos1", true, 0));
 

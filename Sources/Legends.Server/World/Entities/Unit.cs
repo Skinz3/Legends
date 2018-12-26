@@ -167,6 +167,10 @@ namespace Legends.World.Entities
         {
             return Team.HasVision(other);
         }
+        public bool IsFriendly(Unit other)
+        {
+            return Team == other.Team;
+        }
         public override string ToString()
         {
             return Name;

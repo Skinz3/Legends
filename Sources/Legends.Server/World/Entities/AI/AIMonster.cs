@@ -48,8 +48,8 @@ namespace Legends.World.Entities.AI
         {
             CurrentTarget = target;
             CurrentTarget.OnDeadEvent += OnTargetDie;
-            TryBasicAttack(target);
-            RoamState = MinionRoamState.Hostile;
+            //TryBasicAttack(target);
+            //RoamState = MinionRoamState.Hostile;
         }
 
         private void OnTargetDie(AttackableUnit arg1, Unit arg2)

@@ -86,40 +86,37 @@ namespace Legends.Network
         public static void NetLoop()
         {
             var enetEvent = new ENetEvent();
-            while (true)
+            while (enet_host_service(_server, &enetEvent, 0) > 0)
             {
-                while (enet_host_service(_server, &enetEvent, 0) > 0)
+                switch (enetEvent.type)
                 {
-                    switch (enetEvent.type)
-                    {
-                        case EventType.Connect:
-                            //Logging->writeLine("A new client connected: %i.%i.%i.%i:%i", event.peer->address.host & 0xFF, (event.peer->address.host >> 8) & 0xFF, (event.peer->address.host >> 16) & 0xFF, (event.peer->address.host >> 24) & 0xFF, event.peer->address.port);
+                    case EventType.Connect:
+                        //Logging->writeLine("A new client connected: %i.%i.%i.%i:%i", event.peer->address.host & 0xFF, (event.peer->address.host >> 8) & 0xFF, (event.peer->address.host >> 16) & 0xFF, (event.peer->address.host >> 24) & 0xFF, event.peer->address.port);
 
-                            /* Set some defaults */
-                            enetEvent.peer->mtu = PEER_MTU;
-                            enetEvent.data = 0;
-                            m_clients.Add(enetEvent.peer->connectID, CreateClient(enetEvent.peer));
-                            logger.Write("Client connected", MessageState.IMPORTANT_INFO);
-                            break;
+                        /* Set some defaults */
+                        enetEvent.peer->mtu = PEER_MTU;
+                        enetEvent.data = 0;
+                        m_clients.Add(enetEvent.peer->connectID, CreateClient(enetEvent.peer));
+                        logger.Write("Client connected", MessageState.IMPORTANT_INFO);
+                        break;
 
-                        case EventType.Receive:
-                            m_clients[enetEvent.peer->connectID].OnDataArrival(enetEvent.packet, (Channel)enetEvent.channelID);
-                            enet_packet_destroy(enetEvent.packet);
-                            break;
+                    case EventType.Receive:
+                        m_clients[enetEvent.peer->connectID].OnDataArrival(enetEvent.packet, (Channel)enetEvent.channelID);
+                        enet_packet_destroy(enetEvent.packet);
+                        break;
 
-                        case EventType.Disconnect:
-                            if (enetEvent.peer->connectID == 0)
-                            {
-                                return;
-                            }
-                            m_clients[enetEvent.peer->connectID].OnDisconnect();
-                            m_clients.Remove(enetEvent.peer->connectID);
-                            logger.Write("Client disconnected", MessageState.IMPORTANT_INFO);
-                            break;
-                    }
+                    case EventType.Disconnect:
+                        if (enetEvent.peer->connectID == 0)
+                        {
+                            return;
+                        }
+                        m_clients[enetEvent.peer->connectID].OnDisconnect();
+                        m_clients.Remove(enetEvent.peer->connectID);
+                        logger.Write("Client disconnected", MessageState.IMPORTANT_INFO);
+                        break;
                 }
-                Thread.Sleep((int)REFRESH_RATE);
             }
+            Thread.Sleep((int)REFRESH_RATE);
         }
         public static LoLClient[] GetClients()
         {

@@ -89,6 +89,7 @@
     <Compile Include="GameClient\Messages\Game\CreateNeutralMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DamageDoneMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DashMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\DestroyClientMissile.cs" />
     <Compile Include="GameClient\Messages\Game\DestroyObjectMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DieMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DisplayFloatingTextMessage.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="GameClient\Messages\Game\LockCameraRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\MoveCameraMessage.cs" />
     <Compile Include="GameClient\Messages\Game\PlayAnimationMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SetCooldownMessage.cs" />
     <Compile Include="GameClient\Messages\Game\WaypointGroupMessage.cs" />
     <Compile Include="GameClient\Messages\Game\MovementConfirmationMessage.cs" />
     <Compile Include="GameClient\Messages\Game\MovementRequestMessage.cs" />
@@ -120,7 +122,7 @@
     <Compile Include="GameClient\Messages\Game\ShowProjectileMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SkillUpRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SkillUpResponseMessage.cs" />
-    <Compile Include="GameClient\Messages\Game\SpawnParticleMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\FXCreateGroupMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SpawnProjectileMessage.cs" />
     <Compile Include="GameClient\Messages\Game\StartGameMessage.cs" />
     <Compile Include="GameClient\Messages\Game\StartGameRequestMessage.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="GameClient\Messages\Other\ExitMessage.cs" />
     <Compile Include="GameClient\Other\WaypointsReader.cs" />
     <Compile Include="GameClient\Types\CastInformations.cs" />
+    <Compile Include="GameClient\Types\FXCreateGroupData.cs" />
     <Compile Include="GameClient\Types\IProtocolable.cs" />
     <Compile Include="GameClient\Types\ProtocolBasicAttack.cs" />
     <Compile Include="GameClient\Types\CharacterStackData.cs" />

@@ -16,12 +16,7 @@ namespace Legends.World.Spells.Projectiles
             get;
             private set;
         }
-        protected AttackableUnit Target
-        {
-            get;
-            private set;
-        }
-        protected Action OnReach
+        protected Action<AttackableUnit,Projectile> OnReach
         {
             get;
             private set;
@@ -36,10 +31,9 @@ namespace Legends.World.Spells.Projectiles
             get;
             private set;
         }
-        public Projectile(uint netId, AIUnit unit, AttackableUnit target, Vector2 startPosition, float speed, Action onReach) : base(netId)
+        public Projectile(uint netId, AIUnit unit, Vector2 startPosition, float speed, Action<AttackableUnit,Projectile> onReach) : base(netId)
         {
             this.Unit = unit;
-            this.Target = target;
             this.OnReach = onReach;
             this.StartPosition = startPosition;
             this.Position = startPosition;

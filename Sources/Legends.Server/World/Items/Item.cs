@@ -70,6 +70,7 @@ namespace Legends.World.Items
             this.Owner.Stats.Mana.FlatBonus += Record.FlatMpPoolMod;
             this.Owner.Stats.ManaRegeneration.FlatBonus += Record.FlatMpRegenMod;
             this.Owner.Stats.AbilityPower.FlatBonus += Record.FlatAbilityPowerMod;
+            this.Owner.Stats.CooldownReduction.FlatBonus += Record.CooldownReductionPercentMod;
             this.Owner.Stats.Armor.PercentBonus += Record.PercentArmorMod;
             this.Owner.Stats.AttackSpeed.PercentBonus += Record.PercentAttackSpeedMod;
             this.Owner.Stats.CriticalHit.PercentBonus += Record.PercentCritChanceMod;
@@ -82,7 +83,6 @@ namespace Legends.World.Items
             this.Owner.Stats.AbilityPower.PercentBonus += Record.PercentAbilityPowerMod;
             this.Owner.Stats.MagicPenetration.PercentBonus += Record.PercentMagicPenetrationMod;
             this.Owner.Stats.MoveSpeed.PercentBaseBonus += Record.PercentMovementSpeedMod;
-
             this.Owner.Stats.AttackDamage.PercentBonus += Record.PercentPhysicalDamageMod;
             this.Owner.Stats.MagicResistance.PercentBonus += Record.PercentMagicResistMod;
             this.Owner.Stats.SpellVamp.FlatBonus += Record.PercentSpellVampMod;

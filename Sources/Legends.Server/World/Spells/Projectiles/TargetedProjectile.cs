@@ -14,13 +14,16 @@ namespace Legends.World.Spells.Projectiles
 {
     public class TargetedProjectile : Projectile
     {
-        public TargetedProjectile(uint netId, AIUnit unit, AttackableUnit target, Vector2 startPosition, float speed, Action onReach)
-            : base(netId, unit, target, startPosition, speed, onReach)
+        private AttackableUnit Target
         {
-
+            get;
+            set;
         }
-
-        public bool destroy = false;
+        public TargetedProjectile(uint netId, AIUnit unit, AttackableUnit target, Vector2 startPosition, float speed, Action<AttackableUnit, Projectile> onReach)
+            : base(netId, unit, startPosition, speed, onReach)
+        {
+            this.Target = target;
+        }
 
         public override string Name => Unit.Name + " (Projectile)";
 
@@ -35,34 +38,23 @@ namespace Legends.World.Spells.Projectiles
 
         public override void Update(float deltaTime)
         {
+            float deltaMovement = Speed * 0.001f * deltaTime; // deltaTime
 
-            if (!destroy)
+            float angle = Geo.GetAngle(Position, Target.Position);
+
+            float xOffset = (float)Math.Cos(angle) * deltaMovement;
+            float yOffset = (float)Math.Sin(angle) * deltaMovement;
+
+            Position = new Vector2(Position.X + xOffset, Position.Y + yOffset);
+
+            // if (Unit is AIHero)
+            //   ((AIHero)Unit).AttentionPing(Position, 0, Protocol.GameClient.Enum.PingTypeEnum.Ping_OnMyWay);
+
+
+            var distanceToTarget = Target.GetDistanceTo(this);
+            if (distanceToTarget <= deltaMovement)
             {
-
-                float deltaMovement = Speed * 0.001f * deltaTime; // deltaTime
-
-                float angle = Geo.GetAngle(Position, Target.Position);
-
-                float xOffset = (float)Math.Cos(angle) * deltaMovement;
-                float yOffset = (float)Math.Sin(angle) * deltaMovement;
-
-
-                Position = new Vector2(Position.X + xOffset, Position.Y + yOffset);
-
-               // if (Unit is AIHero)
-                 //   ((AIHero)Unit).AttentionPing(Position, 0, Protocol.GameClient.Enum.PingTypeEnum.Ping_OnMyWay);
-
-
-                var distanceToTarget = Target.GetDistanceTo(this);
-                if (distanceToTarget  <= deltaMovement)
-                {
-                    destroy = true;
-                    OnReach();
-                }
-            }
-            else
-            {
-                throw new Exception("What the fuck are you doing");
+                OnReach(Target, this);
             }
             base.Update(deltaTime);
         }

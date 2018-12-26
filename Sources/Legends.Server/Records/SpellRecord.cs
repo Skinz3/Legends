@@ -1,7 +1,9 @@
 ﻿using Legends.Core.Attributes;
+using Legends.Core.DesignPattern;
 using Legends.Core.IO.Inibin;
 using Legends.ORM.Attributes;
 using Legends.ORM.Interfaces;
+using Legends.Protocol.GameClient.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +37,12 @@ namespace Legends.Records
         }
         [InibinField(InibinHashEnum.SPELLS_MissileSpeed)]
         public float MissileSpeed
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.SPELLS_LineWidth)]
+        public float LineWidth
         {
             get;
             set;
@@ -99,9 +107,48 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.SPELLS_Flags)]
+        public uint SpellFlags
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.SPELLS_TextFlags)]
+        public string TextFlags
+        {
+            get;
+            set;
+        }
+        [Ignore]
+        public SpellFlags Flags
+        {
+            get
+            {
+                return (SpellFlags)SpellFlags;
+            }
+        }
         public float GetCastTime()
         {
             return (1.0f + DelayCastOffsetPercent) / 2.0f;
+        }
+        public float GetCooldown(byte level)
+        {
+            switch (level)
+            {
+                case 1:
+                    return Cooldown1;
+                case 2:
+                    return Cooldown2;
+                case 3:
+                    return Cooldown3;
+                case 4:
+                    return Cooldown4;
+                case 5:
+                    return Cooldown5;
+                case 6:
+                    return Cooldown6;
+            }
+            return 0f;
         }
         public static SpellRecord GetSpell(string spellName)
         {

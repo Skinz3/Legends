@@ -128,7 +128,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         }
         public void InflictDamages()
         {
-            Target.InflictDamages(new Damages(Unit, Target, Unit.Stats.AttackDamage.TotalSafe, Critical, DamageType.DAMAGE_TYPE_PHYSICAL));
+            Target.InflictDamages(new Damages(Unit, Target, Unit.Stats.AttackDamage.TotalSafe, Critical, DamageType.DAMAGE_TYPE_PHYSICAL, true));
             Hit = true;
         }
 

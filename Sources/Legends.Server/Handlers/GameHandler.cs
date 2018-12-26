@@ -31,19 +31,15 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_C2S_CastSpell)]
         public static void HandleCastSpellRequest(CastSpellRequestMessage message, LoLClient client)
         {
+            AttackableUnit autoAttackTarget = null;
+
+            if (client.Hero.AttackManager.IsAttacking)
+            {
+                autoAttackTarget = client.Hero.AttackManager.GetTarget();
+            }
+
             client.Hero.StopMove();
-            client.Hero.CastSpell(message.slot, message.position, message.endPosition);
-
-
-            /*    //
-               
-                 */
-
-
-            /*
-         
-            //client.Hero.AttentionPing(new Vector2(endPoint.X, endPoint.Y), 0, PingTypeEnum.Ping_Assist);
-            //client.Hero.Teleport(new Vector2(endPoint.X, endPoint.Y)); */
+            client.Hero.CastSpell(message.slot, message.position, message.endPosition,autoAttackTarget);
         }
         [MessageHandler(PacketCmd.PKT_C2S_Click, Channel.CHL_C2S)]
         public static void HandleClickMessage(ClickMessage message, LoLClient client)

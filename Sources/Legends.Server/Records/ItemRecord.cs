@@ -212,6 +212,12 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.ITEMS_PercentCooldownMod)]
+        public float CooldownReductionPercentMod
+        {
+            get;
+            set;
+        }
         [InibinField(InibinHashEnum.ITEMS_PercentMagicDamageMod)]
         public float PercentAbilityPowerMod
         {

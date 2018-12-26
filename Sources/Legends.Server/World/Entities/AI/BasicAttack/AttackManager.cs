@@ -79,7 +79,7 @@ namespace Legends.World.Entities.AI.BasicAttack
 
                 return;
             }
-            if (Auto && Unit.IsMoving == false && !IsAttacking)
+            if (Auto && Unit.IsMoving == false && !IsAttacking && !Unit.SpellManager.IsChanneling())
             {
                 var unitsInRange = GetUnitsInAttackRange();
                 if (unitsInRange.Count > 0)
@@ -114,6 +114,10 @@ namespace Legends.World.Entities.AI.BasicAttack
                 Unit.OnTargetUnset(CurrentAutoattack.Target);
 
             }
+        }
+        public AttackableUnit GetTarget()
+        {
+            return CurrentAutoattack?.Target;
         }
         public void DestroyAutoattack()
         {

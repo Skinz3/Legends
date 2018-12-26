@@ -54,6 +54,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealArcaneShift.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealEssenceFlux.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealTrueshotBarrage.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealMysticShot.cs" />
     <Compile Include="Configurations\Configuration.cs" />
@@ -141,9 +143,9 @@
     <Compile Include="World\Games\Teams\Team.cs" />
     <Compile Include="World\Items\Inventory.cs" />
     <Compile Include="World\Items\Item.cs" />
-    <Compile Include="World\JungleManager.cs" />
+    <Compile Include="World\Entities\JungleManager.cs" />
     <Compile Include="World\Spells\Damages.cs" />
-    <Compile Include="World\Spells\Projectiles\FreeProjectile.cs" />
+    <Compile Include="World\Spells\Projectiles\SkillShot.cs" />
     <Compile Include="World\Spells\Projectiles\Projectile.cs" />
     <Compile Include="World\Spells\Projectiles\TargetedProjectile.cs" />
     <Compile Include="World\Spells\Spell.cs" />
@@ -172,7 +174,9 @@
       <Name>Legends.Protocol</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\Debug\Scripts\Spells\Nidalee\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Todo List.txt" />
   </ItemGroup>

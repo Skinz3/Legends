@@ -1,4 +1,5 @@
-﻿using Legends.Records;
+﻿using Legends.Protocol.GameClient.Enum;
+using Legends.Records;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using System;
@@ -16,45 +17,53 @@ namespace Legends.World.Spells
             get;
             private set;
         }
-        public Spell Spell1
+        private Dictionary<byte, Spell> Spells
         {
             get;
-            private set;
-        }
-        public Spell Spell2
-        {
-            get;
-            private set;
-        }
-        public Spell Spell3
-        {
-            get;
-            private set;
-        }
-        public Spell Spell4
-        {
-            get;
-            private set;
+            set;
         }
         public SpellManager(AIUnit owner)
         {
             this.Owner = owner;
+            this.Spells = new Dictionary<byte, Spell>();
             SetSpells(Owner.Record);
         }
         public void Update(float deltaTime)
         {
-            Spell1?.Update(deltaTime);
-            Spell2?.Update(deltaTime);
-            Spell3?.Update(deltaTime);
-            Spell4?.Update(deltaTime);
+            foreach (var spell in Spells)
+            {
+                spell.Value.Update(deltaTime);
+            }
+        }
+        public void AddSpell(byte slot, Spell spell)
+        {
+            if (spell != null)
+            {
+                Spells.Add(slot, spell);
+            }
         }
         public void SetSpells(AIUnitRecord record)
         {
-            this.Spell1 = SpellProvider.Instance.GetSpell(Owner,0,record.Spell1);
-            this.Spell2 = SpellProvider.Instance.GetSpell(Owner,1, record.Spell2);
-            this.Spell3 = SpellProvider.Instance.GetSpell(Owner,2, record.Spell3);
-            this.Spell4 = SpellProvider.Instance.GetSpell(Owner,3, record.Spell4);
+            Spells.Clear();
+            AddSpell(0, SpellProvider.Instance.GetSpell(Owner, 0, record.Spell1));
+            AddSpell(1, SpellProvider.Instance.GetSpell(Owner, 1, record.Spell2));
+            AddSpell(2, SpellProvider.Instance.GetSpell(Owner, 2, record.Spell3));
+            AddSpell(3, SpellProvider.Instance.GetSpell(Owner, 3, record.Spell4));
         }
+
+        public void LowerCooldowns(float value)
+        {
+            for (byte i = 0; i <= 3; i++)
+            {
+                var spell = Owner.SpellManager.GetSpell(i);
+
+                if (spell.Level > 0)
+                {
+                    spell.LowerCooldown(value);
+                }
+            }
+        }
+
         public void UpgradeSpell(byte spellId)
         {
             Spell targetSpell = GetSpell(spellId);
@@ -63,18 +72,19 @@ namespace Legends.World.Spells
         }
         public Spell GetSpell(byte slot)
         {
-            switch (slot)
+            return Spells[slot];
+        }
+
+        public bool IsChanneling()
+        {
+            foreach (var spell in Spells)
             {
-                case 0:
-                    return Spell1;
-                case 1:
-                    return Spell2;
-                case 2:
-                    return Spell3;
-                case 3:
-                    return Spell4;
+                if (spell.Value.State == SpellStateEnum.STATE_CHANNELING)
+                {
+                    return true;
+                }
             }
-            return null;
+            return false;
         }
     }
 }

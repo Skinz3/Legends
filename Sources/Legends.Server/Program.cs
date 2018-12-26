@@ -24,6 +24,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Legends.World.Games;
 
 namespace Legends
 {
@@ -48,9 +49,11 @@ namespace Legends
                 }
             }
 
-            LoLServer.NetLoop();
 
-            Console.ReadKey();
+            GameProvider.GameLoop();
+
+            while (true)
+                Console.ReadKey();
         }
 
 

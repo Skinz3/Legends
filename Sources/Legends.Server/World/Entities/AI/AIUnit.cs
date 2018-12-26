@@ -178,6 +178,10 @@ namespace Legends.World.Entities.AI
         }
         public void Move(List<Vector2> waypoints, bool unsetTarget = true, bool notify = true)
         {
+            if (SpellManager.IsChanneling())
+            {
+                return;
+            }
             if (Stats.MoveSpeed.TotalSafe > 0)
             {
                 if (unsetTarget)
@@ -214,21 +218,15 @@ namespace Legends.World.Entities.AI
             position = Game.Map.Record.GetClosestTerrainExit(position);
             Position = position;
             PathManager.Move(new List<Vector2>() { Position });
-            OnMove();
+            OnTeleport();
         }
         public virtual void OnMove()
         {
             SendVision(new WaypointListMessage(NetId, Environment.TickCount, PathManager.GetWaypoints()));
-            return;
-            if (IsMoving)
-            {
-                SendVision(new WaypointGroupMessage(NetId, Environment.TickCount, new List<MovementDataNormal>() { (MovementDataNormal)GetMovementData() }), Channel.CHL_LOW_PRIORITY);
-            }
-            else
-            {
-                SendVision(new WaypointListMessage(NetId, Environment.TickCount, new Vector2[] { Position }));
-
-            }
+        }
+        public virtual void OnTeleport()
+        {
+            SendVision(new WaypointGroupMessage(NetId, Environment.TickCount, new List<MovementDataNormal>() { (MovementDataNormal)GetMovementData() }), Channel.CHL_LOW_PRIORITY);
         }
 
         public void MoveTo(Vector2 targetVector, bool unsetTarget = true)
@@ -288,23 +286,30 @@ namespace Legends.World.Entities.AI
             }
 
         }
-        public void CastSpell(byte spellSlot, Vector2 position, Vector2 endPosition)
+        public void CastSpell(byte spellSlot, Vector2 position, Vector2 endPosition, AttackableUnit autoAttackTarget = null)
         {
+            if (SpellManager.IsChanneling())
+            {
+                return;
+            }
             Spell spell = SpellManager.GetSpell(spellSlot);
-            spell.Cast(position, endPosition);
-            SendVision(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(
+            spell.Cast(position, endPosition, autoAttackTarget);
+            Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(
                 new Vector3(position.X, position.Y, Game.Map.Record.GetZ(position)),
-                new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition)), 
+                new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition)),
                 spell.Record.Name)));
         }
+        short test = 0;
         public virtual MovementData GetMovementData()
         {
             if (!IsMoving)
             {
-                return new MovementDataStop()
+                return new MovementDataNormal()
                 {
-                    Position = Position,
-                    Forward = Position,
+                    HasTeleportID = true,
+                    TeleportID = (byte)test++,
+                    TeleportNetID = NetId,
+                    Waypoints = PathManager.GetWaypointsTranslated(),
                 };
             }
             else

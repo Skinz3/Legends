@@ -42,7 +42,12 @@ namespace Legends.World.Spells
             get;
             private set;
         }
-        public Damages(AIUnit source, AttackableUnit target, float delta, bool critical, DamageType type)
+        public bool ApplyAutoAttack
+        {
+            get;
+            private set;
+        }
+        public Damages(AIUnit source, AttackableUnit target, float delta, bool critical, DamageType type, bool applyAutoAttack)
         {
             this.Source = source;
             this.Target = target;
@@ -50,11 +55,14 @@ namespace Legends.World.Spells
             this.Type = type;
             this.Critical = critical;
             this.Result = GenerateResult();
+            this.ApplyAutoAttack = applyAutoAttack;
         }
+
+
+
         [InDevelopment(InDevelopmentState.TODO, "Just todo ^.^")]
         private DamageResultEnum GenerateResult()
         {
-
             if (Target.Stats.IsInvulnerable)
             {
                 return DamageResultEnum.DAMAGE_TEXT_INVULNERABLE;

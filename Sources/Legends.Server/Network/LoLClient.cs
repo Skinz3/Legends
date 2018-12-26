@@ -74,18 +74,7 @@ namespace Legends.Network
         [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "A good synchronization method?")]
         public override void OnMessageHandle(Message message, Delegate handler)
         {
-            if (Hero != null && Hero.Game != null && Hero.Game.Started)
-            {
-                Hero.Game.Invoke(new Action(() =>
-                {
-                    Handle(message, handler);
-                }));
-            }
-            else
-            {
-
-                Handle(message, handler);
-            }
+            Handle(message, handler);
         }
         private void Handle(Message message, Delegate handler)
         {

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,23 +26,39 @@ namespace Legends.Scripts.Spells
 
         private Dictionary<string, Type> Scripts = new Dictionary<string, Type>();
 
+        public const bool LoadFromAssembly = true;
+
         [StartupInvoke("SpellScripts", StartupInvokePriority.Third)]
         public void Initialize()
         {
-            var types = InjectionManager.Instance.GetScripts(Path.Combine(Environment.CurrentDirectory + RELATIVE_PATH));
+            Type[] types = null;
+
+            if (LoadFromAssembly)
+            {
+                types = Assembly.GetAssembly(typeof(SpellScriptManager)).GetTypes().Where(x => x.BaseType == typeof(SpellScript)).ToArray();
+
+            }
+            else
+            {
+                types = InjectionManager.Instance.GetScripts(Path.Combine(Environment.CurrentDirectory + RELATIVE_PATH));
+
+            }
+
 
             foreach (var type in types)
             {
                 var spellName = (string)type.GetField(SPELL_NAME_FIELD_NAME).GetValue(null);
                 Scripts.Add(spellName, type);
             }
+
+
+
         }
 
         public SpellScript GetSpellScript(SpellRecord record, AIUnit owner)
         {
             if (Scripts.ContainsKey(record.Name) == false)
             {
-                logger.Write("SpellScript is undefined for " + record.Name, MessageState.WARNING);
                 return null;
             }
             return (SpellScript)Activator.CreateInstance(Scripts[record.Name], new object[] { owner, record });
