@@ -5,8 +5,8 @@
   * Base project : IntWars (https://github.com/Nisalon/IntWars)
   * League SandBox https://github.com/LeagueSandbox
   
-   ![alt text](https://image.ibb.co/kYeLFy/tp2.png) 
-   ![alt text](https://image.ibb.co/dikuay/tp1.png)
+   ![alt text](https://ibb.co/wCND0wD) 
+   ![alt text](https://ibb.co/bRnYHDw)
   
  
   
@@ -18,7 +18,7 @@
   
   * Visual Studio 2017
   * .NET Framework 4.6+ (included in visual studio)
-  * League of Legends 4.30 (https://mega.nz/#!iU5ziY4a!qmbFiZgedkyE4Ozj8IHbmV_oq5ge3vjJjqKI25Fx9Uc)
+  * League of Legends 4.20 (https://mega.nz/#!iU5ziY4a!qmbFiZgedkyE4Ozj8IHbmV_oq5ge3vjJjqKI25Fx9Uc)
   * MySQL (https://www.mysql.com/fr/downloads/) (and execute legends.sql)
 
 ## Special Thanks
