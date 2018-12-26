@@ -1,29 +1,22 @@
 <Configuration>
   <ServerPort>5119</ServerPort>
   <Players>
-    <PlayerData>
+   
+	 <PlayerData>
       <UserId>1</UserId>
-      <Name>Skinz</Name>
-      <ChampionName>MissFortune</ChampionName>
+      <Name>Testo</Name>
+      <ChampionName>Ezreal</ChampionName>
       <SkinId>0</SkinId>
       <Team>PURPLE</Team>
       <Summoner1>FLASH</Summoner1>
-      <Summoner2>TELEPORT</Summoner2>
-      <Rank>DIAMOND</Rank>
-      <SummonerIcon>1</SummonerIcon>
-      <Ribbon>1</Ribbon>
-    </PlayerData>
-    <PlayerData>
-      <UserId>2</UserId>
-      <Name>Test</Name>
-      <ChampionName>Yasuo</ChampionName>
-      <SkinId>1</SkinId>
-      <Team>BLUE</Team>
-      <Summoner1>FLASH</Summoner1>
       <Summoner2>IGNITE</Summoner2>
-      <Rank>CHALLENGER</Rank>
-      <SummonerIcon>2</SummonerIcon>
-      <Ribbon>1</Ribbon>
+      <Rank>BRONZE</Rank>
+      <SummonerIcon>25</SummonerIcon>
+      <Ribbon>0</Ribbon>
     </PlayerData>
+	 
   </Players>
 </Configuration>
+
+
+           

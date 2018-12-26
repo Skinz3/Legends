@@ -12,6 +12,14 @@ namespace Legends.Scripts.Maps
     {
         public const MapIdEnum MAP_ID = MapIdEnum.SummonersRift;
 
+		public override float GoldsPerSeconds
+		{
+			get
+			{
+				return 2.04f;
+			}
+		}
+		
         public SummonersRiftScript(Game game) : base(game)
         {
 

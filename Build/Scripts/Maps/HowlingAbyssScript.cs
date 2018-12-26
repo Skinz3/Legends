@@ -12,6 +12,14 @@ namespace Legends.Scripts.Maps
     {
         public const MapIdEnum MAP_ID = MapIdEnum.HowlingAbyss;
 
+		public override float GoldsPerSeconds
+		{
+			get
+			{
+				return 5.5f;
+			}
+		}
+		
         public HowlingAbyssScript(Game game) : base(game)
         {
 
