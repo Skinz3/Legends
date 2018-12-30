@@ -129,10 +129,18 @@ namespace Legends.Records
         }
         public float GetCastTime()
         {
+            if (DelayCastOffsetPercent == 0)
+            {
+                return 0f;
+            }
             return (1.0f + DelayCastOffsetPercent) / 2.0f;
         }
         public float GetCooldown(byte level)
         {
+            if (Cooldown != 0f)
+            {
+                return Cooldown;
+            }
             switch (level)
             {
                 case 1:
@@ -154,6 +162,9 @@ namespace Legends.Records
         {
             return Spells.Find(x => x.Name == spellName);
         }
-
+        public static SpellRecord[] GetSpells()
+        {
+            return Spells.ToArray();
+        }
     }
 }

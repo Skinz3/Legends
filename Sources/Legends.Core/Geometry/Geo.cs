@@ -17,6 +17,21 @@ namespace Legends.Core.Geometry
         {
             return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
         }
+        public static float ToDegrees(float radians)
+        {
+            return (float)(180 / Math.PI) * radians;
+        }
+        public static float GetAngleDegrees(Vector2 p1, Vector2 p2)
+        {
+            var angle = GetAngle(p1, p2);
+            var degrees = ToDegrees(angle);
+            
+            if (degrees < 0)
+            {
+                degrees = degrees + 360;
+            }
+            return degrees;
+        }
         public static float GetAngle(Vector2 p1, Vector2 p2)
         {
             return (float)Math.Atan2(p2.Y - p1.Y, p2.X - p1.X);

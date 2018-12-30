@@ -11,6 +11,7 @@ using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using Legends.World.Spells;
 using Legends.World.Spells.Projectiles;
+using Legends.World.Spells.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,20 +91,32 @@ namespace Legends.Scripts.Spells
         {
 
         }
-        public abstract void OnStartCasting(Vector2 position, Vector2 endPosition);
+        public abstract void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target);
 
-        public abstract void OnFinishCasting(Vector2 position, Vector2 endPosition);
+        public abstract void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target);
 
-        protected void AddProjectile(string name, Vector2 toPosition, Vector2 endPosition, float range, bool serverOnly = false)
+        protected void AddCone(Vector2 coneEnd, float angleDeg)
+        {
+            Cone cone = new Cone(Owner.Position, coneEnd, angleDeg);
+
+            foreach (var unit in GetTargets())
+            {
+                if (cone.TargetIsInCone(unit))
+                {
+                    ApplyEffects(unit, cone);
+                }
+            }
+        }
+        protected void AddSkillShot(string name, Vector2 toPosition, Vector2 endPosition, float range, bool serverOnly = false)
         {
             var record = SpellRecord.GetSpell(name);
-            var position = new Vector3(Owner.Position.X, Owner.Position.Y, 0);
-            var casterPosition = Owner.GetPositionVector3();
+            var position = new Vector3(Owner.Position.X, Owner.Position.Y, 100);
+            var casterPosition = new Vector3(Owner.Position.X, Owner.Position.Y, 100);
             var angle = Geo.GetAngle(Owner.Position, endPosition);
             var direction = Geo.GetDirection(angle);
             var velocity = new Vector3(1, 1, 1) * 100;
-            var startPoint = new Vector3(Owner.Position.X, Owner.Position.Y, 0);
-            var endPoint = new Vector3(endPosition.X, endPosition.Y, 0);
+            var startPoint = new Vector3(Owner.Position.X, Owner.Position.Y, 100);
+            var endPoint = new Vector3(endPosition.X, endPosition.Y, 100);
 
 
             var skillShot = new SkillShot(Owner.Game.NetIdProvider.PopNextNetId(),
@@ -124,11 +137,84 @@ namespace Legends.Scripts.Spells
             }
 
         }
+        protected void AddTargetedProjectile(string name, AttackableUnit target, bool serverOnly = false)
+        {
+            var record = SpellRecord.GetSpell(name);
+            var position = new Vector3(Owner.Position.X, Owner.Position.Y, 100);
+            var casterPosition = new Vector3(Owner.Position.X, Owner.Position.Y, 100);
+            var angle = Geo.GetAngle(Owner.Position, target.Position);
+            var direction = Geo.GetDirection(angle);
+            var velocity = new Vector3(1, 1, 1) * 100;
+            var startPoint = new Vector3(Owner.Position.X, Owner.Position.Y, 100);
+            var endPoint = new Vector3(target.Position.X, target.Position.Y, 100);
+
+
+            var targetedProjectile = new TargetedProjectile(Owner.Game.NetIdProvider.PopNextNetId(),
+                Owner, target, startPoint.ToVector2(), SpellRecord.MissileSpeed, OnProjectileReach);
+
+            Owner.Game.AddUnitToTeam(targetedProjectile, Owner.Team.Id);
+            Owner.Game.Map.AddUnit(targetedProjectile);
+
+            if (!serverOnly)
+            {
+                var castInfo = Spell.GetCastInformations(position, endPoint, name, targetedProjectile.NetId, new AttackableUnit[] { target });
+
+                Owner.Game.Send(new SpawnProjectileMessage(targetedProjectile.NetId, position, casterPosition,
+                    direction.ToVector3(), velocity, startPoint, endPoint, casterPosition,
+                    0, record.MissileSpeed, 1f, 1f, 1f, false, castInfo));
+            }
+
+        }
+
         public void DestroyProjectile(Projectile projectile, bool notify)
         {
             Owner.Game.DestroyUnit(projectile);
             if (notify)
                 Owner.Game.Send(new DestroyClientMissile(projectile.NetId));
+        }
+        public void AddParticle(string effectName, string bonesName, float size)
+        {
+            Owner.SendVision(new FXCreateGroupMessage(Owner.NetId, new FXCreateGroupData[]
+            {
+                new FXCreateGroupData()
+                {
+                    BoneNameHash= bonesName.HashString(),
+                    PackageHash = Owner.Record.Name.HashString(),
+                    EffectNameHash=effectName.HashString(),
+                    Flags= 0,
+                    TargetBoneNameHash=  0,
+                    FXCreateData=  new List<FXCreateData>()
+                    {
+                        new FXCreateData()
+                        {
+                            BindNetId= Owner.NetId,
+                            CasterNetId=  Owner.NetId,
+                            KeywordNetId= Owner.NetId,
+                            NetAssignedNetId =Owner.Game.NetIdProvider.PopNextNetId(),
+                            OrientationVector= new Vector3(),
+                            OwnerPositionX=Owner.Cell.X,
+                            OwnerPositionY=  Owner.Position.Y,
+                            OwnerPositionZ=  0,
+                            PositionX=  Owner.Cell.X,
+                            PositionY= Owner.Position.Y,
+                            PositionZ= 0,
+                            ScriptScale= size,// taille
+                            TargetNetId=Owner.NetId,
+                            TargetPositionX= (short)Owner.Position.X,
+                            TargetPositionY=  Owner.Position.Y,
+                            TargetPositionZ= 0,
+                            TimeSpent= 0.0f, // ou on en est?
+
+                        }
+                    }
+
+                }
+
+            }));
+        }
+        protected AttackableUnit[] GetTargets()
+        {
+            return Owner.Game.Map.Units.OfType<AttackableUnit>().Where(x => IsAffected(x)).ToArray();
         }
         [InDevelopment]
         private bool IsAffected(AttackableUnit unit)
@@ -172,7 +258,7 @@ namespace Legends.Scripts.Spells
         {
             if (IsAffected(target))
             {
-                ApplyProjectileEffects(target, projectile);
+                ApplyEffects(target, projectile);
 
                 if (DestroyProjectileOnHit)
                 {
@@ -180,7 +266,7 @@ namespace Legends.Scripts.Spells
                 }
             }
         }
-        public abstract void ApplyProjectileEffects(AttackableUnit target, Projectile projectile);
+        public abstract void ApplyEffects(AttackableUnit target, IMissile projectile);
 
         public virtual void OnSkillShotRangeReached(SkillShot skillShot)
         {

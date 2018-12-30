@@ -1,9 +1,11 @@
-﻿using Legends.Core.IO;
+﻿using Legends.Core;
+using Legends.Core.IO;
 using Legends.Core.Protocol;
 using Legends.Protocol.GameClient.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,8 +27,8 @@ namespace Legends.Protocol.GameClient.Messages.Game
         {
 
         }
-     
-        public CastSpellAnswerMessage(uint netId,int casterPositionSyncId,bool unknown1,CastInformations castInfo) : base(netId)
+
+        public CastSpellAnswerMessage(uint netId, int casterPositionSyncId,  bool unknown1, CastInformations castInfo) : base(netId)
         {
             this.casterPositionSyncId = casterPositionSyncId;
             this.unknown1 = unknown1;

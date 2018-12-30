@@ -71,7 +71,7 @@ namespace Legends.World.Spells.Projectiles
 
         public override VisibilityData GetVisibilityData()
         {
-            throw new NotImplementedException();
+            return new VisibilityDataSpellMissile();
         }
     }
 }

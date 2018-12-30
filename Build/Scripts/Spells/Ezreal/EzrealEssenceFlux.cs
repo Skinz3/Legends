@@ -46,12 +46,12 @@ namespace Legends.Scripts.Spells
 
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition)
         {
-            AddProjectile("EzrealEssenceFluxMissile", position, endPosition, 1000);
+            AddSkillShot("EzrealEssenceFluxMissile", position, endPosition, 1000);
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition)
         {
-
+            AddParticle("ezreal_bow_yellow.troy", "L_HAND", 1f);
         }
     }
 }

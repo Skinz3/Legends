@@ -22,6 +22,7 @@ using Legends.Records;
 using Legends.Core.Protocol;
 using System.Diagnostics;
 using Legends.World.Entities;
+using Legends.Core;
 
 namespace Legends.World.Commands
 {
@@ -63,8 +64,7 @@ namespace Legends.World.Commands
         [Command("addshield")]
         public static void AddShieldCommand(LoLClient client, float value)
         {
-            client.Hero.Shields.MagicalAndPhysical += value;
-            client.Hero.OnShieldModified(true, true, value);
+            client.Hero.AddGlobalShield(value);
         }
         [Command("addmshield")]
         public static void AddMagicalShieldCommand(LoLClient client, float value)
@@ -167,7 +167,7 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-            client.Hero.Stats.CooldownReduction.FlatBonus += 50f;
+           
             return;
             //    client.Hero.Game.Send(new UpdateModelMessage(t.NetId, "SRUAP_Turret_Chaos1", true, 0));
 

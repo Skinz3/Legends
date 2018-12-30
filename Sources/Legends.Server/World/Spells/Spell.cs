@@ -62,10 +62,17 @@ namespace Legends.World.Spells
 
         private Vector2 castPosition;
         private Vector2 castEndPosition;
+        private AttackableUnit target;
 
         private AttackableUnit autoAttackTarget;
 
-        public Spell(AIUnit owner, SpellRecord record, byte slot, SpellScript script)
+        public bool IsSummonerSpell
+        {
+            get;
+            private set;
+        }
+
+        public Spell(AIUnit owner, SpellRecord record, byte slot, SpellScript script, bool isSummonerSpell)
         {
             this.Owner = owner;
             this.Record = record;
@@ -73,6 +80,7 @@ namespace Legends.World.Spells
             this.Script = script;
             this.Script?.Bind(this);
             this.State = SpellStateEnum.STATE_READY;
+            this.IsSummonerSpell = isSummonerSpell;
         }
         [InDevelopment(InDevelopmentState.STARTED, "Slot max")]
         public bool Upgrade(byte id)
@@ -127,29 +135,34 @@ namespace Legends.World.Spells
 
                 if (ChannelTimer.Finished())
                 {
-                    Script.OnFinishCasting(castPosition, castEndPosition);
-                    ChannelTimer = null;
-
-                    if (autoAttackTarget != null)
-                    {
-                        Owner.TryBasicAttack(autoAttackTarget);
-                        autoAttackTarget = null;
-                    }
-                    
-                    if (GetTotalCooldown() > 0f)
-                    {
-                        CooldownTimer = new UpdateTimer(GetTotalCooldown() * 1000f);
-                        CooldownTimer.Start();
-                        State = SpellStateEnum.STATE_COOLDOWN;
-                    }
-                    else
-                    {
-                        State = SpellStateEnum.STATE_READY;
-                    }
-                    castPosition = new Vector2();
-                    castEndPosition = new Vector2();
+                    OnChannelOver();
                 }
             }
+        }
+        private void OnChannelOver()
+        {
+            Script.OnFinishCasting(castPosition, castEndPosition, target);
+            ChannelTimer = null;
+
+            if (autoAttackTarget != null)
+            {
+                Owner.TryBasicAttack(autoAttackTarget);
+                autoAttackTarget = null;
+            }
+
+            if (GetTotalCooldown() > 0f)
+            {
+                CooldownTimer = new UpdateTimer(GetTotalCooldown() * 1000f);
+                CooldownTimer.Start();
+                State = SpellStateEnum.STATE_COOLDOWN;
+            }
+            else
+            {
+                State = SpellStateEnum.STATE_READY;
+            }
+            castPosition = new Vector2();
+            castEndPosition = new Vector2();
+            target = null;
         }
         public void Update(float deltaTime)
         {
@@ -158,13 +171,13 @@ namespace Legends.World.Spells
 
             Script?.Update(deltaTime);
         }
-        public CastInformations GetCastInformations(Vector3 position, Vector3 endPosition, string spellName, uint missileNetId = 0)
+        public CastInformations GetCastInformations(Vector3 position, Vector3 endPosition, string spellName, uint missileNetId = 0, AttackableUnit[] targets = null)
         {
             if (missileNetId == 0)
             {
                 missileNetId = Owner.Game.NetIdProvider.PopNextNetId();
             }
-            return new CastInformations()
+            var infos = new CastInformations()
             {
                 AmmoRechargeTime = 1f,
                 AmmoUsed = 1, // ??
@@ -177,30 +190,41 @@ namespace Legends.World.Spells
                 DesignerTotalTime = Record.GetCastTime(),
                 ExtraCastTime = 0f,
                 IsClickCasted = false,
-                IsForceCastingOrChannel = true,
+                IsForceCastingOrChannel = false,
                 IsOverrideCastPosition = false,
-                ManaCost = 10f,
+                ManaCost = 0f,
                 MissileNetID = missileNetId,
-                PackageHash = Owner.Record.Name.HashString(),
-                SpellCastLaunchPosition = Owner.GetPositionVector3(),
+                PackageHash = (uint)Owner.GetHash(),
+                SpellCastLaunchPosition = new Vector3(Owner.Position.X, Owner.Position.Y, 100),// Owner.GetPositionVector3(),
                 SpellChainOwnerNetID = Owner.NetId,
                 SpellHash = spellName.HashString(),
                 SpellLevel = Level,
-                SpellNetID = 0,
+                SpellNetID = Owner.Game.NetIdProvider.PopNextNetId(),
                 SpellSlot = Slot, // 3 = R
                 StartCastTime = 0, // animation current, ou en est?
                 TargetPosition = position,
                 TargetPositionEnd = endPosition,
-                Targets = new List<Tuple<uint, HitResultEnum>>(),
+                Targets = new List<Tuple<uint, HitResultEnum>>()
             };
+
+            if (targets != null)
+            {
+                foreach (var target in targets)
+                {
+                    infos.Targets.Add(new Tuple<uint, HitResultEnum>(target.NetId, HitResultEnum.Normal));
+                }
+            }
+            return infos;
         }
-        private float GetTotalCooldown()
+        public float GetTotalCooldown()
         {
             float cd = Record.GetCooldown(Level);
-            cd *= (1 - (Owner.Stats.CooldownReduction.TotalSafe / 100));
+
+            if (!IsSummonerSpell)
+                cd *= (1 - (Owner.Stats.CooldownReduction.TotalSafe / 100));
             return cd;
         }
-        public void Cast(Vector2 position, Vector2 endPosition, AttackableUnit autoAttackTarget = null)
+        public void Cast(Vector2 position, Vector2 endPosition, AttackableUnit target, AttackableUnit autoAttackTarget = null)
         {
             if (State == SpellStateEnum.STATE_READY)
             {
@@ -212,12 +236,21 @@ namespace Legends.World.Spells
                     }
                     this.autoAttackTarget = autoAttackTarget;
                     castPosition = position;
+                    this.target = target;
                     castEndPosition = endPosition;
                     var castTime = Record.GetCastTime();
-                    ChannelTimer = new UpdateTimer((long)(castTime * 1000));
-                    ChannelTimer.Start();
-                    State = SpellStateEnum.STATE_CHANNELING;
-                    Script.OnStartCasting(position, endPosition);
+
+                    if (castTime == 0)
+                    {
+                        OnChannelOver();
+                    }
+                    else
+                    {
+                        ChannelTimer = new UpdateTimer((long)(castTime * 1000));
+                        ChannelTimer.Start();
+                        State = SpellStateEnum.STATE_CHANNELING;
+                    }
+                    Script.OnStartCasting(position, endPosition, target);
                 }
                 else
                 {

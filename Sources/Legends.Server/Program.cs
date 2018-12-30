@@ -25,6 +25,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Legends.World.Games;
+using System.Globalization;
 
 namespace Legends
 {
@@ -55,7 +56,9 @@ namespace Legends
 
             }
 
+        
             GameProvider.GameLoop();
+
 
             while (true)
                 Console.ReadKey();

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Legends.Core.IO;
 using Legends.Protocol.GameClient.Types;
 using System.IO;
+using Legends.Core;
 
 namespace Legends.Protocol.GameClient.Messages.Game
 {
@@ -32,8 +33,46 @@ namespace Legends.Protocol.GameClient.Messages.Game
         {
             throw new NotImplementedException();
         }
+        private void Serialize2(LittleEndianWriter writer)
+        {
+            writer.WriteByte((byte)1); // number of particles
+            writer.WriteUInt("Ezreal".HashString());
+            writer.WriteUInt("ezreal_bow.troy".HashString());
+            writer.WriteInt(0x00000020); // flags ?
+
+            writer.WriteShort((short)0); // Unk
+            writer.WriteUInt("L_HAND".HashString());
+
+            writer.WriteByte((byte)1); // number of targets ?
+
+            writer.WriteUInt(netId);
+            writer.WriteUInt(39439); // Particle net id ?
+            writer.WriteUInt(netId);
+
+            writer.WriteUInt(netId);
+
+            writer.WriteInt(0); // unk
+
+            for (var i = 0; i < 3; ++i)
+            {
+                var ownerHeight = 0;
+                var particleHeight = 0;
+                var higherValue = Math.Max(ownerHeight, particleHeight);
+                writer.WriteShort((short)1);
+                writer.WriteInt(higherValue);
+                writer.WriteShort((short)1);
+            }
+
+            writer.WriteUInt((uint)0); // unk
+            writer.WriteUInt((uint)0); // unk
+            writer.WriteUInt((uint)0); // unk
+            writer.WriteUInt((uint)0); // unk
+            writer.WriteFloat(1.0f); // Particle size
+        }
         public override void Serialize(LittleEndianWriter writer)
         {
+          //Serialize2(writer);
+            //return;
             int count = fXCreateGroupDatas.Length;
             if (count > 0xFF)
             {

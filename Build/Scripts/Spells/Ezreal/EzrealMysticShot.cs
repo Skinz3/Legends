@@ -45,17 +45,16 @@ namespace Legends.Scripts.Spells
             target.InflictDamages(new Damages(Owner, target, damage, false, DamageType.DAMAGE_TYPE_PHYSICAL, true));
 
             Owner.SpellManager.LowerCooldowns(1f);
-         
         }
 
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition)
         {
-            AddProjectile("EzrealMysticShotMissile", position, endPosition, RANGE);
+            AddSkillShot("EzrealMysticShotMissile", position, endPosition, RANGE);
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition)
         {
-
+            AddParticle("ezreal_bow.troy", "L_HAND", 1f);
         }
     }
 }

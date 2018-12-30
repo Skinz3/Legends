@@ -14,20 +14,20 @@
       <ChampionName>Ezreal</ChampionName>
       <SkinId>5</SkinId>
       <Team>PURPLE</Team>
-      <Summoner1>FLASH</Summoner1>
-      <Summoner2>TELEPORT</Summoner2>
+      <Summoner1>SummonerFlash</Summoner1>
+      <Summoner2>SummonerTeleport</Summoner2>
       <Rank>DIAMOND</Rank>
       <SummonerIcon>1</SummonerIcon>
       <Ribbon>1</Ribbon>
     </PlayerData>
     <PlayerData>
       <UserId>2</UserId>
-      <Name>Skinz2</Name>
-      <ChampionName>Yasuo</ChampionName>
-      <SkinId>1</SkinId>
+      <Name>Leviath</Name>
+      <ChampionName>Caitlyn</ChampionName>
+      <SkinId>2</SkinId>
       <Team>BLUE</Team>
-      <Summoner1>FLASH</Summoner1>
-      <Summoner2>IGNITE</Summoner2>
+      <Summoner1>SummonerFlash</Summoner1>
+      <Summoner2>SummonerTeleport</Summoner2>
       <Rank>CHALLENGER</Rank>
       <SummonerIcon>2</SummonerIcon>
       <Ribbon>1</Ribbon>

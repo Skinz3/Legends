@@ -96,6 +96,7 @@ namespace Legends.World.Entities.AI
             Disconnected = false;
         }
 
+
         public override void Initialize()
         {
             Stats = new HeroStats(Record, Data.SkinId);
@@ -105,6 +106,9 @@ namespace Legends.World.Entities.AI
             Score = new Score();
             this.StatsUpdateTimer = new UpdateTimer(STATS_REFRESH_DELAY);
             base.Initialize();
+
+            SpellManager.AddSpell(4, SpellProvider.Instance.GetSpell(this, 4, Data.Summoner1Spell));
+            SpellManager.AddSpell(5, SpellProvider.Instance.GetSpell(this, 5, Data.Summoner2Spell));
         }
         public override void OnGameStart()
         {
@@ -158,6 +162,39 @@ namespace Legends.World.Entities.AI
         public void FloatingText(FloatTextEnum floatTextEnum, int param, string message)
         {
             Client.Send(new DisplayFloatingTextMessage(NetId, floatTextEnum, param, message));
+        }
+        public override int GetHash()
+        {
+            var szSkin = "";
+
+            if (SkinId < 10)
+            {
+                szSkin = "0" + SkinId;
+            }
+            else
+            {
+                szSkin = SkinId.ToString();
+            }
+
+            var hash = 0;
+            var gobj = "[Character]";
+
+            for (var i = 0; i < gobj.Length; i++)
+            {
+                hash = char.ToLower(gobj[i]) + 0x1003F * hash;
+            }
+
+            for (var i = 0; i < Model.Length; i++)
+            {
+                hash = char.ToLower(Model[i]) + 0x1003F * hash;
+            }
+
+            for (var i = 0; i < szSkin.Length; i++)
+            {
+                hash = char.ToLower(szSkin[i]) + 0x1003F * hash;
+            }
+
+            return hash;
         }
         public override void AddGold(float value, bool floatingText)
         {
@@ -231,6 +268,8 @@ namespace Legends.World.Entities.AI
         {
 
         }
+
+
         public void UpdateInfos()
         {
             Game.Send(new PlayerInfoMessage(NetId, Data.Summoner1Spell, Data.Summoner2Spell));
@@ -249,7 +288,7 @@ namespace Legends.World.Entities.AI
         {
             Disconnected = true;
             Game.UnitAnnounce(UnitAnnounceEnum.SummonerLeft, NetId, NetId, new uint[0]);
-            Game.DestroyUnit(this); // maybe depend of reconnect system
+            //Game.DestroyUnit(this); // maybe depend of reconnect system
         }
 
         public override VisibilityData GetVisibilityData()

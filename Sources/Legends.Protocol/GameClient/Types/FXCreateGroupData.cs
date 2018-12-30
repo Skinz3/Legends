@@ -21,11 +21,11 @@ namespace Legends.Protocol.GameClient.Types
 
         public void Serialize(LittleEndianWriter writer)
         {
-            writer.WriteUInt(PackageHash);
-            writer.WriteUInt(EffectNameHash);
-            writer.WriteUShort(Flags);
-            writer.WriteUInt(TargetBoneNameHash);
-            writer.WriteUInt(BoneNameHash);
+            writer.WriteUInt(PackageHash);// Ezreal
+            writer.WriteUInt(EffectNameHash); // Particle.Name
+            writer.WriteUShort(Flags); // 0x00000020
+            writer.WriteUInt(TargetBoneNameHash); // not sended
+            writer.WriteUInt(BoneNameHash); // particle.BonesName
             int count = FXCreateData.Count;
             if (count > 0xFF)
             {
@@ -64,17 +64,22 @@ namespace Legends.Protocol.GameClient.Types
             writer.WriteUInt(TargetNetId);
             writer.WriteUInt(NetAssignedNetId);
             writer.WriteUInt(CasterNetId);
+
             writer.WriteUInt(BindNetId);
+
             writer.WriteUInt(KeywordNetId);
+
+
             writer.WriteShort(PositionX);
             writer.WriteFloat(PositionY);
             writer.WriteShort(PositionZ);
             writer.WriteShort(TargetPositionX);
             writer.WriteFloat(TargetPositionY);
             writer.WriteShort(TargetPositionZ);
-            writer.WriteShort(PositionX);
+            writer.WriteShort(OwnerPositionX);
             writer.WriteFloat(OwnerPositionY);
             writer.WriteShort(OwnerPositionZ);
+
             OrientationVector.Serialize(writer);
             writer.WriteFloat(TimeSpent);
             writer.WriteFloat(ScriptScale);

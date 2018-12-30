@@ -49,12 +49,13 @@ namespace Legends.Scripts.Spells
 
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition)
         {
-            AddProjectile("EzrealTrueshotBarrage", position, endPosition, RANGE, true);
+
+            AddSkillShot("EzrealTrueshotBarrage", position, endPosition, RANGE, true);
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition)
         {
-
+            AddParticle("Ezreal_bow_huge.troy", "L_HAND", 1f);
         }
     }
 }

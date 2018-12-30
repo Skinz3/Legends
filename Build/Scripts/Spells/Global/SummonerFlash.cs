@@ -11,52 +11,65 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.bin.Debug.Scripts.Spells.Ezreal
+namespace Legends.bin.Debug.Scripts.Spells.Global
 {
-    public class EzrealArcaneShift : SpellScript
+    public class SummonerFlash : SpellScript
     {
-        public const string SPELL_NAME = "EzrealArcaneShift";
+        public const string SPELL_NAME = "SummonerFlash";
 
-        public EzrealArcaneShift(AIUnit unit, SpellRecord record) : base(unit, record)
+        public override bool DestroyProjectileOnHit
         {
+            get
+            {
+                return true;
+            }
         }
-
         public override SpellFlags Flags
         {
             get
             {
-                return SpellFlags.InstantCast;
+                return SpellFlags.AffectEnemies | SpellFlags.AffectHeroes | SpellFlags.AffectNeutral;
             }
         }
-
-        public override void ApplyProjectileEffects(AttackableUnit target,Projectile projectile)
+        public SummonerFlash(AIUnit unit, SpellRecord record) : base(unit, record)
         {
-           
+
+        }
+
+        public override void ApplyProjectileEffects(AttackableUnit target, Projectile projectile)
+        {
+
+
         }
 
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition)
         {
             var current = Owner.Position;
-
             var to = new Vector2(position.X, position.Y) - current;
             Vector2 trueCoords;
-            if (to.Length() > 475)
+
+            if (to.Length() > 425)
             {
                 to = Vector2.Normalize(to);
-                var range = to * 475;
+                var range = to * 425;
                 trueCoords = current + range;
             }
             else
             {
                 trueCoords = position;
             }
-            Teleport(trueCoords);
-            AddParticle("Ezreal_arcaneshift_cas_pulsefire.troy", "", 1f);
+
+            AddParticle("global_ss_flash.troy", "", 1f);
+            Owner.Teleport(trueCoords);
+            AddParticle("global_ss_flash_02.troy", "", 1f);
+
+
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition)
         {
-            AddParticle("Ezreal_arcaneshift_flash_pulsefire.troy", "", 1f);
+
+
         }
     }
 }

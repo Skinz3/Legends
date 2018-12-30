@@ -26,12 +26,12 @@ namespace Legends.Handlers
 {
     class GameHandler
     {
-
-
         [MessageHandler(PacketCmd.PKT_C2S_CastSpell)]
         public static void HandleCastSpellRequest(CastSpellRequestMessage message, LoLClient client)
         {
             AttackableUnit autoAttackTarget = null;
+
+            AttackableUnit spellTarget = client.Hero.Game.Map.GetUnit(message.targetNetId) as AttackableUnit;
 
             if (client.Hero.AttackManager.IsAttacking)
             {
@@ -39,7 +39,7 @@ namespace Legends.Handlers
             }
 
             client.Hero.StopMove();
-            client.Hero.CastSpell(message.slot, message.position, message.endPosition,autoAttackTarget);
+            client.Hero.CastSpell(message.slot, message.position, message.endPosition, spellTarget, autoAttackTarget);
         }
         [MessageHandler(PacketCmd.PKT_C2S_Click, Channel.CHL_C2S)]
         public static void HandleClickMessage(ClickMessage message, LoLClient client)

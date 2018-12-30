@@ -1,4 +1,5 @@
-﻿using Legends.Core.DesignPattern;
+﻿using Legends.Core;
+using Legends.Core.DesignPattern;
 using Legends.Core.Geometry;
 using Legends.Core.Protocol;
 using Legends.Core.Utils;
@@ -135,6 +136,12 @@ namespace Legends.World.Entities.AI
         }
 
         public abstract void Create();
+
+        public void AddGlobalShield(float value)
+        {
+            Shields.MagicalAndPhysical += value;
+            OnShieldModified(true, true, value);
+        }
 
         [InDevelopment(InDevelopmentState.TODO)]
         protected override void ApplyExperienceLoot(AttackableUnit source)
@@ -286,18 +293,24 @@ namespace Legends.World.Entities.AI
             }
 
         }
-        public void CastSpell(byte spellSlot, Vector2 position, Vector2 endPosition, AttackableUnit autoAttackTarget = null)
+
+        public void CastSpell(byte spellSlot, Vector2 position, Vector2 endPosition, AttackableUnit target, AttackableUnit autoAttackTarget = null)
         {
-            if (SpellManager.IsChanneling())
+            Spell spell = SpellManager.GetSpell(spellSlot);
+
+            if (SpellManager.IsChanneling() && !spell.IsSummonerSpell)
             {
                 return;
             }
-            Spell spell = SpellManager.GetSpell(spellSlot);
-            spell.Cast(position, endPosition, autoAttackTarget);
+            spell.Cast(position, endPosition, target, autoAttackTarget);
             Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(
-                new Vector3(position.X, position.Y, Game.Map.Record.GetZ(position)),
-                new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition)),
+                new Vector3(position.X, position.Y, Game.Map.Record.GetZ(position) + 100),
+                new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition) + 100),
                 spell.Record.Name)));
+        }
+        public virtual int GetHash()
+        {
+            return (int)Record.Name.HashString();
         }
         short test = 0;
         public virtual MovementData GetMovementData()

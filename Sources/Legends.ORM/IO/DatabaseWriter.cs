@@ -9,6 +9,7 @@ using Legends;
 using Legends.ORM.Interfaces;
 using Legends.ORM.Attributes;
 using Legends.Core;
+using System.Globalization;
 
 namespace Legends.ORM.IO
 {
@@ -194,8 +195,16 @@ namespace Legends.ORM.IO
                 }
             }
 
+
+
+              
+
             if (value != null)
+            {
+                value = Convert.ToString(value, CultureInfo.InvariantCulture);
+
                 value = value.ToString().Replace("'", "''");
+            }
 
             return string.Format("'{0}'", value);
         }

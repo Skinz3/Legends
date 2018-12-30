@@ -12,7 +12,7 @@ namespace Legends.Protocol.GameClient.Messages.Game
     /// <summary>
     /// Chargement du modèle personnage
     /// </summary>
-    public class HeroSpawnMessage : Message
+    public class HeroSpawnMessage : BaseMessage
     {
         public static PacketCmd PACKET_CMD = PacketCmd.PKT_S2C_HeroSpawn;
         public override PacketCmd Cmd => PACKET_CMD;
@@ -20,7 +20,6 @@ namespace Legends.Protocol.GameClient.Messages.Game
         public static Channel CHANNEL = Channel.CHL_S2C;
         public override Channel Channel => CHANNEL;
 
-        public uint netId;
         public int playerId;
         public TeamId team;
         public int skinId;
@@ -31,9 +30,8 @@ namespace Legends.Protocol.GameClient.Messages.Game
         {
 
         }
-        public HeroSpawnMessage(uint netId,int playerId,TeamId team,int skinId,string name,string championType)
+        public HeroSpawnMessage(uint netId, int playerId, TeamId team, int skinId, string name, string championType) : base(netId)
         {
-            this.netId = netId;
             this.playerId = playerId;
             this.team = team;
             this.skinId = skinId;
@@ -47,7 +45,6 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
         public override void Serialize(LittleEndianWriter writer)
         {
-            writer.WriteInt(0);
             writer.WriteUInt(netId);
             writer.WriteInt(playerId);
             writer.WriteByte(40); // net node id?
@@ -73,17 +70,17 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
             writer.Fill(0, 128 - name.Length);
 
-    
+
             foreach (var b in Encoding.Default.GetBytes(championType))
                 writer.WriteByte((byte)b);
 
             writer.Fill(0, 40 - championType.Length);
-           
+
 
             writer.WriteFloat(0.0f);
             writer.WriteFloat(0.0f);
             writer.WriteInt(0);
             writer.WriteByte(0);
         }
-    }   
+    }
 }

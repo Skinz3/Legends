@@ -30,11 +30,6 @@ namespace Legends.World.Entities.AI
 
         public override float PerceptionBubbleRadius => (float)Record.PerceptionBubbleRadius;
 
-        private AttackableUnit CurrentTarget
-        {
-            get;
-            set;
-        }
         public override void InflictDamages(Damages damages)
         {
             AttackTarget(damages.Source);
@@ -46,30 +41,18 @@ namespace Legends.World.Entities.AI
         }
         private void AttackTarget(AttackableUnit target)
         {
-            CurrentTarget = target;
-            CurrentTarget.OnDeadEvent += OnTargetDie;
-            //TryBasicAttack(target);
-            //RoamState = MinionRoamState.Hostile;
-        }
-
-        private void OnTargetDie(AttackableUnit arg1, Unit arg2)
-        {
-            ReturnToCamp();
+            TryBasicAttack(target);
+            RoamState = MinionRoamState.Hostile;
         }
 
         private void ReturnToCamp()
         {
-            if (CurrentTarget != null)
-            {
-                CurrentTarget.OnDeadEvent -= OnTargetDie;
-            }
-            CurrentTarget = null;
             RoamState = MinionRoamState.Running;
             MoveTo(SpawnPosition);
         }
         public override void Update(float deltaTime)
         {
-            if (Geo.GetDistance(SpawnPosition, Position) >= 600)
+            if (Geo.GetDistance(SpawnPosition, Position) >= 1000)
             {
                 if (RoamState == MinionRoamState.Hostile)
                 {

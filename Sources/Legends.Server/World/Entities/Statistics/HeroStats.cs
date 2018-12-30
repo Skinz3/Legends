@@ -41,10 +41,10 @@ namespace Legends.World.Entities.Statistics
             ReplicationManager.UpdateUInt((uint)0, 0, 6); // evolvePoints kha zix?
             ReplicationManager.UpdateUInt((uint)0, 0, 7); // ? spells of evolve flags?
 
-            ReplicationManager.UpdateFloat(20f, 0, 8); // manaCost 0
-            ReplicationManager.UpdateFloat(20f, 0, 9); // manaCost 1
-            ReplicationManager.UpdateFloat(20f, 0, 10); // manaCost 2
-            ReplicationManager.UpdateFloat(20f, 0, 11); // manaCost 3
+            ReplicationManager.UpdateFloat(0f, 0, 8); // manaCost 0
+            ReplicationManager.UpdateFloat(0f, 0, 9); // manaCost 1
+            ReplicationManager.UpdateFloat(0f, 0, 10); // manaCost 2
+            ReplicationManager.UpdateFloat(0f, 0, 11); // manaCost 3
 
             ReplicationManager.UpdateInt(0, 0, 12); // manaCost  Ex0
             ReplicationManager.UpdateInt(0, 0, 13); // manaCost  Ex1

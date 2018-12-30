@@ -8,19 +8,19 @@ namespace Legends.Protocol.GameClient.Enum
 {
     public enum SummonerSpellId : uint
     {
-        Revive = 0x05C8B3A5,
-        Smite = 0x065E8695,
-        Exhaust = 0x08A8BAE4,
-        Barrier = 0x0CCFB982,
-        Teleport = 0x004F1364,
-        Ghost = 0x064ACC95,
-        Heal = 0x0364AF1C,
-        Cleanse = 0x064D2094,
-        Clarity = 0x03657421,
-        Ignite = 0x06364F24,
-        Promote = 0x0410FF72,
-        Clair = 0x09896765,
-        Flash = 0x06496EA8,
-        Test = 0x0103D94C,
+        SummonerRevive = 0x05C8B3A5,
+        SummonerSmite = 0x065E8695,
+        SummonerExhaust = 0x08A8BAE4,
+        SummonerBarrier = 0x0CCFB982,
+        SummonerTeleport = 0x004F1364,
+        SummonerGhost = 0x064ACC95,
+        SummonerHeal = 0x0364AF1C,
+        SummonerCleanse = 0x064D2094,
+        SummonerClarity = 0x03657421,
+        SummonerIgnite = 0x06364F24,
+        SummonerPromote = 0x0410FF72,
+        SummonerClair = 0x09896765,
+        SummonerFlash = 0x06496EA8,
+        SummonerTest = 0x0103D94C,
     };
 }

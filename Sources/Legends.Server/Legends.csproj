@@ -54,10 +54,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bin\Debug\Scripts\Spells\Annie\Disintegrate.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Annie\Incinerate.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Caitlyn\CaitlynPiltoverPeacemaker.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealArcaneShift.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealEssenceFlux.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealTrueshotBarrage.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealMysticShot.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Global\SummonerFlash.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\MasterYi\AlphaStrike.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Yasuo\YasuoQW.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Zed\ZedShuriken.cs" />
     <Compile Include="Configurations\Configuration.cs" />
     <Compile Include="Configurations\ConfigurationProvider.cs" />
     <Compile Include="Configurations\PlayerData.cs" />
@@ -145,9 +152,11 @@
     <Compile Include="World\Items\Item.cs" />
     <Compile Include="World\Entities\JungleManager.cs" />
     <Compile Include="World\Spells\Damages.cs" />
+    <Compile Include="World\Spells\Projectiles\IMissile.cs" />
     <Compile Include="World\Spells\Projectiles\SkillShot.cs" />
     <Compile Include="World\Spells\Projectiles\Projectile.cs" />
     <Compile Include="World\Spells\Projectiles\TargetedProjectile.cs" />
+    <Compile Include="World\Spells\Shapes\Cone.cs" />
     <Compile Include="World\Spells\Spell.cs" />
     <Compile Include="World\Spells\SpellManager.cs" />
     <Compile Include="World\Spells\SpellProvider.cs" />

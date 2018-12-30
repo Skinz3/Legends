@@ -9,6 +9,7 @@ using Legends.ORM.Interfaces;
 using Legends.ORM.Attributes;
 using Legends;
 using Legends.Core;
+using System.Globalization;
 
 namespace Legends.ORM.IO
 {
@@ -78,7 +79,7 @@ namespace Legends.ORM.IO
                 {
                     m_properties[i].SetValue(typeObj, obj[i]);
                 }
-                
+
                 this.m_elements.Add(typeObj);
 
 
@@ -134,8 +135,8 @@ namespace Legends.ORM.IO
                                 continue;
                             }
 
-                                foreach (var element in elements)
-                                    method.Invoke(newList, new object[] { Convert.ChangeType(element, parameters[0]) });
+                            foreach (var element in elements)
+                                method.Invoke(newList, new object[] { Convert.ChangeType(element, parameters[0]) });
 
                             obj[i] = newList;
                             continue;
@@ -179,7 +180,7 @@ namespace Legends.ORM.IO
                 {
                     obj[i] = Enum.Parse(m_properties[i].PropertyType, obj[i].ToString());
                 }
-                try { obj[i] = Convert.ChangeType(obj[i], this.m_properties[i].PropertyType); }
+                try { obj[i] = Convert.ChangeType(obj[i], this.m_properties[i].PropertyType,CultureInfo.InvariantCulture); }
                 catch
                 {
                     string exception = string.Format("Unknown constructor for '{0}', ({1}) if its an Json property, PropertyType must got empty constructor.", this.m_properties[i].PropertyType.Name, this.m_properties[i].Name);
