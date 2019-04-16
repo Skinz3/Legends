@@ -108,6 +108,7 @@ namespace Legends.ORM.IO
                 }
             }
         }
+
         private void UpdateElements(ITable[] elements)
         {
             foreach (var element in elements)

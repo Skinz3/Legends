@@ -22,6 +22,7 @@ using Legends.Core.IO.CFG;
 using Legends.DatabaseSynchronizer.CustomSyncs;
 using Legends.Core.IO.Inibin;
 using Legends.ORM;
+using MySql.Data.MySqlClient;
 
 namespace Legends.DatabaseSynchronizer
 {
@@ -30,8 +31,8 @@ namespace Legends.DatabaseSynchronizer
     /// </summary>
     class Program
     {
-        public const string LeagueOfLegendsPath = @"C:\Users\Skinz\Desktop\Emulateur LoL\League of Legends 4.20\League of Legends\";
-        public const string SmartFileOutputPath = @"C:\Users\Skinz\Desktop\Emulateur LoL\Legends\Build\database.smart";
+        public const string LeagueOfLegendsPath = @"E:\Transfert PC\Emulateur LoL\League of Legends 4.20\League of Legends\";
+        public const string SmartFileOutputPath = @"E:\Transfert PC\Emulateur LoL\\Legends\Build\database.smart";
 
         static Logger logger = new Logger();
 
@@ -47,9 +48,9 @@ namespace Legends.DatabaseSynchronizer
             var test = manager.GetFiles("ExpCurve.inibin");
 
             DatabaseManager.Instance.DropTables(Assembly.GetAssembly(typeof(AIUnitRecord)));
-           
+
             //  JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/items.json","ITEMS");  
-            
+
             var recordAssembly = Assembly.GetAssembly(typeof(AIUnitRecord));
 
             BuildingSynchronizer.Synchronize(manager);

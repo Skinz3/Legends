@@ -17,8 +17,8 @@ namespace Legends.World.Entities
     {
         private Dictionary<string, UpdateTimer> RespawnTimers = new Dictionary<string, UpdateTimer>();
 
-        [InDevelopment(InDevelopmentState.TODO, "its a monster group...")]
-        public void SpawnCamp(string monsterName, Game game, Vector2 position)
+        [InDevelopment(InDevelopmentState.TODO, "spawn group...")]
+        public AIMonster SpawnMonster(string monsterName, Game game, Vector2 position)
         {
             AIMonster monster = new AIMonster(game.NetIdProvider.PopNextNetId(), AIUnitRecord.GetAIUnitRecord(monsterName), 0);
             monster.Position = position;
@@ -28,6 +28,7 @@ namespace Legends.World.Entities
             game.Map.AddUnit(monster);
             monster.Initialize();
             monster.Create();
+            return monster;
         }
     }
 }

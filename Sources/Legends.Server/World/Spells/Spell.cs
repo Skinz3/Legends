@@ -52,10 +52,10 @@ namespace Legends.World.Spells
             get;
             private set;
         }
-        private SpellScript Script
+        public SpellScript Script
         {
             get;
-            set;
+            private set;
         }
         private UpdateTimer ChannelTimer;
         private UpdateTimer CooldownTimer;
@@ -71,7 +71,11 @@ namespace Legends.World.Spells
             get;
             private set;
         }
-
+        private uint NextProjectileId
+        {
+            get;
+            set;
+        }
         public Spell(AIUnit owner, SpellRecord record, byte slot, SpellScript script, bool isSummonerSpell)
         {
             this.Owner = owner;
@@ -171,12 +175,12 @@ namespace Legends.World.Spells
 
             Script?.Update(deltaTime);
         }
+        public uint GetNextProjectileId()
+        {
+            return NextProjectileId;
+        }
         public CastInformations GetCastInformations(Vector3 position, Vector3 endPosition, string spellName, uint missileNetId = 0, AttackableUnit[] targets = null)
         {
-            if (missileNetId == 0)
-            {
-                missileNetId = Owner.Game.NetIdProvider.PopNextNetId();
-            }
             var infos = new CastInformations()
             {
                 AmmoRechargeTime = 1f,
@@ -250,6 +254,7 @@ namespace Legends.World.Spells
                         ChannelTimer.Start();
                         State = SpellStateEnum.STATE_CHANNELING;
                     }
+                    NextProjectileId = Owner.Game.NetIdProvider.PopNextNetId();
                     Script.OnStartCasting(position, endPosition, target);
                 }
                 else

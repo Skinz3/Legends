@@ -3,7 +3,6 @@ using Legends.Protocol.GameClient.Enum;
 using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Network;
 using Legends.Records;
-using Legends.World.Champions;
 using Legends.World.Games;
 using Legends.World.Games.Maps;
 using System;

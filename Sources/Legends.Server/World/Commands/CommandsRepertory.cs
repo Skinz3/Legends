@@ -150,7 +150,7 @@ namespace Legends.World.Commands
         [Command("spawn")]
         public static void SpawnCommand(LoLClient client, string monsterName)
         {
-            JungleManager.Instance.SpawnCamp(monsterName, client.Hero.Game, client.Hero.Position);
+            JungleManager.Instance.SpawnMonster(monsterName, client.Hero.Game, client.Hero.Position);
         }
         [Command("cell")]
         public static void CellCommand(LoLClient client)
@@ -167,7 +167,39 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-           
+            var Owner = client.Hero;
+
+
+            var targetPosition = Owner.Position + new Vector2(300, 300);
+
+            Owner.Game.Send(new WaypointGroupWithSpeedMessage(Owner.NetId,
+               new MovementDataWithSpeed[]
+               {
+                    new MovementDataWithSpeed()
+                    {
+                        HasTeleportID=false,
+                        TeleportID= 0,
+                        TeleportNetID= 0,
+                        SpeedParams = new SpeedParams()
+                        {
+                            Facing= true,
+                            FollowBackDistance=100f,
+                            FollowDistance= 100f,
+                            FollowNetID=0,
+                            FollowTravelTime=10f,
+                            ParabolicGravity=0f,
+                            ParabolicStartPoint=Owner.Position,
+                            PathSpeedOverride=400f,
+                        },
+                        Waypoints=  new GridPosition[]
+                        {
+                            new GridPosition(Owner.Cell.X,Owner.Cell.Y),
+                            new GridPosition((short)(Owner.Cell.X+5),Owner.Cell.Y)
+                        },
+
+
+                    },
+               }, Environment.TickCount));
             return;
             //    client.Hero.Game.Send(new UpdateModelMessage(t.NetId, "SRUAP_Turret_Chaos1", true, 0));
 

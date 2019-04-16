@@ -303,10 +303,11 @@ namespace Legends.World.Entities.AI
                 return;
             }
             spell.Cast(position, endPosition, target, autoAttackTarget);
+            var netId = spell.GetNextProjectileId();
             Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(
                 new Vector3(position.X, position.Y, Game.Map.Record.GetZ(position) + 100),
                 new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition) + 100),
-                spell.Record.Name)));
+                spell.Record.Name,netId)));
         }
         public virtual int GetHash()
         {

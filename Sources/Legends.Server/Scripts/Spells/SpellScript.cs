@@ -45,9 +45,12 @@ namespace Legends.Scripts.Spells
                 return false;
             }
         }
-        public abstract SpellFlags Flags
+        public virtual SpellFlags Flags
         {
-            get;
+            get
+            {
+                return SpellFlags.AffectAllSides | SpellFlags.AffectAllUnitTypes;
+            }
         }
         protected float OwnerBonusAD
         {
@@ -107,6 +110,10 @@ namespace Legends.Scripts.Spells
                 }
             }
         }
+        protected void Dash()
+        {
+
+        }
         protected void AddSkillShot(string name, Vector2 toPosition, Vector2 endPosition, float range, bool serverOnly = false)
         {
             var record = SpellRecord.GetSpell(name);
@@ -119,10 +126,9 @@ namespace Legends.Scripts.Spells
             var endPoint = new Vector3(endPosition.X, endPosition.Y, 100);
 
 
-            var skillShot = new SkillShot(Owner.Game.NetIdProvider.PopNextNetId(),
+            var skillShot = new SkillShot(Spell.GetNextProjectileId(),
                 Owner, position.ToVector2(), record.MissileSpeed, record.LineWidth,
                 OnProjectileReach, direction, range, OnSkillShotRangeReached);
-
 
             Owner.Game.AddUnitToTeam(skillShot, Owner.Team.Id);
             Owner.Game.Map.AddUnit(skillShot);
@@ -149,7 +155,7 @@ namespace Legends.Scripts.Spells
             var endPoint = new Vector3(target.Position.X, target.Position.Y, 100);
 
 
-            var targetedProjectile = new TargetedProjectile(Owner.Game.NetIdProvider.PopNextNetId(),
+            var targetedProjectile = new TargetedProjectile(Spell.GetNextProjectileId(),
                 Owner, target, startPoint.ToVector2(), SpellRecord.MissileSpeed, OnProjectileReach);
 
             Owner.Game.AddUnitToTeam(targetedProjectile, Owner.Team.Id);

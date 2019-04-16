@@ -21,7 +21,7 @@ namespace Legends.Protocol.GameClient.Types
 
     public abstract class MovementData
     {
-        public abstract void Write(LittleEndianWriter writer);
+        public abstract void Serialize(LittleEndianWriter writer);
         public abstract MovementDataType Type
         {
             get;
@@ -48,7 +48,7 @@ namespace Legends.Protocol.GameClient.Types
 
         public static void WriteMovementData(this LittleEndianWriter writer, MovementData data)
         {
-            data.Write(writer);
+            data.Serialize(writer);
         }
     }
 
@@ -57,7 +57,7 @@ namespace Legends.Protocol.GameClient.Types
     {
         public override MovementDataType Type => MovementDataType.None;
 
-        public override void Write(LittleEndianWriter writer)
+        public override void Serialize(LittleEndianWriter writer)
         {
         }
         public MovementDataNone() { }
@@ -79,7 +79,7 @@ namespace Legends.Protocol.GameClient.Types
             get; set;
         }
 
-        public override void Write(LittleEndianWriter writer)
+        public override void Serialize(LittleEndianWriter writer)
         {
             Position.Serialize(writer);
             Forward.Serialize(writer);
@@ -100,7 +100,7 @@ namespace Legends.Protocol.GameClient.Types
         public byte TeleportID { get; set; }
         public GridPosition[] Waypoints { get; set; }
 
-        public override void Write(LittleEndianWriter writer)
+        public override void Serialize(LittleEndianWriter writer)
         {
             int waypointsSize = Waypoints.Length;
             if (waypointsSize > 0x7F)
@@ -154,7 +154,8 @@ namespace Legends.Protocol.GameClient.Types
     {
         public override MovementDataType Type => MovementDataType.WithSpeed;
         public SpeedParams SpeedParams { get; set; } = new SpeedParams();
-        public override void Write(LittleEndianWriter writer)
+
+        public override void Serialize(LittleEndianWriter writer)
         {
             int waypointsSize = Waypoints.Length;
             if (waypointsSize > 0x7F)

@@ -88,7 +88,6 @@
     <Compile Include="GameClient\Messages\Game\CreateMinionCampMessage.cs" />
     <Compile Include="GameClient\Messages\Game\CreateNeutralMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DamageDoneMessage.cs" />
-    <Compile Include="GameClient\Messages\Game\DashMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DestroyClientMissile.cs" />
     <Compile Include="GameClient\Messages\Game\DestroyObjectMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DieMessage.cs" />
@@ -135,6 +134,7 @@
     <Compile Include="GameClient\Messages\Game\UpdateStatsMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ViewMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ViewRequestMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\WaypointGroupWithSpeedMessage.cs" />
     <Compile Include="GameClient\Messages\Game\WaypointListMessage.cs" />
     <Compile Include="GameClient\Messages\LoadingScreen\CharLoadedMessage.cs" />
     <Compile Include="GameClient\Messages\LoadingScreen\ClientReadyMessage.cs" />

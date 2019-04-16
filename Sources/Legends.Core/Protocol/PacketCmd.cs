@@ -84,7 +84,7 @@ namespace Legends.Core.Protocol
         PKT_S2C_MoveAns = 0x61,
         PKT_S2C_StartSpawn = 0x62,
         PKT_S2C_CreateNeutral = 0x63,
-        PKT_S2C_Dash = 0x64, PKT_C2S_ClientReady = 0x64,
+        PKT_S2C_WaypointGroupWithSpeed = 0x64, PKT_C2S_ClientReady = 0x64,
         PKT_S2C_DamageDone = 0x65, PKT_S2C_LoadHero = 0x65,
         PKT_S2C_LoadName = 0x66, PKT_S2C_ModifyShield = 0x66,
         PKT_S2C_LoadScreenInfo = 0x67,

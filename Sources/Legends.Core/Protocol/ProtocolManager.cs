@@ -121,7 +121,7 @@ namespace Legends.Core.Protocol
                 if (channel == Channel.CHL_C2S)
                     id = PacketCmd.PKT_C2S_ClientReady;
                 if (channel == Channel.CHL_S2C)
-                    id = PacketCmd.PKT_S2C_Dash;
+                    id = PacketCmd.PKT_S2C_WaypointGroupWithSpeed;
             }
 
 

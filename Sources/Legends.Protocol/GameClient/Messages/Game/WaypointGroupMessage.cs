@@ -49,7 +49,7 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
             foreach (var data in movements)
             {
-                data.Write(writer);
+                data.Serialize(writer);
             }
 
         }

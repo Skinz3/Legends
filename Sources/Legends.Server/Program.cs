@@ -8,7 +8,6 @@ using Legends.Network;
 using Legends.ORM;
 using Legends.Protocol.GameClient.LoadingScreen;
 using Legends.Records;
-using Legends.World.Champions;
 using Legends.World.Commands;
 using System;
 using Legends.Core;
@@ -56,9 +55,7 @@ namespace Legends
 
             }
 
-        
             GameProvider.GameLoop();
-
 
             while (true)
                 Console.ReadKey();

@@ -90,13 +90,10 @@ namespace Legends.Network
                 switch (enetEvent.type)
                 {
                     case EventType.Connect:
-                        //Logging->writeLine("A new client connected: %i.%i.%i.%i:%i", event.peer->address.host & 0xFF, (event.peer->address.host >> 8) & 0xFF, (event.peer->address.host >> 16) & 0xFF, (event.peer->address.host >> 24) & 0xFF, event.peer->address.port);
-
-                        /* Set some defaults */
                         enetEvent.peer->mtu = PEER_MTU;
                         enetEvent.data = 0;
                         m_clients.Add(enetEvent.peer->connectID, CreateClient(enetEvent.peer));
-                        logger.Write("Client connected", MessageState.IMPORTANT_INFO);
+                        logger.Write("Client connected (" + enetEvent.peer->connectID + ")", MessageState.IMPORTANT_INFO);
                         break;
 
                     case EventType.Receive:

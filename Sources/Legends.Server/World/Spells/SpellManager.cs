@@ -70,6 +70,10 @@ namespace Legends.World.Spells
             targetSpell.Upgrade(spellId);
             Owner.OnSpellUpgraded(spellId, targetSpell);
         }
+        public Spell GetSpell(string name)
+        {
+            return Spells.Values.FirstOrDefault(x => x.Record.Name == name);
+        }
         public Spell GetSpell(byte slot)
         {
             return Spells[slot];
