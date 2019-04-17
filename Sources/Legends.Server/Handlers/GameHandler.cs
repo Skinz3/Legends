@@ -36,14 +36,19 @@ namespace Legends.Handlers
                 autoAttackTarget = client.Hero.AttackManager.GetTarget();
             }
 
-
             Action onChannelOverAction = () =>
             {
                 if (autoAttackTarget != null)
                 {
                     client.Hero.TryBasicAttack(autoAttackTarget);
                 }
+                client.Hero.PathManager.MoveToPendingPoint();
             };
+
+            if (client.Hero.IsMoving)
+                client.Hero.PathManager.PendingPoint = client.Hero.PathManager.GetWaypoints().Last();
+            else
+                client.Hero.PathManager.PendingPoint = null;
 
             client.Hero.StopMove(true, false);
 
@@ -138,7 +143,11 @@ namespace Legends.Handlers
                     WaypointsReader wayPointsReader = new WaypointsReader(message.moveData, message.coordCount, client.Hero.Game.Map.Size);
                     // the client delay lead to display problems so we secure the first waypoint.
                     wayPointsReader.Waypoints[0] = client.Hero.Position;
-                    client.Hero.Move(wayPointsReader.Waypoints);
+
+                    if (!client.Hero.Move(wayPointsReader.Waypoints))
+                    {
+                        client.Hero.PathManager.PendingPoint = wayPointsReader.Waypoints.Last();
+                    }
 
 
                     break;

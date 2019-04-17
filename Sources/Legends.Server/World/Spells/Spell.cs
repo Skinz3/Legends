@@ -173,7 +173,6 @@ namespace Legends.World.Spells
         {
             UpdateCooldown(deltaTime);
             UpdateChanneling(deltaTime);
-
             Script?.Update(deltaTime);
         }
         public uint GetNextProjectileId()
@@ -187,7 +186,7 @@ namespace Legends.World.Spells
                 AmmoRechargeTime = 1f,
                 AmmoUsed = 1, // ??
                 AttackSpeedModifier = 1f,
-                Cooldown = GetTotalCooldown(), // fonctionne avec le slot
+                Cooldown =GetTotalCooldown(), // fonctionne avec le slot
                 CasterNetID = Owner.NetId,
                 IsAutoAttack = false,
                 IsSecondAutoAttack = false,
@@ -223,6 +222,7 @@ namespace Legends.World.Spells
         }
         public float GetTotalCooldown()
         {
+            return 0;
             float cd = Record.GetCooldown(Level);
 
             if (!IsSummonerSpell)

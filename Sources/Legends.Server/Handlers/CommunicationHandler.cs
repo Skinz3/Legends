@@ -21,7 +21,7 @@ namespace Legends.Handlers
             if (message.pingType == PingTypeEnum.Ping_OnMyWay)
             {
                 client.Hero.StopMove();
-                client.Hero.Teleport(message.position);
+                client.Hero.Teleport(message.position, true);
             }
         }
         [MessageHandler(PacketCmd.PKT_ChatBoxMessage, Channel.CHL_COMMUNICATION)]

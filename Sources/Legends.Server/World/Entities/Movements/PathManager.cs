@@ -43,10 +43,15 @@ namespace Legends.World.Entities.Movements
             get
             {
                 return Vector2.Normalize(NextPosition.Value - Unit.Position);
-          
+
             }
         }
         private List<Vector2> Waypoints
+        {
+            get;
+            set;
+        }
+        public Vector2? PendingPoint
         {
             get;
             set;
@@ -113,7 +118,22 @@ namespace Legends.World.Entities.Movements
 
             Waypoints = new List<Vector2>() { Unit.Position, targetPosition }; // A* right here
             End = false;
+        }
 
+        public void Reset()
+        {
+            PendingPoint = null;
+            this.Waypoints = new List<Vector2>() { Unit.Position };
+            this.OnTargetReachAction = null;
+            this.DistanceToTarget = 0f;
+            this.TargetUnit = null;
+            End = false;
+        }
+
+        public void MoveToPendingPoint()
+        {
+            if (Unit.PathManager.PendingPoint != null)
+                Unit.MoveTo(Unit.PathManager.PendingPoint.Value);
         }
         public Vector2[] GetWaypoints()
         {
@@ -184,7 +204,7 @@ namespace Legends.World.Entities.Movements
                     }
                 }
             }
-           
+
         }
         public override string ToString()
         {

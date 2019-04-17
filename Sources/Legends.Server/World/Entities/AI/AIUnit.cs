@@ -112,6 +112,12 @@ namespace Legends.World.Entities.AI
             DashManager = new DashManager(this);
             base.Initialize();
         }
+        public override void OnDead(AttackableUnit source)
+        {
+            PathManager.Reset();
+            DashManager.CancelDash();
+            base.OnDead(source);
+        }
         [InDevelopment(InDevelopmentState.TODO, "Gérer ça correctement lorsque je passerais sur les spells :3")]
         public virtual void AddStackData(string newModel, uint skinId, bool modelOnly, bool overrideSpells,
             bool replaceCharacterPackage, bool notif = true)
@@ -206,15 +212,15 @@ namespace Legends.World.Entities.AI
             OnDashNotified();
             return true;
         }
-        public void Move(List<Vector2> waypoints, bool unsetTarget = true, bool notify = true)
+        public bool Move(List<Vector2> waypoints, bool unsetTarget = true, bool notify = true)
         {
             if (DashManager.IsDashing)
             {
-                return;
+                return false;
             }
             if (SpellManager.IsChanneling())
             {
-                return;
+                return false;
             }
             if (Stats.MoveSpeed.TotalSafe > 0)
             {
@@ -232,7 +238,10 @@ namespace Legends.World.Entities.AI
 
                 if (notify)
                     OnMoveNotified();
+
+                return true;
             }
+            return false;
 
         }
         public override void OnItemAdded(Item item)
@@ -247,25 +256,46 @@ namespace Legends.World.Entities.AI
         {
             return (T)AttackManager;
         }
-        public void Teleport(Vector2 position)
+        public void Teleport(Vector2 position, bool notify = false)
         {
             position = Game.Map.Record.GetClosestTerrainExit(position);
             Position = position;
-            PathManager.Move(new List<Vector2>() { Position });
-            OnTeleport();
+
+            if (notify)
+                OnTeleportNotified();
         }
         [InDevelopment]
         public virtual void OnDashNotified()
         {
-            Game.Send(new Protocol.GameClient.Messages.Game.Dash(NetId, NetId, 1200f, 0f, Position, false, 0f, 0f, 0f, DashManager.GetDash().TargetPoint, Game.Map.Size));
+            Game.Send(new WaypointGroupWithSpeedMessage(NetId, new MovementDataWithSpeed[]{
+            new MovementDataWithSpeed()
+            {
+                HasTeleportID = false,
+                SpeedParams =new SpeedParams()
+                {
+                    Facing = false,
+                    FollowBackDistance =0f,
+                    FollowDistance = 0f,
+                    FollowNetID = 0,
+                    FollowTravelTime =0f,
+                    ParabolicGravity =0f,
+                    ParabolicStartPoint = Position,
+                    PathSpeedOverride = DashManager.GetDash().Speed,
+                },
+                TeleportID = 0,
+                TeleportNetID = NetId,
+                Waypoints= GridPosition.Translate(new Vector2[]{Position,DashManager.GetDash().TargetPoint },Game.Map.Size)
+            } }, Environment.TickCount));
+
+            // Game.Send(new Protocol.GameClient.Messages.Game.Dash(NetId, NetId, 1200f, 0f, Position, false, 0f, 0f, 0f, DashManager.GetDash().TargetPoint, Game.Map.Size));
         }
         public virtual void OnMoveNotified()
         {
-            SendVision(new WaypointGroupMessage(NetId, Environment.TickCount, new List<MovementDataNormal>() { (MovementDataNormal)GetMovementData() }), Channel.CHL_LOW_PRIORITY);
-            return;
+            //SendVision(new WaypointGroupMessage(NetId, Environment.TickCount, new List<MovementDataNormal>() { (MovementDataNormal)GetMovementData() }), Channel.CHL_LOW_PRIORITY);
+            //return;
             SendVision(new WaypointListMessage(NetId, Environment.TickCount, PathManager.GetWaypoints()));
         }
-        public virtual void OnTeleport()
+        public virtual void OnTeleportNotified()
         {
             SendVision(new WaypointGroupMessage(NetId, Environment.TickCount, new List<MovementDataNormal>() { (MovementDataNormal)GetMovementData() }), Channel.CHL_LOW_PRIORITY);
         }
@@ -332,8 +362,8 @@ namespace Legends.World.Entities.AI
         {
             Spell spell = SpellManager.GetSpell(spellSlot);
 
-
-            if (spell.Cast(position, endPosition, target, onChannelOverAction))
+            spell.Cast(position, endPosition, target, onChannelOverAction);
+            //  if (spell.Cast(position, endPosition, target, onChannelOverAction))
             {
                 var netId = spell.GetNextProjectileId();
                 Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(

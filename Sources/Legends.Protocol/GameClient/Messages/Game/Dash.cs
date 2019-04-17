@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Legends.Protocol.GameClient.Messages.Game
 {
-    public class Dash : BaseMessage
+    /*public class Dash : BaseMessage
     {
         public static PacketCmd PACKET_CMD = PacketCmd.PKT_S2C_WaypointGroupWithSpeed;
         public override PacketCmd Cmd => PACKET_CMD;
@@ -93,5 +93,5 @@ namespace Legends.Protocol.GameClient.Messages.Game
         {
             throw new NotImplementedException();
         }
-    }
+    } */
 }

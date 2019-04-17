@@ -46,8 +46,11 @@ namespace Legends.World.Entities.Movements
                 if (Math.Abs(Unit.Position.X - Dash.TargetPoint.X) <= Math.Abs(xOffset) && Math.Abs(Unit.Position.Y - Dash.TargetPoint.Y) <= Math.Abs(yOffset))
                 {
                     Unit.Position = Dash.TargetPoint;
-                    Dash.OnDashEnded?.Invoke();
+                    var onEnded = Dash.OnDashEnded;
                     Dash = null;
+
+                    Unit.PathManager.MoveToPendingPoint();
+                    onEnded?.Invoke();
                 }
             }
         }

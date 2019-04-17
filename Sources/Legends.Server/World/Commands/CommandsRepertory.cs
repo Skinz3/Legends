@@ -171,38 +171,28 @@ namespace Legends.World.Commands
 
 
             var targetPosition = Owner.Position + new Vector2(300, 300);
-
-            /* Owner.Game.Send(new WaypointGroupWithSpeedMessage(Owner.NetId,
-                new MovementDataWithSpeed[]
+            Owner.Game.Send(new WaypointGroupWithSpeedMessage(Owner.NetId, new MovementDataWithSpeed[]{
+            new MovementDataWithSpeed()
+            {
+                HasTeleportID=false,
+                SpeedParams =new SpeedParams()
                 {
-                     new MovementDataWithSpeed()
-                     {
-                         HasTeleportID=false,
-                         TeleportID= 0,
-                         TeleportNetID= 0,
-                         SpeedParams = new SpeedParams()
-                         {
-                             Facing= true,
-                             FollowBackDistance=0f,
-                             FollowDistance= 0f,
-                             FollowNetID=Owner.NetId,
-                             FollowTravelTime=10f,
-                             ParabolicGravity=0f,
-                             ParabolicStartPoint=Owner.Position,
-                             PathSpeedOverride=400f,
-                         },
-                         Waypoints=  new GridPosition[]
-                         {
-                             new GridPosition(Owner.Cell.X,Owner.Cell.Y),
-                             new GridPosition((short)(Owner.Cell.X+100),Owner.Cell.Y)
-                         },
+                    Facing = false,
+                    FollowBackDistance =0f,
+                    FollowDistance = 0f,
+                    FollowNetID = 0,
+                    FollowTravelTime =0f,
+                    ParabolicGravity =0f,
+                    ParabolicStartPoint = Owner.Position,
+                    PathSpeedOverride = 1f,
+                },
+                TeleportID = 0,
+                TeleportNetID = Owner.NetId,
+                Waypoints= new GridPosition[]{ new GridPosition(Owner.Cell.X, Owner.Cell.Y),new GridPosition((short)(Owner.Cell.X+5), Owner.Cell.Y) }
+            } }, Environment.TickCount));
 
 
-                     },
-                }, Environment.TickCount));*/
-
-          
-         //   Owner.Game.Send(new Dash(Owner.NetId, Owner.NetId, 1200f, 0f, Owner.Position, false, 0f, 0f, 0f, targetPosition, Owner.Game.Map.Size));
+            //   Owner.Game.Send(new Dash(Owner.NetId, Owner.NetId, 1200f, 0f, Owner.Position, false, 0f, 0f, 0f, targetPosition, Owner.Game.Map.Size));
 
             return;
             //    client.Hero.Game.Send(new UpdateModelMessage(t.NetId, "SRUAP_Turret_Chaos1", true, 0));

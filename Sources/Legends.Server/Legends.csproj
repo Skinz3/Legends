@@ -66,6 +66,8 @@
     <Compile Include="bin\Debug\Scripts\Spells\Lux\LuxMaliceCannon.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\MasterYi\AlphaStrike.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Nidalee\JavelinToss.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Riven\RivenFeint.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Yasuo\YasuoDashWrapper.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Yasuo\YasuoQW.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Zed\ZedShadowDash.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Zed\ZedShuriken.cs" />

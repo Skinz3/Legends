@@ -171,7 +171,7 @@ namespace Legends.Protocol.GameClient.Types
             {
                 bitfield |= 1;
             }
-            writer.WriteByte(bitfield);
+            writer.WriteByte(4);//bitfield);
             if (Waypoints != null)
             {
                 writer.WriteUInt(TeleportNetID);
