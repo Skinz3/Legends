@@ -31,8 +31,8 @@ namespace Legends.DatabaseSynchronizer
     /// </summary>
     class Program
     {
-        public const string LeagueOfLegendsPath = @"E:\Transfert PC\Emulateur LoL\League of Legends 4.20\League of Legends\";
-        public const string SmartFileOutputPath = @"E:\Transfert PC\Emulateur LoL\\Legends\Build\database.smart";
+        public const string LeagueOfLegendsPath = @"C:\Emulateur LoL\League of Legends 4.20\League of Legends\";
+        public const string SmartFileOutputPath = @"C:\Emulateur LoL\\Legends\Build\database.smart";
 
         static Logger logger = new Logger();
 

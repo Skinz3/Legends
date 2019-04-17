@@ -64,7 +64,7 @@ namespace Legends.World.Spells
         private Vector2 castEndPosition;
         private AttackableUnit target;
 
-        private AttackableUnit autoAttackTarget;
+        private Action onChannelOverAction;
 
         public bool IsSummonerSpell
         {
@@ -148,12 +148,6 @@ namespace Legends.World.Spells
             Script.OnFinishCasting(castPosition, castEndPosition, target);
             ChannelTimer = null;
 
-            if (autoAttackTarget != null)
-            {
-                Owner.TryBasicAttack(autoAttackTarget);
-                autoAttackTarget = null;
-            }
-
             if (GetTotalCooldown() > 0f)
             {
                 CooldownTimer = new UpdateTimer(GetTotalCooldown() * 1000f);
@@ -164,9 +158,16 @@ namespace Legends.World.Spells
             {
                 State = SpellStateEnum.STATE_READY;
             }
+
             castPosition = new Vector2();
             castEndPosition = new Vector2();
             target = null;
+
+            if (onChannelOverAction != null)
+            {
+                onChannelOverAction();
+                onChannelOverAction = null;
+            }
         }
         public void Update(float deltaTime)
         {
@@ -228,17 +229,22 @@ namespace Legends.World.Spells
                 cd *= (1 - (Owner.Stats.CooldownReduction.TotalSafe / 100));
             return cd;
         }
-        public void Cast(Vector2 position, Vector2 endPosition, AttackableUnit target, AttackableUnit autoAttackTarget = null)
+        public bool Cast(Vector2 position, Vector2 endPosition, AttackableUnit target, Action onChannelOverAction)
         {
+            if (Owner.SpellManager.IsChanneling() && !IsSummonerSpell)
+            {
+                return false;
+            }
+
             if (State == SpellStateEnum.STATE_READY)
             {
-                if (Script != null)
+                if (Script != null && Script.CanCast())
                 {
-                    if (this.autoAttackTarget != null)
+                    if (this.onChannelOverAction != null)
                     {
                         throw new Exception("wtf?");
                     }
-                    this.autoAttackTarget = autoAttackTarget;
+                    this.onChannelOverAction = onChannelOverAction;
                     castPosition = position;
                     this.target = target;
                     castEndPosition = endPosition;
@@ -256,13 +262,18 @@ namespace Legends.World.Spells
                     }
                     NextProjectileId = Owner.Game.NetIdProvider.PopNextNetId();
                     Script.OnStartCasting(position, endPosition, target);
+                    return true;
                 }
                 else
                 {
                     logger.Write("No script for spell:" + Record.Name, MessageState.WARNING);
+                    return false;
                 }
             }
-
+            else
+            {
+                return false;
+            }
         }
 
 

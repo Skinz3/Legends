@@ -34,6 +34,11 @@ namespace Legends.World.Entities.AI
             get;
             private set;
         }
+        public DashManager DashManager
+        {
+            get;
+            private set;
+        }
         public AttackManager AttackManager
         {
             get;
@@ -104,6 +109,7 @@ namespace Legends.World.Entities.AI
             AttackManager.SetAutoattackActivated(DefaultAutoattackActivated);
             SpellManager = new SpellManager(this);
             PathManager = new PathManager(this);
+            DashManager = new DashManager(this);
             base.Initialize();
         }
         [InDevelopment(InDevelopmentState.TODO, "Gérer ça correctement lorsque je passerais sur les spells :3")]
@@ -176,15 +182,36 @@ namespace Legends.World.Entities.AI
                 }
             }
         }
+        [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "Dash & Move conflict?")]
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
             SpellManager.Update(deltaTime);
+            DashManager.Update(deltaTime);
             PathManager.Update(deltaTime);
             this.AttackManager.Update(deltaTime);
         }
+        public bool Dash(Vector2 targetPoint, float speed, Action onDashEnded = null)
+        {
+            if (IsMoving)
+            {
+                StopMove(false, false);
+            }
+            if (DashManager.IsDashing)
+            {
+                return false;
+            }
+            targetPoint = Game.Map.Record.GetClosestTerrainExit(targetPoint);
+            DashManager.StartDashing(targetPoint, speed, onDashEnded);
+            OnDashNotified();
+            return true;
+        }
         public void Move(List<Vector2> waypoints, bool unsetTarget = true, bool notify = true)
         {
+            if (DashManager.IsDashing)
+            {
+                return;
+            }
             if (SpellManager.IsChanneling())
             {
                 return;
@@ -204,7 +231,7 @@ namespace Legends.World.Entities.AI
                 PathManager.Move(waypoints);
 
                 if (notify)
-                    OnMove();
+                    OnMoveNotified();
             }
 
         }
@@ -227,8 +254,15 @@ namespace Legends.World.Entities.AI
             PathManager.Move(new List<Vector2>() { Position });
             OnTeleport();
         }
-        public virtual void OnMove()
+        [InDevelopment]
+        public virtual void OnDashNotified()
         {
+            Game.Send(new Protocol.GameClient.Messages.Game.Dash(NetId, NetId, 1200f, 0f, Position, false, 0f, 0f, 0f, DashManager.GetDash().TargetPoint, Game.Map.Size));
+        }
+        public virtual void OnMoveNotified()
+        {
+            SendVision(new WaypointGroupMessage(NetId, Environment.TickCount, new List<MovementDataNormal>() { (MovementDataNormal)GetMovementData() }), Channel.CHL_LOW_PRIORITY);
+            return;
             SendVision(new WaypointListMessage(NetId, Environment.TickCount, PathManager.GetWaypoints()));
         }
         public virtual void OnTeleport()
@@ -288,31 +322,31 @@ namespace Legends.World.Entities.AI
 
                     Action onTargetReach = new Action(() => { TryBasicAttack(targetUnit); }); // recursive call 
                     PathManager.MoveToTarget(targetUnit, onTargetReach, GetAutoattackRangeWhileChasing(targetUnit));
-                    OnMove();
+                    OnMoveNotified();
                 }
             }
 
         }
 
-        public void CastSpell(byte spellSlot, Vector2 position, Vector2 endPosition, AttackableUnit target, AttackableUnit autoAttackTarget = null)
+        public void CastSpell(byte spellSlot, Vector2 position, Vector2 endPosition, AttackableUnit target, Action onChannelOverAction = null)
         {
             Spell spell = SpellManager.GetSpell(spellSlot);
 
-            if (SpellManager.IsChanneling() && !spell.IsSummonerSpell)
+
+            if (spell.Cast(position, endPosition, target, onChannelOverAction))
             {
-                return;
+                var netId = spell.GetNextProjectileId();
+                Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(
+                    new Vector3(position.X, position.Y, Game.Map.Record.GetZ(position) + 100),
+                    new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition) + 100),
+                    spell.Record.Name, netId)));
             }
-            spell.Cast(position, endPosition, target, autoAttackTarget);
-            var netId = spell.GetNextProjectileId();
-            Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(
-                new Vector3(position.X, position.Y, Game.Map.Record.GetZ(position) + 100),
-                new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition) + 100),
-                spell.Record.Name,netId)));
         }
         public virtual int GetHash()
         {
             return (int)Record.Name.HashString();
         }
+        [InDevelopment]
         short test = 0;
         public virtual MovementData GetMovementData()
         {

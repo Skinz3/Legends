@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Legends.World.Games.Delayed
+{
+    public class DelayedAction : IUpdatable
+    {
+        public bool Finalized
+        {
+            get;
+            set;
+        }
+
+        private Action action;
+        private float delayCurrent;
+
+        public DelayedAction(Action action, float delay)
+        {
+            this.action = action;
+            this.delayCurrent = delay;
+            this.Finalized = false;
+        }
+        public void Update(float deltaTime)
+        {
+            delayCurrent -= deltaTime;
+            if (delayCurrent <= 0)
+            {
+                if (Finalized)
+                {
+                    throw new Exception("Oops, need dispose.");
+                }
+                action();
+                Finalized = true;
+            }
+        }
+    }
+}

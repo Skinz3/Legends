@@ -71,8 +71,11 @@ namespace Legends.World.Entities.Movements
             get;
             set;
         }
+
         public bool IsMoving => NextPosition != null && NextPosition != Unit.Position;
+
         private bool End = false;
+
         public PathManager(AIUnit unit)
         {
             this.Unit = unit;

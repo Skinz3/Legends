@@ -24,14 +24,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using Legends.Protocol.GameClient.LoadingScreen;
+using Legends.World.Games.Delayed;
 
 namespace Legends.World.Games
 {
     public class Game
     {
         private Logger logger = new Logger();
-
-
 
         public NetIdProvider NetIdProvider
         {
@@ -105,7 +104,7 @@ namespace Legends.World.Games
             get;
             private set;
         }
-      
+
         public float GameTime
         {
             get;
@@ -130,6 +129,11 @@ namespace Legends.World.Games
             get;
             set;
         }
+        private List<DelayedAction> DelayedActions
+        {
+            get;
+            set;
+        }
         public Game(int id, string name, int mapId) // Enum MapType, switch -> instance
         {
             this.NetIdProvider = new NetIdProvider();
@@ -143,7 +147,8 @@ namespace Legends.World.Games
             this.Map = Map.CreateMap(mapId, this);
 
             this.UnitsToRemove = new List<Unit>();
-  
+            this.DelayedActions = new List<DelayedAction>();
+
         }
         /// <summary>
         /// Add player to the game and to his team 
@@ -204,6 +209,17 @@ namespace Legends.World.Games
             }
 
         }
+        /// <summary>
+        /// Delay in seconds
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="delay"></param>
+        public DelayedAction Action(Action action, float delay)
+        {
+            DelayedAction dAction = new DelayedAction(action, delay * 1000);
+            DelayedActions.Add(dAction);
+            return dAction;
+        }
         public void DestroyUnit(Unit unit)
         {
             UnitsToRemove.Add(unit);
@@ -218,10 +234,9 @@ namespace Legends.World.Games
         }
         public void Send(Message message, Channel channel = Channel.CHL_S2C, PacketFlags flags = PacketFlags.Reliable)
         {
-            foreach (var player in Players)
-            {
-                player.Client.Send(message, channel, flags);
-            }
+            BlueTeam.Send(message, channel, flags);
+            PurpleTeam.Send(message, channel, flags);
+            //NeutralTeam.Send(message, channel, flags);
         }
         public void Spawn()
         {
@@ -280,15 +295,16 @@ namespace Legends.World.Games
             {
                 unit.OnGameStart();
             }
+
             Map.Script.OnStart();
             Send(new StartGameMessage(0));
             this.Started = true;
 
 
-         
+
 
         }
-       
+
         public void Update(float deltaTime)
         {
             if (NextSyncTime >= 10 * 1000)
@@ -297,11 +313,18 @@ namespace Legends.World.Games
                 NextSyncTime = 0;
             }
 
-
             BlueTeam.Update(deltaTime);
             PurpleTeam.Update(deltaTime);
             NeutralTeam.Update(deltaTime);
             Map.Update(deltaTime);
+
+
+            DelayedActions.RemoveAll(x => x.Finalized);
+
+            foreach (var action in DelayedActions)
+            {
+                action.Update(deltaTime);
+            }
 
             foreach (var unit in UnitsToRemove)
             {

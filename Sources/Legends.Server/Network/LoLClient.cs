@@ -90,8 +90,6 @@ namespace Legends.Network
         }
         public bool Send(byte[] buffer, Channel channelNo, PacketFlags flag = PacketFlags.Reliable)
         {
-
-
             if (buffer.Length >= 8)
                 buffer = LoLServer.BlowFish.Encrypt(buffer);
             fixed (byte* data = buffer)

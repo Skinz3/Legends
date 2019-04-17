@@ -88,10 +88,12 @@
     <Compile Include="GameClient\Messages\Game\CreateMinionCampMessage.cs" />
     <Compile Include="GameClient\Messages\Game\CreateNeutralMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DamageDoneMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\Dash.cs" />
     <Compile Include="GameClient\Messages\Game\DestroyClientMissile.cs" />
     <Compile Include="GameClient\Messages\Game\DestroyObjectMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DieMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DisplayFloatingTextMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\FXKillMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ModifyShieldMessage.cs" />
     <Compile Include="GameClient\Messages\Game\OnEnterVisiblityClientMessage.cs" />
     <Compile Include="GameClient\Messages\Game\FogUpdate2Message.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="GameClient\Messages\Game\LockCameraRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\MoveCameraMessage.cs" />
     <Compile Include="GameClient\Messages\Game\PlayAnimationMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\SetAnimationsStatesMessage.cs" />
     <Compile Include="GameClient\Messages\Game\SetCooldownMessage.cs" />
     <Compile Include="GameClient\Messages\Game\WaypointGroupMessage.cs" />
     <Compile Include="GameClient\Messages\Game\MovementConfirmationMessage.cs" />

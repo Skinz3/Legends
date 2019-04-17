@@ -31,15 +31,25 @@ namespace Legends.Handlers
         {
             AttackableUnit autoAttackTarget = null;
 
-            AttackableUnit spellTarget = client.Hero.Game.Map.GetUnit(message.targetNetId) as AttackableUnit;
-
             if (client.Hero.AttackManager.IsAttacking)
             {
                 autoAttackTarget = client.Hero.AttackManager.GetTarget();
             }
 
-            client.Hero.StopMove();
-            client.Hero.CastSpell(message.slot, message.position, message.endPosition, spellTarget, autoAttackTarget);
+
+            Action onChannelOverAction = () =>
+            {
+                if (autoAttackTarget != null)
+                {
+                    client.Hero.TryBasicAttack(autoAttackTarget);
+                }
+            };
+
+            client.Hero.StopMove(true, false);
+
+            AttackableUnit spellTarget = client.Hero.Game.Map.GetUnit(message.targetNetId) as AttackableUnit;
+
+            client.Hero.CastSpell(message.slot, message.position, message.endPosition, spellTarget, onChannelOverAction);
         }
         [MessageHandler(PacketCmd.PKT_C2S_Click, Channel.CHL_C2S)]
         public static void HandleClickMessage(ClickMessage message, LoLClient client)

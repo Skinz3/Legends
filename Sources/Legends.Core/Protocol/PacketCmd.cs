@@ -52,7 +52,7 @@ namespace Legends.Core.Protocol
         PKT_S2C_InstantStopAutoAttack = 0x34,
         PKT_S2C_DeleteObject = 0x35, // not sure what this is, happens when turret leaves vision
         PKT_S2C_MessageBoxTop = 0x36,
-        PKT_S2C_DestroyObject2 = 0x38,
+        PKT_S2C_FXKill = 0x38,
         PKT_C2S_SkillUp = 0x39,
         PKT_C2S_UseObject = 0x3A,
         PKT_S2C_SpawnProjectile = 0x3B,

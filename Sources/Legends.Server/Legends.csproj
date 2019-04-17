@@ -62,6 +62,7 @@
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealTrueshotBarrage.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealMysticShot.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Global\SummonerFlash.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Graves\GravesMove.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Lux\LuxMaliceCannon.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\MasterYi\AlphaStrike.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Nidalee\JavelinToss.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="World\Entities\Buildings\Nexus.cs" />
     <Compile Include="World\Entities\Buildings\Turret.cs" />
     <Compile Include="World\Entities\Loot\LootManager.cs" />
+    <Compile Include="World\Entities\Movements\DashManager.cs" />
     <Compile Include="World\Entities\Movements\Node.cs" />
     <Compile Include="World\Entities\Movements\PathManager.cs" />
     <Compile Include="World\Entities\Statistics\AIStats.cs" />
@@ -136,6 +138,7 @@
     <Compile Include="World\Entities\Statistics\Stats.cs" />
     <Compile Include="World\Entities\Statistics\TurretStats.cs" />
     <Compile Include="World\Entities\Unit.cs" />
+    <Compile Include="World\Games\Delayed\DelayedAction.cs" />
     <Compile Include="World\Games\Teams\BlueTeam.cs" />
     <Compile Include="World\Games\Game.cs" />
     <Compile Include="World\Games\GameProvider.cs" />

@@ -110,9 +110,18 @@ namespace Legends.Scripts.Spells
                 }
             }
         }
-        protected void Dash()
+        /// <summary>
+        /// Delay in seconds
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="delay"></param>
+        protected void CreateAction(Action action, float delay)
         {
-
+            Owner.Game.Action(action, delay);
+        }
+        protected void DestroyParticle(uint netId)
+        {
+            Owner.Game.Send(new FXKillMessage(Owner.NetId, netId));
         }
         protected void AddSkillShot(string name, Vector2 toPosition, Vector2 endPosition, float range, bool serverOnly = false)
         {
@@ -142,6 +151,10 @@ namespace Legends.Scripts.Spells
                     0, record.MissileSpeed, 1f, 1f, 1f, false, castInfo));
             }
 
+        }
+        protected void SetAnimation(string slot, string value)
+        {
+            Owner.Game.Send(new SetAnimationsStatesMessage(Owner.NetId, new Dictionary<string, string>() { { slot, value } }));
         }
         protected void AddTargetedProjectile(string name, AttackableUnit target, bool serverOnly = false)
         {
@@ -178,14 +191,15 @@ namespace Legends.Scripts.Spells
             if (notify)
                 Owner.Game.Send(new DestroyClientMissile(projectile.NetId));
         }
-        public void AddParticle(string effectName, string bonesName, float size)
+        public uint AddParticle(string effectName, string bonesName, float size, AIUnit target)
         {
+            uint netId = Owner.Game.NetIdProvider.PopNextNetId();
             Owner.SendVision(new FXCreateGroupMessage(Owner.NetId, new FXCreateGroupData[]
             {
                 new FXCreateGroupData()
                 {
                     BoneNameHash= bonesName.HashString(),
-                    PackageHash = Owner.Record.Name.HashString(),
+                    PackageHash = target.Record.Name.HashString(),
                     EffectNameHash=effectName.HashString(),
                     Flags= 0,
                     TargetBoneNameHash=  0,
@@ -196,18 +210,18 @@ namespace Legends.Scripts.Spells
                             BindNetId= Owner.NetId,
                             CasterNetId=  Owner.NetId,
                             KeywordNetId= Owner.NetId,
-                            NetAssignedNetId =Owner.Game.NetIdProvider.PopNextNetId(),
+                            NetAssignedNetId =netId,
                             OrientationVector= new Vector3(),
                             OwnerPositionX=Owner.Cell.X,
                             OwnerPositionY=  Owner.Position.Y,
                             OwnerPositionZ=  0,
-                            PositionX=  Owner.Cell.X,
-                            PositionY= Owner.Position.Y,
+                            PositionX=  target.Cell.X,
+                            PositionY= target.Position.Y,
                             PositionZ= 0,
                             ScriptScale= size,// taille
-                            TargetNetId=Owner.NetId,
-                            TargetPositionX= (short)Owner.Position.X,
-                            TargetPositionY=  Owner.Position.Y,
+                            TargetNetId = target.NetId,
+                            TargetPositionX= (short)target.Position.X,
+                            TargetPositionY=  target.Position.Y,
                             TargetPositionZ= 0,
                             TimeSpent= 0.0f, // ou on en est?
 
@@ -217,6 +231,7 @@ namespace Legends.Scripts.Spells
                 }
 
             }));
+            return netId;
         }
         protected AttackableUnit[] GetTargets()
         {
@@ -281,6 +296,11 @@ namespace Legends.Scripts.Spells
         protected void Teleport(Vector2 position)
         {
             Owner.Teleport(position);
+        }
+
+        public virtual bool CanCast()
+        {
+            return true;
         }
     }
 }
