@@ -32,6 +32,7 @@ namespace Legends.World.Entities.AI.BasicAttack
         private void CastProjectile()
         {
             SpellRecord basicAttackRecord = Unit.Record.BasicAttack;
+
             if (basicAttackRecord == null)
             {
                 logger.Write("No basic attack data for unit " + Unit.Name, MessageState.WARNING);

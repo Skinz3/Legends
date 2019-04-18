@@ -303,7 +303,7 @@ namespace Legends.Protocol.GameClient.Types
                 {
                     writer.WriteSByte((SByte)(data[i].Y - data[i - 1].Y));
                 }
-                else
+                else 
                 {
                     writer.WriteShort(data[i].Y);
                 }

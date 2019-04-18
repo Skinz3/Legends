@@ -6,6 +6,8 @@ using System.Linq;
 using System.Numerics;
 using Legends.Core.Protocol;
 using System.Threading.Tasks;
+using Legends.Protocol.GameClient.Types;
+using Legends.Core.DesignPattern;
 
 namespace Legends.Protocol.GameClient.Other
 {
@@ -33,7 +35,7 @@ namespace Legends.Protocol.GameClient.Other
             }
 
             var lastCoord = new Vector2(reader.ReadShort(), reader.ReadShort());
-            var vMoves = new List<Vector2> { TranslateCoordinates(lastCoord, mapSize) };
+            var vMoves = new List<Vector2> { GridPosition.TranslateFromGrid((short)lastCoord.X, (short)lastCoord.Y, mapSize) };
 
             if (count < 3)
             {
@@ -60,16 +62,9 @@ namespace Legends.Protocol.GameClient.Other
                 {
                     lastCoord.Y = reader.ReadShort();
                 }
-
-                vMoves.Add(TranslateCoordinates(lastCoord, mapSize));
+                vMoves.Add(GridPosition.TranslateFromGrid((short)lastCoord.X, (short)lastCoord.Y, mapSize));
             }
             Waypoints = vMoves;
-        }
-        private Vector2 TranslateCoordinates(Vector2 vector, Vector2 mapSize)
-        {
-            // For ???? reason coordinates are translated to 0,0 as a map center, so we gotta get back the original
-            // mapSize contains the real center point coordinates, meaning width/2, height/2
-            return new Vector2(2 * vector.X + mapSize.X, 2 * vector.Y + mapSize.Y);
         }
     }
 }

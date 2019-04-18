@@ -160,11 +160,11 @@ namespace Legends.World.Entities.Movements
             var mapSize = Unit.Game.Map.Size;
             var wayPoints = GetWaypoints();
 
-            result.Add(GridPosition.TranslateCenter(Unit.Position, mapSize));
+            result.Add(GridPosition.TranslateToGrid(Unit.Position, mapSize));
 
             for (int i = WaypointsIndex; i < wayPoints.Length; i++)
             {
-                result.Add(GridPosition.TranslateCenter(wayPoints[i], mapSize));
+                result.Add(GridPosition.TranslateToGrid(wayPoints[i], mapSize));
             }
             return result.ToArray();
         }
@@ -201,6 +201,8 @@ namespace Legends.World.Entities.Movements
                 if (Math.Abs(Unit.Position.X - NextPosition.Value.X) <= Math.Abs(xOffset) && Math.Abs(Unit.Position.Y - NextPosition.Value.Y) <= Math.Abs(yOffset))
                 {
                     Unit.Position = NextPosition.Value;
+
+
                     WaypointsIndex++;
 
                     if (WaypointsIndex == Waypoints.Count)

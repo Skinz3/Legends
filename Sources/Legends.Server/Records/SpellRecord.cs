@@ -47,6 +47,12 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.SPELLS_CastFrame)]
+        public float CastFrame
+        {
+            get;
+            set;
+        }
         [InibinField(InibinHashEnum.SPELLS_AIRange)]
         public float AIRange
         {

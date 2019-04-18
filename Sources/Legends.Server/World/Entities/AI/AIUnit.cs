@@ -274,7 +274,6 @@ namespace Legends.World.Entities.AI
         [InDevelopment]
         public virtual void OnDashNotified()
         {
-
             var dash = DashManager.GetDash();
 
             Game.Send(new WaypointGroupWithSpeedMessage(NetId, new MovementDataWithSpeed[]{
@@ -294,13 +293,16 @@ namespace Legends.World.Entities.AI
                 },
                 TeleportID = 0,
                 TeleportNetID = NetId,
-                Waypoints= GridPosition.Translate(new Vector2[]{Position, dash.TargetPoint },Game.Map.Size)
+                Waypoints= GridPosition.TranslateToGrid(new Vector2[]{Position, dash.TargetPoint },Game.Map.Size)
             } }, Environment.TickCount));
         }
 
-        [InDevelopment(InDevelopmentState.OPTIMIZATION, "We should send Waypoint group here, but we calculate wrongly cell positions.")]
+        [InDevelopment(InDevelopmentState.OPTIMIZATION, "We should send Waypoint group here, but we calculate wrongly cell positions. wtf offset fix the problem...its not a real solution think about it")]
         public void NotifyWaypoints()
         {
+            SendVision(new WaypointGroupMessage(NetId, Environment.TickCount, new List<MovementDataNormal>() { (MovementDataNormal)GetMovementData() }), Channel.CHL_LOW_PRIORITY);
+            return;
+
             if (PathManager.GetWaypoints().Length > 1)
                 SendVision(new WaypointListMessage(NetId, Environment.TickCount, PathManager.GetWaypoints()));
             else
@@ -370,7 +372,7 @@ namespace Legends.World.Entities.AI
             {
                 if (IsMoving) // Si on est en mouvement, on s'arrête
                 {
-                    StopMove(true, false);
+                    StopMove(true, true);
                 }
                 AttackManager.BeginAttackTarget(targetUnit); // on lance la première auto
             }

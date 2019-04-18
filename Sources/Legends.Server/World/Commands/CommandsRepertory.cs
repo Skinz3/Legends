@@ -155,7 +155,7 @@ namespace Legends.World.Commands
         [Command("test2")]
         public static void Test2Command(LoLClient client)
         {
-            AIMonster monster = new AIMonster(client.Hero.Game.NetIdProvider.PopNextNetId(), AIUnitRecord.GetAIUnitRecord("DrMundo"), 0);
+            AIMonster monster = new AIMonster(client.Hero.Game.NetIdProvider.PopNextNetId(), AIUnitRecord.GetAIUnitRecord("Vi"), 0);
             monster.Position = client.Hero.Position;
             monster.SpawnPosition = client.Hero.Position;
             monster.DefineGame(client.Hero.Game);
@@ -163,7 +163,7 @@ namespace Legends.World.Commands
             client.Hero.Game.Map.AddUnit(monster);
             monster.Initialize();
             monster.Stats.Health.SetBaseValue(25000);
-            monster.Stats.MoveSpeed.SetBaseValue(0); 
+            monster.Stats.MoveSpeed.SetBaseValue(0);
             monster.Create();
             monster.UpdateStats(false);
         }
@@ -182,6 +182,34 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
+            Vector2 inputPosition = new Vector2(7771.999f, 7279.999f);
+
+
+            client.Hero.SendVision(new WaypointListMessage(client.Hero.NetId, Environment.TickCount, new Vector2[] { inputPosition }));
+
+
+            client.Hero.Game.Action(() =>
+            {
+                var mov = new MovementDataNormal()
+                {
+                    HasTeleportID = true,
+                    TeleportID = 0,
+                    TeleportNetID = client.Hero.NetId,
+                    Waypoints = new GridPosition[]
+                    {
+                        GridPosition.TranslateToGrid(inputPosition,client.Hero.Game.Map.Size),
+                    }
+                };
+                client.Hero.AttentionPing(new Vector2(), client.Hero.NetId, PingTypeEnum.Ping_Danger);
+                client.Hero.SendVision(new WaypointGroupMessage(client.Hero.NetId, Environment.TickCount, new List<MovementDataNormal>() { mov }), Channel.CHL_LOW_PRIORITY);
+
+
+            }, 2f);
+
+
+
+
+            return;
             client.Hero.Game.Send(new BuffAddMessage(client.Hero.NetId, 0, BuffTypeEnum.Suppression
                 , 1, false, "RivenMartyr".HashString(), "Riven".HashString(), 0f, 1f, client.Hero.NetId));
 
