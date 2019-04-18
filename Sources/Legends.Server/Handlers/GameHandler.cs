@@ -147,6 +147,8 @@ namespace Legends.Handlers
                     if (!client.Hero.Move(wayPointsReader.Waypoints))
                     {
                         client.Hero.PathManager.PendingPoint = wayPointsReader.Waypoints.Last();
+
+                        client.Hero.AttentionPing(client.Hero.Position, client.Hero.NetId, PingTypeEnum.Ping_Missing);
                     }
 
 

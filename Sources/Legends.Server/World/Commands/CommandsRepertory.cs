@@ -167,14 +167,10 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-            var Owner = client.Hero;
-
-
-            var targetPosition = Owner.Position + new Vector2(300, 300);
-            Owner.Game.Send(new WaypointGroupWithSpeedMessage(Owner.NetId, new MovementDataWithSpeed[]{
+            /* client.Hero.Game.Send(new WaypointGroupWithSpeedMessage(client.Hero.NetId, new MovementDataWithSpeed[]{
             new MovementDataWithSpeed()
             {
-                HasTeleportID=false,
+                HasTeleportID = false,
                 SpeedParams =new SpeedParams()
                 {
                     Facing = false,
@@ -182,21 +178,26 @@ namespace Legends.World.Commands
                     FollowDistance = 0f,
                     FollowNetID = 0,
                     FollowTravelTime =0f,
-                    ParabolicGravity =0f,
-                    ParabolicStartPoint = Owner.Position,
-                    PathSpeedOverride = 1f,
+                    ParabolicGravity =102f,
+                    ParabolicStartPoint = client.Hero.Position,
+                    PathSpeedOverride = 200F,// DashManager.GetDash().Speed,
                 },
                 TeleportID = 0,
-                TeleportNetID = Owner.NetId,
-                Waypoints= new GridPosition[]{ new GridPosition(Owner.Cell.X, Owner.Cell.Y),new GridPosition((short)(Owner.Cell.X+5), Owner.Cell.Y) }
+                TeleportNetID = client.Hero.NetId,
+                Waypoints= GridPosition.Translate(new Vector2[]{client.Hero.Position,client.Hero.Position+new Vector2(100,100) },client.Hero.Game.Map.Size)
             } }, Environment.TickCount));
-
-
-            //   Owner.Game.Send(new Dash(Owner.NetId, Owner.NetId, 1200f, 0f, Owner.Position, false, 0f, 0f, 0f, targetPosition, Owner.Game.Map.Size));
-
             return;
             //    client.Hero.Game.Send(new UpdateModelMessage(t.NetId, "SRUAP_Turret_Chaos1", true, 0));
+            */
+            for (int i = 0; i < 10; i++)
+            {
+                JungleManager.Instance.SpawnMonster("SRU_OrderMinionMelee", client.Hero.Game, client.Hero.Position + new Vector2(i * 150, 0));
+            }
 
+            for (int i = 0; i < 10; i++)
+            {
+                JungleManager.Instance.SpawnMonster("SRU_OrderMinionRanged", client.Hero.Game, client.Hero.Position + new Vector2(0, i * 150));
+            }
 
 
             client.Hero.BlueTip("Legends", "This is for developpement purpose only!", "", TipCommandEnum.ACTIVATE_TIP_DIALOGUE);

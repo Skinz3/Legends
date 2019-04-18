@@ -77,6 +77,10 @@ namespace Legends.World.Spells.Projectiles
                             OnReach(target, this);
                         }
                     }
+                    if (PendingDispose)
+                    {
+                        return;
+                    }
                 }
             }
             base.Update(deltaTime);

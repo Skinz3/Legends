@@ -84,6 +84,13 @@ namespace Legends.World.Entities
             get;
             set;
         }
+        public Vector2 CellPosition
+        {
+            get
+            {
+                return Game.Map.Record.TranslateFromNavGrid(Cell.X, Cell.Y);
+            }
+        }
         public Vector2 SpawnPosition
         {
             get;
@@ -103,10 +110,22 @@ namespace Legends.World.Entities
         {
             return new Vector3(Position.X, Position.Y, Game.Map.Record.GetZ(Position));
         }
+        public bool Disposed
+        {
+            get;
+            set;
+        }
+        public bool PendingDispose
+        {
+            get;
+            set;
+        }
+
         public Unit(uint netId)
         {
             this.NetId = netId;
             this.Alive = true;
+            this.Disposed = false;
 
         }
         public virtual void Initialize()

@@ -2,6 +2,7 @@
 using Legends.Core.CSharp;
 using Legends.Core.DesignPattern;
 using Legends.Core.Geometry;
+using Legends.Core.Utils;
 using Legends.Protocol.GameClient.Enum;
 using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Protocol.GameClient.Types;
@@ -9,6 +10,7 @@ using Legends.Records;
 using Legends.World;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
+using Legends.World.Entities.AI.Particles;
 using Legends.World.Spells;
 using Legends.World.Spells.Projectiles;
 using Legends.World.Spells.Shapes;
@@ -80,6 +82,15 @@ namespace Legends.Scripts.Spells
                 return Owner.Stats.AbilityPower.TotalSafe;
             }
         }
+
+        public virtual float OverrideCastTime
+        {
+            get
+            {
+                return -1f;
+            }
+        }
+
         public SpellScript(AIUnit owner, SpellRecord spellRecord)
         {
             this.Owner = owner;
@@ -119,10 +130,7 @@ namespace Legends.Scripts.Spells
         {
             Owner.Game.Action(action, delay);
         }
-        protected void DestroyParticle(uint netId)
-        {
-            Owner.Game.Send(new FXKillMessage(Owner.NetId, netId));
-        }
+
         protected void AddSkillShot(string name, Vector2 toPosition, Vector2 endPosition, float range, bool serverOnly = false)
         {
             var record = SpellRecord.GetSpell(name);
@@ -156,9 +164,11 @@ namespace Legends.Scripts.Spells
         {
             Owner.Game.Send(new SetAnimationsStatesMessage(Owner.NetId, new Dictionary<string, string>() { { slot, value } }));
         }
-        protected void AddTargetedProjectile(string name, AttackableUnit target, bool serverOnly = false)
+        protected void AddTargetedProjectile(string name, AttackableUnit target, bool serverOnly = false, float overrideSpeed = -1f)
         {
             var record = SpellRecord.GetSpell(name);
+            float speed = overrideSpeed != -1 ? overrideSpeed : record.MissileSpeed;
+
             var position = new Vector3(Owner.Position.X, Owner.Position.Y, 100);
             var casterPosition = new Vector3(Owner.Position.X, Owner.Position.Y, 100);
             var angle = Geo.GetAngle(Owner.Position, target.Position);
@@ -169,7 +179,7 @@ namespace Legends.Scripts.Spells
 
 
             var targetedProjectile = new TargetedProjectile(Spell.GetNextProjectileId(),
-                Owner, target, startPoint.ToVector2(), SpellRecord.MissileSpeed, OnProjectileReach);
+                Owner, target, startPoint.ToVector2(), speed, OnProjectileReach);
 
             Owner.Game.AddUnitToTeam(targetedProjectile, Owner.Team.Id);
             Owner.Game.Map.AddUnit(targetedProjectile);
@@ -191,47 +201,19 @@ namespace Legends.Scripts.Spells
             if (notify)
                 Owner.Game.Send(new DestroyClientMissile(projectile.NetId));
         }
-        public uint AddParticle(string effectName, string bonesName, float size, AIUnit target)
+        protected void DestroyFX(uint netId)
+        {
+            Owner.FXManager.DestroyFX(netId);
+        }
+        protected void DestroyFX(string name)
+        {
+            Owner.FXManager.DestroyFX(name);
+        }
+        public void CreateFX(string effectName, string bonesName, float size, AIUnit target, bool add)
         {
             uint netId = Owner.Game.NetIdProvider.PopNextNetId();
-            Owner.SendVision(new FXCreateGroupMessage(Owner.NetId, new FXCreateGroupData[]
-            {
-                new FXCreateGroupData()
-                {
-                    BoneNameHash= bonesName.HashString(),
-                    PackageHash = target.Record.Name.HashString(),
-                    EffectNameHash=effectName.HashString(),
-                    Flags= 0,
-                    TargetBoneNameHash=  0,
-                    FXCreateData=  new List<FXCreateData>()
-                    {
-                        new FXCreateData()
-                        {
-                            BindNetId= Owner.NetId,
-                            CasterNetId=  Owner.NetId,
-                            KeywordNetId= Owner.NetId,
-                            NetAssignedNetId =netId,
-                            OrientationVector= new Vector3(),
-                            OwnerPositionX=Owner.Cell.X,
-                            OwnerPositionY=  Owner.Position.Y,
-                            OwnerPositionZ=  0,
-                            PositionX=  target.Cell.X,
-                            PositionY= target.Position.Y,
-                            PositionZ= 0,
-                            ScriptScale= size,// taille
-                            TargetNetId = target.NetId,
-                            TargetPositionX= (short)target.Position.X,
-                            TargetPositionY=  target.Position.Y,
-                            TargetPositionZ= 0,
-                            TimeSpent= 0.0f, // ou on en est?
-
-                        }
-                    }
-
-                }
-
-            }));
-            return netId;
+            FX fx = new FX(netId, effectName, bonesName, size, Owner, target);
+            target.FXManager.CreateFX(fx,add);
         }
         protected AttackableUnit[] GetTargets()
         {
@@ -293,9 +275,9 @@ namespace Legends.Scripts.Spells
         {
             DestroyProjectile(skillShot, false);
         }
-        protected void Teleport(Vector2 position)
+        protected void Teleport(Vector2 position, bool notify)
         {
-            Owner.Teleport(position);
+            Owner.Teleport(position, notify);
         }
 
         public virtual bool CanCast()

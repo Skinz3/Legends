@@ -56,6 +56,13 @@ namespace Legends.World.Entities.Movements
             get;
             set;
         }
+        public bool MovePending
+        {
+            get
+            {
+                return PendingPoint != null;
+            }
+        }
         private AttackableUnit TargetUnit
         {
             get;
@@ -130,10 +137,14 @@ namespace Legends.World.Entities.Movements
             End = false;
         }
 
-        public void MoveToPendingPoint()
+        public bool MoveToPendingPoint()
         {
             if (Unit.PathManager.PendingPoint != null)
+            {
                 Unit.MoveTo(Unit.PathManager.PendingPoint.Value);
+                return true;
+            }
+            return false;
         }
         public Vector2[] GetWaypoints()
         {

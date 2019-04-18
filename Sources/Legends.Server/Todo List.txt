@@ -28,7 +28,7 @@ Visibility from bush
 Walk to target auto, with A*
 Items Name, with metadata and remove usless Hashes
 
-
+Ezreal 10s ult
 
 PlayerInfoMessage a partir de lsb
 

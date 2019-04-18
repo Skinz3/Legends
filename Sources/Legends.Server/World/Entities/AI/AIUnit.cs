@@ -7,6 +7,7 @@ using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Protocol.GameClient.Types;
 using Legends.Records;
 using Legends.World.Entities.AI.BasicAttack;
+using Legends.World.Entities.AI.Particles;
 using Legends.World.Entities.Buildings;
 using Legends.World.Entities.Loot;
 using Legends.World.Entities.Movements;
@@ -50,6 +51,11 @@ namespace Legends.World.Entities.AI
             private set;
         }
         public SpellManager SpellManager
+        {
+            get;
+            private set;
+        }
+        public FXManager FXManager
         {
             get;
             private set;
@@ -110,8 +116,10 @@ namespace Legends.World.Entities.AI
             SpellManager = new SpellManager(this);
             PathManager = new PathManager(this);
             DashManager = new DashManager(this);
+            FXManager = new FXManager(this);
             base.Initialize();
         }
+        [InDevelopment(InDevelopmentState.TODO, "Cancel all spells")]
         public override void OnDead(AttackableUnit source)
         {
             PathManager.Reset();
@@ -188,7 +196,6 @@ namespace Legends.World.Entities.AI
                 }
             }
         }
-        [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "Dash & Move conflict?")]
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
@@ -197,18 +204,18 @@ namespace Legends.World.Entities.AI
             PathManager.Update(deltaTime);
             this.AttackManager.Update(deltaTime);
         }
-        public bool Dash(Vector2 targetPoint, float speed, Action onDashEnded = null)
+        public bool Dash(Vector2 targetPoint, float speed, bool facing, Action onDashEnded = null)
         {
-            if (IsMoving)
-            {
-                StopMove(false, false);
-            }
             if (DashManager.IsDashing)
             {
                 return false;
             }
+            if (IsMoving)
+            {
+                StopMove(false, false);
+            }
             targetPoint = Game.Map.Record.GetClosestTerrainExit(targetPoint);
-            DashManager.StartDashing(targetPoint, speed, onDashEnded);
+            DashManager.StartDashing(targetPoint, speed, facing, onDashEnded);
             OnDashNotified();
             return true;
         }
@@ -237,7 +244,7 @@ namespace Legends.World.Entities.AI
                 PathManager.Move(waypoints);
 
                 if (notify)
-                    OnMoveNotified();
+                    NotifyWaypoints();
 
                 return true;
             }
@@ -262,42 +269,64 @@ namespace Legends.World.Entities.AI
             Position = position;
 
             if (notify)
-                OnTeleportNotified();
+                NotifyWaypoints();
         }
         [InDevelopment]
         public virtual void OnDashNotified()
         {
+
+            var dash = DashManager.GetDash();
+
             Game.Send(new WaypointGroupWithSpeedMessage(NetId, new MovementDataWithSpeed[]{
             new MovementDataWithSpeed()
             {
                 HasTeleportID = false,
                 SpeedParams =new SpeedParams()
                 {
-                    Facing = false,
+                    Facing = dash.Facing,
                     FollowBackDistance =0f,
                     FollowDistance = 0f,
                     FollowNetID = 0,
                     FollowTravelTime =0f,
                     ParabolicGravity =0f,
                     ParabolicStartPoint = Position,
-                    PathSpeedOverride = DashManager.GetDash().Speed,
+                    PathSpeedOverride =  dash.Speed,
                 },
                 TeleportID = 0,
                 TeleportNetID = NetId,
-                Waypoints= GridPosition.Translate(new Vector2[]{Position,DashManager.GetDash().TargetPoint },Game.Map.Size)
+                Waypoints= GridPosition.Translate(new Vector2[]{Position, dash.TargetPoint },Game.Map.Size)
             } }, Environment.TickCount));
+        }
 
-            // Game.Send(new Protocol.GameClient.Messages.Game.Dash(NetId, NetId, 1200f, 0f, Position, false, 0f, 0f, 0f, DashManager.GetDash().TargetPoint, Game.Map.Size));
-        }
-        public virtual void OnMoveNotified()
+        [InDevelopment(InDevelopmentState.OPTIMIZATION, "We should send Waypoint group here, but we calculate wrongly cell positions.")]
+        public void NotifyWaypoints()
         {
-            //SendVision(new WaypointGroupMessage(NetId, Environment.TickCount, new List<MovementDataNormal>() { (MovementDataNormal)GetMovementData() }), Channel.CHL_LOW_PRIORITY);
-            //return;
-            SendVision(new WaypointListMessage(NetId, Environment.TickCount, PathManager.GetWaypoints()));
+            if (PathManager.GetWaypoints().Length > 1)
+                SendVision(new WaypointListMessage(NetId, Environment.TickCount, PathManager.GetWaypoints()));
+            else
+                SendVision(new WaypointGroupMessage(NetId, Environment.TickCount, new List<MovementDataNormal>() { (MovementDataNormal)GetMovementData() }), Channel.CHL_LOW_PRIORITY);
         }
-        public virtual void OnTeleportNotified()
+        public void NotifyFXDestroyed(uint netId)
         {
-            SendVision(new WaypointGroupMessage(NetId, Environment.TickCount, new List<MovementDataNormal>() { (MovementDataNormal)GetMovementData() }), Channel.CHL_LOW_PRIORITY);
+            Game.Send(new FXKillMessage(NetId, netId));
+        }
+        public void NotifyFXCreated(FX fx)
+        {
+            SendVision(new FXCreateGroupMessage(NetId, new FXCreateGroupData[]
+            {
+                new FXCreateGroupData()
+                {
+                    BoneNameHash= fx.Bones.HashString(),
+                    PackageHash = Record.Name.HashString(),
+                    EffectNameHash= fx.Name.HashString(),
+                    Flags= 0,
+                    TargetBoneNameHash=  0,
+                    FXCreateData=  new List<FXCreateData>()
+                    {
+                       fx.GetProtocolObject(),
+                    }
+                }
+           }));
         }
 
         public void MoveTo(Vector2 targetVector, bool unsetTarget = true)
@@ -352,7 +381,7 @@ namespace Legends.World.Entities.AI
 
                     Action onTargetReach = new Action(() => { TryBasicAttack(targetUnit); }); // recursive call 
                     PathManager.MoveToTarget(targetUnit, onTargetReach, GetAutoattackRangeWhileChasing(targetUnit));
-                    OnMoveNotified();
+                    NotifyWaypoints();
                 }
             }
 
@@ -362,8 +391,8 @@ namespace Legends.World.Entities.AI
         {
             Spell spell = SpellManager.GetSpell(spellSlot);
 
-            spell.Cast(position, endPosition, target, onChannelOverAction);
-            //  if (spell.Cast(position, endPosition, target, onChannelOverAction))
+
+            if (spell.Cast(position, endPosition, target, onChannelOverAction))
             {
                 var netId = spell.GetNextProjectileId();
                 Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(

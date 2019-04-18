@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="bin\Debug\Scripts\Spells\Annie\Disintegrate.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Annie\Incinerate.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Caitlyn\CaitlynAceintheHole.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Caitlyn\CaitlynEntrapment.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Caitlyn\CaitlynPiltoverPeacemaker.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealArcaneShift.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealEssenceFlux.cs" />
@@ -115,6 +117,8 @@
     <Compile Include="World\Entities\AI\Deaths\Death.cs" />
     <Compile Include="World\Entities\AI\Deaths\HeroDeath.cs" />
     <Compile Include="World\Entities\AI\Deaths\InhibitorDeath.cs" />
+    <Compile Include="World\Entities\AI\Particles\FX.cs" />
+    <Compile Include="World\Entities\AI\Particles\FXManager.cs" />
     <Compile Include="World\Entities\AI\Score.cs" />
     <Compile Include="World\Entities\AttackableUnit.cs" />
     <Compile Include="World\Entities\Buildings\AnimatedBuilding.cs" />

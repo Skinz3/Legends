@@ -186,7 +186,7 @@ namespace Legends.World.Spells
                 AmmoRechargeTime = 1f,
                 AmmoUsed = 1, // ??
                 AttackSpeedModifier = 1f,
-                Cooldown =GetTotalCooldown(), // fonctionne avec le slot
+                Cooldown = GetTotalCooldown(), // fonctionne avec le slot
                 CasterNetID = Owner.NetId,
                 IsAutoAttack = false,
                 IsSecondAutoAttack = false,
@@ -222,12 +222,15 @@ namespace Legends.World.Spells
         }
         public float GetTotalCooldown()
         {
-            return 0;
             float cd = Record.GetCooldown(Level);
 
             if (!IsSummonerSpell)
                 cd *= (1 - (Owner.Stats.CooldownReduction.TotalSafe / 100));
             return cd;
+        }
+        public float GetChannelDuration()
+        {
+            return Script.OverrideCastTime != -1 ? Script.OverrideCastTime : Record.GetCastTime();
         }
         public bool Cast(Vector2 position, Vector2 endPosition, AttackableUnit target, Action onChannelOverAction)
         {
@@ -235,7 +238,10 @@ namespace Legends.World.Spells
             {
                 return false;
             }
-
+            if (Owner.DashManager.IsDashing)
+            {
+                return false;
+            }
             if (State == SpellStateEnum.STATE_READY)
             {
                 if (Script != null && Script.CanCast())
@@ -248,8 +254,7 @@ namespace Legends.World.Spells
                     castPosition = position;
                     this.target = target;
                     castEndPosition = endPosition;
-                    var castTime = Record.GetCastTime();
-
+                    var castTime = GetChannelDuration();
                     if (castTime == 0)
                     {
                         OnChannelOver();

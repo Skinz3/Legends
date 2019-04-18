@@ -222,6 +222,12 @@ namespace Legends.World.Games
         }
         public void DestroyUnit(Unit unit)
         {
+            if (unit.Disposed || unit.PendingDispose)
+            {
+                logger.Write("Attempt to dispose " + unit + " failed. Already disposed", MessageState.ERROR);
+                return;
+            }
+            unit.PendingDispose = true;
             UnitsToRemove.Add(unit);
         }
         public bool Contains(long userId)
@@ -332,6 +338,8 @@ namespace Legends.World.Games
                 unit.Team.RemoveUnit(unit);
                 unit.DefineTeam(null);
                 unit.DefineGame(null);
+                unit.Disposed = true;
+                unit.PendingDispose = false;
             }
 
             UnitsToRemove.Clear();

@@ -36,7 +36,7 @@ namespace Legends.World.Entities.Movements
         {
             if (IsDashing)
             {
-                float deltaMovement = Dash.Speed * 0.001f * deltaTime; 
+                float deltaMovement = Dash.Speed * 0.001f * deltaTime;
 
                 float xOffset = Dash.Direction.X * deltaMovement;
                 float yOffset = Dash.Direction.Y * deltaMovement;
@@ -55,9 +55,9 @@ namespace Legends.World.Entities.Movements
             }
         }
 
-        public void StartDashing(Vector2 targetPoint, float speed, Action onDashEnded)
+        public void StartDashing(Vector2 targetPoint, float speed, bool facing, Action onDashEnded)
         {
-            this.Dash = new Dash(Unit.Position, targetPoint, speed, onDashEnded);
+            this.Dash = new Dash(Unit.Position, targetPoint, speed, facing, onDashEnded);
         }
         public void CancelDash()
         {
@@ -103,13 +103,19 @@ namespace Legends.World.Entities.Movements
             get;
             set;
         }
+        public bool Facing
+        {
+            get;
+            set;
+        }
 
-        public Dash(Vector2 startPoint, Vector2 targetPoint, float speed, Action onDashEnded)
+        public Dash(Vector2 startPoint, Vector2 targetPoint, float speed, bool facing, Action onDashEnded)
         {
             this.StartPoint = startPoint;
             this.TargetPoint = targetPoint;
             this.Speed = speed;
             this.OnDashEnded = onDashEnded;
+            this.Facing = facing;
         }
     }
 }

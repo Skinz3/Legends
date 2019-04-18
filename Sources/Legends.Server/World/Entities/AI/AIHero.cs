@@ -255,10 +255,7 @@ namespace Legends.World.Entities.AI
         {
             base.AddGold(Game.Map.Script.GoldsPerSeconds * 0.001f * deltaTime);
         }
-        public override void OnMoveNotified()
-        {
-            base.OnMoveNotified();
-        }
+      
         public override void OnUnitEnterVision(Unit unit)
         {
 

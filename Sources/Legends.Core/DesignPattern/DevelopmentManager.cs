@@ -80,7 +80,7 @@ namespace Legends.Core.DesignPattern
         TODO,
         STARTED,
         NOT_VERIFIED,
-        SLOW_PERFORMANCES,
+        OPTIMIZATION,
         HAS_BUG,
         THINK_ABOUT_IT,
         BAD_SPELLING,
