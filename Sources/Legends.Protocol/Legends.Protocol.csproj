@@ -45,6 +45,7 @@
     <Compile Include="GameClient\Enum\AttackSlotEnum.cs" />
     <Compile Include="GameClient\Enum\AttackTypeEnum.cs" />
     <Compile Include="GameClient\Enum\AudioVOComponentEvent.cs" />
+    <Compile Include="GameClient\Enum\BuffTypeEnum.cs" />
     <Compile Include="GameClient\Enum\ChampionEnum.cs" />
     <Compile Include="GameClient\Enum\ChatChannelType.cs" />
     <Compile Include="GameClient\Enum\DamageResultEnum.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="GameClient\Messages\Game\AutoAttackOptionMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BasicAttackPositionMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BlueTipMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\BuffAddMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BuyItemAnswerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BuyItemRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\CastSpellAnswerMessage.cs" />
@@ -88,7 +90,6 @@
     <Compile Include="GameClient\Messages\Game\CreateMinionCampMessage.cs" />
     <Compile Include="GameClient\Messages\Game\CreateNeutralMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DamageDoneMessage.cs" />
-    <Compile Include="GameClient\Messages\Game\Dash.cs" />
     <Compile Include="GameClient\Messages\Game\DestroyClientMissile.cs" />
     <Compile Include="GameClient\Messages\Game\DestroyObjectMessage.cs" />
     <Compile Include="GameClient\Messages\Game\DieMessage.cs" />

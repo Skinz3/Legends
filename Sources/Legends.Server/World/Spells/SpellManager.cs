@@ -22,10 +22,22 @@ namespace Legends.World.Spells
             get;
             set;
         }
+        public SpellRecord BasicAttack1
+        {
+            get;
+            set;
+        }
+        public SpellRecord BasicAttack2
+        {
+            get;
+            set;
+        }
         public SpellManager(AIUnit owner)
         {
             this.Owner = owner;
             this.Spells = new Dictionary<byte, Spell>();
+            this.BasicAttack1 = SpellRecord.GetSpell(Owner.Record.Name + "BasicAttack");
+            this.BasicAttack1 = SpellRecord.GetSpell(Owner.Record.Name + "BasicAttack2");
             SetSpells(Owner.Record);
         }
         public void Update(float deltaTime)

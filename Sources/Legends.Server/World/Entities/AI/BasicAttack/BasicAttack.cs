@@ -19,7 +19,11 @@ namespace Legends.World.Entities.AI.BasicAttack
         /// <summary>
         /// Représente le moment ou l'autoattaque applique son effet (dégats pour les mélées, lancé de projectile pour les tireurs)
         /// </summary>
-        public static float CAST_TIME_MULTIPLIER = 0.25f;
+        public abstract float CAST_TIME_MULTIPLIER
+        {
+            get;
+        }
+            
         /// <summary>
         /// L'autoattaque a t-elle appliquée les dégats? 
         /// </summary>

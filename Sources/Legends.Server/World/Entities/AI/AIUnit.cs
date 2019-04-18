@@ -326,6 +326,7 @@ namespace Legends.World.Entities.AI
                        fx.GetProtocolObject(),
                     }
                 }
+
            }));
         }
 
@@ -356,15 +357,20 @@ namespace Legends.World.Entities.AI
         /// <param name="targetUnit"></param>
         public void TryBasicAttack(AttackableUnit targetUnit)
         {
+            if (DashManager.IsDashing)
+            {
+                return;
+            }
             if (!targetUnit.Alive)
             {
                 return;
             }
+
             if (this.GetDistanceTo(targetUnit) <= GetAutoattackRange(targetUnit))
             {
                 if (IsMoving) // Si on est en mouvement, on s'arrête
                 {
-                    StopMove();
+                    StopMove(true, false);
                 }
                 AttackManager.BeginAttackTarget(targetUnit); // on lance la première auto
             }

@@ -152,6 +152,21 @@ namespace Legends.World.Commands
         {
             JungleManager.Instance.SpawnMonster(monsterName, client.Hero.Game, client.Hero.Position);
         }
+        [Command("test2")]
+        public static void Test2Command(LoLClient client)
+        {
+            AIMonster monster = new AIMonster(client.Hero.Game.NetIdProvider.PopNextNetId(), AIUnitRecord.GetAIUnitRecord("DrMundo"), 0);
+            monster.Position = client.Hero.Position;
+            monster.SpawnPosition = client.Hero.Position;
+            monster.DefineGame(client.Hero.Game);
+            client.Hero.Game.AddUnitToTeam(monster, TeamId.NEUTRAL);
+            client.Hero.Game.Map.AddUnit(monster);
+            monster.Initialize();
+            monster.Stats.Health.SetBaseValue(25000);
+            monster.Stats.MoveSpeed.SetBaseValue(0); 
+            monster.Create();
+            monster.UpdateStats(false);
+        }
         [Command("cell")]
         public static void CellCommand(LoLClient client)
         {
@@ -167,6 +182,9 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
+            client.Hero.Game.Send(new BuffAddMessage(client.Hero.NetId, 0, BuffTypeEnum.Suppression
+                , 1, false, "RivenMartyr".HashString(), "Riven".HashString(), 0f, 1f, client.Hero.NetId));
+
             /* client.Hero.Game.Send(new WaypointGroupWithSpeedMessage(client.Hero.NetId, new MovementDataWithSpeed[]{
             new MovementDataWithSpeed()
             {

@@ -21,6 +21,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             set;
         }
 
+        public override float CAST_TIME_MULTIPLIER => 0.18f;
 
         public RangedBasicAttack(AIUnit unit, AttackableUnit target,
             bool critical, bool first, AttackSlotEnum slot) : base(unit, target, critical, first, slot)

@@ -243,7 +243,6 @@ namespace Legends.World.Entities.AI
             {
                 UpdateStats(true);
             }
-
             GenerateGold(deltaTime);
             StatsUpdateTimer.Update(deltaTime);
             base.Update(deltaTime);

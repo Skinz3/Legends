@@ -139,16 +139,15 @@ namespace Legends.Handlers
                 case MovementType.EMOTE:
                     break;
                 case MovementType.MOVE:
-
                     WaypointsReader wayPointsReader = new WaypointsReader(message.moveData, message.coordCount, client.Hero.Game.Map.Size);
                     // the client delay lead to display problems so we secure the first waypoint.
+
                     wayPointsReader.Waypoints[0] = client.Hero.Position;
 
                     if (!client.Hero.Move(wayPointsReader.Waypoints))
                     {
                         client.Hero.PathManager.PendingPoint = wayPointsReader.Waypoints.Last();
 
-                        client.Hero.AttentionPing(client.Hero.Position, client.Hero.NetId, PingTypeEnum.Ping_Missing);
                     }
 
 
