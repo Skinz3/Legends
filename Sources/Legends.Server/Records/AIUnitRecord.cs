@@ -348,7 +348,8 @@ namespace Legends.Records
                     SpellRecord.GetSpell(record.Spell3),
                     SpellRecord.GetSpell(record.Spell4),
                 }).Where(x => x != null).ToArray();
-                record.BasicAttack = SpellRecord.GetSpell(record.Name + BASIC_ATTACK_SPELL_FOOTER);
+
+                record.BasicAttack = SpellRecord.GetSpellCaseInsensitive(record.Name + BASIC_ATTACK_SPELL_FOOTER);
         
             }
         }

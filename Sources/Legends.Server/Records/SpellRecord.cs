@@ -168,6 +168,10 @@ namespace Legends.Records
         {
             return Spells.Find(x => x.Name == spellName);
         }
+        public static SpellRecord GetSpellCaseInsensitive(string spellName)
+        {
+            return Spells.Find(x => x.Name.ToLower() == spellName.ToLower());
+        }
         public static SpellRecord[] GetSpells()
         {
             return Spells.ToArray();

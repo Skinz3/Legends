@@ -12,11 +12,12 @@ namespace Legends.World.Games
 {
     public class GameProvider
     {
+        public const float FRAME_PER_SECONDS = 30f;
         /// <summary>
         /// Theorically 30fps
         /// Aprox equal to (16.666 * 2)
         /// </summary>
-        public const double REFRESH_RATE = (1000d / 30d);
+        public static float REFRESH_RATE = (1000f / FRAME_PER_SECONDS);
 
         public static Game TestGame = new Game(1, "Partie de test", 11);
 

@@ -11,19 +11,13 @@ using System.Threading.Tasks;
 using Legends.Core;
 using Legends.Core.Geometry;
 using Legends.Protocol.GameClient.Types;
+using Legends.Core.Time;
+using Legends.World.Games;
 
 namespace Legends.World.Entities.AI.BasicAttack
 {
     public abstract class BasicAttack : IProtocolable<ProtocolBasicAttack>, IUpdatable
     {
-        /// <summary>
-        /// Représente le moment ou l'autoattaque applique son effet (dégats pour les mélées, lancé de projectile pour les tireurs)
-        /// </summary>
-        public abstract float CAST_TIME_MULTIPLIER
-        {
-            get;
-        }
-            
         /// <summary>
         /// L'autoattaque a t-elle appliquée les dégats? 
         /// </summary>
@@ -103,7 +97,11 @@ namespace Legends.World.Entities.AI.BasicAttack
             get;
             private set;
         }
-
+        public UpdateTimer CastTimer
+        {
+            get;
+            private set;
+        }
         public BasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASE_ATTACK_1)
         {
             this.Unit = unit;
@@ -112,9 +110,24 @@ namespace Legends.World.Entities.AI.BasicAttack
             this.DeltaAnimationTime = AnimationTime;
             this.First = first;
             this.Slot = slot;
+            this.CastTimer = new UpdateTimer(GetCastDelay());
+            this.CastTimer.Start();
         }
 
         protected abstract void OnCancel();
+
+        [InDevelopment(InDevelopmentState.HAS_BUG,"Not the correct formulas.")]
+        private float GetCastDelay()
+        {
+            if (Unit.Record.BasicAttack != null)
+            {
+                return (Unit.Record.BasicAttack.CastFrame * GameProvider.REFRESH_RATE / Unit.Stats.AttackSpeed.Ratio);
+            }
+            else
+            {
+                return 0f;
+            }
+        }
 
         public void Cancel()
         {
@@ -123,12 +136,9 @@ namespace Legends.World.Entities.AI.BasicAttack
             OnCancel();
         }
 
-        [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "BeginAuto donne une position legerement differente au client")]
         public void Notify()
         {
             Unit.Game.Send(new BasicAttackMessage(Unit.NetId, GetProtocolObject()));
-
-
         }
         public void InflictDamages()
         {
@@ -192,12 +202,13 @@ namespace Legends.World.Entities.AI.BasicAttack
 
             if (Cancelled == false && !Casted)
             {
-                if (DeltaAnimationTime / AnimationTime <= (1 - CAST_TIME_MULTIPLIER))
+                CastTimer.Update(deltaTime);
+                if (CastTimer.Finished())
                 {
+                    CastTimer = null;
                     Casted = true;
                     OnCastTimeReach();
                 }
-
             }
         }
 

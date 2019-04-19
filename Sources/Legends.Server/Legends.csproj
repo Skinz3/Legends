@@ -64,6 +64,7 @@
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealTrueshotBarrage.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealMysticShot.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Global\SummonerFlash.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Graves\GravesClusterShot.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Graves\GravesMove.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Lux\LuxMaliceCannon.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\MasterYi\AlphaStrike.cs" />
