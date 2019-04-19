@@ -14,6 +14,13 @@ namespace Legends.World.Entities.Statistics.Replication
             get;
             private set;
         }
+        public float DefaultMultiplier
+        {
+            get
+            {
+                return TotalSafe / 0.625f;
+            }
+        }
         public float Ratio
         {
             get

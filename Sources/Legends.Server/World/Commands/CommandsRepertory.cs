@@ -197,7 +197,7 @@ namespace Legends.World.Commands
                     TeleportNetID = client.Hero.NetId,
                     Waypoints = new GridPosition[]
                     {
-                        GridPosition.TranslateToGrid(inputPosition,client.Hero.Game.Map.Size),
+                        GridPosition.TranslateToGrid(inputPosition,client.Hero.Game.Map.Size,client.Hero.Game.Map.Record.HalfCellSize),
                     }
                 };
                 client.Hero.AttentionPing(new Vector2(), client.Hero.NetId, PingTypeEnum.Ping_Danger);

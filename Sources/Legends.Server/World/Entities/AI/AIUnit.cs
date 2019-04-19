@@ -293,7 +293,7 @@ namespace Legends.World.Entities.AI
                 },
                 TeleportID = 0,
                 TeleportNetID = NetId,
-                Waypoints= GridPosition.TranslateToGrid(new Vector2[]{Position, dash.TargetPoint },Game.Map.Size)
+                Waypoints= GridPosition.TranslateToGrid(new Vector2[]{Position, dash.TargetPoint },Game.Map.Size,Game.Map.Record.HalfCellSize)
             } }, Environment.TickCount));
         }
 

@@ -158,13 +158,14 @@ namespace Legends.World.Entities.Movements
         {
             List<GridPosition> result = new List<GridPosition>();
             var mapSize = Unit.Game.Map.Size;
+            var halfCellSize = Unit.Game.Map.Record.HalfCellSize;
             var wayPoints = GetWaypoints();
 
-            result.Add(GridPosition.TranslateToGrid(Unit.Position, mapSize));
+            result.Add(GridPosition.TranslateToGrid(Unit.Position, mapSize, halfCellSize));
 
             for (int i = WaypointsIndex; i < wayPoints.Length; i++)
             {
-                result.Add(GridPosition.TranslateToGrid(wayPoints[i], mapSize));
+                result.Add(GridPosition.TranslateToGrid(wayPoints[i], mapSize, halfCellSize));
             }
             return result.ToArray();
         }

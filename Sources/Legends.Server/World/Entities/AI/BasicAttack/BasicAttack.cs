@@ -16,8 +16,22 @@ using Legends.World.Games;
 
 namespace Legends.World.Entities.AI.BasicAttack
 {
+    /// <summary>
+    /// Thanks to @Moonshadow and @FrankTheBoxMonster for CastTime investigations :3
+    /// attack delay = attack cooldown = 1 / attack speed
+    /// attack windup = attack delay* cast offset
+    /// global base attack delay = 1.6
+    /// global base attack speed = 1 / global base attack delay = 1 / 1.6 = 0.625
+    /// global base cast offset = 0.3
+    /// character base attack delay = global base attack delay * (1 + character attack delay offset percent)
+    /// character base attack speed = 1 / character base attack delay
+    /// character base attack windup = character base attack delay * (global base cast offset + character attack delay cast offset) 
+    /// </summary>
     public abstract class BasicAttack : IProtocolable<ProtocolBasicAttack>, IUpdatable
     {
+        public const float BASE_CAST_OFFSET = 0.333333f;
+
+        public const float BASE_ATTACK_DELAY = 1.6f;
         /// <summary>
         /// L'autoattaque a t-elle appliquée les dégats? 
         /// </summary>
@@ -49,7 +63,14 @@ namespace Legends.World.Entities.AI.BasicAttack
         {
             get
             {
-                return (1 / Unit.Stats.AttackSpeed.TotalSafe) * 1000;
+                return (BaseAttackDelay / Unit.Stats.AttackSpeed.DefaultMultiplier);
+            }
+        }
+        protected float CastTime
+        {
+            get
+            {
+                return (BaseCastDelay / Unit.Stats.AttackSpeed.DefaultMultiplier);
             }
         }
         /// <summary>
@@ -97,10 +118,20 @@ namespace Legends.World.Entities.AI.BasicAttack
             get;
             private set;
         }
-        public UpdateTimer CastTimer
+
+        public float BaseAttackDelay
         {
-            get;
-            private set;
+            get
+            {
+                return BASE_ATTACK_DELAY * (1 + (float)Unit.Record.AttackDelayOffsetPercent) * 1000f;
+            }
+        }
+        public float BaseCastDelay
+        {
+            get
+            {
+                return BaseAttackDelay * (BASE_CAST_OFFSET + (float)Unit.Record.AttackDelayCastOffsetPercent);
+            }
         }
         public BasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASE_ATTACK_1)
         {
@@ -110,24 +141,11 @@ namespace Legends.World.Entities.AI.BasicAttack
             this.DeltaAnimationTime = AnimationTime;
             this.First = first;
             this.Slot = slot;
-            this.CastTimer = new UpdateTimer(GetCastDelay());
-            this.CastTimer.Start();
         }
 
         protected abstract void OnCancel();
 
-        [InDevelopment(InDevelopmentState.HAS_BUG,"Not the correct formulas.")]
-        private float GetCastDelay()
-        {
-            if (Unit.Record.BasicAttack != null)
-            {
-                return (Unit.Record.BasicAttack.CastFrame * GameProvider.REFRESH_RATE / Unit.Stats.AttackSpeed.Ratio);
-            }
-            else
-            {
-                return 0f;
-            }
-        }
+      
 
         public void Cancel()
         {
@@ -202,10 +220,9 @@ namespace Legends.World.Entities.AI.BasicAttack
 
             if (Cancelled == false && !Casted)
             {
-                CastTimer.Update(deltaTime);
-                if (CastTimer.Finished())
+               
+                if (AnimationTime - DeltaAnimationTime >= CastTime)
                 {
-                    CastTimer = null;
                     Casted = true;
                     OnCastTimeReach();
                 }

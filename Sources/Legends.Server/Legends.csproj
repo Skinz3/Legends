@@ -66,11 +66,23 @@
     <Compile Include="bin\Debug\Scripts\Spells\Global\SummonerFlash.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Graves\GravesClusterShot.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Graves\GravesMove.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkEOne.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkQOne.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkRKick.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkWOne.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Lissandra\LissandraQ.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Lissandra\LissandraW.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Lissandra\LissandraE.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Lissandra\LissandraR.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Lux\LuxMaliceCannon.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\MasterYi\AlphaStrike.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Nidalee\JavelinToss.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Riven\RivenFeint.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Vayne\VayneTumble.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Veigar\VeigarBalefulStrike.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Veigar\VeigarDarkMatter.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Veigar\VeigarEventHorizon.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Veigar\VeigarPrimordialBurst.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Yasuo\YasuoDashWrapper.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Yasuo\YasuoQW.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Zed\ZedShadowDash.cs" />
@@ -197,7 +209,9 @@
       <Name>Legends.Protocol</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\Debug\Scripts\Spells\Katarina\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Todo List.txt" />
   </ItemGroup>

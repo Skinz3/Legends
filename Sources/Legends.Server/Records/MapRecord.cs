@@ -52,6 +52,14 @@ namespace Legends.Records
             get;
             set;
         }
+        public float CellSize
+        {
+            get;
+            set;
+        }
+
+        [Ignore]
+        public float HalfCellSize => CellSize / 2f;
 
         [Json]
         public MapObjectRecord[] Objects

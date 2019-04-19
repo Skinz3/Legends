@@ -265,7 +265,7 @@ namespace Legends.Protocol.GameClient.Types
                 throw new IOException("Need at least 1 waypoint!");
             }
             byte[] flagsBuffer;
-            if (size >= 2)
+            if (size > 1)
             {
                 flagsBuffer = new byte[(size - 2) / 4 + 1u];
             }

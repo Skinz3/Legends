@@ -217,6 +217,12 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.CHARACTER_AttackDelayCastOffsetPercent)]
+        public double AttackDelayCastOffsetPercent
+        {
+            get;
+            set;
+        }
 
         [InibinField(InibinHashEnum.CHARACTER_BaseDodge)]
         public double BaseDodge

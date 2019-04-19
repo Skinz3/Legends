@@ -34,8 +34,9 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                 record.MiddleOfMap = grid.MiddleOfMap;
                 record.Width = grid.MapWidth;
                 record.Height = grid.MapHeight;
-                record.XCellCount = grid.XCellCount;
+                record.CellSize = grid.CellSize;
                 record.CellFlags = grid.CellFlags;
+                record.XCellCount = grid.XCellCount;
                 record.YCellCount = grid.YCellCount;
                 record.MaxGridPos = new Vector3(grid.MaxGridPos.X, grid.MaxGridPos.Y, grid.MaxGridPos.Z);
                 record.MinGridPos = new Vector3(grid.MinGridPos.X, grid.MinGridPos.Y, grid.MinGridPos.Z);

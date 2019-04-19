@@ -47,8 +47,8 @@ namespace Legends.World.Spells.Projectiles
 
             Position = new Vector2(Position.X + xOffset, Position.Y + yOffset);
 
-//             if (Unit is AIHero)
-  //             ((AIHero)Unit).AttentionPing(Position, 0, Protocol.GameClient.Enum.PingTypeEnum.Ping_OnMyWay);
+    //         if (Unit is AIHero)
+  //            ((AIHero)Unit).AttentionPing(Position, 0, Protocol.GameClient.Enum.PingTypeEnum.Ping_OnMyWay);
 
 
             var distanceToTarget = Target.GetDistanceTo(this);

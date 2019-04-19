@@ -10,9 +10,6 @@ namespace Legends.Protocol.GameClient.Types
 {
     public struct GridPosition
     {
-        [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "What the fuck? working with this offset!!!!!!???????")]
-        public const short WTF_OFFSET = 12;
-
         public short X;
 
         public short Y;
@@ -22,19 +19,19 @@ namespace Legends.Protocol.GameClient.Types
             this.X = x;
             this.Y = y;
         }
-        public static GridPosition TranslateToGrid(Vector2 inputPosition, Vector2 mapSize)
+        public static GridPosition TranslateToGrid(Vector2 inputPosition, Vector2 mapSize, float halfCellSize)
         {
-            var X = ((inputPosition.X - mapSize.X) / 2f) - WTF_OFFSET;
-            var Y = ((inputPosition.Y - mapSize.Y) / 2f) - WTF_OFFSET;
+            var X = ((inputPosition.X - mapSize.X) - halfCellSize) / 2f;
+            var Y = ((inputPosition.Y - mapSize.Y) - halfCellSize) / 2f;
             return new GridPosition((short)X, (short)Y);
         }
-        public static GridPosition[] TranslateToGrid(Vector2[] positions, Vector2 mapSize)
+        public static GridPosition[] TranslateToGrid(Vector2[] positions, Vector2 mapSize, float halfCellSize)
         {
             GridPosition[] result = new GridPosition[positions.Length];
 
             for (int i = 0; i < positions.Length; i++)
             {
-                result[i] = TranslateToGrid(positions[i], mapSize);
+                result[i] = TranslateToGrid(positions[i], mapSize, halfCellSize);
             }
 
             return result;
