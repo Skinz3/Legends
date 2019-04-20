@@ -29,12 +29,12 @@ namespace Legends.bin.Debug.Scripts.Spells.Ezreal
             }
         }
 
-        public override void ApplyProjectileEffects(AttackableUnit target,Projectile projectile)
+        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
         {
-           
+
         }
 
-        public override void OnFinishCasting(Vector2 position, Vector2 endPosition)
+        public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
             var current = Owner.Position;
 
@@ -50,13 +50,13 @@ namespace Legends.bin.Debug.Scripts.Spells.Ezreal
             {
                 trueCoords = position;
             }
-            Teleport(trueCoords);
-            AddParticle("Ezreal_arcaneshift_cas_pulsefire.troy", "", 1f);
+            Teleport(trueCoords, true);
+            CreateFX("Ezreal_arcaneshift_cas_pulsefire.troy", "", 1f, Owner, false);
         }
 
-        public override void OnStartCasting(Vector2 position, Vector2 endPosition)
+        public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-            AddParticle("Ezreal_arcaneshift_flash_pulsefire.troy", "", 1f);
+            CreateFX("Ezreal_arcaneshift_flash_pulsefire.troy", "", 1f, Owner, false);
         }
     }
 }

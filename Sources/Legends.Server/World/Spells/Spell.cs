@@ -220,12 +220,13 @@ namespace Legends.World.Spells
             }
             return infos;
         }
+        [InDevelopment(InDevelopmentState.TEMPORARY, "if its summoner spell, not affected from cdr, only for tests ;) so uncomment // if (!IsSummonerSpell)")]
         public float GetTotalCooldown()
         {
             float cd = Record.GetCooldown(Level);
 
-            if (!IsSummonerSpell)
-                cd *= (1 - (Owner.Stats.CooldownReduction.TotalSafe / 100));
+            //if (!IsSummonerSpell)
+            cd *= (1 - (Owner.Stats.CooldownReduction.TotalSafe / 100));
             return cd;
         }
         public float GetChannelDuration()

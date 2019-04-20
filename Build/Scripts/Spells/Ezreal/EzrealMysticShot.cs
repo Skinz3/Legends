@@ -10,6 +10,8 @@ using Legends.World.Spells;
 using Legends.World.Entities;
 using Legends.Protocol.GameClient.Enum;
 using Legends.World.Spells.Projectiles;
+using Legends.Protocol.GameClient.Messages.Game;
+using Legends.Core.Geometry;
 
 namespace Legends.Scripts.Spells
 {
@@ -30,14 +32,14 @@ namespace Legends.Scripts.Spells
         {
             get
             {
-                return SpellFlags.AffectEnemies | SpellFlags.AffectHeroes | SpellFlags.AffectNeutral;
+                return SpellFlags.AffectEnemies | SpellFlags.AffectHeroes | SpellFlags.AffectMinions;
             }
         }
         public EzrealMysticShot(AIUnit unit, SpellRecord record) : base(unit, record)
         {
         }
 
-        public override void ApplyProjectileEffects(AttackableUnit target, Projectile projectile)
+        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
         {
             var ad = OwnerADTotal * 1.1f;
             var ap = OwnerAPTotal * 0.4f;
@@ -47,14 +49,14 @@ namespace Legends.Scripts.Spells
             Owner.SpellManager.LowerCooldowns(1f);
         }
 
-        public override void OnFinishCasting(Vector2 position, Vector2 endPosition)
+        public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
             AddSkillShot("EzrealMysticShotMissile", position, endPosition, RANGE);
         }
 
-        public override void OnStartCasting(Vector2 position, Vector2 endPosition)
+        public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-            AddParticle("ezreal_bow.troy", "L_HAND", 1f);
+            CreateFX("ezreal_bow.troy", "L_HAND", 1f, Owner,false);
         }
     }
 }

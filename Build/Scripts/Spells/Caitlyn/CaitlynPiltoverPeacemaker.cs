@@ -24,7 +24,7 @@ namespace Legends.bin.Debug.Scripts.Spells.Caitlyn
         {
             get
             {
-                return true;
+                return false;
             }
         }
         public override SpellFlags Flags
@@ -38,18 +38,17 @@ namespace Legends.bin.Debug.Scripts.Spells.Caitlyn
         {
         }
 
-        public override void ApplyProjectileEffects(AttackableUnit target, Projectile projectile)
+        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
         {
             target.InflictDamages(new Damages(Owner, target, 200f, false, DamageType.DAMAGE_TYPE_PHYSICAL, true));
-
         }
 
-        public override void OnFinishCasting(Vector2 position, Vector2 endPosition)
+        public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
             AddSkillShot("CaitlynPiltoverPeacemaker", position, endPosition, RANGE, true);
         }
 
-        public override void OnStartCasting(Vector2 position, Vector2 endPosition)
+        public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
 
         }

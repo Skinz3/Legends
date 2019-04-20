@@ -418,13 +418,15 @@ namespace Legends.World.Entities.AI
 
             Spell spell = SpellManager.GetSpell(spellSlot);
 
+            AttackableUnit[] targets = target != null ? new AttackableUnit[] { target } : new AttackableUnit[0];
+
             if (spell.Cast(position, endPosition, target, onChannelOverAction))
             {
                 var netId = spell.GetNextProjectileId();
                 Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(
                     new Vector3(position.X, position.Y, Game.Map.Record.GetZ(position) + 100),
                     new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition) + 100),
-                    spell.Record.Name, netId)));
+                    spell.Record.Name, netId, targets)));
             }
             else
             {

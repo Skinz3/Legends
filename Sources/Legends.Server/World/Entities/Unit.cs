@@ -119,7 +119,7 @@ namespace Legends.World.Entities
         {
             get
             {
-                return !Disposed && !PendingDispose && Alive;
+                return !Disposed && !PendingDispose;
             }
         }
         public bool PendingDispose

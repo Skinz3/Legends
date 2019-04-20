@@ -30,7 +30,7 @@ namespace Legends.Scripts.Spells
         {
         }
 
-        public override void ApplyProjectileEffects(AttackableUnit target, Projectile projectile)
+        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
         {
             if (target.IsFriendly(Owner))
             {
@@ -44,14 +44,14 @@ namespace Legends.Scripts.Spells
             }
         }
 
-        public override void OnFinishCasting(Vector2 position, Vector2 endPosition)
+        public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
             AddSkillShot("EzrealEssenceFluxMissile", position, endPosition, 1000);
         }
 
-        public override void OnStartCasting(Vector2 position, Vector2 endPosition)
+        public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-            AddParticle("ezreal_bow_yellow.troy", "L_HAND", 1f);
+            CreateFX("ezreal_bow_yellow.troy", "L_HAND", 1f, Owner,false);
         }
     }
 }

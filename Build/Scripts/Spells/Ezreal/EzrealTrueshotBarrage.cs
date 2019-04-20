@@ -19,6 +19,14 @@ namespace Legends.Scripts.Spells
 
         public const float RANGE = 20000;
 
+        public override bool DestroyProjectileOnHit
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         public EzrealTrueshotBarrage(AIUnit unit, SpellRecord record) : base(unit, record)
         {
         }
@@ -27,11 +35,11 @@ namespace Legends.Scripts.Spells
         {
             get
             {
-                return SpellFlags.AffectEnemies | SpellFlags.AffectHeroes | SpellFlags.AffectNeutral;
+                return SpellFlags.AffectEnemies | SpellFlags.AffectHeroes | SpellFlags.AffectMinions;
             }
         }
 
-        public override void ApplyProjectileEffects(AttackableUnit target, Projectile projectile)
+        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
         {
             SkillShot skillShot = projectile as SkillShot;
 
@@ -47,15 +55,15 @@ namespace Legends.Scripts.Spells
             target.InflictDamages(new Damages(Owner, target, total, false, DamageType.DAMAGE_TYPE_MAGICAL, false));
         }
 
-        public override void OnFinishCasting(Vector2 position, Vector2 endPosition)
+        public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
 
             AddSkillShot("EzrealTrueshotBarrage", position, endPosition, RANGE, true);
         }
 
-        public override void OnStartCasting(Vector2 position, Vector2 endPosition)
+        public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-            AddParticle("Ezreal_bow_huge.troy", "L_HAND", 1f);
+            CreateFX("Ezreal_bow_huge.troy", "L_HAND", 1f, Owner,false);
         }
     }
 }

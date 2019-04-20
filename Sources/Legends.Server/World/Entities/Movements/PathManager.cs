@@ -208,9 +208,11 @@ namespace Legends.World.Entities.Movements
 
                     if (WaypointsIndex == Waypoints.Count)
                     {
+                        End = true;
+                        PendingPoint = null;
+
                         if (TargetUnit != null)
                         {
-                            End = true;
                             OnTargetReachAction();
                         }
 

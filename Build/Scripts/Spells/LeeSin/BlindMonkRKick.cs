@@ -1,6 +1,4 @@
-﻿using Legends.Protocol.GameClient.Enum;
-using Legends.Protocol.GameClient.Messages.Game;
-using Legends.Records;
+﻿using Legends.Records;
 using Legends.Scripts.Spells;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
@@ -12,47 +10,43 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.bin.Debug.Scripts.Spells.MasterYi
+namespace Legends.bin.Debug.Scripts.Spells.LeeSin
 {
-    public class AlphaStrike : SpellScript
+    public class BlindMonkRKick : SpellScript
     {
-        public const string SPELL_NAME = "AlphaStrike";
+        public const string SPELL_NAME = "BlindMonkRKick";
 
-        public override bool DestroyProjectileOnHit
+        public override bool CanCastSummonerDuringChanneling
         {
             get
             {
                 return true;
             }
         }
-        public override SpellFlags Flags
+        public BlindMonkRKick(AIUnit unit, SpellRecord record) : base(unit, record)
         {
-            get
-            {
-                return SpellFlags.AffectEnemies | SpellFlags.AffectHeroes | SpellFlags.AffectNeutral;
-            }
+
         }
-        public AlphaStrike(AIUnit unit, SpellRecord record) : base(unit, record)
-        {
-        }
+
+
 
         public override void ApplyEffects(AttackableUnit target, IMissile projectile)
         {
-
 
         }
 
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
+            CreateFX("blind_monk_ult_impact.troy", "", 1f, (AIUnit)target, false);
+            var direction = Vector2.Normalize(target.Position - Owner.Position);
+            (target as AIUnit).Dash(target.Position + (direction * 800f), 1000f, true);
 
-
-
+            target.InflictDamages(new World.Spells.Damages(Owner, target, 400, false, Protocol.GameClient.Enum.DamageType.DAMAGE_TYPE_PHYSICAL, false));
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
 
-            CreateFX("MasterYi_Base_W_Dmg.troy", "", 1f, Owner, false);
         }
     }
 }

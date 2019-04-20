@@ -91,6 +91,14 @@ namespace Legends.Scripts.Spells
             }
         }
 
+        public virtual bool CanCastSummonerDuringChanneling
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         public SpellScript(AIUnit owner, SpellRecord spellRecord)
         {
             this.Owner = owner;
@@ -228,6 +236,10 @@ namespace Legends.Scripts.Spells
         {
             var flags = Flags; // SpellRecord.Flags?
 
+            if (flags.HasFlag(SpellFlags.NotAffectSelf) && unit == Owner)
+            {
+                return false;
+            }
             if (!flags.HasFlag(SpellFlags.AffectAllSides))
             {
                 if (!unit.IsFriendly(Owner) && !flags.HasFlag(SpellFlags.AffectEnemies))

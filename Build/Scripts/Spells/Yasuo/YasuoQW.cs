@@ -41,20 +41,35 @@ namespace Legends.bin.Debug.Scripts.Spells.Yasuo
         {
         }
 
-        public override void ApplyProjectileEffects(AttackableUnit target, Projectile projectile)
+        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
         {
 
 
         }
 
-        public override void OnFinishCasting(Vector2 position, Vector2 endPosition)
+        public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-       
+            /*
+             * spawn tornado
+             * var castInfo = Spell.GetCastInformations(position.ToVector3(),
+               endPosition.ToVector3(), "YasuoQ3Mis", 0);
+            castInfo.DesignerCastTime = 0f;
+            castInfo.DesignerTotalTime = 0f;
+            castInfo.ExtraCastTime = 0f;
+            Owner.Game.Send(new CastSpellAnswerMessage(Owner.NetId, Environment.TickCount, false, castInfo));*/
+
+            var castInfo = Spell.GetCastInformations(position.ToVector3(),
+               endPosition.ToVector3(), "YasuoQ", 0);
+            castInfo.DesignerCastTime = 0.1f;
+            castInfo.DesignerTotalTime = 0.1f;
+            castInfo.ExtraCastTime = 0f;
+            Owner.Game.Send(new CastSpellAnswerMessage(Owner.NetId, Environment.TickCount, false, castInfo));
         }
 
-        public override void OnStartCasting(Vector2 position, Vector2 endPosition)
+        public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
            
         }
+
     }
 }

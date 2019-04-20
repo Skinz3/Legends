@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Legends.DatabaseSynchronizer
 {
     public class FieldSanitizer
     {
-        public static object Sanitize(string value,Type fieldType)
+        public static object Sanitize(string value, Type fieldType)
         {
             if (value == "No")
             {
@@ -30,7 +31,7 @@ namespace Legends.DatabaseSynchronizer
             {
                 return value.ToString().Split('.')[0];
             }
-            else if (value.ToString().Contains('.'))
+            else if (value.ToString().Contains('.') && !value.Contains("troybin"))
             {
                 return value.ToString().Replace('.', ',');
 

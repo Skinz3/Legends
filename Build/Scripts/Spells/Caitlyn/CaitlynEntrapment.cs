@@ -3,6 +3,7 @@ using Legends.Records;
 using Legends.Scripts.Spells;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
+using Legends.World.Spells;
 using Legends.World.Spells.Projectiles;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,13 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Legends.bin.Debug.Scripts.Spells.Global
+namespace Legends.bin.Debug.Scripts.Spells.Caitlyn
 {
-    public class SummonerFlash : SpellScript
+    public class CaitlynEntrapment : SpellScript
     {
-        public const string SPELL_NAME = "SummonerFlash";
+        public const string SPELL_NAME = "CaitlynEntrapment";
+
+        public const float RANGE = 750;
 
         public override bool DestroyProjectileOnHit
         {
@@ -31,44 +34,44 @@ namespace Legends.bin.Debug.Scripts.Spells.Global
                 return SpellFlags.AffectEnemies | SpellFlags.AffectHeroes | SpellFlags.AffectNeutral;
             }
         }
-        public SummonerFlash(AIUnit unit, SpellRecord record) : base(unit, record)
+        public CaitlynEntrapment(AIUnit unit, SpellRecord record) : base(unit, record)
         {
-
         }
 
         public override void ApplyEffects(AttackableUnit target, IMissile projectile)
         {
-
-
+            target.InflictDamages(new Damages(Owner, target, 200f, false, DamageType.DAMAGE_TYPE_PHYSICAL, true));
         }
 
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
+            // Calculate net coords
             var current = Owner.Position;
-            var to = new Vector2(position.X, position.Y) - current;
-            Vector2 trueCoords;
+            var to = Vector2.Normalize(position - current);
+            var range = to * 750;
+            var trueCoords = current + range;
 
-            if (to.Length() > 425)
+            // Calculate dash coords/vector
+            var dash = Vector2.Negate(to) * 500;
+
+
+            var dashCoords = current + dash;
+
+
+            Action onDashEnded = () =>
             {
-                to = Vector2.Normalize(to);
-                var range = to * 425;
-                trueCoords = current + range;
-            }
-            else
-            {
-                trueCoords = position;
-            }
+                SetAnimation("RUN", "");
+            };
 
-            CreateFX("global_ss_flash.troy", "", 1f, Owner,false);
-            Teleport(trueCoords, true);
-            CreateFX("global_ss_flash_02.troy", "", 1f, Owner,false);
+            SetAnimation("RUN", "Spell3b");
+            Owner.Dash(dashCoords, 1000, true, onDashEnded);
 
 
+            AddSkillShot("CaitlynEntrapmentMissile", trueCoords, endPosition, RANGE, false);
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-
 
         }
     }

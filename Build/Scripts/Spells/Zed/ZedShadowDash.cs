@@ -16,9 +16,9 @@ using System.Threading.Tasks;
 
 namespace Legends.bin.Debug.Scripts.Spells.Zed
 {
-    public class ZedShuriken : SpellScript
+    public class ZedShadowDash : SpellScript
     {
-        public const string SPELL_NAME = "ZedShuriken";
+        public const string SPELL_NAME = "ZedShadowDash";
 
         public override bool DestroyProjectileOnHit
         {
@@ -27,33 +27,29 @@ namespace Legends.bin.Debug.Scripts.Spells.Zed
                 return false;
             }
         }
-        public override SpellFlags Flags
-        {
-            get
-            {
-                return SpellFlags.AffectEnemies | SpellFlags.AffectHeroes | SpellFlags.AffectNeutral;
-            }
-        }
-        public ZedShuriken(AIUnit unit, SpellRecord record) : base(unit, record)
+        public ZedShadowDash(AIUnit unit, SpellRecord record) : base(unit, record)
         {
         }
 
         public override void ApplyEffects(AttackableUnit target, IMissile projectile)
         {
-            CreateFX("Zed_Q_tar.troy", "", 1f, (AIUnit)target, false);
             target.InflictDamages(new Damages(Owner, target, 200, false, DamageType.DAMAGE_TYPE_PHYSICAL, false));
         }
 
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-            AddSkillShot("ZedShurikenMisOne", position, endPosition, 1000);
-
-           
+          
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-
+            var castInfo = Spell.GetCastInformations(position.ToVector3(),
+            endPosition.ToVector3(), "ZedShadowDashMissile");
+            castInfo.DesignerCastTime = 0f;
+            castInfo.DesignerTotalTime = 0f;
+            castInfo.ExtraCastTime = 0f;
+            Owner.Game.Send(new CastSpellAnswerMessage(Owner.NetId, Environment.TickCount, false, castInfo));
         }
     }
+   
 }
