@@ -60,6 +60,9 @@ namespace Legends.World.Entities.AI
             get;
             private set;
         }
+
+
+
         /// <summary>
         /// Gère les modèles etc
         /// </summary>
@@ -241,6 +244,8 @@ namespace Legends.World.Entities.AI
                     }
                 }
 
+                EventsBinder.OnStartMoving(waypoints.ToArray());
+
                 PathManager.Move(waypoints);
 
                 if (notify)
@@ -414,16 +419,17 @@ namespace Legends.World.Entities.AI
             else
                 PathManager.PendingPoint = null;
 
-           
+
 
             Spell spell = SpellManager.GetSpell(spellSlot);
 
             AttackableUnit[] targets = target != null ? new AttackableUnit[] { target } : new AttackableUnit[0];
+ 
 
             if (spell.Cast(position, endPosition, target, onChannelOverAction))
             {
                 var netId = spell.GetNextProjectileId();
-                Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(
+                Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, true, spell.GetCastInformations(
                     new Vector3(position.X, position.Y, Game.Map.Record.GetZ(position) + 100),
                     new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition) + 100),
                     spell.Record.Name, netId, targets)));

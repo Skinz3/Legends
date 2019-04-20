@@ -61,6 +61,10 @@ namespace Legends.Scripts.Maps
             get;
             set;
         }
+        public abstract bool RecallAllowed
+        {
+            get;
+        }
         public abstract float GoldsPerSeconds
         {
             get;

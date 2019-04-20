@@ -23,17 +23,25 @@ namespace Legends.World.Games.Delayed
             this.delayCurrent = delay;
             this.Finalized = false;
         }
+        public void Cancel()
+        {
+            Finalized = true;
+        }
         public void Update(float deltaTime)
         {
-            delayCurrent -= deltaTime;
-            if (delayCurrent <= 0)
+            if (!Finalized)
             {
-                if (Finalized)
+                delayCurrent -= deltaTime;
+                if (delayCurrent <= 0)
                 {
-                    throw new Exception("Oops, need dispose.");
+
+                    action();
+                    Finalized = true;
                 }
-                action();
-                Finalized = true;
+            }
+            else
+            {
+                Console.WriteLine("Need diposition");
             }
         }
     }

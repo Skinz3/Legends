@@ -6,6 +6,7 @@ using Legends.Protocol.GameClient.Enum;
 using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Protocol.GameClient.Types;
 using Legends.Records;
+using Legends.World.Entities.AI.Events;
 using Legends.World.Entities.Movements;
 using Legends.World.Entities.Statistics;
 using Legends.World.Games;
@@ -27,6 +28,11 @@ namespace Legends.World.Entities
         public const float DEFAULT_MODEL_SIZE = 1f;
 
         public uint NetId
+        {
+            get;
+            set;
+        }
+        public EventsBinder EventsBinder
         {
             get;
             set;
@@ -133,6 +139,7 @@ namespace Legends.World.Entities
             this.NetId = netId;
             this.Alive = true;
             this.Disposed = false;
+            this.EventsBinder = new EventsBinder();
 
         }
         public virtual void Initialize()

@@ -33,6 +33,8 @@ namespace Legends.World.Entities.AI
 
         public const long STATS_REFRESH_DELAY = 1000;
 
+        public const int BLUE_PILL_ITEMID = 2001;
+
         public LoLClient Client
         {
             get;
@@ -106,8 +108,8 @@ namespace Legends.World.Entities.AI
             this.StatsUpdateTimer = new UpdateTimer(STATS_REFRESH_DELAY);
             base.Initialize();
 
-            SpellManager.AddSpell(4, SpellProvider.Instance.GetSpell(this, 4, Data.Summoner1Spell));
-            SpellManager.AddSpell(5, SpellProvider.Instance.GetSpell(this, 5, Data.Summoner2Spell));
+            SpellManager.AddSpell(4, SpellProvider.Instance.GetSpell(this, 4, Data.Summoner1Spell.ToString(), true, true));
+            SpellManager.AddSpell(5, SpellProvider.Instance.GetSpell(this, 5, Data.Summoner2Spell.ToString(), true, true));
         }
         public override void OnGameStart()
         {
@@ -254,7 +256,7 @@ namespace Legends.World.Entities.AI
         {
             base.AddGold(Game.Map.Script.GoldsPerSeconds * 0.001f * deltaTime);
         }
-      
+
         public override void OnUnitEnterVision(Unit unit)
         {
 
@@ -311,6 +313,14 @@ namespace Legends.World.Entities.AI
             UpdateInfos();
             UpdateStats(false);
             UpdateHeath();
+
+
+            if (Game.Map.Script.RecallAllowed)
+            {
+                Inventory.AddExtraItem(BLUE_PILL_ITEMID, 7);
+                SpellManager.AddSpell(13, SpellProvider.Instance.GetSpell(this, 13, "Recall", true));
+            }
+
         }
     }
 }

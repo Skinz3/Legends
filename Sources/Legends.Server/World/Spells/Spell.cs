@@ -199,7 +199,7 @@ namespace Legends.World.Spells
                 IsOverrideCastPosition = false,
                 ManaCost = 1f,
                 MissileNetID = missileNetId,
-                PackageHash = (uint)Owner.GetHash(),
+                PackageHash =(uint)Owner.GetHash(),
                 SpellCastLaunchPosition = new Vector3(Owner.Position.X, Owner.Position.Y, 100),// Owner.GetPositionVector3(),
                 SpellChainOwnerNetID = Owner.NetId,
                 SpellHash = spellName.HashString(),
@@ -248,6 +248,7 @@ namespace Legends.World.Spells
             {
                 if (Script != null && Script.CanCast())
                 {
+
                     if (Script.StopMovement)
                     {
                         Owner.StopMove(true, false);
@@ -258,18 +259,23 @@ namespace Legends.World.Spells
                     this.target = target;
                     castEndPosition = endPosition;
                     var castTime = GetChannelDuration();
-                    if (castTime == 0)
-                    {
-                        OnChannelOver();
-                    }
-                    else
+                  
+                    if (castTime > 0)
                     {
                         ChannelTimer = new UpdateTimer((long)(castTime * 1000));
                         ChannelTimer.Start();
                         State = SpellStateEnum.STATE_CHANNELING;
                     }
+
                     NextProjectileId = Owner.Game.NetIdProvider.Pop();
+                    Owner.EventsBinder.OnSpellStartCasting(this, position, endPosition);
                     Script.OnStartCasting(position, endPosition, target);
+
+                    if (castTime == 0)
+                    {
+                        OnChannelOver();
+                    }
+
                     return true;
                 }
                 else

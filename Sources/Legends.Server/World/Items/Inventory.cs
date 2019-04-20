@@ -75,9 +75,16 @@ namespace Legends.World.Items
         {
             return AddItem(ItemRecord.GetItemRecord(itemId));
         }
+        public Item AddExtraItem(int itemId, byte slot)
+        {
+            var item = new Item(ItemRecord.GetItemRecord(itemId), Owner, slot);
+            Items.Add(slot, item);
+            item.ApplyStats();
+            Owner.OnItemAdded(item);
+            return item;
+        }
         public Item AddItem(ItemRecord record)
         {
-
             byte slot = GetNextSlot();
             bool isRelicBase = record.Group == ItemGroupEnum.RelicBase;  // Trinket
 

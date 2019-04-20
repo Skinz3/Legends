@@ -31,6 +31,7 @@ namespace Legends.World.Entities
         /// </summary>
         public event Action<AttackableUnit, Unit> OnReviveEvent;
 
+
         public Stats Stats
         {
             get;
@@ -131,6 +132,7 @@ namespace Legends.World.Entities
         {
             if (!ObjectAvailable)
                 return;
+
             damages.Apply();
 
             if (!Stats.IsLifeStealImmune && damages.ApplyAutoAttack && damages.Type == DamageType.DAMAGE_TYPE_PHYSICAL)
@@ -167,6 +169,9 @@ namespace Legends.World.Entities
 
             UpdateStats();
             damages.Source.UpdateStats();
+
+            EventsBinder.OnDamagesInflicted(damages); 
+
             if (Stats.Health.Current <= 0)
             {
                 OnDead(damages.Source);

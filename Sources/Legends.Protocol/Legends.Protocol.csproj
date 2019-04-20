@@ -52,6 +52,7 @@
     <Compile Include="GameClient\Enum\DamageResultEnum.cs" />
     <Compile Include="GameClient\Enum\DamageTypeEnum.cs" />
     <Compile Include="GameClient\Enum\FloatTextEnum.cs" />
+    <Compile Include="GameClient\Enum\GameFeatures.cs" />
     <Compile Include="GameClient\Enum\GameModeEnum.cs" />
     <Compile Include="GameClient\Enum\HitResultEnum.cs" />
     <Compile Include="GameClient\Enum\InhibitorStateEnum.cs" />

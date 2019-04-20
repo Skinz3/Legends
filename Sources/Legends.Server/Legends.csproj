@@ -54,6 +54,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bin\Debug\Scripts\Maps\HowlingAbyssScript.cs" />
+    <Compile Include="bin\Debug\Scripts\Maps\SummonersRiftScript.cs" />
+    <Compile Include="bin\Debug\Scripts\Maps\SummonersRiftUpdatedScript.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Annie\Disintegrate.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Annie\Incinerate.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Brand\BrandBlaze.cs" />
@@ -67,6 +70,7 @@
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealEssenceFlux.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealTrueshotBarrage.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealMysticShot.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Global\Recall.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Global\SummonerFlash.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Graves\GravesClusterShot.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Graves\GravesMove.cs" />
@@ -143,6 +147,7 @@
     <Compile Include="World\Entities\AI\Deaths\Death.cs" />
     <Compile Include="World\Entities\AI\Deaths\HeroDeath.cs" />
     <Compile Include="World\Entities\AI\Deaths\InhibitorDeath.cs" />
+    <Compile Include="World\Entities\AI\Events\EventsBinder.cs" />
     <Compile Include="World\Entities\AI\Particles\FX.cs" />
     <Compile Include="World\Entities\AI\Particles\FXManager.cs" />
     <Compile Include="World\Entities\AI\Score.cs" />

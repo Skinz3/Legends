@@ -5,6 +5,7 @@ using Legends.World.Entities.AI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,8 @@ namespace Legends.World.Spells
 {
     public class SpellManager
     {
+        public event Action<Spell, Vector2, Vector2> OnSpellStartCast;
+
         public AIUnit Owner
         {
             get;
@@ -63,7 +66,6 @@ namespace Legends.World.Spells
                 }
             }
         }
-
         public void UpgradeSpell(byte spellId)
         {
             Spell targetSpell = GetSpell(spellId);

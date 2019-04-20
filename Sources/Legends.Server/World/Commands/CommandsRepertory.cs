@@ -155,7 +155,7 @@ namespace Legends.World.Commands
         [Command("test2")]
         public static void Test2Command(LoLClient client)
         {
-         
+
         }
         [Command("cell")]
         public static void CellCommand(LoLClient client)
@@ -172,11 +172,13 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-            
 
-           
-            /* client.Hero.Game.Send(new BuffAddMessage(client.Hero.NetId, 0, BuffTypeEnum.Suppression
-                , 1, false, "RivenMartyr".HashString(), "Riven".HashString(), 0f, 1f, client.Hero.NetId)); */
+
+
+            client.Hero.Game.Send(new BuffAddMessage(client.Hero.NetId, 0, BuffTypeEnum.Counter
+                  , 1, false, "Recall".HashString(), (uint)client.Hero.GetHash(), 0f, 1f, client.Hero.NetId));
+
+            return;
 
             /* client.Hero.Game.Send(new WaypointGroupWithSpeedMessage(client.Hero.NetId, new MovementDataWithSpeed[]{
             new MovementDataWithSpeed()

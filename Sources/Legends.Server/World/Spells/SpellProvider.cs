@@ -13,27 +13,19 @@ namespace Legends.World.Spells
 {
     public class SpellProvider : Singleton<SpellProvider>
     {
-        public Spell GetSpell(AIUnit owner, byte slot, string spellName)
+        public Spell GetSpell(AIUnit owner, byte slot, string spellName, bool global = false, bool isSummonerSpell = false)
         {
-            SpellRecord record = owner.Record.GetSpellRecord(spellName);
+            SpellRecord record = null;
 
-            if (record != null)
-            {
-                return new Spell(owner, record, slot, SpellScriptManager.Instance.GetSpellScript(record, owner), false);
-
-            }
+            if (!global)
+                record = owner.Record.GetSpellRecord(spellName);
             else
-            {
-                return null;
-            }
-        }
-        public Spell GetSpell(AIUnit owner, byte slot, SummonerSpellId summonerSpell)
-        {
-            SpellRecord record = SpellRecord.GetSpell(summonerSpell.ToString());
+                record = SpellRecord.GetSpell(spellName);
+
 
             if (record != null)
             {
-                return new Spell(owner, record, slot, SpellScriptManager.Instance.GetSpellScript(record, owner), true);
+                return new Spell(owner, record, slot, SpellScriptManager.Instance.GetSpellScript(record, owner), isSummonerSpell);
 
             }
             else

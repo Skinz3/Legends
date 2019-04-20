@@ -39,7 +39,7 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
         public override void Serialize(LittleEndianWriter writer)
         {
-            writer.WriteUInt(0); // animation flags, unknown
+            writer.WriteUInt(100); // animation flags, unknown
             writer.WriteFloat(scaleTime);
             writer.WriteFloat(startProgress);
             writer.WriteFloat(speedRatio);

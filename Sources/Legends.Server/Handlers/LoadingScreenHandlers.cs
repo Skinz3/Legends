@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Legends.Protocol.GameClient.LoadingScreen;
+using Legends.Core.DesignPattern;
 
 namespace Legends.Handlers
 {
@@ -87,6 +88,7 @@ namespace Legends.Handlers
             client.Send(new QueryStatusAnswerMessage(0, 1), Channel.CHL_S2C);
         }
 
+        [InDevelopment(InDevelopmentState.TODO,"Use moonshadow serialization for SynchVersion messages")]
         [MessageHandler(PacketCmd.PKT_C2S_SynchVersion)]
         public static void HandleSynchVersionMessage(SynchVersionMessage message, LoLClient client)
         {

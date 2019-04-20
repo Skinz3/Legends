@@ -11,6 +11,7 @@ using Legends.World;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using Legends.World.Entities.AI.Particles;
+using Legends.World.Games.Delayed;
 using Legends.World.Spells;
 using Legends.World.Spells.Projectiles;
 using Legends.World.Spells.Shapes;
@@ -141,9 +142,9 @@ namespace Legends.Scripts.Spells
         /// </summary>
         /// <param name="action"></param>
         /// <param name="delay"></param>
-        protected void CreateAction(Action action, float delay)
+        protected DelayedAction CreateAction(Action action, float delay)
         {
-            Owner.Game.Action(action, delay);
+            return Owner.Game.Action(action, delay);
         }
 
         protected void AddSkillShot(string name, Vector2 toPosition, Vector2 endPosition, float range, bool serverOnly = false)

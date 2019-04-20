@@ -17,7 +17,6 @@ namespace Legends.World.Entities.Statistics
 
         public override bool IsLifeStealImmune => false;
 
-
         public HeroStats(AIUnitRecord record, int skinId) : base((float)record.BaseHp, (float)record.BaseMp, (float)record.BaseHpRegen, (float)record.BaseArmor,
             (float)record.BaseDamage, record.BaseAbilityPower, (float)record.BaseDodge, (float)record.BaseCritChance, (float)record.BaseMagicResist,
             (float)record.BaseMpRegen, record.AttackRange, (float)record.BaseAttackSpeed, (float)record.AttackDelayOffsetPercent, AIHero.DEFAULT_COOLDOWN_REDUCTION,
@@ -36,7 +35,7 @@ namespace Legends.World.Entities.Statistics
             ReplicationManager.UpdateUInt(uint.MaxValue, 0, 2); // mReplicatedSpellCanCastBitsLower1
             ReplicationManager.UpdateUInt(uint.MaxValue, 0, 3); // mReplicatedSpellCanCastBitsUpper1
             ReplicationManager.UpdateUInt(uint.MaxValue, 0, 4); // mReplicatedSpellCanCastBitsLower2
-            ReplicationManager.UpdateUInt(uint.MaxValue, 0, 5); // mReplicatedSpellCanCastBitsUpper2
+            ReplicationManager.UpdateUInt(uint.MaxValue, 0, 5); // mReplicatedSpellCanCastBitsUpper2 
 
             ReplicationManager.UpdateUInt((uint)0, 0, 6); // evolvePoints kha zix?
             ReplicationManager.UpdateUInt((uint)0, 0, 7); // ? spells of evolve flags?
