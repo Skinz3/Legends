@@ -56,6 +56,10 @@
   <ItemGroup>
     <Compile Include="bin\Debug\Scripts\Spells\Annie\Disintegrate.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Annie\Incinerate.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Brand\BrandBlaze.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Brand\BrandConflagration.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Brand\BrandFissure.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Brand\BrandWildfire.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Caitlyn\CaitlynAceintheHole.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Caitlyn\CaitlynEntrapment.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Caitlyn\CaitlynPiltoverPeacemaker.cs" />
@@ -66,6 +70,11 @@
     <Compile Include="bin\Debug\Scripts\Spells\Global\SummonerFlash.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Graves\GravesClusterShot.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Graves\GravesMove.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Jax\JaxCounterStrike.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Jax\JaxEmpowerTwo.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Jax\JaxLeapStrike.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Jax\JaxRelentlessAssault.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Karma\KarmaQ.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkEOne.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkQOne.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkRKick.cs" />
@@ -211,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\Scripts\Spells\Katarina\" />
+    <Folder Include="Scripts\Buffs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Todo List.txt" />

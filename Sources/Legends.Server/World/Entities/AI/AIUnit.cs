@@ -312,25 +312,21 @@ namespace Legends.World.Entities.AI
         {
             Game.Send(new FXKillMessage(NetId, netId));
         }
-        public void NotifyFXCreated(FX fx)
-        {
-            SendVision(new FXCreateGroupMessage(NetId, new FXCreateGroupData[]
-            {
-                new FXCreateGroupData()
-                {
-                    BoneNameHash= fx.Bones.HashString(),
-                    PackageHash = Record.Name.HashString(),
-                    EffectNameHash= fx.Name.HashString(),
-                    Flags= 0,
-                    TargetBoneNameHash=  0,
-                    FXCreateData=  new List<FXCreateData>()
-                    {
-                       fx.GetProtocolObject(),
-                    }
-                }
 
-           }));
+        public void NotifyFXsCreated(FX[] fxs)
+        {
+            FXCreateGroupData[] data = new FXCreateGroupData[fxs.Length];
+
+            for (int i = 0; i < fxs.Length; i++)
+            {
+                data[i] = fxs[i].GetFXCreateGroupData();
+            }
+
+            SendVision(new FXCreateGroupMessage(NetId, data));
         }
+
+
+
 
         public void MoveTo(Vector2 targetVector, bool unsetTarget = true)
         {
@@ -395,10 +391,32 @@ namespace Legends.World.Entities.AI
 
         }
 
-        public void CastSpell(byte spellSlot, Vector2 position, Vector2 endPosition, AttackableUnit target, Action onChannelOverAction = null)
+        public void CastSpell(byte spellSlot, Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-            Spell spell = SpellManager.GetSpell(spellSlot);
+            AttackableUnit autoAttackTarget = null;
 
+            if (AttackManager.IsAttacking)
+            {
+                autoAttackTarget = AttackManager.GetTarget();
+            }
+
+            Action onChannelOverAction = () =>
+            {
+                if (autoAttackTarget != null)
+                {
+                    TryBasicAttack(autoAttackTarget);
+                }
+                PathManager.MoveToPendingPoint();
+            };
+
+            if (IsMoving)
+                PathManager.PendingPoint = PathManager.GetWaypoints().Last();
+            else
+                PathManager.PendingPoint = null;
+
+            StopMove(true, false);
+
+            Spell spell = SpellManager.GetSpell(spellSlot);
 
             if (spell.Cast(position, endPosition, target, onChannelOverAction))
             {
@@ -407,6 +425,10 @@ namespace Legends.World.Entities.AI
                     new Vector3(position.X, position.Y, Game.Map.Record.GetZ(position) + 100),
                     new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition) + 100),
                     spell.Record.Name, netId)));
+            }
+            else
+            {
+                NotifyWaypoints(); // we correctly notify to client stop moving (cast spell ans, stop the movement)
             }
         }
         public virtual int GetHash()

@@ -155,7 +155,7 @@ namespace Legends.World.Commands
         [Command("test2")]
         public static void Test2Command(LoLClient client)
         {
-            AIMonster monster = new AIMonster(client.Hero.Game.NetIdProvider.PopNextNetId(), AIUnitRecord.GetAIUnitRecord("Vi"), 0);
+            AIMonster monster = new AIMonster(client.Hero.Game.NetIdProvider.Pop(), AIUnitRecord.GetAIUnitRecord("Vi"), 0);
             monster.Position = client.Hero.Position;
             monster.SpawnPosition = client.Hero.Position;
             monster.DefineGame(client.Hero.Game);
@@ -182,6 +182,8 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
+            var a = "MasterYi".HashString();
+
             Vector2 inputPosition = new Vector2(7771.999f, 7279.999f);
 
 

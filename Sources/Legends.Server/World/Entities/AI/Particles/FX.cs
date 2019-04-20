@@ -4,6 +4,8 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Legends.Core;
+using Legends.Core.DesignPattern;
 using Legends.Protocol.GameClient.Types;
 
 namespace Legends.World.Entities.AI.Particles
@@ -13,32 +15,32 @@ namespace Legends.World.Entities.AI.Particles
         public uint NetId
         {
             get;
-            set;
+            private set;
         }
         public string Name
         {
             get;
-            set;
+            private set;
         }
         public string Bones
         {
             get;
-            set;
+            private set;
         }
         public float Size
         {
             get;
-            set;
+            private set;
         }
         public AIUnit Source
         {
             get;
-            set;
+            private set;
         }
         public AIUnit Target
         {
             get;
-            set;
+            private set;
         }
         public FX(uint netId, string name, string bones, float size, AIUnit source, AIUnit target)
         {
@@ -57,22 +59,42 @@ namespace Legends.World.Entities.AI.Particles
             {
                 BindNetId = Target.NetId,
                 CasterNetId = Source.NetId,
-                KeywordNetId = Source.NetId,
+                KeywordNetId = Target.NetId,
                 NetAssignedNetId = NetId,
                 OrientationVector = new Vector3(),
-                OwnerPositionX = Source.Cell.X,
-                OwnerPositionY = Source.Position.Y,
+                OwnerPositionX = 0,
+                OwnerPositionY = 0,
                 OwnerPositionZ = 0,
-                PositionX = Target.Cell.X,
-                PositionY = Target.Position.Y,
+                PositionX = 0,
+                PositionY = 0,
                 PositionZ = 0,
                 ScriptScale = Size,// taille
-                TargetNetId = NetId,
-                TargetPositionX = (short)Target.Position.X,
-                TargetPositionY = Target.Position.Y,
+                TargetNetId = Target.NetId,
+                TargetPositionX = 0,
+                TargetPositionY = 0,
                 TargetPositionZ = 0,
                 TimeSpent = 0.0f, // ou on en est?
             };
         }
+
+        [InDevelopment(InDevelopmentState.THINK_ABOUT_IT, "Multiple FXCreate Data? change architecture")]
+        public FXCreateGroupData GetFXCreateGroupData()
+        {
+            return new FXCreateGroupData()
+            {
+
+                BoneNameHash = Bones.HashString(),
+                PackageHash = (uint)Source.GetHash(),
+                EffectNameHash = Name.HashString(),
+                Flags = 32,
+                TargetBoneNameHash = "".HashString(),
+                FXCreateData = new List<FXCreateData>()
+                {
+                       GetProtocolObject(),
+                }
+
+            };
+        }
     }
+
 }

@@ -29,32 +29,11 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_C2S_CastSpell)]
         public static void HandleCastSpellRequest(CastSpellRequestMessage message, LoLClient client)
         {
-            AttackableUnit autoAttackTarget = null;
-
-            if (client.Hero.AttackManager.IsAttacking)
-            {
-                autoAttackTarget = client.Hero.AttackManager.GetTarget();
-            }
-
-            Action onChannelOverAction = () =>
-            {
-                if (autoAttackTarget != null)
-                {
-                    client.Hero.TryBasicAttack(autoAttackTarget);
-                }
-                client.Hero.PathManager.MoveToPendingPoint();
-            };
-
-            if (client.Hero.IsMoving)
-                client.Hero.PathManager.PendingPoint = client.Hero.PathManager.GetWaypoints().Last();
-            else
-                client.Hero.PathManager.PendingPoint = null;
-
-            client.Hero.StopMove(true, false);
+           
 
             AttackableUnit spellTarget = client.Hero.Game.Map.GetUnit(message.targetNetId) as AttackableUnit;
 
-            client.Hero.CastSpell(message.slot, message.position, message.endPosition, spellTarget, onChannelOverAction);
+            client.Hero.CastSpell(message.slot, message.position, message.endPosition, spellTarget);
         }
         [MessageHandler(PacketCmd.PKT_C2S_Click, Channel.CHL_C2S)]
         public static void HandleClickMessage(ClickMessage message, LoLClient client)
@@ -84,7 +63,7 @@ namespace Legends.Handlers
         {
             client.Hero.ReadyToSpawn = true;
 
-            client.Hero.NetId = client.Hero.Game.NetIdProvider.PopNextNetId();
+            client.Hero.NetId = client.Hero.Game.NetIdProvider.Pop();
             client.Hero.SpawnPosition = client.Hero.Game.Map.GetSpawnPosition(client.Hero);
             client.Hero.Position = client.Hero.SpawnPosition;
 

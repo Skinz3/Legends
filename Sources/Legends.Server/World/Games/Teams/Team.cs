@@ -132,7 +132,7 @@ namespace Legends.World.Games
         {
             foreach (var unit in Array.FindAll(Units.Values.ToArray(), x => x.AddFogUpdate))
             {
-                AddFogUpdate(new FogUpdate(Game.NetIdProvider.PopNextNetId(), Id, unit));
+                AddFogUpdate(new FogUpdate(Game.NetIdProvider.Pop(), Id, unit));
             }
         }
         private void AddFogUpdate(FogUpdate fogUpdate)

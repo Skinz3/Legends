@@ -20,7 +20,7 @@ namespace Legends.World.Entities
         [InDevelopment(InDevelopmentState.TODO, "spawn group...")]
         public AIMonster SpawnMonster(string monsterName, Game game, Vector2 position)
         {
-            AIMonster monster = new AIMonster(game.NetIdProvider.PopNextNetId(), AIUnitRecord.GetAIUnitRecord(monsterName), 0);
+            AIMonster monster = new AIMonster(game.NetIdProvider.Pop(), AIUnitRecord.GetAIUnitRecord(monsterName), 0);
             monster.Position = position;
             monster.SpawnPosition = position;
             monster.DefineGame(game);

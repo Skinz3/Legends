@@ -58,7 +58,12 @@ namespace Legends
             GameProvider.GameLoop();
 
             while (true)
-                Console.ReadKey();
+            {
+               Console.ReadLine();
+            }
+
+
+            
         }
 
 
@@ -71,6 +76,8 @@ namespace Legends
                , ConfigurationProvider.Instance.Configuration.MySQLUser, ConfigurationProvider.Instance.Configuration.MySQLPassword);
 
             DatabaseManager.Instance.LoadTables();
+
+         
         }
         [StartupInvoke("CSharp Scripts", StartupInvokePriority.Third)]
         public static void LoadScripts()

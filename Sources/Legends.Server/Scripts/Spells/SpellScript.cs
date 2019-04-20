@@ -156,7 +156,7 @@ namespace Legends.Scripts.Spells
 
                 Owner.Game.Send(new SpawnProjectileMessage(skillShot.NetId, position, casterPosition,
                     direction.ToVector3(), velocity, startPoint, endPoint, casterPosition,
-                    0, record.MissileSpeed, 1f, 1f, 1f, false, castInfo));
+                    0, record.MissileSpeed, 1f, 1f, 1f, true, castInfo));
             }
 
         }
@@ -211,9 +211,13 @@ namespace Legends.Scripts.Spells
         }
         public void CreateFX(string effectName, string bonesName, float size, AIUnit target, bool add)
         {
-            uint netId = Owner.Game.NetIdProvider.PopNextNetId();
+            uint netId = Owner.Game.NetIdProvider.Pop();
             FX fx = new FX(netId, effectName, bonesName, size, Owner, target);
-            target.FXManager.CreateFX(fx,add);
+            target.FXManager.CreateFX(fx, add);
+        }
+        public void CreateFXs(FX[] fxs, AIUnit target, bool add)
+        {
+            target.FXManager.CreateFXs(fxs, add);
         }
         protected AttackableUnit[] GetTargets()
         {

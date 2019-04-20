@@ -126,6 +126,12 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.SPELLS_HitEffectName)]
+        public string HitEffectName
+        {
+            get;
+            set;
+        }
         [Ignore]
         public SpellFlags Flags
         {
@@ -141,6 +147,10 @@ namespace Legends.Records
                 return 0f;
             }
             return (1.0f + DelayCastOffsetPercent) / 2.0f;
+        }
+        public bool UseAutoattackAnimation()
+        {
+            return AnimationName.StartsWith("Attack");
         }
         public float GetCooldown(byte level)
         {

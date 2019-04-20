@@ -61,11 +61,7 @@ namespace Legends.World.Entities.AI
             }
             base.Update(deltaTime);
         }
-        [InDevelopment]
-        public void Bind(AIMonster monster)
-        {
-
-        }
+      
         public override void Create()
         {
             Game.Send(new CreateNeutralMessage(NetId, NetNodeEnum.Spawned, GetPositionVector3(), GetPositionVector3(),

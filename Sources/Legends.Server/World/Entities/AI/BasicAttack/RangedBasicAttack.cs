@@ -42,7 +42,7 @@ namespace Legends.World.Entities.AI.BasicAttack
                 logger.Write("We wont spawn a projectile with 0 speed!", MessageState.WARNING);
                 return;
             }
-            this.Projectile = new TargetedProjectile(Unit.Game.NetIdProvider.PopNextNetId(), Unit, Target, Unit.Position, basicAttackRecord.MissileSpeed, OnReach);
+            this.Projectile = new TargetedProjectile(Unit.Game.NetIdProvider.Pop(), Unit, Target, Unit.Position, basicAttackRecord.MissileSpeed, OnReach);
             Unit.GetAttackManager<RangedManager>().AddProjectile(Projectile);
         }
         protected override float GetAutocancelDistance()

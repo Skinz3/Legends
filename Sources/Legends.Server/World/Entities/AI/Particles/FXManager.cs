@@ -26,9 +26,19 @@ namespace Legends.World.Entities.AI.Particles
 
         public void CreateFX(FX fx, bool add)
         {
-            if (add)
-                this.FXS.Add(fx.NetId, fx);
-            this.Owner.NotifyFXCreated(fx);
+            CreateFXs(new FX[] { fx }, add);
+        }
+        public void CreateFXs(FX[] fxs, bool add)
+        {
+            foreach (var fx in fxs)
+            {
+                if (add)
+                    this.FXS.Add(fx.NetId, fx);
+
+            }
+
+            this.Owner.NotifyFXsCreated(fxs);
+
         }
         public void DestroyFX(uint netId)
         {

@@ -31,13 +31,6 @@ namespace Legends.Records
             set;
         }
 
-        [InibinField(InibinHashEnum.SKINS_SkinScale)]
-        public float Scale
-        {
-            get;
-            set;
-        }
-
         [Ignore]
         public int SkinId
         {

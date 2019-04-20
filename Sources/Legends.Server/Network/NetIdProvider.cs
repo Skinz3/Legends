@@ -23,7 +23,7 @@ namespace Legends.Network
             this.LastNetId = DEFAULT_NET_ID;
         }
 
-        public uint PopNextNetId()
+        public uint Pop()
         {
             lock (locker)
             {

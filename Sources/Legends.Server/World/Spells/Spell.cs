@@ -183,17 +183,17 @@ namespace Legends.World.Spells
         {
             var infos = new CastInformations()
             {
-                AmmoRechargeTime = 1f,
+                AmmoRechargeTime = 0f,
                 AmmoUsed = 1, // ??
                 AttackSpeedModifier = 1f,
                 Cooldown = GetTotalCooldown(), // fonctionne avec le slot
                 CasterNetID = Owner.NetId,
-                IsAutoAttack = false,
+                IsAutoAttack = Record.UseAutoattackAnimation(),
                 IsSecondAutoAttack = false,
                 DesignerCastTime = Record.GetCastTime(),
                 DesignerTotalTime = Record.GetCastTime(),
                 ExtraCastTime = 0f,
-                IsClickCasted = false,
+                IsClickCasted = true,
                 IsForceCastingOrChannel = false,
                 IsOverrideCastPosition = false,
                 ManaCost = 0f,
@@ -203,7 +203,7 @@ namespace Legends.World.Spells
                 SpellChainOwnerNetID = Owner.NetId,
                 SpellHash = spellName.HashString(),
                 SpellLevel = Level,
-                SpellNetID = Owner.Game.NetIdProvider.PopNextNetId(),
+                SpellNetID = Owner.Game.NetIdProvider.Pop(),
                 SpellSlot = Slot, // 3 = R
                 StartCastTime = 0, // animation current, ou en est?
                 TargetPosition = position,
@@ -265,7 +265,7 @@ namespace Legends.World.Spells
                         ChannelTimer.Start();
                         State = SpellStateEnum.STATE_CHANNELING;
                     }
-                    NextProjectileId = Owner.Game.NetIdProvider.PopNextNetId();
+                    NextProjectileId = Owner.Game.NetIdProvider.Pop();
                     Script.OnStartCasting(position, endPosition, target);
                     return true;
                 }

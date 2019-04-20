@@ -115,6 +115,13 @@ namespace Legends.World.Entities
             get;
             set;
         }
+        public bool ObjectAvailable
+        {
+            get
+            {
+                return !Disposed && !PendingDispose && Alive;
+            }
+        }
         public bool PendingDispose
         {
             get;

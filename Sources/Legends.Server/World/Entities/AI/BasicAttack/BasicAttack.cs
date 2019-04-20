@@ -133,7 +133,19 @@ namespace Legends.World.Entities.AI.BasicAttack
                 return BaseAttackDelay * (BASE_CAST_OFFSET + (float)Unit.Record.AttackDelayCastOffsetPercent);
             }
         }
-        public BasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASE_ATTACK_1)
+       /* const global.AttackDelay = 1.6;
+        const global.AttackDelayCastPercent = 0.3;
+
+if(CharacterRecord.AttackTotalTime > 0.0)
+{
+    tmp = fminf(CharacterRecord.AttackTotalTime, CharacterRecord.AttackCastTime);
+    if(tmp > 0.0) 
+    {
+        AttackDelayOffsetPercent = (CharacterRecord.AttackTotalTime / global.AttackDelay) + -1.0f;
+        AttackDelayCastOffsetPercent = (tmp / CharacterRecord.AttackTotalTime ) - global.AttackDelayCastPercent;
+    }
+} */
+public BasicAttack(AIUnit unit, AttackableUnit target, bool critical, bool first = true, AttackSlotEnum slot = AttackSlotEnum.BASE_ATTACK_1)
         {
             this.Unit = unit;
             this.Target = target;
@@ -235,7 +247,7 @@ namespace Legends.World.Entities.AI.BasicAttack
             {
                 AttackSlot = Slot,
                 ExtraTime = 0,
-                MissileNextId = Unit.Game.NetIdProvider.PopNextNetId(),
+                MissileNextId = Unit.Game.NetIdProvider.Pop(),
                 TargetNetId = Target.NetId,
                 TargetPosition = Target.GetPositionVector3(),
             };

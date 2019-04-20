@@ -129,7 +129,7 @@ namespace Legends.Scripts.Maps
         }
         protected void SpawnMonster(string name, Vector2 position, int delay)
         {
-            uint netId = Game.NetIdProvider.PopNextNetId();
+            uint netId = Game.NetIdProvider.Pop();
             AIUnitRecord record = AIUnitRecord.GetAIUnitRecord(name);
             AIMonster monster = new AIMonster(netId, record, delay);
             monster.SpawnPosition = position;

@@ -87,7 +87,12 @@ namespace Legends.World.Entities.AI
 
         public override void Create()
         {
-            throw new NotImplementedException();
+            Game.Send(new CreateNeutralMessage(NetId, NetNodeEnum.Spawned, GetPositionVector3(), GetPositionVector3(),
+                    new Vector3(0f, 0f, 0f), Name, Name, "wtf", "", TeamId.NEUTRAL, 0, 0, RoamState,
+                    0, 0, 0, Stats.Level, 5, 20, 0, ""));
+
+            UpdateStats(false);
+            UpdateHeath();
         }
     }
 }

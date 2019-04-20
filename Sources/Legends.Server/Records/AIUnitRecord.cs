@@ -336,6 +336,10 @@ namespace Legends.Records
         {
 
         }
+        public static AIUnitRecord[] GetAIUnits()
+        {
+            return AIUnits.ToArray();
+        }
         public SpellRecord GetSpellRecord(string spellName)
         {
             return Spells.FirstOrDefault(x => x.Name == spellName);
@@ -362,16 +366,7 @@ namespace Legends.Records
 
         public float GetSkinScale(int skinId)
         {
-            var skin = Skins.FirstOrDefault(x => x.SkinId == skinId);
-
-            if (skin != null)
-            {
-                return skin.Scale;
-            }
-            else
-            {
-                return Unit.DEFAULT_MODEL_SIZE;
-            }
+            return Unit.DEFAULT_MODEL_SIZE; 
         }
 
         public static AIUnitRecord GetAIUnitRecord(string name)
