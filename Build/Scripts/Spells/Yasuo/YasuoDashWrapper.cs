@@ -25,6 +25,7 @@ namespace Legends.bin.Debug.Scripts.Spells.Yasuo
         {
         }
 
+
         public override void ApplyEffects(AttackableUnit target, IMissile projectile)
         {
 
@@ -38,6 +39,9 @@ namespace Legends.bin.Debug.Scripts.Spells.Yasuo
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
+            CreateFX("Yasuo_Base_E_Dash.troy", "", 1f, (AIUnit)Owner, false);
+
+            CreateFX("Yasuo_base_E_timer1.troy", "", 1f, (AIUnit)target, false);
 
             var current = Owner.Position;
             var to = Vector2.Normalize(target.Position - current);
@@ -49,13 +53,13 @@ namespace Legends.bin.Debug.Scripts.Spells.Yasuo
 
             Action onDashEnded = () =>
             {
-                SetAnimation("RUN", "");
+                SetAnimation("RUN", "RUN");
             };
 
 
 
             target.InflictDamages(new World.Spells.Damages(Owner, target, 200, false, DamageType.DAMAGE_TYPE_MAGICAL, false));
-            Owner.Dash(trueCoords, 1200f, false, onDashEnded);
+            Owner.Dash(trueCoords, 1000f, false, onDashEnded);
         }
         public override bool CanCast()
         {

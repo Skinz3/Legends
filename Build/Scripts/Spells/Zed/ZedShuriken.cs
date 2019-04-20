@@ -48,7 +48,7 @@ namespace Legends.bin.Debug.Scripts.Spells.Zed
         {
             AddSkillShot("ZedShurikenMisOne", position, endPosition, 1000);
 
-           
+
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)

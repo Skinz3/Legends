@@ -164,6 +164,20 @@ namespace Legends.Core.IO
             this.m_reader.BaseStream.Position = position;
         }
 
+        public string ReadZeroTerminatedString()
+        {
+            var data = new List<byte>();
+
+            byte c = 1;
+
+            while (c != 0)
+            {
+                c = ReadByte();
+                data.Add(c);
+            }
+            return Encoding.ASCII.GetString(data.ToArray());
+        }
+
         public void Dispose()
         {
             this.m_reader = null;

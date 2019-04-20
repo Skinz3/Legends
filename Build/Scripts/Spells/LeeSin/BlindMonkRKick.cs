@@ -16,13 +16,6 @@ namespace Legends.bin.Debug.Scripts.Spells.LeeSin
     {
         public const string SPELL_NAME = "BlindMonkRKick";
 
-        public override bool CanCastSummonerDuringChanneling
-        {
-            get
-            {
-                return true;
-            }
-        }
         public BlindMonkRKick(AIUnit unit, SpellRecord record) : base(unit, record)
         {
 

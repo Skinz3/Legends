@@ -91,7 +91,7 @@ namespace Legends.Scripts.Spells
             }
         }
 
-        public virtual bool CanCastSummonerDuringChanneling
+        public virtual bool AutoAttackAnimation
         {
             get
             {
@@ -99,6 +99,13 @@ namespace Legends.Scripts.Spells
             }
         }
 
+        public virtual bool StopMovement
+        {
+            get
+            {
+                return true;
+            }
+        }
         public SpellScript(AIUnit owner, SpellRecord spellRecord)
         {
             this.Owner = owner;
@@ -229,7 +236,7 @@ namespace Legends.Scripts.Spells
         }
         protected AttackableUnit[] GetTargets()
         {
-            return Owner.Game.Map.Units.OfType<AttackableUnit>().Where(x => IsAffected(x)).ToArray();
+            return Owner.Game.Map.Units.OfType<AttackableUnit>().Where(x => x.Alive && IsAffected(x)).ToArray();
         }
         [InDevelopment]
         private bool IsAffected(AttackableUnit unit)

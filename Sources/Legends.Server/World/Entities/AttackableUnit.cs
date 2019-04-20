@@ -129,6 +129,8 @@ namespace Legends.World.Entities
 
         public virtual void InflictDamages(Damages damages)
         {
+            if (!ObjectAvailable)
+                return;
             damages.Apply();
 
             if (!Stats.IsLifeStealImmune && damages.ApplyAutoAttack && damages.Type == DamageType.DAMAGE_TYPE_PHYSICAL)

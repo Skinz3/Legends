@@ -24,7 +24,13 @@ namespace Legends.bin.Debug.Scripts.Spells.LeeSin
 
         }
 
-
+        public override bool AutoAttackAnimation
+        {
+            get
+            {
+                return true;
+            }
+        }
 
         public override void ApplyEffects(AttackableUnit target, IMissile projectile)
         {

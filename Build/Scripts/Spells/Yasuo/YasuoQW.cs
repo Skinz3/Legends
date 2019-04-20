@@ -34,7 +34,7 @@ namespace Legends.bin.Debug.Scripts.Spells.Yasuo
         {
             get
             {
-                return SpellFlags.AffectEnemies | SpellFlags.AffectHeroes | SpellFlags.AffectNeutral;
+                return SpellFlags.AffectEnemies | SpellFlags.AffectHeroes | SpellFlags.AffectMinions;
             }
         }
         public YasuoQW(AIUnit unit, SpellRecord record) : base(unit, record)
@@ -58,17 +58,27 @@ namespace Legends.bin.Debug.Scripts.Spells.Yasuo
             castInfo.ExtraCastTime = 0f;
             Owner.Game.Send(new CastSpellAnswerMessage(Owner.NetId, Environment.TickCount, false, castInfo));*/
 
+
+
             var castInfo = Spell.GetCastInformations(position.ToVector3(),
-               endPosition.ToVector3(), "YasuoQ", 0);
-            castInfo.DesignerCastTime = 0.1f;
-            castInfo.DesignerTotalTime = 0.1f;
-            castInfo.ExtraCastTime = 0f;
+            endPosition.ToVector3(), "YasuoQ", 0);
+            castInfo.DesignerCastTime = 0.2f;
+            castInfo.DesignerTotalTime = 0.2f;
             Owner.Game.Send(new CastSpellAnswerMessage(Owner.NetId, Environment.TickCount, false, castInfo));
+
+            var a = GetTargets();
+
+            foreach (var b in a)
+            {
+                CreateFX("Yasuo_Base_Q_hit_tar.troy", "", 1f, (AIUnit)b, false);
+                b.InflictDamages(new Damages(Owner, b, 100f, false, DamageType.DAMAGE_TYPE_PHYSICAL, true));
+            }
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-           
+
+
         }
 
     }

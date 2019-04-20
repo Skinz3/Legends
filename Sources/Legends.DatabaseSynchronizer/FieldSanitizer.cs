@@ -27,6 +27,14 @@ namespace Legends.DatabaseSynchronizer
             {
                 return 0;
             }
+            if (fieldType == typeof(Boolean) && value == "0")
+            {
+                return false;
+            }
+            if (fieldType == typeof(Boolean) && value == "1")
+            {
+                return true;
+            }
             else if (value.ToString().Split('.').Last() == "0")
             {
                 return value.ToString().Split('.')[0];

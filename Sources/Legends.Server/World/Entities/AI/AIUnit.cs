@@ -414,7 +414,7 @@ namespace Legends.World.Entities.AI
             else
                 PathManager.PendingPoint = null;
 
-            StopMove(true, false);
+           
 
             Spell spell = SpellManager.GetSpell(spellSlot);
 

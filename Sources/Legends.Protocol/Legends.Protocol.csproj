@@ -47,6 +47,7 @@
     <Compile Include="GameClient\Enum\AudioVOComponentEvent.cs" />
     <Compile Include="GameClient\Enum\BuffTypeEnum.cs" />
     <Compile Include="GameClient\Enum\ChampionEnum.cs" />
+    <Compile Include="GameClient\Enum\ChangeSpellDataType.cs" />
     <Compile Include="GameClient\Enum\ChatChannelType.cs" />
     <Compile Include="GameClient\Enum\DamageResultEnum.cs" />
     <Compile Include="GameClient\Enum\DamageTypeEnum.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="GameClient\Enum\StatPrimaryId.cs" />
     <Compile Include="GameClient\Enum\StatSecondaryId.cs" />
     <Compile Include="GameClient\Enum\SummonerSpellId.cs" />
+    <Compile Include="GameClient\Enum\TargetingType.cs" />
     <Compile Include="GameClient\Enum\TeamId.cs" />
     <Compile Include="GameClient\Enum\TipCommandEnum.cs" />
     <Compile Include="GameClient\Enum\UnitAnnounceEnum.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="GameClient\Messages\Game\ChampionDeathTimerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ChampionDieMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ChampionRespawnMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\ChangeSlotSpellDataMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ChatBoxMessage.cs" />
     <Compile Include="GameClient\Messages\Game\ClickMessage.cs" />
     <Compile Include="GameClient\Messages\Game\CreateMinionCampMessage.cs" />
@@ -160,6 +163,7 @@
     <Compile Include="GameClient\Messages\Other\ExitMessage.cs" />
     <Compile Include="GameClient\Other\WaypointsReader.cs" />
     <Compile Include="GameClient\Types\CastInformations.cs" />
+    <Compile Include="GameClient\Types\ChangeSpellData.cs" />
     <Compile Include="GameClient\Types\FXCreateGroupData.cs" />
     <Compile Include="GameClient\Types\IProtocolable.cs" />
     <Compile Include="GameClient\Types\ProtocolBasicAttack.cs" />

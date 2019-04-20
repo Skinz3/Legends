@@ -94,6 +94,7 @@
     <Compile Include="bin\Debug\Scripts\Spells\Veigar\VeigarPrimordialBurst.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Yasuo\YasuoDashWrapper.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Yasuo\YasuoQW.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Zed\ZedPBAOEDummy.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Zed\ZedShadowDash.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Zed\ZedShuriken.cs" />
     <Compile Include="Configurations\Configuration.cs" />

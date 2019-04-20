@@ -45,7 +45,7 @@ namespace Legends.bin.Debug.Scripts.Spells.LeeSin
                 DestroyFX("blindMonk_W_self_mis.troy");
             };
 
-            Owner.Dash(target.Position, 1500f, false, onDashEnd);
+            Owner.Dash(target.Position, 1800f, false, onDashEnd);
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)

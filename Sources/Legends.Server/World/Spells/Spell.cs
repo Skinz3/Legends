@@ -181,6 +181,7 @@ namespace Legends.World.Spells
         }
         public CastInformations GetCastInformations(Vector3 position, Vector3 endPosition, string spellName, uint missileNetId = 0, AttackableUnit[] targets = null)
         {
+            var castTime = Record.GetCastTime();
             var infos = new CastInformations()
             {
                 AmmoRechargeTime = 0f,
@@ -188,15 +189,15 @@ namespace Legends.World.Spells
                 AttackSpeedModifier = 1f,
                 Cooldown = GetTotalCooldown(), // fonctionne avec le slot
                 CasterNetID = Owner.NetId,
-                IsAutoAttack = Record.UseAutoattackAnimation(),
+                IsAutoAttack = Script.AutoAttackAnimation,
                 IsSecondAutoAttack = false,
-                DesignerCastTime = Record.GetCastTime(),
-                DesignerTotalTime = Record.GetCastTime(),
+                DesignerCastTime = castTime,
+                DesignerTotalTime = castTime,
                 ExtraCastTime = 0f,
-                IsClickCasted = true,
+                IsClickCasted = false,
                 IsForceCastingOrChannel = false,
                 IsOverrideCastPosition = false,
-                ManaCost = 0f,
+                ManaCost = 1f,
                 MissileNetID = missileNetId,
                 PackageHash = (uint)Owner.GetHash(),
                 SpellCastLaunchPosition = new Vector3(Owner.Position.X, Owner.Position.Y, 100),// Owner.GetPositionVector3(),
@@ -247,10 +248,11 @@ namespace Legends.World.Spells
             {
                 if (Script != null && Script.CanCast())
                 {
-                    if (this.onChannelOverAction != null)
+                    if (Script.StopMovement)
                     {
-                        throw new Exception("wtf?");
+                        Owner.StopMove(true, false);
                     }
+
                     this.onChannelOverAction = onChannelOverAction;
                     castPosition = position;
                     this.target = target;
