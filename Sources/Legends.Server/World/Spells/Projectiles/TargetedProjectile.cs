@@ -19,6 +19,8 @@ namespace Legends.World.Spells.Projectiles
             get;
             set;
         }
+        private float m_deltaMovement;
+
         public TargetedProjectile(uint netId, AIUnit unit, AttackableUnit target, Vector2 startPosition, float speed, Action<AttackableUnit, Projectile> onReach)
             : base(netId, unit, startPosition, speed, onReach)
         {
@@ -38,21 +40,16 @@ namespace Legends.World.Spells.Projectiles
 
         public override void Update(float deltaTime)
         {
-            float deltaMovement = Speed * 0.001f * deltaTime; // deltaTime
+            m_deltaMovement = Speed * 0.001f * deltaTime; // deltaTime
 
             float angle = Geo.GetAngle(Position, Target.Position);
 
-            float xOffset = (float)Math.Cos(angle) * deltaMovement;
-            float yOffset = (float)Math.Sin(angle) * deltaMovement;
+            float xOffset = (float)Math.Cos(angle) * m_deltaMovement;
+            float yOffset = (float)Math.Sin(angle) * m_deltaMovement;
 
             Position = new Vector2(Position.X + xOffset, Position.Y + yOffset);
 
-    //         if (Unit is AIHero)
-  //            ((AIHero)Unit).AttentionPing(Position, 0, Protocol.GameClient.Enum.PingTypeEnum.Ping_OnMyWay);
-
-
-            var distanceToTarget = Target.GetDistanceTo(this);
-            if (distanceToTarget <= deltaMovement)
+            if (Collide(Target))
             {
                 OnReach(Target, this);
             }
@@ -72,6 +69,12 @@ namespace Legends.World.Spells.Projectiles
         public override VisibilityData GetVisibilityData()
         {
             return new VisibilityDataSpellMissile();
+        }
+
+        public override bool Collide(AttackableUnit target)
+        {
+            var distanceToTarget = Target.GetDistanceTo(this);
+            return distanceToTarget <= m_deltaMovement;
         }
     }
 }

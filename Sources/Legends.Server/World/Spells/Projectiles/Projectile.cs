@@ -1,5 +1,6 @@
 ﻿using Legends.World.Entities;
 using Legends.World.Entities.AI;
+using Legends.World.Spells.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Legends.World.Spells.Projectiles
 {
-    public abstract class Projectile : Unit, IMissile
+    public abstract class Projectile : Unit, IShape
     {
         protected AIUnit Unit
         {
@@ -39,5 +40,8 @@ namespace Legends.World.Spells.Projectiles
             this.Position = startPosition;
             this.Speed = speed;
         }
+
+        public abstract bool Collide(AttackableUnit target);
+
     }
 }

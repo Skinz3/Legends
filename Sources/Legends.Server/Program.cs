@@ -40,7 +40,6 @@ namespace Legends
             StartupManager.Instance.Initialize(Assembly.GetAssembly(typeof(AIUnitRecord)));
             logger.Write("Server started");
 
-
             if (ConfigurationProvider.Instance.Configuration.StartClient)
             {
                 foreach (var player in ConfigurationProvider.Instance.Configuration.Players)
@@ -59,11 +58,11 @@ namespace Legends
 
             while (true)
             {
-               Console.ReadLine();
+                Console.ReadLine();
             }
 
 
-            
+
         }
 
 
@@ -77,7 +76,7 @@ namespace Legends
 
             DatabaseManager.Instance.LoadTables();
 
-         
+
         }
         [StartupInvoke("CSharp Scripts", StartupInvokePriority.Third)]
         public static void LoadScripts()

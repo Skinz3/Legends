@@ -174,6 +174,15 @@ namespace Legends.World.Commands
         {
 
 
+            for (int i = 0; i < 10; i++)
+            {
+                JungleManager.Instance.SpawnMonster("SRU_OrderMinionMelee", client.Hero.Game, client.Hero.Position + new Vector2(i * 150, 0));
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                JungleManager.Instance.SpawnMonster("SRU_OrderMinionRanged", client.Hero.Game, client.Hero.Position + new Vector2(0, i * 150));
+            }
 
             client.Hero.Game.Send(new BuffAddMessage(client.Hero.NetId, 0, BuffTypeEnum.Counter
                   , 1, false, "Recall".HashString(), (uint)client.Hero.GetHash(), 0f, 1f, client.Hero.NetId));
@@ -202,16 +211,7 @@ namespace Legends.World.Commands
             return;
             //    client.Hero.Game.Send(new UpdateModelMessage(t.NetId, "SRUAP_Turret_Chaos1", true, 0));
             */
-            for (int i = 0; i < 10; i++)
-            {
-                JungleManager.Instance.SpawnMonster("SRU_OrderMinionMelee", client.Hero.Game, client.Hero.Position + new Vector2(i * 150, 0));
-            }
-
-            for (int i = 0; i < 10; i++)
-            {
-                JungleManager.Instance.SpawnMonster("SRU_OrderMinionRanged", client.Hero.Game, client.Hero.Position + new Vector2(0, i * 150));
-            }
-
+          
 
             client.Hero.BlueTip("Legends", "This is for developpement purpose only!", "", TipCommandEnum.ACTIVATE_TIP_DIALOGUE);
             return;

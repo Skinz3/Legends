@@ -30,11 +30,12 @@ namespace Legends.World.Entities.AI.Particles
         }
         public void CreateFXs(FX[] fxs, bool add)
         {
-            foreach (var fx in fxs)
+            if (add)
             {
-                if (add)
+                foreach (var fx in fxs)
+                {
                     this.FXS.Add(fx.NetId, fx);
-
+                }
             }
 
             this.Owner.NotifyFXsCreated(fxs);

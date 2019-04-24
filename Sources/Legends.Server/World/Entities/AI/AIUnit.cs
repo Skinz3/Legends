@@ -424,19 +424,21 @@ namespace Legends.World.Entities.AI
             Spell spell = SpellManager.GetSpell(spellSlot);
 
             AttackableUnit[] targets = target != null ? new AttackableUnit[] { target } : new AttackableUnit[0];
- 
+            var netId = spell.GetNextProjectileId();
 
-            if (spell.Cast(position, endPosition, target, onChannelOverAction))
+            SpellCastResultEnum result = spell.Cast(position, endPosition, target, onChannelOverAction);
+
+            if (result == SpellCastResultEnum.OK)
             {
-                var netId = spell.GetNextProjectileId();
-                Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, true, spell.GetCastInformations(
+                Game.Send(new CastSpellAnswerMessage(NetId, Environment.TickCount, false, spell.GetCastInformations(
                     new Vector3(position.X, position.Y, Game.Map.Record.GetZ(position) + 100),
                     new Vector3(endPosition.X, endPosition.Y, Game.Map.Record.GetZ(endPosition) + 100),
                     spell.Record.Name, netId, targets)));
             }
             else
             {
-                NotifyWaypoints(); // we correctly notify to client stop moving (cast spell ans, stop the movement)
+                /* if (result == SpellCastResultEnum.Failed_NoScript)
+                    NotifyWaypoints(); // we correctly notify to client stop moving (cast spell ans, stop the movement) */ 
             }
         }
         public virtual int GetHash()

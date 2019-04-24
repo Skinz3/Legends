@@ -66,6 +66,12 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.SPELLS_CastRadius)]
+        public float CastRadius
+        {
+            get;
+            set;
+        }
         [InibinField(InibinHashEnum.SPELLS_Cooldown)]
         public float Cooldown
         {

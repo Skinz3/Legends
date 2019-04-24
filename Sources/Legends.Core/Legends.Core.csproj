@@ -93,6 +93,7 @@
     <Compile Include="Time\AsyncRandom.cs" />
     <Compile Include="IO\Inibin\InibinHashEnum.cs" />
     <Compile Include="Time\UpdateTimer.cs" />
+    <Compile Include="Utils\FileSystem.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="DesignPattern\Singleton.cs" />
   </ItemGroup>

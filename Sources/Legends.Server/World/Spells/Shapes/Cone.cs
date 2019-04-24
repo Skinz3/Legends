@@ -11,7 +11,7 @@ using Legends.World.Entities.AI;
 
 namespace Legends.World.Spells.Shapes
 {
-    public struct Cone : IMissile // btw its a missile, riot logic? ^_^
+    public struct Cone : IShape 
     {
         private float BeginAngle
         {
@@ -50,7 +50,7 @@ namespace Legends.World.Spells.Shapes
             EndAngle = middlePointAngle + angleDeg;
 
         }
-        public bool TargetIsInCone(AttackableUnit target)
+        public bool Collide(AttackableUnit target)
         {
             var unitCoords = target.Position;
             var targetDistance = Vector2.Distance(Begin, unitCoords);

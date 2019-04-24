@@ -55,6 +55,7 @@
     <Compile Include="Attributes\InibinMethod.cs" />
     <Compile Include="InibinSynchronizer.cs" />
     <Compile Include="JSONHashes.cs" />
+    <Compile Include="Other\TroyListBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RafManager.cs" />

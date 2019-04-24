@@ -42,6 +42,16 @@ namespace Legends.World.Entities.AI.Particles
             get;
             private set;
         }
+        public Vector2? TargetPosition
+        {
+            get;
+            private set;
+        }
+        public GridPosition? TargetPositionGrid
+        {
+            get;
+            private set;
+        }
         public FX(uint netId, string name, string bones, float size, AIUnit source, AIUnit target)
         {
             this.NetId = netId;
@@ -50,6 +60,19 @@ namespace Legends.World.Entities.AI.Particles
             this.Size = size;
             this.Source = source;
             this.Target = target;
+            this.TargetPosition = null;
+            this.TargetPositionGrid = null;
+        }
+        public FX(uint netId, string name, string bones, float size, AIUnit source, Vector2 targetPosition)
+        {
+            this.NetId = netId;
+            this.Name = name;
+            this.Bones = bones;
+            this.Size = size;
+            this.Source = source;
+            this.Target = null;
+            this.TargetPosition = targetPosition;
+            this.TargetPositionGrid = GridPosition.TranslateToGrid(targetPosition, source.Game.Map.Size, source.Game.Map.Record.HalfCellSize);
         }
 
 
@@ -57,19 +80,20 @@ namespace Legends.World.Entities.AI.Particles
         {
             return new FXCreateData()
             {
-                BindNetId = Target.NetId,
+                BindNetId = Target != null ? Target.NetId : 0,
+
                 CasterNetId = Source.NetId,
-                KeywordNetId = Target.NetId,
+                KeywordNetId = 0,
                 NetAssignedNetId = NetId,
                 OrientationVector = new Vector3(),
                 OwnerPositionX = 0,
                 OwnerPositionY = 0,
                 OwnerPositionZ = 0,
-                PositionX = 0,
+                PositionX = TargetPositionGrid.HasValue ? TargetPositionGrid.Value.X : (short)0,
                 PositionY = 0,
-                PositionZ = 0,
+                PositionZ = TargetPositionGrid.HasValue ? TargetPositionGrid.Value.Y : (short)0,
                 ScriptScale = Size,// taille
-                TargetNetId = Target.NetId,
+                TargetNetId = 0,
                 TargetPositionX = 0,
                 TargetPositionY = 0,
                 TargetPositionZ = 0,

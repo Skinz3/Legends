@@ -71,7 +71,7 @@ namespace Legends.World.Spells.Projectiles
                 {
                     if (Hitten.Contains(target) == false)
                     {
-                        if (Geo.GetDistance(Position, target.Position) <= CollisionRadius + (target.PathfindingCollisionRadius * target.Stats.ModelSize.TotalSafe))
+                        if (Collide(target))
                         {
                             Hitten.Add(target);
                             OnReach(target, this);
@@ -111,6 +111,11 @@ namespace Legends.World.Spells.Projectiles
         public override void OnUnitLeaveVision(Unit unit)
         {
 
+        }
+
+        public override bool Collide(AttackableUnit target)
+        {
+            return Geo.GetDistance(Position, target.Position) <= CollisionRadius + (target.PathfindingCollisionRadius * target.Stats.ModelSize.TotalSafe);
         }
     }
 }

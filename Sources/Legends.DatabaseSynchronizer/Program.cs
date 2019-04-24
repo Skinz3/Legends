@@ -23,6 +23,7 @@ using Legends.DatabaseSynchronizer.CustomSyncs;
 using Legends.Core.IO.Inibin;
 using Legends.ORM;
 using MySql.Data.MySqlClient;
+using Legends.DatabaseSynchronizer.Other;
 
 namespace Legends.DatabaseSynchronizer
 {
@@ -32,7 +33,8 @@ namespace Legends.DatabaseSynchronizer
     class Program
     {
         public const string LeagueOfLegendsPath = @"C:\Emulateur LoL\League of Legends 4.20\League of Legends\";
-        public const string SmartFileOutputPath = @"C:\Emulateur LoL\\Legends\Build\database.smart";
+
+        public const string ExtractedRAFOutputPath = @"C:\Emulateur LoL\RAF 4.20\";
 
         static Logger logger = new Logger();
 
@@ -45,7 +47,7 @@ namespace Legends.DatabaseSynchronizer
 
             RafManager manager = new RafManager(LeagueOfLegendsPath);
 
-            var test = manager.GetFiles("ExpCurve.inibin");
+            TroyListBuilder.GenerateTroybinlist("troybin.txt", ExtractedRAFOutputPath);
 
             DatabaseManager.Instance.DropTables(Assembly.GetAssembly(typeof(AIUnitRecord)));
 

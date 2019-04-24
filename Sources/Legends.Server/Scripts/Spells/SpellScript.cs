@@ -125,18 +125,17 @@ namespace Legends.Scripts.Spells
 
         public abstract void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target);
 
-        protected void AddCone(Vector2 coneEnd, float angleDeg)
+        protected void CreateShapeCollider(IShape collider)
         {
-            Cone cone = new Cone(Owner.Position, coneEnd, angleDeg);
-
             foreach (var unit in GetTargets())
             {
-                if (cone.TargetIsInCone(unit))
+                if (collider.Collide(unit))
                 {
-                    ApplyEffects(unit, cone);
+                    ApplyEffects(unit, collider);
                 }
             }
         }
+       
         /// <summary>
         /// Delay in seconds
         /// </summary>
@@ -231,6 +230,13 @@ namespace Legends.Scripts.Spells
             FX fx = new FX(netId, effectName, bonesName, size, Owner, target);
             target.FXManager.CreateFX(fx, add);
         }
+        public void CreateFX(string effectName, string bonesName, float size, Vector2 targetPosition)
+        {
+            uint netId = Owner.Game.NetIdProvider.Pop();
+            FX fx = new FX(netId, effectName, bonesName, size, Owner, targetPosition);
+            Owner.FXManager.CreateFX(fx, false);
+        }
+
         public void CreateFXs(FX[] fxs, AIUnit target, bool add)
         {
             target.FXManager.CreateFXs(fxs, add);
@@ -293,7 +299,10 @@ namespace Legends.Scripts.Spells
                 }
             }
         }
-        public abstract void ApplyEffects(AttackableUnit target, IMissile projectile);
+        public virtual void ApplyEffects(AttackableUnit target, IShape projectile)
+        {
+            // !! --> keep this empty
+        }
 
         public virtual void OnSkillShotRangeReached(SkillShot skillShot)
         {

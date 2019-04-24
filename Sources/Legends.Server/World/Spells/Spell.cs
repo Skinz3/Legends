@@ -234,21 +234,24 @@ namespace Legends.World.Spells
         {
             return Script.OverrideCastTime != -1 ? Script.OverrideCastTime : Record.GetCastTime();
         }
-        public bool Cast(Vector2 position, Vector2 endPosition, AttackableUnit target, Action onChannelOverAction)
+        public SpellCastResultEnum Cast(Vector2 position, Vector2 endPosition, AttackableUnit target, Action onChannelOverAction)
         {
             if (Owner.SpellManager.IsChanneling() && !IsSummonerSpell)
             {
-                return false;
+                return SpellCastResultEnum.Failed_CastingOrChanneling;
             }
             if (Owner.DashManager.IsDashing)
             {
-                return false;
+                return SpellCastResultEnum.Failed_Dashing;
             }
             if (State == SpellStateEnum.STATE_READY)
             {
-                if (Script != null && Script.CanCast())
+                if (Script != null)
                 {
-
+                    if (!Script.CanCast())
+                    {
+                        return SpellCastResultEnum.Failed_ScriptCriteria;
+                    }
                     if (Script.StopMovement)
                     {
                         Owner.StopMove(true, false);
@@ -276,17 +279,17 @@ namespace Legends.World.Spells
                         OnChannelOver();
                     }
 
-                    return true;
+                    return SpellCastResultEnum.OK;
                 }
                 else
                 {
                     logger.Write("No script for spell:" + Record.Name, MessageState.WARNING);
-                    return false;
+                    return SpellCastResultEnum.Failed_NoScript;
                 }
             }
             else
             {
-                return false;
+                return SpellCastResultEnum.Failed_Cooldown;
             }
         }
 

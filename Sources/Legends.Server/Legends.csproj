@@ -151,6 +151,7 @@
     <Compile Include="World\Entities\AI\Particles\FX.cs" />
     <Compile Include="World\Entities\AI\Particles\FXManager.cs" />
     <Compile Include="World\Entities\AI\Score.cs" />
+    <Compile Include="World\Entities\AI\Ward.cs" />
     <Compile Include="World\Entities\AttackableUnit.cs" />
     <Compile Include="World\Entities\Buildings\AnimatedBuilding.cs" />
     <Compile Include="World\Entities\Buildings\Building.cs" />
@@ -193,12 +194,14 @@
     <Compile Include="World\Items\Item.cs" />
     <Compile Include="World\Entities\JungleManager.cs" />
     <Compile Include="World\Spells\Damages.cs" />
-    <Compile Include="World\Spells\Projectiles\IMissile.cs" />
     <Compile Include="World\Spells\Projectiles\SkillShot.cs" />
     <Compile Include="World\Spells\Projectiles\Projectile.cs" />
     <Compile Include="World\Spells\Projectiles\TargetedProjectile.cs" />
+    <Compile Include="World\Spells\Shapes\Circle.cs" />
     <Compile Include="World\Spells\Shapes\Cone.cs" />
+    <Compile Include="World\Spells\Shapes\IShape.cs" />
     <Compile Include="World\Spells\Spell.cs" />
+    <Compile Include="World\Spells\SpellCastResultEnum.cs" />
     <Compile Include="World\Spells\SpellManager.cs" />
     <Compile Include="World\Spells\SpellProvider.cs" />
   </ItemGroup>
