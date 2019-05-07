@@ -184,7 +184,7 @@ namespace Legends.World.Spells
             var castTime = Record.GetCastTime();
             var infos = new CastInformations()
             {
-                AmmoRechargeTime = 0f,
+                AmmoRechargeTime = 1f,
                 AmmoUsed = 1, // ??
                 AttackSpeedModifier = 1f,
                 Cooldown = GetTotalCooldown(), // fonctionne avec le slot
@@ -271,6 +271,8 @@ namespace Legends.World.Spells
                     }
 
                     NextProjectileId = Owner.Game.NetIdProvider.Pop();
+
+
                     Owner.EventsBinder.OnSpellStartCasting(this, position, endPosition);
                     Script.OnStartCasting(position, endPosition, target);
 
@@ -278,6 +280,8 @@ namespace Legends.World.Spells
                     {
                         OnChannelOver();
                     }
+
+
 
                     return SpellCastResultEnum.OK;
                 }

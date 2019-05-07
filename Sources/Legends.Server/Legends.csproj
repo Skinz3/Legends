@@ -66,6 +66,10 @@
     <Compile Include="bin\Debug\Scripts\Spells\Caitlyn\CaitlynAceintheHole.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Caitlyn\CaitlynEntrapment.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Caitlyn\CaitlynPiltoverPeacemaker.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Darius\DariusAxeGrabCone.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Darius\DariusCleave.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Darius\DariusExecute.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Darius\DariusNoxianTacticsONH.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealArcaneShift.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealEssenceFlux.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Ezreal\EzrealTrueshotBarrage.cs" />
@@ -79,6 +83,10 @@
     <Compile Include="bin\Debug\Scripts\Spells\Jax\JaxLeapStrike.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Jax\JaxRelentlessAssault.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Karma\KarmaQ.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Katarina\KatarinaE.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Katarina\KatarinaQ.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Katarina\KatarinaR.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Katarina\KatarinaW.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkEOne.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkQOne.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkRKick.cs" />
@@ -90,6 +98,10 @@
     <Compile Include="bin\Debug\Scripts\Spells\Lux\LuxMaliceCannon.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\MasterYi\AlphaStrike.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Nidalee\JavelinToss.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Nunu\AbsoluteZero.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Nunu\BloodBoil.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Nunu\Consume.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\Nunu\IceBlast.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Riven\RivenFeint.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Vayne\VayneTumble.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Veigar\VeigarBalefulStrike.cs" />
@@ -228,7 +240,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Debug\Scripts\Spells\Katarina\" />
     <Folder Include="Scripts\Buffs\" />
   </ItemGroup>
   <ItemGroup>

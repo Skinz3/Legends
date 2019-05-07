@@ -22,7 +22,7 @@ namespace Legends.DatabaseSynchronizer.Other
 
             if (File.Exists(fileOutputPath))
             {
-                logger.Write("TroybinList is not generated. " + fileOutputPath + " already exists. . This wont affect database.", MessageState.WARNING);
+                logger.Write("TroybinList is not generated. " + fileOutputPath + " already exists. This wont affect database.", MessageState.WARNING);
                 return;
             }
            

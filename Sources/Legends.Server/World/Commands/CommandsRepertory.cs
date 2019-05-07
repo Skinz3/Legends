@@ -173,7 +173,11 @@ namespace Legends.World.Commands
         public static void TestCommand(LoLClient client)
         {
 
-
+            client.Send(new ChangeSlotSpellDataMessage(client.Hero.NetId, 0, false, new ChangeSpellDataIconIndex()
+            {
+                IconIndex = 0
+            }));
+            return;
             for (int i = 0; i < 10; i++)
             {
                 JungleManager.Instance.SpawnMonster("SRU_OrderMinionMelee", client.Hero.Game, client.Hero.Position + new Vector2(i * 150, 0));

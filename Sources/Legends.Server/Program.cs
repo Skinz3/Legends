@@ -65,8 +65,6 @@ namespace Legends
 
         }
 
-
-
         [StartupInvoke("Database", StartupInvokePriority.First)]
         public static void LoadDatabase()
         {
@@ -86,7 +84,7 @@ namespace Legends
         [StartupInvoke("Protocol", StartupInvokePriority.Second)]
         public static void LoadProtocol()
         {
-            ProtocolManager.Initialize(Assembly.GetAssembly(typeof(KeyCheckMessage)), Assembly.GetExecutingAssembly(), true);
+            ProtocolManager.Initialize(Assembly.GetAssembly(typeof(KeyCheckMessage)), Assembly.GetExecutingAssembly(), false);
         }
     }
 }

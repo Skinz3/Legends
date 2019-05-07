@@ -162,6 +162,8 @@ namespace Legends.Scripts.Spells
                 Owner, position.ToVector2(), record.MissileSpeed, record.LineWidth,
                 OnProjectileReach, direction, range, OnSkillShotRangeReached);
 
+            Console.WriteLine("W" + skillShot.NetId);
+
             Owner.Game.AddUnitToTeam(skillShot, Owner.Team.Id);
             Owner.Game.Map.AddUnit(skillShot);
 
@@ -213,6 +215,7 @@ namespace Legends.Scripts.Spells
         public void DestroyProjectile(Projectile projectile, bool notify)
         {
             Owner.Game.DestroyUnit(projectile);
+            Console.WriteLine("W" + projectile.NetId);
             if (notify)
                 Owner.Game.Send(new DestroyClientMissile(projectile.NetId));
         }
