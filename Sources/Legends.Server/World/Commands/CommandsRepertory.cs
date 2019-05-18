@@ -173,9 +173,9 @@ namespace Legends.World.Commands
         public static void TestCommand(LoLClient client)
         {
 
-            client.Send(new ChangeSlotSpellDataMessage(client.Hero.NetId, 0, false, new ChangeSpellDataIconIndex()
+            client.Send(new ChangeSlotSpellDataMessage(client.Hero.NetId, 0, false, new ChangeSpellDataSpellName()
             {
-                IconIndex = 0
+                SpellName = "BlindMonkQTwo",
             }));
             return;
             for (int i = 0; i < 10; i++)

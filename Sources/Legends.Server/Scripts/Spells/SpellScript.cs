@@ -215,7 +215,7 @@ namespace Legends.Scripts.Spells
         public void DestroyProjectile(Projectile projectile, bool notify)
         {
             Owner.Game.DestroyUnit(projectile);
-            Console.WriteLine("W" + projectile.NetId);
+
             if (notify)
                 Owner.Game.Send(new DestroyClientMissile(projectile.NetId));
         }

@@ -41,21 +41,16 @@ namespace Legends.Protocol.GameClient.Messages.Game
 
         public override void Serialize(LittleEndianWriter writer)
         {
-            writer.WriteByte((byte)0);
-            writer.WriteByte((byte)0x00);
-            writer.WriteByte((byte)0x02);
-            writer.WriteByte((byte)0x00);
-            writer.WriteByte((byte)0x00);
-            writer.WriteByte((byte)0x00);
-            writer.WriteString("BlindMonkQTwoDash");
-            writer.WriteByte((byte)0x00);
-            return;
-            byte bitfield = 0;
-            bitfield |= (byte)((byte)spellSlot & 0x3F);
-            if (isSummonerSpell)
-                bitfield |= 0x40;
+            writer.WriteByte(spellSlot);
 
+
+            byte bitfield = 0;
+            if (isSummonerSpell)
+                bitfield |= 0x01;
             writer.WriteByte(bitfield);
+
+            writer.WriteUInt((uint)changeSpellData.ChangeSlotSpellDataType);
+
             ChangeSpellDataExtension.WriteChangeSpellData(writer, changeSpellData);
             changeSpellData.Serialize(writer);
         }
