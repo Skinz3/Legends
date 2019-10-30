@@ -1,8 +1,10 @@
-﻿using Legends.Records;
+﻿using Legends.bin.Debug.Scripts.Buffs;
+using Legends.Records;
 using Legends.Scripts.Spells;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using Legends.World.Spells.Projectiles;
+using Legends.World.Spells.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,30 +24,24 @@ namespace Legends.bin.Debug.Scripts.Spells.LeeSin
 
         }
 
-
-
-        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
-        {
-
-        }
-
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-            CreateFX("blindMonk_W_cas_01.troy", "", 1f, (AIUnit)target, false);
-            CreateFX("blindMonk_W_self_mis.troy", "", 1f, (AIUnit)Owner, true);
+            CreateFX("blindMonk_W_cas_01.troy", "", 1f, (AIUnit)Owner, false);
 
-            /*CreateFX("blindMonk_W_shield_self.troy", "", 1f, (AIUnit)target, true); <----- this is in buff part
-            CreateFX("blindMonk_W_shield_self.troy", "", 1f, (AIUnit)Owner, true); */
+            ((AIUnit)target).BuffManager.AddBuff<Safeguard>(Owner);
 
-            SetAnimation("Run", "Spell2");
-
-            Action onDashEnd = () =>
+            if (target != Owner)
             {
-                SetAnimation("Run", "Run");
-                DestroyFX("blindMonk_W_self_mis.troy");
-            };
+                SetAnimation("Run", "Spell2");
 
-            Owner.Dash(target.Position, 1800f, false, onDashEnd);
+                Action onDashEnd = () =>
+                {
+                    SetAnimation("Run", "Run");
+
+                };
+
+                Owner.Dash(target.Position, 1800f, false, onDashEnd);
+            }
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)

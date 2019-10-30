@@ -7,6 +7,7 @@ using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using Legends.World.Entities.AI.Particles;
 using Legends.World.Spells.Projectiles;
+using Legends.World.Spells.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace Legends.bin.Debug.Scripts.Spells.LeeSin
             get;
             set;
         }
-        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
+        public override void ApplyEffects(AttackableUnit target, IShape projectile)
         {
             var targetAI = (AIUnit)target;
 
@@ -61,19 +62,37 @@ namespace Legends.bin.Debug.Scripts.Spells.LeeSin
 
             target.InflictDamages(new World.Spells.Damages(Owner, target, 200, false, DamageType.DAMAGE_TYPE_PHYSICAL, false));
 
+            if (target.Alive)
+            {
+                SwapSpell("BlindMonkQTwo", 0);
+            }
+
             CreateAction(() =>
             {
-                if (CurrentTarget.ObjectAvailable)
+                if (CurrentTarget != null && CurrentTarget.ObjectAvailable)
                 {
-                    CurrentTarget.FXManager.DestroyFX("blindMonk_Q_tar.troy");
-                    CurrentTarget.FXManager.DestroyFX("blindMonk_Q_tar_indicator.troy");
+                    var blindMonkQTwo = Owner.SpellManager.GetSpell("BlindMonkQTwo");
+
+                    if (blindMonkQTwo != null && !blindMonkQTwo.GetScript<BlindMonkQTwo>().Casted)
+                    {
+                        SwapSpell("BlindMonkQOne", 0);
+                        CurrentTarget.FXManager.DestroyFX("blindMonk_Q_tar.troy");
+                        CurrentTarget.FXManager.DestroyFX("blindMonk_Q_tar_indicator.troy");
+                    }
                 }
                 CurrentTarget = null;
 
             }, 3f);
 
         }
-
+        public AIUnit GetTarget()
+        {
+            return CurrentTarget;
+        }
+        public void DestroyTarget()
+        {
+            CurrentTarget = null;
+        }
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
             AddSkillShot("BlindMonkQOne", position, endPosition, 1000, true);

@@ -8,6 +8,7 @@ using Legends.World.Entities.AI;
 using Legends.World.Entities.AI.Particles;
 using Legends.World.Spells;
 using Legends.World.Spells.Projectiles;
+using Legends.World.Spells.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +36,9 @@ namespace Legends.bin.Debug.Scripts.Spells.LeeSin
 
 
 
-        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
+        public override void ApplyEffects(AttackableUnit target, IShape projectile)
         {
-
+            target.InflictDamages(new Damages(Owner, target, 200, false, DamageType.DAMAGE_TYPE_MAGICAL, false));
         }
 
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
@@ -50,14 +51,7 @@ namespace Legends.bin.Debug.Scripts.Spells.LeeSin
 
             CreateFXs(fxs, Owner, false);
 
-            foreach (var unit in GetTargets())
-            {
-                if (unit.GetDistanceTo(Owner) <= SpellRecord.CastRange)
-                {
-                    unit.InflictDamages(new Damages(Owner, target, 200, false, DamageType.DAMAGE_TYPE_MAGICAL, false));
-                }
-            }
-
+            CreateShapeCollider(new Circle(Owner.Position, SpellRecord.CastRange));
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)

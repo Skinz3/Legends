@@ -22,14 +22,9 @@ namespace Legends.bin.Debug.Scripts.Spells.Lux
         {
         }
 
-        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-            throw new NotImplementedException();
+
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)

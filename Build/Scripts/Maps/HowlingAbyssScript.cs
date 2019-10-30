@@ -19,7 +19,13 @@ namespace Legends.Scripts.Maps
 				return 5.5f;
 			}
 		}
-		
+        public override bool RecallAllowed
+        {
+            get
+            {
+                return false;
+            }
+        }
         public HowlingAbyssScript(Game game) : base(game)
         {
 

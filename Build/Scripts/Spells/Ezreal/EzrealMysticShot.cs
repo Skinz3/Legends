@@ -12,6 +12,7 @@ using Legends.Protocol.GameClient.Enum;
 using Legends.World.Spells.Projectiles;
 using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Core.Geometry;
+using Legends.World.Spells.Shapes;
 
 namespace Legends.Scripts.Spells
 {
@@ -39,7 +40,7 @@ namespace Legends.Scripts.Spells
         {
         }
 
-        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
+        public override void ApplyEffects(AttackableUnit target, IShape projectile)
         {
             var ad = OwnerADTotal * 1.1f;
             var ap = OwnerAPTotal * 0.4f;

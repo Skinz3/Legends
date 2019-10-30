@@ -37,7 +37,7 @@ namespace Legends.bin.Debug.Scripts.Spells.Annie
         {
         }
 
-        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
+        public override void ApplyEffects(AttackableUnit target, IShape projectile)
         {
           
             var ap = OwnerAPTotal * 0.85f;
@@ -51,8 +51,8 @@ namespace Legends.bin.Debug.Scripts.Spells.Annie
             var to = Vector2.Normalize(position - current);
             var range = to * 625;
             var trueCoords = current + range;
+            CreateShapeCollider(new Cone(Owner.Position, trueCoords, 24.76f));
 
-            AddCone(trueCoords, 24.76f);
         }
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)

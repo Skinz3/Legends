@@ -5,6 +5,7 @@ using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using Legends.World.Spells;
 using Legends.World.Spells.Projectiles;
+using Legends.World.Spells.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace Legends.bin.Debug.Scripts.Spells.Caitlyn
         {
         }
 
-        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
+        public override void ApplyEffects(AttackableUnit target, IShape projectile)
         {
             target.InflictDamages(new Damages(Owner, target, 200f, false, DamageType.DAMAGE_TYPE_PHYSICAL, true));
         }
@@ -52,7 +53,7 @@ namespace Legends.bin.Debug.Scripts.Spells.Caitlyn
             var trueCoords = current + range;
 
             // Calculate dash coords/vector
-            var dash = Vector2.Negate(to) * 500;
+            var dash = Vector2.Negate(to) * 400;
 
 
             var dashCoords = current + dash;
@@ -73,6 +74,10 @@ namespace Legends.bin.Debug.Scripts.Spells.Caitlyn
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
 
+        }
+        public override bool CanCast()
+        {
+            return Owner.DashManager.IsDashing == false;
         }
     }
 }

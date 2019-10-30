@@ -24,13 +24,6 @@ namespace Legends.bin.Debug.Scripts.Spells.LeeSin
 
         }
 
-
-
-        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
-        {
-
-        }
-
         public override void OnFinishCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
 
@@ -38,7 +31,7 @@ namespace Legends.bin.Debug.Scripts.Spells.LeeSin
 
         public override void OnStartCasting(Vector2 position, Vector2 endPosition, AttackableUnit target)
         {
-
+            CreateFX("Veigar_Base_E_cage_green.troy", "", 1f, position);
         }
     }
 }

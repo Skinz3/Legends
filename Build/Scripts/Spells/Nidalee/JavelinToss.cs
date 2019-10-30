@@ -5,6 +5,7 @@ using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using Legends.World.Spells;
 using Legends.World.Spells.Projectiles;
+using Legends.World.Spells.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace Legends.bin.Debug.Scripts.Spells.Nidalee
         {
         }
 
-        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
+        public override void ApplyEffects(AttackableUnit target, IShape projectile)
         {
             var ap = OwnerAPTotal * 1f;
             var damage = 15 + (Spell.Level * 20) + ap;

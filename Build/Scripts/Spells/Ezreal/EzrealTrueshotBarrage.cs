@@ -10,6 +10,7 @@ using Legends.World.Spells;
 using Legends.World.Entities;
 using Legends.Protocol.GameClient.Enum;
 using Legends.World.Spells.Projectiles;
+using Legends.World.Spells.Shapes;
 
 namespace Legends.Scripts.Spells
 {
@@ -39,7 +40,7 @@ namespace Legends.Scripts.Spells
             }
         }
 
-        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
+        public override void ApplyEffects(AttackableUnit target, IShape projectile)
         {
             SkillShot skillShot = projectile as SkillShot;
 

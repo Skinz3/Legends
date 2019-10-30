@@ -19,7 +19,13 @@ namespace Legends.Scripts.Maps
 				return 2.04f;
 			}
 		}
-		
+        public override bool RecallAllowed
+        {
+            get
+            {
+                return true;
+            }
+        }
         public SummonersRiftScript(Game game) : base(game)
         {
 

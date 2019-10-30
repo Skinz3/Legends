@@ -4,6 +4,7 @@ using Legends.Scripts.Spells;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;
 using Legends.World.Spells.Projectiles;
+using Legends.World.Spells.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,28 +18,8 @@ namespace Legends.bin.Debug.Scripts.Spells.Global
     {
         public const string SPELL_NAME = "SummonerFlash";
 
-        public override bool DestroyProjectileOnHit
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public override SpellFlags Flags
-        {
-            get
-            {
-                return SpellFlags.AffectEnemies | SpellFlags.AffectHeroes | SpellFlags.AffectNeutral;
-            }
-        }
         public SummonerFlash(AIUnit unit, SpellRecord record) : base(unit, record)
         {
-
-        }
-
-        public override void ApplyEffects(AttackableUnit target, IMissile projectile)
-        {
-
 
         }
 

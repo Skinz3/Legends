@@ -11,8 +11,8 @@
     <PlayerData>
       <UserId>1</UserId>
       <Name>Skinz</Name>
-      <ChampionName>Zed</ChampionName>
-      <SkinId>0</SkinId>
+      <ChampionName>Lux</ChampionName>
+      <SkinId>4</SkinId>
       <Team>BLUE</Team>
       <Summoner1>SummonerFlash</Summoner1>
       <Summoner2>SummonerTeleport</Summoner2>
@@ -20,11 +20,11 @@
       <SummonerIcon>1</SummonerIcon>
       <Ribbon>1</Ribbon>
     </PlayerData>
- <PlayerData>
+     <PlayerData>
       <UserId>2</UserId>
       <Name>Skinz2</Name>
-      <ChampionName>LeeSin</ChampionName>
-      <SkinId>0</SkinId>
+      <ChampionName>Veigar</ChampionName>
+      <SkinId>1</SkinId>
       <Team>PURPLE</Team>
       <Summoner1>SummonerFlash</Summoner1>
       <Summoner2>SummonerTeleport</Summoner2>
@@ -32,6 +32,5 @@
       <SummonerIcon>1</SummonerIcon>
       <Ribbon>1</Ribbon>
     </PlayerData>
-
   </Players>
 </Configuration>
