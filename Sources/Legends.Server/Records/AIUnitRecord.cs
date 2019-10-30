@@ -17,7 +17,7 @@ namespace Legends.Records
     [Table("aiunits")]
     public class AIUnitRecord : ITable
     {
-        public const string BASIC_ATTACK_SPELL_FOOTER = "BasicAttack";
+        public const string BASIC_ATTACK_SPELL_SUFFIX = "BasicAttack";
 
         private static List<AIUnitRecord> AIUnits = new List<AIUnitRecord>();
 
@@ -27,14 +27,12 @@ namespace Legends.Records
             get;
             set;
         }
-
         [InibinFieldFileName]
         public string Name
         {
             get;
             set;
         }
-        
         [InibinField(InibinHashEnum.CHARACTER_BaseHP)]
         public double BaseHp
         {
@@ -274,6 +272,66 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraSpell1)]
+        public string ExtraSpell1
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraSpell2)]
+        public string ExtraSpell2
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraSpell3)]
+        public string ExtraSpell3
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraSpell4)]
+        public string ExtraSpell4
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraSpell5)]
+        public string ExtraSpell5
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraSpell6)]
+        public string ExtraSpell6
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraSpell7)]
+        public string ExtraSpell7
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraSpell8)]
+        public string ExtraSpell8
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraSpell9)]
+        public string ExtraSpell9
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_ExtraSpell10)]
+        public string ExtraSpell10
+        {
+            get;
+            set;
+        }
         [InibinField(InibinHashEnum.CHARACTER_ExtraAttack1)]
         public string ExtraAttack1
         {
@@ -304,6 +362,30 @@ namespace Legends.Records
             get;
             set;
         }
+        [InibinField(InibinHashEnum.CHARACTER_SpellSupLevels1)]
+        public string SpellSupLevels1
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_SpellSupLevels2)]
+        public string SpellSupLevels2
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_SpellSupLevels3)]
+        public string SpellSupLevels3
+        {
+            get;
+            set;
+        }
+        [InibinField(InibinHashEnum.CHARACTER_SpellSupLevels4)]
+        public string SpellSupLevels4
+        {
+            get;
+            set;
+        }
         [InibinField(InibinHashEnum.CHARACTER_LocalGoldGivenOnDeath)]
         public float LocalGoldGivenOnDeath
         {
@@ -317,14 +399,6 @@ namespace Legends.Records
             get;
             set;
         }
-        [InDevelopment(InDevelopmentState.TODO,"extra spells records")]
-        [Ignore]
-        public SpellRecord[] Spells
-        {
-            get;
-            set;
-        }
-
         [Ignore]
         public SkinRecord[] Skins
         {
@@ -340,10 +414,6 @@ namespace Legends.Records
         {
             return AIUnits.ToArray();
         }
-        public SpellRecord GetSpellRecord(string spellName)
-        {
-            return Spells.FirstOrDefault(x => x.Name == spellName);
-        }
         [StartupInvoke("AIUnits Hooks", StartupInvokePriority.Ninth)]
         public static void Initialize()
         {
@@ -351,22 +421,14 @@ namespace Legends.Records
             {
                 record.Skins = SkinRecord.GetSkins(record.Id);
 
-                record.Spells = (new SpellRecord[4]
-                {
-                    SpellRecord.GetSpell(record.Spell1),
-                    SpellRecord.GetSpell(record.Spell2),
-                    SpellRecord.GetSpell(record.Spell3),
-                    SpellRecord.GetSpell(record.Spell4),
-                }).Where(x => x != null).ToArray();
+                record.BasicAttack = SpellRecord.GetSpellCaseInsensitive(record.Name + BASIC_ATTACK_SPELL_SUFFIX);
 
-                record.BasicAttack = SpellRecord.GetSpellCaseInsensitive(record.Name + BASIC_ATTACK_SPELL_FOOTER);
-        
             }
         }
 
         public float GetSkinScale(int skinId)
         {
-            return Unit.DEFAULT_MODEL_SIZE; 
+            return Unit.DEFAULT_MODEL_SIZE;
         }
 
         public static AIUnitRecord GetAIUnitRecord(string name)

@@ -8,12 +8,12 @@ namespace Legends.Protocol.GameClient.Enum
 {
     public enum ChangeSlotSpellDataType : byte
     {
-        TargetingType = 0x0,
-        SpellName = 0x1,
-        Range = 0x2,
-        MaxGrowthRange = 0x3,
-        RangeDisplay = 0x4,
-        IconIndex = 0x5,
-        OffsetTarget = 0x6,
+        TargetingType = 0x1,
+        SpellName = 0x2,
+        Range = 0x3,
+        MaxGrowthRange = 0x4,
+        RangeDisplay = 0x5,
+        IconIndex = 0x6,
+        OffsetTarget = 0x7,
     }
 }

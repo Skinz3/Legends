@@ -135,7 +135,7 @@ namespace Legends.Scripts.Spells
                 }
             }
         }
-       
+
         /// <summary>
         /// Delay in seconds
         /// </summary>
@@ -161,8 +161,6 @@ namespace Legends.Scripts.Spells
             var skillShot = new SkillShot(Spell.GetNextProjectileId(),
                 Owner, position.ToVector2(), record.MissileSpeed, record.LineWidth,
                 OnProjectileReach, direction, range, OnSkillShotRangeReached);
-
-            Console.WriteLine("W" + skillShot.NetId);
 
             Owner.Game.AddUnitToTeam(skillShot, Owner.Team.Id);
             Owner.Game.Map.AddUnit(skillShot);
@@ -211,6 +209,25 @@ namespace Legends.Scripts.Spells
             }
 
         }
+        /// <summary>
+        /// Rather a push then a swap.
+        /// </summary>
+        protected void SwapSpell(string spellName, byte slotId)
+        {
+            if (Owner.SpellManager.ExistsAtSlot(slotId, spellName))
+            {
+                Spell previous = Owner.SpellManager.Pop(slotId);
+                Spell next = Owner.SpellManager.GetCurrent(slotId);
+                Owner.OnSpellSwaped(slotId, next);
+                next.NotifyCooldownCurrent();
+            }
+            else
+            {
+                Spell spell = SpellProvider.Instance.GetSpell(Owner, slotId, spellName);
+                Owner.SpellManager.AddSpell(slotId, spell);
+                Owner.OnSpellSwaped(slotId, spell);
+            }
+        }
 
         public void DestroyProjectile(Projectile projectile, bool notify)
         {
@@ -226,6 +243,10 @@ namespace Legends.Scripts.Spells
         protected void DestroyFX(string name)
         {
             Owner.FXManager.DestroyFX(name);
+        }
+        protected void DestroyFX(AIUnit unit,string name)
+        {
+            unit.FXManager.DestroyFX(name);
         }
         public void CreateFX(string effectName, string bonesName, float size, AIUnit target, bool add)
         {

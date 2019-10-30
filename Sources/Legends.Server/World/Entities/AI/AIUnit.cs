@@ -264,6 +264,10 @@ namespace Legends.World.Entities.AI
         {
             Game.Send(new InventoryRemoveItemMessage(NetId, item.Slot, 0));
         }
+        public virtual void OnSpellSwaped(byte slot, Spell spell)
+        {
+            
+        }
         public T GetAttackManager<T>() where T : AttackManager
         {
             return (T)AttackManager;

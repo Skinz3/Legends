@@ -53,7 +53,6 @@ namespace Legends
                 }
 
             }
-
             GameProvider.GameLoop();
 
             while (true)

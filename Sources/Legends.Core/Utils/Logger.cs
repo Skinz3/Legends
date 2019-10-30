@@ -49,7 +49,6 @@ namespace Legends.Core.Utils
             WriteColor2("|_____|___|_  |___|_|_|___|___|", false);
             WriteColor2("          |___|                ", false);
             WriteColor1(@"(League Of Legends 4.20)", false);
-
         }
         public void Write(object value, MessageState state = MessageState.INFO)
         {

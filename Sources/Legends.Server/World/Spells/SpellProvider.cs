@@ -13,20 +13,15 @@ namespace Legends.World.Spells
 {
     public class SpellProvider : Singleton<SpellProvider>
     {
-        public Spell GetSpell(AIUnit owner, byte slot, string spellName, bool global = false, bool isSummonerSpell = false)
+        public Spell GetSpell(AIUnit owner, byte slot, string spellName, bool isSummonerSpell = false)
         {
             SpellRecord record = null;
 
-            if (!global)
-                record = owner.Record.GetSpellRecord(spellName);
-            else
-                record = SpellRecord.GetSpell(spellName);
-
+            record = SpellRecord.GetSpell(spellName);
 
             if (record != null)
             {
                 return new Spell(owner, record, slot, SpellScriptManager.Instance.GetSpellScript(record, owner), isSummonerSpell);
-
             }
             else
             {

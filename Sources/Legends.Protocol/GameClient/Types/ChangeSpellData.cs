@@ -54,7 +54,6 @@ namespace Legends.Protocol.GameClient.Types
         }
         public static void WriteChangeSpellData(this LittleEndianWriter writer, IChangeSpellData data)
         {
-            writer.WriteByte((byte)data.ChangeSlotSpellDataType);
             data.Serialize(writer);
         }
     }

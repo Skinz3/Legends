@@ -105,7 +105,13 @@ namespace Legends.World.Spells
             if (State == SpellStateEnum.STATE_COOLDOWN)
             {
                 CooldownTimer.Current -= value;
-
+                NotifyCooldownCurrent();
+            }
+        }
+        public void NotifyCooldownCurrent()
+        {
+            if (State == SpellStateEnum.STATE_COOLDOWN)
+            {
                 if (CooldownTimer.Current <= 0)
                 {
                     CooldownTimer = null;
@@ -296,7 +302,10 @@ namespace Legends.World.Spells
                 return SpellCastResultEnum.Failed_Cooldown;
             }
         }
-
+        public override string ToString()
+        {
+            return Record.Name;
+        }
 
     }
 }

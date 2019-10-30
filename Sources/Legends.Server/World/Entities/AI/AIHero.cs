@@ -108,8 +108,8 @@ namespace Legends.World.Entities.AI
             this.StatsUpdateTimer = new UpdateTimer(STATS_REFRESH_DELAY);
             base.Initialize();
 
-            SpellManager.AddSpell(4, SpellProvider.Instance.GetSpell(this, 4, Data.Summoner1Spell.ToString(), true, true));
-            SpellManager.AddSpell(5, SpellProvider.Instance.GetSpell(this, 5, Data.Summoner2Spell.ToString(), true, true));
+            SpellManager.AddSpell(4, SpellProvider.Instance.GetSpell(this, 4, Data.Summoner1Spell.ToString(), true));
+            SpellManager.AddSpell(5, SpellProvider.Instance.GetSpell(this, 5, Data.Summoner2Spell.ToString(), true));
         }
         public override void OnGameStart()
         {
@@ -222,6 +222,14 @@ namespace Legends.World.Entities.AI
         public override void OnSpellUpgraded(byte spellId, Spell targetSpell)
         {
             Client.Send(new SkillUpResponseMessage(NetId, spellId, targetSpell.Level, Stats.SkillPoints));
+        }
+        public override void OnSpellSwaped(byte slot, Spell spell)
+        {
+            Client.Send(new ChangeSlotSpellDataMessage(NetId, slot, spell.IsSummonerSpell,
+            new ChangeSpellDataSpellName()
+            {
+                SpellName = spell.Record.Name,
+            }));
         }
         public override void OnRevive(AttackableUnit source)
         {

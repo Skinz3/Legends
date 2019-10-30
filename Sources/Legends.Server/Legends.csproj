@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Legends</RootNamespace>
     <AssemblyName>Legends</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -89,6 +90,7 @@
     <Compile Include="bin\Debug\Scripts\Spells\Katarina\KatarinaW.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkEOne.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkQOne.cs" />
+    <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkQTwo.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkRKick.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\LeeSin\BlindMonkWOne.cs" />
     <Compile Include="bin\Debug\Scripts\Spells\Lissandra\LissandraQ.cs" />
@@ -163,7 +165,6 @@
     <Compile Include="World\Entities\AI\Particles\FX.cs" />
     <Compile Include="World\Entities\AI\Particles\FXManager.cs" />
     <Compile Include="World\Entities\AI\Score.cs" />
-    <Compile Include="World\Entities\AI\Ward.cs" />
     <Compile Include="World\Entities\AttackableUnit.cs" />
     <Compile Include="World\Entities\Buildings\AnimatedBuilding.cs" />
     <Compile Include="World\Entities\Buildings\Building.cs" />

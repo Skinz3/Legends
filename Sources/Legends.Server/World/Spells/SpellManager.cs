@@ -20,7 +20,7 @@ namespace Legends.World.Spells
             get;
             private set;
         }
-        private Dictionary<byte, Spell> Spells
+        private Dictionary<byte, SpellSlot> Spells
         {
             get;
             set;
@@ -28,7 +28,7 @@ namespace Legends.World.Spells
         public SpellManager(AIUnit owner)
         {
             this.Owner = owner;
-            this.Spells = new Dictionary<byte, Spell>();
+            this.Spells = new Dictionary<byte, SpellSlot>();
             SetSpells(Owner.Record);
         }
         public void Update(float deltaTime)
@@ -42,7 +42,16 @@ namespace Legends.World.Spells
         {
             if (spell != null)
             {
-                Spells.Add(slot, spell);
+                if (Spells.ContainsKey(slot))
+                {
+                    Spells[slot].Push(spell);
+                }
+                else
+                {
+                    SpellSlot spellSlot = new SpellSlot();
+                    spellSlot.Push(spell);
+                    Spells.Add(slot, spellSlot);
+                }
             }
         }
         public void SetSpells(AIUnitRecord record)
@@ -53,7 +62,6 @@ namespace Legends.World.Spells
             AddSpell(2, SpellProvider.Instance.GetSpell(Owner, 2, record.Spell3));
             AddSpell(3, SpellProvider.Instance.GetSpell(Owner, 3, record.Spell4));
         }
-
         public void LowerCooldowns(float value)
         {
             for (byte i = 0; i <= 3; i++)
@@ -74,23 +82,84 @@ namespace Legends.World.Spells
         }
         public Spell GetSpell(string name)
         {
-            return Spells.Values.FirstOrDefault(x => x.Record.Name == name);
+            foreach (var slot in Spells.Values)
+            {
+                var spell = slot.Find(name);
+
+                if (spell != null)
+                {
+                    return spell;
+                }
+            }
+            return null;
         }
         public Spell GetSpell(byte slot)
         {
-            return Spells[slot];
+            return Spells[slot].Current;
         }
-
         public bool IsChanneling()
         {
             foreach (var spell in Spells)
             {
-                if (spell.Value.State == SpellStateEnum.STATE_CHANNELING)
+                if (spell.Value.Current.State == SpellStateEnum.STATE_CHANNELING)
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        public bool ExistsAtSlot(byte slotId, string spellName)
+        {
+            return Spells[slotId].Find(spellName) != null;
+        }
+
+        public Spell Pop(byte slotId)
+        {
+            return Spells[slotId].Pop();
+        }
+
+        public Spell GetCurrent(byte slotId)
+        {
+            return Spells[slotId].Current;
+        }
+    }
+    public class SpellSlot
+    {
+        private Stack<Spell> Spells
+        {
+            get;
+            set;
+        }
+        public Spell Current
+        {
+            get
+            {
+                return Spells.First();
+            }
+        }
+        public SpellSlot()
+        {
+            this.Spells = new Stack<Spell>();
+        }
+        public void Push(Spell spell)
+        {
+            Spells.Push(spell);
+        }
+        public void Update(float deltaTime)
+        {
+            foreach (var spell in Spells)
+            {
+                spell.Update(deltaTime);
+            }
+        }
+        public Spell Pop()
+        {
+            return Spells.Pop();
+        }
+        public Spell Find(string name)
+        {
+            return Spells.FirstOrDefault(x => x.Record.Name == name);
         }
     }
 }
