@@ -165,6 +165,11 @@ namespace Legends.World.Entities.AI
             Shields.MagicalAndPhysical += value;
             OnShieldModified(true, true, value);
         }
+        public void RemoveGlobalShield(float value)
+        {
+            Shields.MagicalAndPhysical -= value;
+            OnShieldModified(true, true, -value);
+        }
 
         [InDevelopment(InDevelopmentState.TODO)]
         protected override void ApplyExperienceLoot(AttackableUnit source)

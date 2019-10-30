@@ -1,4 +1,5 @@
-﻿using Legends.Protocol.GameClient.Enum;
+﻿using Legends.Core.Utils;
+using Legends.Protocol.GameClient.Enum;
 using Legends.Records;
 using Legends.World.Entities;
 using Legends.World.Entities.AI;

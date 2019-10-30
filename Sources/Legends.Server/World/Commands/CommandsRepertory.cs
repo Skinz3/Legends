@@ -75,8 +75,6 @@ namespace Legends.World.Commands
         [Command("circle")]
         public static void Cercle2Command(LoLClient client, float size)
         {
-            List<Vector2> results = new List<Vector2>();
-
             float start = 0;
 
             float end = (float)(2 * Math.PI);

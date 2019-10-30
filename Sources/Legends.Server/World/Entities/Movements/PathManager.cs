@@ -127,6 +127,10 @@ namespace Legends.World.Entities.Movements
             End = false;
         }
 
+        public void DestroyPendingPoint()
+        {
+            PendingPoint = null;
+        }
         public void Reset()
         {
             PendingPoint = null;

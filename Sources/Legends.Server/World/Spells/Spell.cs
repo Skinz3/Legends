@@ -52,11 +52,13 @@ namespace Legends.World.Spells
             get;
             private set;
         }
-        public SpellScript Script
+        private SpellScript Script
         {
             get;
-            private set;
+            set;
         }
+
+
         private UpdateTimer ChannelTimer;
         private UpdateTimer CooldownTimer;
 
@@ -85,6 +87,10 @@ namespace Legends.World.Spells
             this.Script?.Bind(this);
             this.State = SpellStateEnum.STATE_READY;
             this.IsSummonerSpell = isSummonerSpell;
+        }
+        public T GetScript<T>() where T : SpellScript
+        {
+            return Script as T;
         }
         [InDevelopment(InDevelopmentState.STARTED, "Slot max")]
         public bool Upgrade(byte id)
@@ -205,7 +211,7 @@ namespace Legends.World.Spells
                 IsOverrideCastPosition = false,
                 ManaCost = 1f,
                 MissileNetID = missileNetId,
-                PackageHash =(uint)Owner.GetHash(),
+                PackageHash = (uint)Owner.GetHash(),
                 SpellCastLaunchPosition = new Vector3(Owner.Position.X, Owner.Position.Y, 100),// Owner.GetPositionVector3(),
                 SpellChainOwnerNetID = Owner.NetId,
                 SpellHash = spellName.HashString(),
@@ -268,7 +274,7 @@ namespace Legends.World.Spells
                     this.target = target;
                     castEndPosition = endPosition;
                     var castTime = GetChannelDuration();
-                  
+
                     if (castTime > 0)
                     {
                         ChannelTimer = new UpdateTimer((long)(castTime * 1000));

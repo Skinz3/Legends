@@ -165,8 +165,6 @@ namespace Legends.World.Entities
                 Game.Send(new DamageDoneMessage(damages.Result, damages.Type, damages.Delta, NetId, damages.Source.NetId));
             }
 
-
-
             UpdateStats();
             damages.Source.UpdateStats();
 
