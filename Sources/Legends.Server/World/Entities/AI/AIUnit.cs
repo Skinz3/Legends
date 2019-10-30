@@ -7,6 +7,7 @@ using Legends.Protocol.GameClient.Messages.Game;
 using Legends.Protocol.GameClient.Types;
 using Legends.Records;
 using Legends.World.Entities.AI.BasicAttack;
+using Legends.World.Entities.AI.Buffs;
 using Legends.World.Entities.AI.Particles;
 using Legends.World.Entities.Buildings;
 using Legends.World.Entities.Loot;
@@ -60,9 +61,11 @@ namespace Legends.World.Entities.AI
             get;
             private set;
         }
-
-
-
+        public BuffManager BuffManager
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// Gère les modèles etc
         /// </summary>
@@ -120,6 +123,7 @@ namespace Legends.World.Entities.AI
             PathManager = new PathManager(this);
             DashManager = new DashManager(this);
             FXManager = new FXManager(this);
+            BuffManager = new BuffManager(this);
             base.Initialize();
         }
         [InDevelopment(InDevelopmentState.TODO, "Cancel all spells")]
@@ -210,6 +214,7 @@ namespace Legends.World.Entities.AI
             SpellManager.Update(deltaTime);
             DashManager.Update(deltaTime);
             PathManager.Update(deltaTime);
+            BuffManager.Update(deltaTime);
             this.AttackManager.Update(deltaTime);
         }
         public bool Dash(Vector2 targetPoint, float speed, bool facing, Action onDashEnded = null)
@@ -271,7 +276,7 @@ namespace Legends.World.Entities.AI
         }
         public virtual void OnSpellSwaped(byte slot, Spell spell)
         {
-            
+
         }
         public T GetAttackManager<T>() where T : AttackManager
         {
@@ -433,7 +438,7 @@ namespace Legends.World.Entities.AI
             Spell spell = SpellManager.GetSpell(spellSlot);
 
             AttackableUnit[] targets = target != null ? new AttackableUnit[] { target } : new AttackableUnit[0];
-           
+
             SpellCastResultEnum result = spell.Cast(position, endPosition, target, onChannelOverAction);
 
             if (result == SpellCastResultEnum.OK)
@@ -448,7 +453,7 @@ namespace Legends.World.Entities.AI
             else
             {
                 /* if (result == SpellCastResultEnum.Failed_NoScript)
-                    NotifyWaypoints(); // we correctly notify to client stop moving (cast spell ans, stop the movement) */ 
+                    NotifyWaypoints(); // we correctly notify to client stop moving (cast spell ans, stop the movement) */
             }
         }
         public virtual int GetHash()

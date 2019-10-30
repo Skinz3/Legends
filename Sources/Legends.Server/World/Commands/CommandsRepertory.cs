@@ -170,7 +170,9 @@ namespace Legends.World.Commands
         [Command("test")]
         public static void TestCommand(LoLClient client)
         {
-
+            client.Hero.Game.Send(new BuffAddMessage(
+                client.Hero.NetId, 0, BuffTypeEnum.CombatEnchancer, 1, false, "BootsHomeguardSpeed".HashString(), (uint)client.Hero.GetHash(),
+                0f, 5f, client.Hero.NetId));
             return;
             for (int i = 0; i < 10; i++)
             {
@@ -209,7 +211,7 @@ namespace Legends.World.Commands
             return;
             //    client.Hero.Game.Send(new UpdateModelMessage(t.NetId, "SRUAP_Turret_Chaos1", true, 0));
             */
-          
+
 
             client.Hero.BlueTip("Legends", "This is for developpement purpose only!", "", TipCommandEnum.ACTIVATE_TIP_DIALOGUE);
             return;

@@ -82,6 +82,7 @@
     <Compile Include="GameClient\Messages\Game\BasicAttackPositionMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BlueTipMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BuffAddMessage.cs" />
+    <Compile Include="GameClient\Messages\Game\BuffRemoveMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BuyItemAnswerMessage.cs" />
     <Compile Include="GameClient\Messages\Game\BuyItemRequestMessage.cs" />
     <Compile Include="GameClient\Messages\Game\CastSpellAnswerMessage.cs" />
