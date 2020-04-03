@@ -1,0 +1,22 @@
+{
+  "Name": "FioraDance",
+  "AlternateName": "FioraDance",
+  "AnimationName": "Spell4_WNDUP",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 400.0,
+  "CastRadius": 210.0,
+  "Cooldown": 130.0,
+  "Cooldown1": 130.0,
+  "Cooldown2": 120.0,
+  "Cooldown3": 110.0,
+  "Cooldown4": 5.0,
+  "Cooldown5": 5.0,
+  "Cooldown6": 5.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 91136,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectHeroes | NotAffectSelf",
+  "HitEffectName": "GlobalHit_Yellow_tar,troy"
+}

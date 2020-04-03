@@ -1,0 +1,22 @@
+{
+  "Name": "ArchersMark",
+  "AlternateName": null,
+  "AnimationName": "Spell2",
+  "MissileSpeed": 902.0,
+  "LineWidth": 0.0,
+  "CastFrame": 22.42,
+  "AIRange": 0.0,
+  "CastRange": 0.0,
+  "CastRadius": 100.0,
+  "Cooldown": 20.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.03,
+  "SpellFlags": 82944,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectHeroes",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

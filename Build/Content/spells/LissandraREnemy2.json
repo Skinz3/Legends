@@ -1,0 +1,22 @@
+{
+  "Name": "LissandraREnemy2",
+  "AlternateName": "LissandraR",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 1800.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 1800.0,
+  "CastRadius": 0.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 9.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 66560,
+  "TextFlags": "AffectEnemies | AffectHeroes",
+  "HitEffectName": "swain_ult_tar,troy"
+}

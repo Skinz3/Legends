@@ -1,0 +1,22 @@
+{
+  "Name": "RaiseMorale",
+  "AlternateName": "RaiseMorale",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 2000.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.18,
+  "AIRange": 0.0,
+  "CastRange": 575.0,
+  "CastRadius": 1300.0,
+  "Cooldown": 20.0,
+  "Cooldown1": 20.0,
+  "Cooldown2": 20.0,
+  "Cooldown3": 20.0,
+  "Cooldown4": 20.0,
+  "Cooldown5": 20.0,
+  "Cooldown6": 25.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 262144,
+  "TextFlags": "AlwaysSelf",
+  "HitEffectName": "pirate_raiseMorale_tar,troy"
+}

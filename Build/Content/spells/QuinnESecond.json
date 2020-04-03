@@ -1,0 +1,22 @@
+{
+  "Name": "QuinnESecond",
+  "AlternateName": "DianaTeleport",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 900.0,
+  "CastRadius": 250.0,
+  "Cooldown": 25.0,
+  "Cooldown1": 25.0,
+  "Cooldown2": 20.0,
+  "Cooldown3": 15.0,
+  "Cooldown4": 6.0,
+  "Cooldown5": 6.0,
+  "Cooldown6": 6.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115716,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

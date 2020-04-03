@@ -1,0 +1,22 @@
+{
+  "Name": "DariusCleave",
+  "AlternateName": "DariusCleave",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 270.0,
+  "CastRadius": 0.0,
+  "Cooldown": 8.0,
+  "Cooldown1": 9.0,
+  "Cooldown2": 8.0,
+  "Cooldown3": 7.0,
+  "Cooldown4": 6.0,
+  "Cooldown5": 5.0,
+  "Cooldown6": 8.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 123908,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | NotAffectSelf",
+  "HitEffectName": ""
+}

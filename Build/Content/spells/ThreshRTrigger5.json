@@ -1,0 +1,22 @@
+{
+  "Name": "ThreshRTrigger5",
+  "AlternateName": "ThreshRPenta",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 1100.0,
+  "LineWidth": 0.0,
+  "CastFrame": 30.0,
+  "AIRange": 0.0,
+  "CastRange": 20000.0,
+  "CastRadius": 210.0,
+  "Cooldown": 7.0,
+  "Cooldown1": 7.0,
+  "Cooldown2": 7.0,
+  "Cooldown3": 7.0,
+  "Cooldown4": 7.0,
+  "Cooldown5": 7.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.2222,
+  "SpellFlags": 115712,
+  "TextFlags": null,
+  "HitEffectName": ""
+}

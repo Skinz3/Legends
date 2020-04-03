@@ -1,0 +1,22 @@
+{
+  "Name": "DariusExecute",
+  "AlternateName": "DariusExecute",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 11.0,
+  "AIRange": -1.0,
+  "CastRange": 475.0,
+  "CastRadius": 475.0,
+  "Cooldown": 120.0,
+  "Cooldown1": 120.0,
+  "Cooldown2": 100.0,
+  "Cooldown3": 80.0,
+  "Cooldown4": 6.0,
+  "Cooldown5": 6.0,
+  "Cooldown6": 6.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 74752,
+  "TextFlags": "AffectEnemies | AffectHeroes | NotAffectSelf",
+  "HitEffectName": "BloodSlash,troy"
+}

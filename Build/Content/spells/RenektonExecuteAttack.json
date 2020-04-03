@@ -1,0 +1,22 @@
+{
+  "Name": "RenektonExecuteAttack",
+  "AlternateName": "RenektonPreExecute",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 779.9,
+  "LineWidth": 100.0,
+  "CastFrame": 1.0,
+  "AIRange": 0.0,
+  "CastRange": 400.0,
+  "CastRadius": 210.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.2222,
+  "SpellFlags": 67359748,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectBuildings | AffectMinions | AffectHeroes | AffectTurrets | AffectsWards",
+  "HitEffectName": "RighteousFury_nova,troy"
+}

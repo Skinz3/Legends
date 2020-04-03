@@ -1,0 +1,22 @@
+{
+  "Name": "ThreshBasicAttack1M",
+  "AlternateName": null,
+  "AnimationName": "Attack1_MID",
+  "MissileSpeed": 1000.0,
+  "LineWidth": 0.0,
+  "CastFrame": 12.5,
+  "AIRange": -1.0,
+  "CastRange": 600.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.1528,
+  "SpellFlags": 5120,
+  "TextFlags": "AffectEnemies | AffectBuildings",
+  "HitEffectName": "Thresh_ba2_tar,troy"
+}

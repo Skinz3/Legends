@@ -1,0 +1,22 @@
+{
+  "Name": "SummonerDot",
+  "AlternateName": "SummonerDot",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 828.5,
+  "LineWidth": 0.0,
+  "CastFrame": 5.17,
+  "AIRange": 0.0,
+  "CastRange": 600.0,
+  "CastRadius": 550.0,
+  "Cooldown": 180.0,
+  "Cooldown1": 180.0,
+  "Cooldown2": 180.0,
+  "Cooldown3": 180.0,
+  "Cooldown4": 180.0,
+  "Cooldown5": 180.0,
+  "Cooldown6": 180.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 66564,
+  "TextFlags": "Instacast | AffectEnemies | AffectHeroes",
+  "HitEffectName": "missing_instant,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "YasuoRKnockUpCombo",
+  "AlternateName": "YasuoRKnockUpComboW",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 25.85,
+  "AIRange": 0.0,
+  "CastRange": 2500.0,
+  "CastRadius": 210.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 5.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 201452548,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | NotAffectSelf | AffectWards",
+  "HitEffectName": ""
+}

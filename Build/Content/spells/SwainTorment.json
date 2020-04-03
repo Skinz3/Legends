@@ -1,0 +1,22 @@
+{
+  "Name": "SwainTorment",
+  "AlternateName": "SwainTorment",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 1400.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 625.0,
+  "CastRadius": 135.0,
+  "Cooldown": 16.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 16.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "swain_torment_tar,troy"
+}

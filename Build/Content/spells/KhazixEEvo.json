@@ -1,0 +1,22 @@
+{
+  "Name": "KhazixEEvo",
+  "AlternateName": "KhazixEEvo",
+  "AnimationName": "Evo2E",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 60.0,
+  "AIRange": -1.0,
+  "CastRange": 350.0,
+  "CastRadius": 350.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 3.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 510976,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AffectTurrets | AlwaysSelf",
+  "HitEffectName": "globalhit_orange_tar,troy"
+}

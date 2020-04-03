@@ -1,0 +1,22 @@
+{
+  "Name": "ItemFeralFlare",
+  "AlternateName": null,
+  "AnimationName": "Spell2",
+  "MissileSpeed": 1450.0,
+  "LineWidth": 0.0,
+  "CastFrame": 2.73,
+  "AIRange": 0.0,
+  "CastRange": 1200.0,
+  "CastRadius": 1200.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 248836,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AffectTurrets",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

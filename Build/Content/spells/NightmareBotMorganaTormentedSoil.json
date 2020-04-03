@@ -1,0 +1,22 @@
+{
+  "Name": "NightmareBotMorganaTormentedSoil",
+  "AlternateName": null,
+  "AnimationName": "Spell2",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 20.16,
+  "AIRange": 0.0,
+  "CastRange": 900.0,
+  "CastRadius": 280.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": ""
+}

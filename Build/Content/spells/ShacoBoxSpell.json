@@ -1,0 +1,22 @@
+{
+  "Name": "ShacoBoxSpell",
+  "AlternateName": "ShacoBoxSpell",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 1500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.0,
+  "AIRange": 0.0,
+  "CastRange": 450.0,
+  "CastRadius": 0.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 67359744,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectBuildings | AffectMinions | AffectHeroes | AffectTurrets | AffectWards",
+  "HitEffectName": "ShacoBox_hit,troy"
+}

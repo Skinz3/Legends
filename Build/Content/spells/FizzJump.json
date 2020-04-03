@@ -1,0 +1,22 @@
+{
+  "Name": "FizzJump",
+  "AlternateName": "FizzJump",
+  "AnimationName": "Idle3",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 4.535,
+  "AIRange": 0.0,
+  "CastRange": 25000.0,
+  "CastRadius": 330.0,
+  "Cooldown": 11.0,
+  "Cooldown1": 16.0,
+  "Cooldown2": 14.0,
+  "Cooldown3": 12.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 8.0,
+  "Cooldown6": 12.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 262180,
+  "TextFlags": "Instacast | AlwaysSelf",
+  "HitEffectName": "GlobalHit_Yellow_tar,troy"
+}

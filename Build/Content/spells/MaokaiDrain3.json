@@ -1,0 +1,22 @@
+{
+  "Name": "maokaidrain3",
+  "AlternateName": null,
+  "AnimationName": "Spell4",
+  "MissileSpeed": 20.0,
+  "LineWidth": 150.0,
+  "CastFrame": 16.0,
+  "AIRange": 0.0,
+  "CastRange": 500.0,
+  "CastRadius": 475.0,
+  "Cooldown": 30.0,
+  "Cooldown1": 40.0,
+  "Cooldown2": 30.0,
+  "Cooldown3": 20.0,
+  "Cooldown4": 20.0,
+  "Cooldown5": 20.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 329728,
+  "TextFlags": "AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

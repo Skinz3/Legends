@@ -1,0 +1,22 @@
+{
+  "Name": "MordekaiserCOTGPetBuff",
+  "AlternateName": null,
+  "AnimationName": "Spell2",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 0.66,
+  "AIRange": 0.0,
+  "CastRange": 25000.0,
+  "CastRadius": 25000.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 90.0,
+  "Cooldown2": 75.0,
+  "Cooldown3": 60.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 4310028,
+  "TextFlags": "Instacast | PersistThroughDeath | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": ""
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "LuluR",
+  "AlternateName": "LuluR",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 900.0,
+  "CastRadius": 210.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 110.0,
+  "Cooldown2": 95.0,
+  "Cooldown3": 80.0,
+  "Cooldown4": 80.0,
+  "Cooldown5": 80.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 67588,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes",
+  "HitEffectName": ""
+}

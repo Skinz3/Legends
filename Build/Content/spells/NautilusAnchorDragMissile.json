@@ -1,0 +1,22 @@
+{
+  "Name": "NautilusAnchorDragMissile",
+  "AlternateName": "NautilusAnchorDrag",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 2000.0,
+  "LineWidth": 90.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 25000.0,
+  "CastRadius": 25000.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 123904,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | NotAffectSelf",
+  "HitEffectName": "Globalhit_red,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "SyndraR",
+  "AlternateName": "SyndraR",
+  "AnimationName": "Spell4_start",
+  "MissileSpeed": 1100.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 675.0,
+  "CastRadius": 1010.0,
+  "Cooldown": 100.0,
+  "Cooldown1": 100.0,
+  "Cooldown2": 90.0,
+  "Cooldown3": 80.0,
+  "Cooldown4": 3.5,
+  "Cooldown5": 3.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 66564,
+  "TextFlags": "Instacast | AffectEnemies | AffectHeroes",
+  "HitEffectName": "LCDclock,troy"
+}

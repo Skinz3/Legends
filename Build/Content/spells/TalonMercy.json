@@ -1,0 +1,22 @@
+{
+  "Name": "TalonMercy",
+  "AlternateName": null,
+  "AnimationName": "Spell2",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 15.12,
+  "AIRange": 0.0,
+  "CastRange": 650.0,
+  "CastRadius": 210.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 100352,
+  "TextFlags": "AffectFriends | AffectMinions | AffectHeroes",
+  "HitEffectName": ""
+}

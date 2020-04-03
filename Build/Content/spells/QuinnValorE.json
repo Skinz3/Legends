@@ -1,0 +1,22 @@
+{
+  "Name": "QuinnValorE",
+  "AlternateName": "QuinnE",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 725.0,
+  "CastRadius": 250.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 12.0,
+  "Cooldown2": 11.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 9.0,
+  "Cooldown5": 8.0,
+  "Cooldown6": 6.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115716,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

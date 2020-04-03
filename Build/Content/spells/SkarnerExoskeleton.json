@@ -1,0 +1,22 @@
+{
+  "Name": "SkarnerExoskeleton",
+  "AlternateName": "SkarnerExoskeleton",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 1.0,
+  "CastRadius": 100.0,
+  "Cooldown": 13.0,
+  "Cooldown1": 13.0,
+  "Cooldown2": 12.5,
+  "Cooldown3": 12.0,
+  "Cooldown4": 11.5,
+  "Cooldown5": 11.0,
+  "Cooldown6": 11.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 510980,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AffectTurrets | AlwaysSelf",
+  "HitEffectName": "global_armor_pos_buf,troy"
+}

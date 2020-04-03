@@ -1,0 +1,22 @@
+{
+  "Name": "Mourning",
+  "AlternateName": "Mourning",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 1600.0,
+  "LineWidth": 0.0,
+  "CastFrame": 13.34,
+  "AIRange": 0.0,
+  "CastRange": 750.0,
+  "CastRadius": 710.0,
+  "Cooldown": 20.0,
+  "Cooldown1": 20.0,
+  "Cooldown2": 20.0,
+  "Cooldown3": 20.0,
+  "Cooldown4": 20.0,
+  "Cooldown5": 20.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.15,
+  "SpellFlags": 82948,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectHeroes",
+  "HitEffectName": "hextech_gunBlade_tar,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "EliseSpiderEDescent",
+  "AlternateName": "EliseSpiderEDescent",
+  "AnimationName": "Ult_D",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 25.85,
+  "AIRange": 0.0,
+  "CastRange": 700.0,
+  "CastRadius": 210.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 5.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 67232772,
+  "TextFlags": "AffectEnemies | AffectHeroes | AffectMinions | AffectNeutral | AffectWards | Instacast | NotAffectSelf",
+  "HitEffectName": "GlobalHit_Yellow_tar,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "SkarnerImpale",
+  "AlternateName": "SkarnerImpale",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 350.0,
+  "CastRadius": 20.0,
+  "Cooldown": 110.0,
+  "Cooldown1": 110.0,
+  "Cooldown2": 100.0,
+  "Cooldown3": 90.0,
+  "Cooldown4": 90.0,
+  "Cooldown5": 90.0,
+  "Cooldown6": 110.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 66560,
+  "TextFlags": "AffectEnemies | AffectHeroes",
+  "HitEffectName": "skarner_ult_tar_02,troy"
+}

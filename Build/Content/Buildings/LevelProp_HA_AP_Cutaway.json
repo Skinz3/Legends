@@ -1,0 +1,18 @@
+{
+  "Name": "LevelProp_HA_AP_Cutaway",
+  "MapId": 12,
+  "SkinId": 0,
+  "Rot": "314.0000 0.0000 0.0000",
+  "Move": "-722.2222 177.7777 244.4445",
+  "Health": 0.0,
+  "BaseStaticHpRegen": 0.0,
+  "Mana": 0.0,
+  "SelectionHeight": 0.0,
+  "SelectionRadius": 0.0,
+  "PerceptionBubbleRadius": 0.0,
+  "SkinName1": "",
+  "SkinName2": "",
+  "CollisionRadius": 0.0,
+  "CollisionHeight": 0.0,
+  "PathfindingCollisionRadius": 0.0
+}

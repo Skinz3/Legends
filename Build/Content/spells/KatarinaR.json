@@ -1,0 +1,22 @@
+{
+  "Name": "KatarinaR",
+  "AlternateName": null,
+  "AnimationName": "Spell4",
+  "MissileSpeed": 1450.0,
+  "LineWidth": 0.0,
+  "CastFrame": 5.4,
+  "AIRange": 0.0,
+  "CastRange": 550.0,
+  "CastRadius": 325.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 90.0,
+  "Cooldown2": 60.0,
+  "Cooldown3": 45.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

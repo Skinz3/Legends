@@ -1,0 +1,22 @@
+{
+  "Name": "ZyraBrambleZone",
+  "AlternateName": "ZyraRMiasma",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 700.0,
+  "CastRadius": 500.0,
+  "Cooldown": 130.0,
+  "Cooldown1": 130.0,
+  "Cooldown2": 120.0,
+  "Cooldown3": 110.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 12.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "globalhit_orange_tar,troy"
+}

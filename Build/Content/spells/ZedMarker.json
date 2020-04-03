@@ -1,0 +1,22 @@
+{
+  "Name": "ZedMarker",
+  "AlternateName": null,
+  "AnimationName": "Spell2",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 11.395,
+  "AIRange": 0.0,
+  "CastRange": 325.0,
+  "CastRadius": 325.0,
+  "Cooldown": 7.0,
+  "Cooldown1": 6.0,
+  "Cooldown2": 6.0,
+  "Cooldown3": 6.0,
+  "Cooldown4": 6.0,
+  "Cooldown5": 6.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115716,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | Instacast",
+  "HitEffectName": "akali_shadowSwipe_tar,troy"
+}

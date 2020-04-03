@@ -1,0 +1,22 @@
+{
+  "Name": "Destiny",
+  "AlternateName": "Destiny",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 14.11,
+  "AIRange": -1.0,
+  "CastRange": 5500.0,
+  "CastRadius": 25000.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 180.0,
+  "Cooldown2": 150.0,
+  "Cooldown3": 120.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 66564,
+  "TextFlags": "Instacast | AffectEnemies | AffectHeroes",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

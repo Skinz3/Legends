@@ -1,0 +1,22 @@
+{
+  "Name": "BlindMonkQOne",
+  "AlternateName": "BlindMonkQOne",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 1800.0,
+  "LineWidth": 60.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 1100.0,
+  "CastRadius": 300.0,
+  "Cooldown": 11.0,
+  "Cooldown1": 11.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 9.0,
+  "Cooldown4": 8.0,
+  "Cooldown5": 7.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "Roulette_hit,troy"
+}

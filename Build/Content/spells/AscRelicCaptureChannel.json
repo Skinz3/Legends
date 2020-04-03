@@ -1,0 +1,22 @@
+{
+  "Name": "AscRelicCaptureChannel",
+  "AlternateName": "AbsoluteZero",
+  "AnimationName": "",
+  "MissileSpeed": 828.5,
+  "LineWidth": 0.0,
+  "CastFrame": 5.17,
+  "AIRange": 0.0,
+  "CastRange": 450.0,
+  "CastRadius": 450.0,
+  "Cooldown": 2.0,
+  "Cooldown1": 2.0,
+  "Cooldown2": 2.0,
+  "Cooldown3": 2.0,
+  "Cooldown4": 2.0,
+  "Cooldown5": 2.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 134333568,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | AffectUseable | AllowWhileTaunted",
+  "HitEffectName": "AbsoluteZero_tar,troy"
+}

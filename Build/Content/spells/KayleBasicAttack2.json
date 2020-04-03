@@ -1,0 +1,22 @@
+{
+  "Name": "KayleBasicAttack2",
+  "AlternateName": "KayleBasicAttack2",
+  "AnimationName": "Attack2",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.0,
+  "AIRange": -1.0,
+  "CastRange": 600.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.3025,
+  "SpellFlags": 5120,
+  "TextFlags": "AffectEnemies | AffectBuildings",
+  "HitEffectName": "globalhit_bloodslash,troy"
+}

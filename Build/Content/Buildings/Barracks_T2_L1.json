@@ -1,0 +1,18 @@
+{
+  "Name": "Barracks_T2_L1",
+  "MapId": 11,
+  "SkinId": 0,
+  "Rot": "88.0000 0.0000 0.0000",
+  "Move": "-64.4444 0 37.7778",
+  "Health": 5500.0,
+  "BaseStaticHpRegen": 15.0,
+  "Mana": 0.0,
+  "SelectionHeight": 108.0,
+  "SelectionRadius": 225.0,
+  "PerceptionBubbleRadius": 1350.0,
+  "SkinName1": "SRUAP_ChaosInhibitor",
+  "SkinName2": "SRUAP_ChaosInhibitor_Rubble",
+  "CollisionRadius": 0.0,
+  "CollisionHeight": 0.0,
+  "PathfindingCollisionRadius": 213.75
+}

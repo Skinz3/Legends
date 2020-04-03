@@ -53,9 +53,12 @@ namespace Legends.bin.Debug.Scripts.Spells.LeeSin
                 Owner.TryBasicAttack(dashTarget);
             };
 
-            Owner.Dash(dashTarget.Position, 1800f, false, onDashEnd);
+            if (Owner != null)
+            {
+                Owner.Dash(dashTarget.Position, 1800f, false, onDashEnd);
 
-            SwapSpell("BlindMonkQOne", 0);
+                SwapSpell("BlindMonkQOne", 0);
+            }
         }
     }
 }

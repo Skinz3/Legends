@@ -1,0 +1,22 @@
+{
+  "Name": "BaronTail",
+  "AlternateName": null,
+  "AnimationName": "Spell5",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 0.0,
+  "AIRange": 0.0,
+  "CastRange": 1200.0,
+  "CastRadius": 250.0,
+  "Cooldown": 9.0,
+  "Cooldown1": 9.0,
+  "Cooldown2": 9.0,
+  "Cooldown3": 9.0,
+  "Cooldown4": 9.0,
+  "Cooldown5": 9.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "rupture_cas_01,troy"
+}

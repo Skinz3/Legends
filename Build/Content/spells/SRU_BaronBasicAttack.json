@@ -1,0 +1,22 @@
+{
+  "Name": "SRU_BaronBasicAttack",
+  "AlternateName": "JinxBasicAttack",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 1300.0,
+  "LineWidth": 0.0,
+  "CastFrame": 8.5,
+  "AIRange": 0.0,
+  "CastRange": 900.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 232448,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectBuildings | AffectMinions | AffectHeroes | AffectTurrets | AffectsWards",
+  "HitEffectName": "sru_baron_ba1_tar,troy"
+}

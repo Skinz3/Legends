@@ -1,0 +1,22 @@
+{
+  "Name": "EliseHumanE",
+  "AlternateName": "EliseHumanE",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 1450.0,
+  "LineWidth": 55.0,
+  "CastFrame": 4.545,
+  "AIRange": 0.0,
+  "CastRange": 1100.0,
+  "CastRadius": 210.0,
+  "Cooldown": 14.0,
+  "Cooldown1": 14.0,
+  "Cooldown2": 13.0,
+  "Cooldown3": 12.0,
+  "Cooldown4": 11.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 11.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "rhyzebasicattack2_mis,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "MissFortuneBullets",
+  "AlternateName": "MissFortuneBullets",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 2000.0,
+  "LineWidth": 20.0,
+  "CastFrame": 2.85,
+  "AIRange": 0.0,
+  "CastRange": 1400.0,
+  "CastRadius": 299.3,
+  "Cooldown": 7.0,
+  "Cooldown1": 7.0,
+  "Cooldown2": 7.0,
+  "Cooldown3": 7.0,
+  "Cooldown4": 7.0,
+  "Cooldown5": 7.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115716,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": ""
+}

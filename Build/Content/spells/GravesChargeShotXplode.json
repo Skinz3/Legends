@@ -1,0 +1,22 @@
+{
+  "Name": "GravesChargeShotXplode",
+  "AlternateName": "GravesChargeShotXplode",
+  "AnimationName": "Attack2",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 18.0,
+  "AIRange": 0.0,
+  "CastRange": 700.0,
+  "CastRadius": 700.0,
+  "Cooldown": 5.0,
+  "Cooldown1": 6.0,
+  "Cooldown2": 6.0,
+  "Cooldown3": 6.0,
+  "Cooldown4": 6.0,
+  "Cooldown5": 6.0,
+  "Cooldown6": 5.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "Graves_ChargedShotXplode_tar,troy"
+}

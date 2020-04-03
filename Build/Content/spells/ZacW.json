@@ -1,0 +1,22 @@
+{
+  "Name": "ZacW",
+  "AlternateName": "ZacW",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 350.0,
+  "CastRadius": 0.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 5.0,
+  "Cooldown2": 5.0,
+  "Cooldown3": 5.0,
+  "Cooldown4": 5.0,
+  "Cooldown5": 5.0,
+  "Cooldown6": 6.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 123908,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | NotAffectSelf",
+  "HitEffectName": "akali_shadowSwipe_tar,troy"
+}

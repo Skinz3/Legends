@@ -1,0 +1,22 @@
+{
+  "Name": "NightmareBotZyraSeedCast",
+  "AlternateName": "",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 2200.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.54,
+  "AIRange": -1.0,
+  "CastRange": 2850.0,
+  "CastRadius": 45.0,
+  "Cooldown": 0.25,
+  "Cooldown1": 0.25,
+  "Cooldown2": 0.25,
+  "Cooldown3": 0.25,
+  "Cooldown4": 0.25,
+  "Cooldown5": 0.25,
+  "Cooldown6": 0.25,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 34852,
+  "TextFlags": "Instacast | AffectFriends | AffectMinions",
+  "HitEffectName": ""
+}

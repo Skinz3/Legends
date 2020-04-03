@@ -1,0 +1,22 @@
+{
+  "Name": "BrandWildfire",
+  "AlternateName": null,
+  "AnimationName": "spell4",
+  "MissileSpeed": 1000.0,
+  "LineWidth": 0.0,
+  "CastFrame": 12.0,
+  "AIRange": 0.0,
+  "CastRange": 750.0,
+  "CastRadius": 0.0,
+  "Cooldown": 105.0,
+  "Cooldown1": 105.0,
+  "Cooldown2": 90.0,
+  "Cooldown3": 75.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "permission_shadowbolt_tar,troy"
+}

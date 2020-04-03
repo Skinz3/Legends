@@ -1,0 +1,22 @@
+{
+  "Name": "GragasQToggle",
+  "AlternateName": "GragasQ",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 800.0,
+  "LineWidth": 110.0,
+  "CastFrame": 15.0,
+  "AIRange": 0.0,
+  "CastRange": 1100.0,
+  "CastRadius": 210.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 377860,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "cryo_FlashFrost_tar,troy"
+}

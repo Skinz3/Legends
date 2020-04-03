@@ -1,0 +1,22 @@
+{
+  "Name": "VorpalSpikes",
+  "AlternateName": "VorpalSpikes",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 347.8,
+  "LineWidth": 170.0,
+  "CastFrame": 20.21,
+  "AIRange": 0.0,
+  "CastRange": 40.0,
+  "CastRadius": 270.0,
+  "Cooldown": 0.5,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.2375,
+  "SpellFlags": 329732,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

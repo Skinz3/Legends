@@ -1,0 +1,22 @@
+{
+  "Name": "AscXerathArcaneBarrage2",
+  "AlternateName": "",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 1000.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 1.0,
+  "Cooldown2": 1.0,
+  "Cooldown3": 1.0,
+  "Cooldown4": 1.0,
+  "Cooldown5": 1.0,
+  "Cooldown6": 1.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "missing_instant,troy"
+}

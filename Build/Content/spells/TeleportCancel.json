@@ -1,0 +1,22 @@
+{
+  "Name": "TeleportCancel",
+  "AlternateName": null,
+  "AnimationName": "Idle1",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.0,
+  "AIRange": 0.0,
+  "CastRange": 10000.0,
+  "CastRadius": 240.0,
+  "Cooldown": 300.0,
+  "Cooldown1": 300.0,
+  "Cooldown2": 300.0,
+  "Cooldown3": 300.0,
+  "Cooldown4": 300.0,
+  "Cooldown5": 300.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 428052,
+  "TextFlags": "Instacast | NonDispellable | AffectFriends | AffectMinions | AffectTurrets | AlwaysSelf",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "ToxicShot",
+  "AlternateName": "ToxicShot",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 1500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.0,
+  "AIRange": 0.0,
+  "CastRange": 680.0,
+  "CastRadius": 100.0,
+  "Cooldown": 8.0,
+  "Cooldown1": 8.0,
+  "Cooldown2": 8.0,
+  "Cooldown3": 8.0,
+  "Cooldown4": 8.0,
+  "Cooldown5": 8.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "chill_glb,troy"
+}

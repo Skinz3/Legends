@@ -1,0 +1,18 @@
+{
+  "Name": "LevelProp_ShopMale",
+  "MapId": 11,
+  "SkinId": 0,
+  "Rot": "224.0000 0.0000 0.0000",
+  "Move": "33.3333 0.0000 -44.4445",
+  "Health": 0.0,
+  "BaseStaticHpRegen": 0.0,
+  "Mana": 0.0,
+  "SelectionHeight": 39.6217,
+  "SelectionRadius": 19.8098,
+  "PerceptionBubbleRadius": 0.0,
+  "SkinName1": "",
+  "SkinName2": "",
+  "CollisionRadius": 0.0,
+  "CollisionHeight": 0.0,
+  "PathfindingCollisionRadius": 0.0
+}

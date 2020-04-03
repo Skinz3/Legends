@@ -1,0 +1,22 @@
+{
+  "Name": "YasuoWMovingWallEnemy",
+  "AlternateName": "YasuoWMovingWall",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 902.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 600.0,
+  "CastRadius": 100.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 26.0,
+  "Cooldown2": 23.0,
+  "Cooldown3": 20.0,
+  "Cooldown4": 17.0,
+  "Cooldown5": 13.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 257024,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AffectTurrets | NotAffectSelf",
+  "HitEffectName": ""
+}

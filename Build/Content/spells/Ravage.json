@@ -1,0 +1,22 @@
+{
+  "Name": "Ravage",
+  "AlternateName": null,
+  "AnimationName": "Spell3",
+  "MissileSpeed": 900.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 325.0,
+  "CastRadius": 100.0,
+  "Cooldown": 9.0,
+  "Cooldown1": 9.0,
+  "Cooldown2": 9.0,
+  "Cooldown3": 9.0,
+  "Cooldown4": 9.0,
+  "Cooldown5": 9.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "evelyn_ravage_tar,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "XerathArcanopulse2",
+  "AlternateName": "XerathArcanopulseChargeUp",
+  "AnimationName": "",
+  "MissileSpeed": 3000.0,
+  "LineWidth": 0.0,
+  "CastFrame": 0.0,
+  "AIRange": 0.0,
+  "CastRange": 25000.0,
+  "CastRadius": 250.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -1.0,
+  "SpellFlags": 4310020,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "Ezreal_TrueShot_tar,troy"
+}

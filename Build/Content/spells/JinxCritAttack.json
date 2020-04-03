@@ -1,0 +1,22 @@
+{
+  "Name": "JinxCritAttack",
+  "AlternateName": "JinxBasicAttack",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 2750.0,
+  "LineWidth": 0.0,
+  "CastFrame": 8.5,
+  "AIRange": 0.0,
+  "CastRange": 600.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.08070175,
+  "SpellFlags": 232448,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectMinions | AffectHeroes | AffectTurrets",
+  "HitEffectName": "Jinx_Q_Minigun_Tar,troy"
+}

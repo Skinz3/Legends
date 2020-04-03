@@ -1,0 +1,22 @@
+{
+  "Name": "NightmareBotEzrealQ",
+  "AlternateName": null,
+  "AnimationName": "Spell1",
+  "MissileSpeed": 1200.0,
+  "LineWidth": 80.0,
+  "CastFrame": 1.98,
+  "AIRange": 0.0,
+  "CastRange": 10000.0,
+  "CastRadius": 210.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 6.0,
+  "Cooldown2": 5.5,
+  "Cooldown3": 5.0,
+  "Cooldown4": 4.5,
+  "Cooldown5": 4.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 347136,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

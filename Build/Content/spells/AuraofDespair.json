@@ -1,0 +1,22 @@
+{
+  "Name": "AuraofDespair",
+  "AlternateName": "AuraofDespair",
+  "AnimationName": "Crit",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 5.0,
+  "AIRange": -1.0,
+  "CastRange": 300.0,
+  "CastRadius": 300.0,
+  "Cooldown": 1.0,
+  "Cooldown1": 1.0,
+  "Cooldown2": 1.0,
+  "Cooldown3": 1.0,
+  "Cooldown4": 1.0,
+  "Cooldown5": 1.0,
+  "Cooldown6": 1.0,
+  "DelayCastOffsetPercent": -0.3864,
+  "SpellFlags": 329748,
+  "TextFlags": "Instacast | NonDispellable | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "SunfireCape_tar,troy"
+}

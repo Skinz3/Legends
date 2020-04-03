@@ -1,0 +1,22 @@
+{
+  "Name": "RumbleShield",
+  "AlternateName": "RumbleShield",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 828.5,
+  "LineWidth": 0.0,
+  "CastFrame": 16.095,
+  "AIRange": 0.0,
+  "CastRange": 20.0,
+  "CastRadius": 20.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 6.0,
+  "Cooldown2": 6.0,
+  "Cooldown3": 6.0,
+  "Cooldown4": 6.0,
+  "Cooldown5": 6.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 67588,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes",
+  "HitEffectName": "missing_instant,troy"
+}

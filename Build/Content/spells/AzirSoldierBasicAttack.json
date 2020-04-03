@@ -1,0 +1,22 @@
+{
+  "Name": "AzirSoldierBasicAttack",
+  "AlternateName": null,
+  "AnimationName": "Attack1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 20.0,
+  "AIRange": 0.0,
+  "CastRange": 549.4,
+  "CastRadius": 0.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 117760,
+  "TextFlags": null,
+  "HitEffectName": null
+}

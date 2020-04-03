@@ -1,0 +1,22 @@
+{
+  "Name": "ZyraQFissure",
+  "AlternateName": "ZyraQFissure",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 1400.0,
+  "LineWidth": 85.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 800.0,
+  "CastRadius": 220.0,
+  "Cooldown": 3.0,
+  "Cooldown1": 7.0,
+  "Cooldown2": 6.5,
+  "Cooldown3": 6.0,
+  "Cooldown4": 5.5,
+  "Cooldown5": 5.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 117760,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "Globalhit_red,troy"
+}

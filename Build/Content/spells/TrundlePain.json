@@ -1,0 +1,22 @@
+{
+  "Name": "TrundlePain",
+  "AlternateName": "TrundlePain",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 1400.0,
+  "LineWidth": 0.0,
+  "CastFrame": 11.0,
+  "AIRange": 0.0,
+  "CastRange": 700.0,
+  "CastRadius": 300.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 80.0,
+  "Cooldown2": 70.0,
+  "Cooldown3": 60.0,
+  "Cooldown4": 9.0,
+  "Cooldown5": 7.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 66560,
+  "TextFlags": "AffectEnemies | AffectHeroes",
+  "HitEffectName": ""
+}

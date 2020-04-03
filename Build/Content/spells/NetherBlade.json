@@ -1,0 +1,22 @@
+{
+  "Name": "NetherBlade",
+  "AlternateName": null,
+  "AnimationName": "Spell2",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 5.3,
+  "AIRange": 0.0,
+  "CastRange": 1.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 9.0,
+  "Cooldown2": 9.0,
+  "Cooldown3": 9.0,
+  "Cooldown4": 9.0,
+  "Cooldown5": 9.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 329732,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "MinotaurBasicAttack_bld_tar,troy"
+}

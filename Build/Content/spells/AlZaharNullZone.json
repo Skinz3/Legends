@@ -1,0 +1,22 @@
+{
+  "Name": "AlZaharNullZone",
+  "AlternateName": "AlZaharNullZone",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 800.0,
+  "CastRadius": 240.0,
+  "Cooldown": 14.0,
+  "Cooldown1": 14.0,
+  "Cooldown2": 14.0,
+  "Cooldown3": 14.0,
+  "Cooldown4": 14.0,
+  "Cooldown5": 14.0,
+  "Cooldown6": 14.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115716,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "ChronoClockFast_tar,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "RengarQ",
+  "AlternateName": "RengarQ",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 8.0,
+  "AIRange": -1.0,
+  "CastRange": 300.0,
+  "CastRadius": 210.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 0.5,
+  "Cooldown2": 0.5,
+  "Cooldown3": 0.5,
+  "Cooldown4": 0.5,
+  "Cooldown5": 0.5,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 329732,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "GlobalHit_Yellow_tar,troy"
+}

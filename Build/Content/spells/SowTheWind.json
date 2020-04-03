@@ -1,0 +1,22 @@
+{
+  "Name": "SowTheWind",
+  "AlternateName": "SowTheWind",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 1600.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 600.0,
+  "CastRadius": 210.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 12.0,
+  "Cooldown2": 12.0,
+  "Cooldown3": 12.0,
+  "Cooldown4": 12.0,
+  "Cooldown5": 12.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 123904,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | NotAffectSelf",
+  "HitEffectName": "SowTheWind_tar,troy"
+}

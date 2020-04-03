@@ -1,0 +1,22 @@
+{
+  "Name": "NightmareBotBlitzcrankPowerFist",
+  "AlternateName": null,
+  "AnimationName": "Attack1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 5.265,
+  "AIRange": 0.0,
+  "CastRange": 300.0,
+  "CastRadius": 210.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 9.0,
+  "Cooldown2": 8.0,
+  "Cooldown3": 7.0,
+  "Cooldown4": 6.0,
+  "Cooldown5": 5.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0435,
+  "SpellFlags": 329732,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "GlobalHit_Yellow_tar,troy"
+}

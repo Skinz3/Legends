@@ -1,0 +1,22 @@
+{
+  "Name": "DianaVortex",
+  "AlternateName": "DianaVortex",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 450.0,
+  "CastRadius": 450.0,
+  "Cooldown": 26.0,
+  "Cooldown1": 26.0,
+  "Cooldown2": 24.0,
+  "Cooldown3": 22.0,
+  "Cooldown4": 20.0,
+  "Cooldown5": 18.0,
+  "Cooldown6": 7.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 377856,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "globalhit_orange_tar,troy"
+}

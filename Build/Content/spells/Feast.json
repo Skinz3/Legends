@@ -1,0 +1,22 @@
+{
+  "Name": "Feast",
+  "AlternateName": null,
+  "AnimationName": "Spell2",
+  "MissileSpeed": 500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 5.8,
+  "AIRange": 0.0,
+  "CastRange": 175.0,
+  "CastRadius": 0.0,
+  "Cooldown": 70.0,
+  "Cooldown1": 60.0,
+  "Cooldown2": 60.0,
+  "Cooldown3": 60.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "feast_tar,troy"
+}

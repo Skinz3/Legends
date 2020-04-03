@@ -1,0 +1,22 @@
+{
+  "Name": "AsheSpiritOfTheHawkCast",
+  "AlternateName": "AsheSpiritOfTheHawk",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 1500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 11.31,
+  "AIRange": 0.0,
+  "CastRange": 1400.0,
+  "CastRadius": 299.3,
+  "Cooldown": 60.0,
+  "Cooldown1": 60.0,
+  "Cooldown2": 60.0,
+  "Cooldown3": 60.0,
+  "Cooldown4": 60.0,
+  "Cooldown5": 60.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 344064,
+  "TextFlags": "AffectNeutral | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

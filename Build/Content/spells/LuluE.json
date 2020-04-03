@@ -1,0 +1,22 @@
+{
+  "Name": "LuluE",
+  "AlternateName": "LuluE",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 650.0,
+  "CastRadius": 171.9,
+  "Cooldown": 10.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.65,
+  "SpellFlags": 117764,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": ""
+}

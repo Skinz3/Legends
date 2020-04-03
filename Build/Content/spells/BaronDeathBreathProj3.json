@@ -1,0 +1,22 @@
+{
+  "Name": "BaronDeathBreathProj3",
+  "AlternateName": "WormAttack",
+  "AnimationName": "",
+  "MissileSpeed": 1800.0,
+  "LineWidth": 0.0,
+  "CastFrame": 0.0,
+  "AIRange": 0.0,
+  "CastRange": 1500.0,
+  "CastRadius": 0.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 4312580,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AffectTurrets",
+  "HitEffectName": "SRU_Baron_Attack_HitEffect,troy"
+}

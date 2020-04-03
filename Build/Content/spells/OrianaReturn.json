@@ -1,0 +1,22 @@
+{
+  "Name": "OrianaReturn",
+  "AlternateName": "OrianaRedact",
+  "AnimationName": "Ult_Loop",
+  "MissileSpeed": 2250.0,
+  "LineWidth": 200.0,
+  "CastFrame": 7.935,
+  "AIRange": 0.0,
+  "CastRange": 10000.0,
+  "CastRadius": 300.0,
+  "Cooldown": 8.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 8.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 327686,
+  "TextFlags": "Autocast | Instacast | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "yeti_iceBlast_tar,troy"
+}

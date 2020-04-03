@@ -1,0 +1,22 @@
+{
+  "Name": "CaitlynEntrapment",
+  "AlternateName": "CaitlynEntrapment",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 2000.0,
+  "LineWidth": 80.0,
+  "CastFrame": 7.0,
+  "AIRange": 0.0,
+  "CastRange": 10000.0,
+  "CastRadius": 20.0,
+  "Cooldown": 18.0,
+  "Cooldown1": 18.0,
+  "Cooldown2": 16.0,
+  "Cooldown3": 14.0,
+  "Cooldown4": 12.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 18.0,
+  "DelayCastOffsetPercent": -0.7,
+  "SpellFlags": 379904,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "HeadButt_tar,troy"
+}

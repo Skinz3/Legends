@@ -1,0 +1,22 @@
+{
+  "Name": "VolibearE",
+  "AlternateName": "VolibearE",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 828.5,
+  "LineWidth": 0.0,
+  "CastFrame": 16.095,
+  "AIRange": 0.0,
+  "CastRange": 425.0,
+  "CastRadius": 425.0,
+  "Cooldown": 14.0,
+  "Cooldown1": 11.0,
+  "Cooldown2": 11.0,
+  "Cooldown3": 11.0,
+  "Cooldown4": 11.0,
+  "Cooldown5": 11.0,
+  "Cooldown6": 8.0,
+  "DelayCastOffsetPercent": -0.1213,
+  "SpellFlags": 377860,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "HuntersCall_eff2,troy"
+}

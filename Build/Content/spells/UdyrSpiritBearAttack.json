@@ -1,0 +1,22 @@
+{
+  "Name": "UdyrSpiritBearAttack",
+  "AlternateName": "UdyrBearAttack",
+  "AnimationName": "Stun1",
+  "MissileSpeed": 467.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 625.0,
+  "CastRadius": 125.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.3507,
+  "SpellFlags": 67357696,
+  "TextFlags": "AffectEnemies | AffectMinions | AffectHeroes | AffectTurrets | AffectsWards",
+  "HitEffectName": "globalhit_physical,troy"
+}

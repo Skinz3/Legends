@@ -1,0 +1,22 @@
+{
+  "Name": "RumbleGrenade",
+  "AlternateName": "RumbleGrenade",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 1200.0,
+  "LineWidth": 90.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 10000.0,
+  "CastRadius": 210.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 0.5,
+  "Cooldown2": 0.5,
+  "Cooldown3": 0.5,
+  "Cooldown4": 0.5,
+  "Cooldown5": 0.5,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 347136,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

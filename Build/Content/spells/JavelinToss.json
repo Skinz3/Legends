@@ -1,0 +1,22 @@
+{
+  "Name": "JavelinToss",
+  "AlternateName": "JavelinToss",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 1300.0,
+  "LineWidth": 40.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 1500.0,
+  "CastRadius": 299.3,
+  "Cooldown": 6.0,
+  "Cooldown1": 6.0,
+  "Cooldown2": 6.0,
+  "Cooldown3": 6.0,
+  "Cooldown4": 6.0,
+  "Cooldown5": 6.0,
+  "Cooldown6": 6.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "Nidalee_Base_Q_Tar,troy"
+}

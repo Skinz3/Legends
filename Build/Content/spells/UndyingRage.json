@@ -1,0 +1,22 @@
+{
+  "Name": "UndyingRage",
+  "AlternateName": null,
+  "AnimationName": "Spell4",
+  "MissileSpeed": 500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 4.18,
+  "AIRange": 0.0,
+  "CastRange": 400.0,
+  "CastRadius": 20.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 110.0,
+  "Cooldown2": 100.0,
+  "Cooldown3": 90.0,
+  "Cooldown4": 160.0,
+  "Cooldown5": 160.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 329748,
+  "TextFlags": "Instacast | NonDispellable | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

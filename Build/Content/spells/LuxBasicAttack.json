@@ -1,0 +1,22 @@
+{
+  "Name": "LuxBasicAttack",
+  "AlternateName": "LuxBasicAttack",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 1600.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 622.7,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.1437,
+  "SpellFlags": 261120,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectBuildings | AffectMinions | AffectHeroes | AffectTurrets | NotAffectSelf",
+  "HitEffectName": "LuxBasicAttack_tar,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "YasuoRKnockUpComboW",
+  "AlternateName": "YasuoRKnockUpComboW",
+  "AnimationName": "Channel",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 9.0,
+  "AIRange": 0.0,
+  "CastRange": 1200.0,
+  "CastRadius": 0.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 6.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115748,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "GlobalHit_Yellow_tar,troy"
+}

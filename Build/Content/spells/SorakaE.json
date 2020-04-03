@@ -1,0 +1,22 @@
+{
+  "Name": "SorakaE",
+  "AlternateName": null,
+  "AnimationName": "Spell3",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 875.0,
+  "CastRadius": 300.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 24.0,
+  "Cooldown2": 22.0,
+  "Cooldown3": 20.0,
+  "Cooldown4": 18.0,
+  "Cooldown5": 16.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 117760,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | NotAffectSelf | IgnoreAllyMinion",
+  "HitEffectName": "Infuse_tar,troy"
+}

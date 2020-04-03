@@ -1,0 +1,22 @@
+{
+  "Name": "VladimirHemoplague",
+  "AlternateName": "VladimirHemoplague",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 1200.0,
+  "LineWidth": 150.0,
+  "CastFrame": 0.0,
+  "AIRange": 0.0,
+  "CastRange": 700.0,
+  "CastRadius": 375.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 150.0,
+  "Cooldown2": 135.0,
+  "Cooldown3": 120.0,
+  "Cooldown4": 120.0,
+  "Cooldown5": 120.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.2222,
+  "SpellFlags": 115716,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

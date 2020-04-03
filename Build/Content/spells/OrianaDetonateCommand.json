@@ -1,0 +1,22 @@
+{
+  "Name": "OrianaDetonateCommand",
+  "AlternateName": "OrianaDetonateCommand",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 1200.0,
+  "LineWidth": 80.0,
+  "CastFrame": 12.0,
+  "AIRange": 0.0,
+  "CastRange": 410.0,
+  "CastRadius": 20.0,
+  "Cooldown": 4.0,
+  "Cooldown1": 120.0,
+  "Cooldown2": 105.0,
+  "Cooldown3": 90.0,
+  "Cooldown4": 12.0,
+  "Cooldown5": 12.0,
+  "Cooldown6": 6.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 347136,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

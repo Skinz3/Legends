@@ -1,0 +1,18 @@
+{
+  "Name": "HQ_T2",
+  "MapId": 11,
+  "SkinId": 0,
+  "Rot": "44.0000 0.0000 0.0000",
+  "Move": "0.0000 0.0000 0.0000",
+  "Health": 5500.0,
+  "BaseStaticHpRegen": 20.0,
+  "Mana": 0.0,
+  "SelectionHeight": 117.0,
+  "SelectionRadius": 397.2222,
+  "PerceptionBubbleRadius": 1350.0,
+  "SkinName1": "SRUAP_ChaosNexus",
+  "SkinName2": "Sruap_Chaosnexus_Rubble",
+  "CollisionRadius": 319.4445,
+  "CollisionHeight": 0.0,
+  "PathfindingCollisionRadius": 352.7778
+}

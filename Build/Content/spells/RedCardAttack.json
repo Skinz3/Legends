@@ -1,0 +1,22 @@
+{
+  "Name": "RedCardAttack",
+  "AlternateName": "RedCardAttack",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 1500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 9.94,
+  "AIRange": 0.0,
+  "CastRange": 2000.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": -100.0,
+  "Cooldown2": -100.0,
+  "Cooldown3": -100.0,
+  "Cooldown4": -100.0,
+  "Cooldown5": -100.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 67359748,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectBuildings | AffectMinions | AffectHeroes | AffectTurrets | AffectsWards",
+  "HitEffectName": "PickaCard_red_tar,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "JudicatorRighteousFuryAttack",
+  "AlternateName": "JudicatorRighteousFuryAttack",
+  "AnimationName": "Attack2",
+  "MissileSpeed": 779.9,
+  "LineWidth": 100.0,
+  "CastFrame": 10.0,
+  "AIRange": -1.0,
+  "CastRange": 400.0,
+  "CastRadius": 210.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.2222,
+  "SpellFlags": 250880,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectBuildings | AffectMinions | AffectHeroes | AffectTurrets",
+  "HitEffectName": "globalhit_physical,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "QuinnW",
+  "AlternateName": "QuinnW",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 3.48,
+  "AIRange": 0.0,
+  "CastRange": 2500.0,
+  "CastRadius": 1200.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 50.0,
+  "Cooldown2": 45.0,
+  "Cooldown3": 40.0,
+  "Cooldown4": 35.0,
+  "Cooldown5": 30.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 262148,
+  "TextFlags": null,
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

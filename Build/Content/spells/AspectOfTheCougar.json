@@ -1,0 +1,22 @@
+{
+  "Name": "AspectOfTheCougar",
+  "AlternateName": null,
+  "AnimationName": "Spell4",
+  "MissileSpeed": 943.8,
+  "LineWidth": 0.0,
+  "CastFrame": 0.0,
+  "AIRange": 0.0,
+  "CastRange": 20.0,
+  "CastRadius": 100.0,
+  "Cooldown": 3.0,
+  "Cooldown1": 3.0,
+  "Cooldown2": 3.0,
+  "Cooldown3": 3.0,
+  "Cooldown4": 3.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0574,
+  "SpellFlags": 329732,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

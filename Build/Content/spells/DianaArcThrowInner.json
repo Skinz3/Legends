@@ -1,0 +1,22 @@
+{
+  "Name": "DianaArcThrowInner",
+  "AlternateName": "",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 5000.0,
+  "LineWidth": 100.0,
+  "CastFrame": 7.0,
+  "AIRange": -1.0,
+  "CastRange": 1000.0,
+  "CastRadius": 185.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 117764,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": ""
+}

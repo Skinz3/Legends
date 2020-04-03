@@ -1,0 +1,22 @@
+{
+  "Name": "FeralScream",
+  "AlternateName": "FeralScream",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 19.25,
+  "AIRange": -1.0,
+  "CastRange": 300.0,
+  "CastRadius": 210.0,
+  "Cooldown": 13.0,
+  "Cooldown1": 13.0,
+  "Cooldown2": 13.0,
+  "Cooldown3": 13.0,
+  "Cooldown4": 13.0,
+  "Cooldown5": 13.0,
+  "Cooldown6": 13.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "sound_impact_01,troy"
+}

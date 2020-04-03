@@ -1,0 +1,22 @@
+{
+  "Name": "SwainBeamMinion",
+  "AlternateName": "SwainDecrepify",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 13.0,
+  "AIRange": 0.0,
+  "CastRange": 600.0,
+  "CastRadius": 210.0,
+  "Cooldown": 6.0,
+  "Cooldown1": 6.0,
+  "Cooldown2": 6.0,
+  "Cooldown3": 6.0,
+  "Cooldown4": 6.0,
+  "Cooldown5": 6.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115716,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "Fearmonger_buf,troy"
+}

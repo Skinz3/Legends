@@ -1,0 +1,22 @@
+{
+  "Name": "maokaisapmagicmelee",
+  "AlternateName": "MaokaiBasicAttack2",
+  "AnimationName": "Passive",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 28.0,
+  "AIRange": 0.0,
+  "CastRange": 200.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.1667,
+  "SpellFlags": 67341312,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectMinions | AffectHeroes | AffectTurrets | AffectsWards",
+  "HitEffectName": "globalhit_physical,troy"
+}

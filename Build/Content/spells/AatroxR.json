@@ -1,0 +1,22 @@
+{
+  "Name": "AatroxR",
+  "AlternateName": "AatroxR",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 779.9,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 550.0,
+  "CastRadius": 550.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 100.0,
+  "Cooldown2": 85.0,
+  "Cooldown3": 70.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 329728,
+  "TextFlags": "AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "AnnieSparks,troy"
+}

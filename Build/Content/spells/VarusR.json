@@ -1,0 +1,22 @@
+{
+  "Name": "VarusR",
+  "AlternateName": "VarusR",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 1200.0,
+  "LineWidth": 450.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 10000.0,
+  "CastRadius": 0.0,
+  "Cooldown": 110.0,
+  "Cooldown1": 110.0,
+  "Cooldown2": 90.0,
+  "Cooldown3": 70.0,
+  "Cooldown4": 4.5,
+  "Cooldown5": 4.0,
+  "Cooldown6": 120.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 347136,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "VladimirBasicAttack2",
+  "AlternateName": "VladimirBasicAttack2",
+  "AnimationName": "Attack2",
+  "MissileSpeed": 1400.0,
+  "LineWidth": 0.0,
+  "CastFrame": 8.0,
+  "AIRange": 0.0,
+  "CastRange": 402.0,
+  "CastRadius": 0.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 261120,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectBuildings | AffectMinions | AffectHeroes | AffectTurrets | NotAffectSelf",
+  "HitEffectName": "GlobalHit_Physical,troy"
+}

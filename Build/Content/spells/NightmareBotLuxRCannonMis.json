@@ -1,0 +1,22 @@
+{
+  "Name": "NightmareBotLuxRCannonMis",
+  "AlternateName": "LuxMaliceCannon",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 3000.0,
+  "LineWidth": 250.0,
+  "CastFrame": 80.0,
+  "AIRange": 0.0,
+  "CastRange": 3500.0,
+  "CastRadius": 299.3,
+  "Cooldown": 10.0,
+  "Cooldown1": 60.0,
+  "Cooldown2": 60.0,
+  "Cooldown3": 60.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 1.0,
+  "SpellFlags": 4310016,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "Ezreal_TrueShot_tar,troy"
+}

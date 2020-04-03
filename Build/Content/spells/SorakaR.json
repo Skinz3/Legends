@@ -1,0 +1,22 @@
+{
+  "Name": "SorakaR",
+  "AlternateName": "",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 25000.0,
+  "CastRadius": 25000.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 160.0,
+  "Cooldown2": 145.0,
+  "Cooldown3": 130.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 68096,
+  "TextFlags": "AffectFriends | AffectHeroes",
+  "HitEffectName": "Wish_tar,troy"
+}

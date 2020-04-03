@@ -1,0 +1,22 @@
+{
+  "Name": "SummonerBarrier",
+  "AlternateName": null,
+  "AnimationName": "Attack1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.0,
+  "AIRange": 0.0,
+  "CastRange": 1200.0,
+  "CastRadius": 600.0,
+  "Cooldown": 210.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 510980,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AffectTurrets | AlwaysSelf",
+  "HitEffectName": "InnervatingLocket_cas,troy"
+}

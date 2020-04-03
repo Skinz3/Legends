@@ -1,0 +1,22 @@
+{
+  "Name": "NightmareBotAmumuR",
+  "AlternateName": "CurseoftheSadMummy",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 17.85,
+  "AIRange": 0.0,
+  "CastRange": 550.0,
+  "CastRadius": 550.0,
+  "Cooldown": 180.0,
+  "Cooldown1": 150.0,
+  "Cooldown2": 130.0,
+  "Cooldown3": 110.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 180.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "InciteRage_buf,troy"
+}

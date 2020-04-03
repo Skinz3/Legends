@@ -1,0 +1,22 @@
+{
+  "Name": "GoldCardLock",
+  "AlternateName": null,
+  "AnimationName": "Spell1",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 14.645,
+  "AIRange": 0.0,
+  "CastRange": 200.0,
+  "CastRadius": 1000.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.15,
+  "SpellFlags": 329732,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "AnnieSparks,troy"
+}

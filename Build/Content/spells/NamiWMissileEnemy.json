@@ -1,0 +1,22 @@
+{
+  "Name": "NamiWMissileEnemy",
+  "AlternateName": "FiddlesticksDarkWind",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 1500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 12.0,
+  "AIRange": -1.0,
+  "CastRange": 2500.0,
+  "CastRadius": 710.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 4.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 117764,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "DarkWind_tar,troy"
+}

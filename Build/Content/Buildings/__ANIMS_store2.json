@@ -1,0 +1,18 @@
+{
+  "Name": "__ANIMS_store2",
+  "MapId": 11,
+  "SkinId": 0,
+  "Rot": "184.0000 0.0000 0.0000",
+  "Move": "0.0000 -13.3333 -20.0000",
+  "Health": 0.0,
+  "BaseStaticHpRegen": 0.0,
+  "Mana": 0.0,
+  "SelectionHeight": 0.0,
+  "SelectionRadius": 0.0,
+  "PerceptionBubbleRadius": 0.0,
+  "SkinName1": "shop",
+  "SkinName2": "",
+  "CollisionRadius": 0.0,
+  "CollisionHeight": 0.0,
+  "PathfindingCollisionRadius": 0.0
+}

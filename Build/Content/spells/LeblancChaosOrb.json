@@ -1,0 +1,22 @@
+{
+  "Name": "LeblancChaosOrb",
+  "AlternateName": "LeblancChaosOrb",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 2000.0,
+  "LineWidth": 0.0,
+  "CastFrame": 12.035,
+  "AIRange": 0.0,
+  "CastRange": 700.0,
+  "CastRadius": 800.0,
+  "Cooldown": 6.0,
+  "Cooldown1": 6.0,
+  "Cooldown2": 6.0,
+  "Cooldown3": 6.0,
+  "Cooldown4": 6.0,
+  "Cooldown5": 6.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "LeBlanc_Base_Q_tar,troy"
+}

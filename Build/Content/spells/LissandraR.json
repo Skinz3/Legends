@@ -1,0 +1,22 @@
+{
+  "Name": "LissandraR",
+  "AlternateName": "LissandraR",
+  "AnimationName": "Spell4_SELF",
+  "MissileSpeed": 2000.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 0.0,
+  "CastRadius": 690.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 130.0,
+  "Cooldown2": 105.0,
+  "Cooldown3": 80.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 345092,
+  "TextFlags": "AffectEnemies | AffectHeroes | AffectNeutral | AlwaysSelf | Instacast",
+  "HitEffectName": "LissandraR_buf,troy"
+}

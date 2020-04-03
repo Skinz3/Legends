@@ -1,0 +1,22 @@
+{
+  "Name": "JarvanIVDragonStrike",
+  "AlternateName": null,
+  "AnimationName": "Spell1",
+  "MissileSpeed": 20.0,
+  "LineWidth": 70.0,
+  "CastFrame": 8.0,
+  "AIRange": 0.0,
+  "CastRange": 770.0,
+  "CastRadius": 210.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 9.0,
+  "Cooldown3": 8.0,
+  "Cooldown4": 7.0,
+  "Cooldown5": 6.0,
+  "Cooldown6": 9.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "globalhit_physical,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "KennenCritAttack",
+  "AlternateName": null,
+  "AnimationName": "Crit",
+  "MissileSpeed": 1600.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.0,
+  "AIRange": 0.0,
+  "CastRange": 200.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 230400,
+  "TextFlags": "AffectEnemies | AffectMinions | AffectHeroes | AffectTurrets",
+  "HitEffectName": "globalhit_bloodslash_crit,troy"
+}

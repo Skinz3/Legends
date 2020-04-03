@@ -1,0 +1,22 @@
+{
+  "Name": "ThreshRCenterMin",
+  "AlternateName": "VeigarEventHorizon",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 20.16,
+  "AIRange": 0.0,
+  "CastRange": 650.0,
+  "CastRadius": 350.0,
+  "Cooldown": 20.0,
+  "Cooldown1": 20.0,
+  "Cooldown2": 19.0,
+  "Cooldown3": 18.0,
+  "Cooldown4": 17.0,
+  "Cooldown5": 16.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "ChronoClockFast_tar,troy"
+}

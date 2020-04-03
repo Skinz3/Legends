@@ -1,0 +1,22 @@
+{
+  "Name": "SummonerSmite",
+  "AlternateName": null,
+  "AnimationName": "Idle1",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.0,
+  "AIRange": 0.0,
+  "CastRange": 760.0,
+  "CastRadius": 210.0,
+  "Cooldown": 90.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 58388,
+  "TextFlags": "Instacast | NonDispellable | AffectEnemies | AffectNeutral | AffectMinions | NotAffectSelf",
+  "HitEffectName": "Global_SS_Smite,troy"
+}

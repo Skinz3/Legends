@@ -1,0 +1,22 @@
+{
+  "Name": "SonaWMissile",
+  "AlternateName": "SonaAriaofPerseveranceMissile",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 1300.0,
+  "LineWidth": 0.0,
+  "CastFrame": 0.0,
+  "AIRange": 0.0,
+  "CastRange": 10000.0,
+  "CastRadius": 710.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 4.0,
+  "Cooldown2": 4.0,
+  "Cooldown3": 4.0,
+  "Cooldown4": 4.0,
+  "Cooldown5": 4.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.15,
+  "SpellFlags": 108548,
+  "TextFlags": "Instacast | AffectFriends | AffectMinions | AffectHeroes | NotAffectSelf",
+  "HitEffectName": "heimerdinger_hexTech_missile_tar,troy"
+}

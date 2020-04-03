@@ -1,0 +1,22 @@
+{
+  "Name": "DianaOrbs",
+  "AlternateName": "DianaOrbs",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 1800.0,
+  "LineWidth": 0.0,
+  "CastFrame": 15.0,
+  "AIRange": -1.0,
+  "CastRange": 750.0,
+  "CastRadius": 1000.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 6.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 114692,
+  "TextFlags": "Instacast | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": ""
+}

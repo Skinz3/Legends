@@ -1,0 +1,22 @@
+{
+  "Name": "InfuseWrapper",
+  "AlternateName": "Infuse",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 725.0,
+  "CastRadius": 171.9,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 268561412,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | NotAffectSelf | IgnoreAllyMinion | Instacast",
+  "HitEffectName": "Infuse_tar,troy"
+}

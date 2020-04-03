@@ -1,0 +1,22 @@
+{
+  "Name": "VarusRMissile",
+  "AlternateName": "VarusR",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 1950.0,
+  "LineWidth": 100.0,
+  "CastFrame": 7.53,
+  "AIRange": -1.0,
+  "CastRange": 1200.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 66560,
+  "TextFlags": "AffectEnemies | AffectHeroes",
+  "HitEffectName": "Ezreal_mysticshot_tar,troy"
+}

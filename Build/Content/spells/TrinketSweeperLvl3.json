@@ -1,0 +1,22 @@
+{
+  "Name": "TrinketSweeperLvl3",
+  "AlternateName": "RelicGreaterSpotter",
+  "AnimationName": "Idle1",
+  "MissileSpeed": 500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 5.25,
+  "AIRange": 0.0,
+  "CastRange": 600.0,
+  "CastRadius": 600.0,
+  "Cooldown": 60.0,
+  "Cooldown1": 60.0,
+  "Cooldown2": 60.0,
+  "Cooldown3": 60.0,
+  "Cooldown4": 60.0,
+  "Cooldown5": 60.0,
+  "Cooldown6": 60.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 329732,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "pantheon_grandskyfall_land,troy"
+}

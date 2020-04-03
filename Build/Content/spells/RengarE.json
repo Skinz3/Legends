@@ -1,0 +1,22 @@
+{
+  "Name": "RengarE",
+  "AlternateName": "RengarE",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 1500.0,
+  "LineWidth": 70.0,
+  "CastFrame": 8.5,
+  "AIRange": -1.0,
+  "CastRange": 10000.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.5,
+  "Cooldown1": 0.5,
+  "Cooldown2": 0.5,
+  "Cooldown3": 0.5,
+  "Cooldown4": 0.5,
+  "Cooldown5": 0.5,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 347140,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | InstantCast",
+  "HitEffectName": "RengarE_tar,troy"
+}

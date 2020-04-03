@@ -1,0 +1,22 @@
+{
+  "Name": "InfernalGuardian",
+  "AlternateName": null,
+  "AnimationName": "Spell4",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.0,
+  "AIRange": 0.0,
+  "CastRange": 600.0,
+  "CastRadius": 250.3,
+  "Cooldown": 120.0,
+  "Cooldown1": 120.0,
+  "Cooldown2": 100.0,
+  "Cooldown3": 80.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "InfernalGuardian_tar,troy"
+}

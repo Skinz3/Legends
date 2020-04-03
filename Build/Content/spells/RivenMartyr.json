@@ -1,0 +1,22 @@
+{
+  "Name": "RivenMartyr",
+  "AlternateName": "RivenMartyr",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 1500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 8.0,
+  "AIRange": 0.0,
+  "CastRange": 650.0,
+  "CastRadius": 250.0,
+  "Cooldown": 11.0,
+  "Cooldown1": 11.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 9.0,
+  "Cooldown4": 8.0,
+  "Cooldown5": 7.0,
+  "Cooldown6": 8.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 329728,
+  "TextFlags": "AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

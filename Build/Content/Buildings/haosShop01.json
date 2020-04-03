@@ -1,0 +1,18 @@
+{
+  "Name": "haosShop01",
+  "MapId": 10,
+  "SkinId": 0,
+  "Rot": "",
+  "Move": "",
+  "Health": 0.0,
+  "BaseStaticHpRegen": 0.0,
+  "Mana": 0.0,
+  "SelectionHeight": 338.9408,
+  "SelectionRadius": 237.0155,
+  "PerceptionBubbleRadius": 0.0,
+  "SkinName1": "",
+  "SkinName2": "",
+  "CollisionRadius": 0.0,
+  "CollisionHeight": 0.0,
+  "PathfindingCollisionRadius": 0.0
+}

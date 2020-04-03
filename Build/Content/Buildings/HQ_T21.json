@@ -1,0 +1,18 @@
+{
+  "Name": "HQ_T21",
+  "MapId": 10,
+  "SkinId": 0,
+  "Rot": "",
+  "Move": "",
+  "Health": 0.0,
+  "BaseStaticHpRegen": 0.0,
+  "Mana": 0.0,
+  "SelectionHeight": 158.2981,
+  "SelectionRadius": 318.4645,
+  "PerceptionBubbleRadius": 0.0,
+  "SkinName1": "",
+  "SkinName2": "",
+  "CollisionRadius": 0.0,
+  "CollisionHeight": 0.0,
+  "PathfindingCollisionRadius": 302.5413
+}

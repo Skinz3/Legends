@@ -1,0 +1,22 @@
+{
+  "Name": "BlindMonkEOne",
+  "AlternateName": "BlindMonkEOne",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 350.0,
+  "CastRadius": 350.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 377856,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "globalhit_orange_tar,troy"
+}

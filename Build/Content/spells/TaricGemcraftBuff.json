@@ -1,0 +1,22 @@
+{
+  "Name": "TaricGemcraftBuff",
+  "AlternateName": "TaricHammerSmash",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 400.0,
+  "CastRadius": 400.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 60.0,
+  "Cooldown2": 60.0,
+  "Cooldown3": 60.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 8.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectFriends | AffectHeroes",
+  "HitEffectName": "globalhit_orange_tar,troy"
+}

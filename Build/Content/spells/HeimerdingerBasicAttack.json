@@ -1,0 +1,22 @@
+{
+  "Name": "HeimerdingerBasicAttack",
+  "AlternateName": "HeimerdingerBasicAttack",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 1500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 6.0234375,
+  "AIRange": -1.0,
+  "CastRange": 625.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.1346,
+  "SpellFlags": 261120,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectBuildings | AffectMinions | AffectHeroes | AffectTurrets | NotAffectSelf",
+  "HitEffectName": "Heimerdinger_Base_AA_Tar,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "WrathoftheAncients",
+  "AlternateName": null,
+  "AnimationName": "spell1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 20.0,
+  "AIRange": 0.0,
+  "CastRange": 808.9,
+  "CastRadius": 700.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.2059,
+  "SpellFlags": 513024,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectBuildings | AffectMinions | AffectHeroes | AffectTurrets | AlwaysSelf",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

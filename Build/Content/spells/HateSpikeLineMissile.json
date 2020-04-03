@@ -1,0 +1,22 @@
+{
+  "Name": "HateSpikeLineMissile",
+  "AlternateName": "OlafAxeThrow",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 2200.0,
+  "LineWidth": 80.0,
+  "CastFrame": 1.0,
+  "AIRange": -1.0,
+  "CastRange": 650.0,
+  "CastRadius": 220.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115716,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "Evelynn_Q_tar,troy"
+}

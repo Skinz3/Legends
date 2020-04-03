@@ -1,0 +1,22 @@
+{
+  "Name": "OrianaRedact",
+  "AlternateName": "OrianaRedactCommand",
+  "AnimationName": "Idle1",
+  "MissileSpeed": 1850.0,
+  "LineWidth": 80.0,
+  "CastFrame": 7.935,
+  "AIRange": 0.0,
+  "CastRange": 1500.0,
+  "CastRadius": 300.0,
+  "Cooldown": 8.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 8.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 117766,
+  "TextFlags": "Autocast | Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "yeti_iceBlast_tar,troy"
+}

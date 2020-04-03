@@ -1,0 +1,22 @@
+{
+  "Name": "RumbleGrenadeMissileMechBase",
+  "AlternateName": "EzrealMysticShotMissile",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 2000.0,
+  "LineWidth": 60.0,
+  "CastFrame": 14.1,
+  "AIRange": 0.0,
+  "CastRange": 950.0,
+  "CastRadius": 100.0,
+  "Cooldown": 3.0,
+  "Cooldown1": 3.0,
+  "Cooldown2": 3.0,
+  "Cooldown3": 3.0,
+  "Cooldown4": 3.0,
+  "Cooldown5": 3.0,
+  "Cooldown6": 3.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": ""
+}

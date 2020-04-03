@@ -1,0 +1,22 @@
+{
+  "Name": "OrianaIzunaCommand",
+  "AlternateName": "OrianaIzunaCommand",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 1200.0,
+  "LineWidth": 80.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 825.0,
+  "CastRadius": 145.0,
+  "Cooldown": 5.0,
+  "Cooldown1": 6.0,
+  "Cooldown2": 5.25,
+  "Cooldown3": 4.5,
+  "Cooldown4": 3.75,
+  "Cooldown5": 3.0,
+  "Cooldown6": 4.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 329732,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

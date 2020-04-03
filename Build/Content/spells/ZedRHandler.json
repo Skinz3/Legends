@@ -1,0 +1,22 @@
+{
+  "Name": "ZedRHandler",
+  "AlternateName": "Landslide",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 400.0,
+  "CastRadius": 400.0,
+  "Cooldown": 7.0,
+  "Cooldown1": 22.0,
+  "Cooldown2": 20.5,
+  "Cooldown3": 19.0,
+  "Cooldown4": 17.5,
+  "Cooldown5": 16.0,
+  "Cooldown6": 7.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 377860,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "globalhit_orange_tar,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "ZedShadowDash",
+  "AlternateName": null,
+  "AnimationName": "Spell2_cast",
+  "MissileSpeed": 1600.0,
+  "LineWidth": 40.0,
+  "CastFrame": 1.98,
+  "AIRange": 0.0,
+  "CastRange": 0.0,
+  "CastRadius": 210.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 18.0,
+  "Cooldown2": 17.0,
+  "Cooldown3": 16.0,
+  "Cooldown4": 15.0,
+  "Cooldown5": 14.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115716,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

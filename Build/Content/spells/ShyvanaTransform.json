@@ -1,0 +1,22 @@
+{
+  "Name": "ShyvanaTransform",
+  "AlternateName": "ShyvanGodOfDeath",
+  "AnimationName": "Idle1",
+  "MissileSpeed": 779.9,
+  "LineWidth": 0.0,
+  "CastFrame": 12.425,
+  "AIRange": 0.0,
+  "CastRange": 20.0,
+  "CastRadius": 350.0,
+  "Cooldown": 120.0,
+  "Cooldown1": 120.0,
+  "Cooldown2": 100.0,
+  "Cooldown3": 80.0,
+  "Cooldown4": 120.0,
+  "Cooldown5": 120.0,
+  "Cooldown6": 120.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 99332,
+  "TextFlags": "Instacast | AffectEnemies | AffectMinions | AffectHeroes",
+  "HitEffectName": "AnnieSparks,troy"
+}

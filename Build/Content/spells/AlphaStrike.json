@@ -1,0 +1,22 @@
+{
+  "Name": "AlphaStrike",
+  "AlternateName": "AlphaStrike",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 4000.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.935,
+  "AIRange": 0.0,
+  "CastRange": 600.0,
+  "CastRadius": 300.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 18.0,
+  "Cooldown2": 17.0,
+  "Cooldown3": 16.0,
+  "Cooldown4": 15.0,
+  "Cooldown5": 14.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "MasterYi_Base_Q_tar,troy"
+}

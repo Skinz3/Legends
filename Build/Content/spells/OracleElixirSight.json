@@ -1,0 +1,22 @@
+{
+  "Name": "OracleElixirSight",
+  "AlternateName": "OracleElixirSight",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.0,
+  "AIRange": 0.0,
+  "CastRange": 400.0,
+  "CastRadius": 100.0,
+  "Cooldown": 1.0,
+  "Cooldown1": 1.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 1.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 232468,
+  "TextFlags": "Instacast | NonDispellable | AffectEnemies | AffectFriends | AffectMinions | AffectHeroes | AffectTurrets",
+  "HitEffectName": "missing_instant,troy"
+}

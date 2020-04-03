@@ -1,0 +1,22 @@
+{
+  "Name": "SivirQ",
+  "AlternateName": null,
+  "AnimationName": "Spell1",
+  "MissileSpeed": 1350.0,
+  "LineWidth": 90.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 10000.0,
+  "CastRadius": 299.3,
+  "Cooldown": 9.0,
+  "Cooldown1": 9.0,
+  "Cooldown2": 9.0,
+  "Cooldown3": 9.0,
+  "Cooldown4": 9.0,
+  "Cooldown5": 9.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 327680,
+  "TextFlags": "Instacast | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "Sivir_Base_Q_tar,troy"
+}

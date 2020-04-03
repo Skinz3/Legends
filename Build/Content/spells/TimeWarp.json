@@ -1,0 +1,22 @@
+{
+  "Name": "TimeWarp",
+  "AlternateName": null,
+  "AnimationName": "Spell1",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 20.16,
+  "AIRange": 0.0,
+  "CastRange": 700.0,
+  "CastRadius": 210.0,
+  "Cooldown": 20.0,
+  "Cooldown1": 20.0,
+  "Cooldown2": 20.0,
+  "Cooldown3": 20.0,
+  "Cooldown4": 20.0,
+  "Cooldown5": 20.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0305,
+  "SpellFlags": 68612,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectHeroes",
+  "HitEffectName": "AnnieBasicAttack_mis,troy"
+}

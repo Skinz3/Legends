@@ -1,0 +1,22 @@
+{
+  "Name": "GalioIdolOfDurand",
+  "AlternateName": "GalioIdolOfDurand",
+  "AnimationName": "Spell4_Windup",
+  "MissileSpeed": 20.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 550.0,
+  "CastRadius": 550.0,
+  "Cooldown": 150.0,
+  "Cooldown1": 150.0,
+  "Cooldown2": 135.0,
+  "Cooldown3": 120.0,
+  "Cooldown4": 170.0,
+  "Cooldown5": 170.0,
+  "Cooldown6": 170.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": ""
+}

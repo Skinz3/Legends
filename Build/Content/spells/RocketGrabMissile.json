@@ -1,0 +1,22 @@
+{
+  "Name": "RocketGrabMissile",
+  "AlternateName": "RocketGrabMissile",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 1800.0,
+  "LineWidth": 70.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 1050.0,
+  "CastRadius": 210.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 22.0,
+  "Cooldown2": 21.0,
+  "Cooldown3": 20.0,
+  "Cooldown4": 19.0,
+  "Cooldown5": 18.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115712,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "Globalhit_red,troy"
+}

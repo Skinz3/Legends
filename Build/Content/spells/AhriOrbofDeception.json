@@ -1,0 +1,22 @@
+{
+  "Name": "AhriOrbofDeception",
+  "AlternateName": "AhriOrbofDeception",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 1100.0,
+  "LineWidth": 100.0,
+  "CastFrame": 0.0,
+  "AIRange": 0.0,
+  "CastRange": 10000.0,
+  "CastRadius": 275.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 7.0,
+  "Cooldown2": 7.0,
+  "Cooldown3": 7.0,
+  "Cooldown4": 7.0,
+  "Cooldown5": 7.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 347136,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "LuxLightstrike_mis,troy"
+}

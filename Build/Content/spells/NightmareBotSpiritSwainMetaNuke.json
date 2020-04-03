@@ -1,0 +1,22 @@
+{
+  "Name": "NightmareBotSpiritSwainMetaNuke",
+  "AlternateName": "SwainMetamorphism",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 900.0,
+  "LineWidth": 0.0,
+  "CastFrame": 1.0,
+  "AIRange": -1.0,
+  "CastRange": 1800.0,
+  "CastRadius": 0.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 248836,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AffectTurrets",
+  "HitEffectName": "swain_ult_tar,troy"
+}

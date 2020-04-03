@@ -1,0 +1,22 @@
+{
+  "Name": "KogMawBioArcaneBarrage",
+  "AlternateName": null,
+  "AnimationName": "Spell2",
+  "MissileSpeed": 7.0,
+  "LineWidth": 0.0,
+  "CastFrame": 3.335,
+  "AIRange": 0.0,
+  "CastRange": 530.0,
+  "CastRadius": 0.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 17.0,
+  "Cooldown2": 17.0,
+  "Cooldown3": 17.0,
+  "Cooldown4": 17.0,
+  "Cooldown5": 17.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 329732,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "AnnieSparks,troy"
+}

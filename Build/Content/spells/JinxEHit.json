@@ -1,0 +1,22 @@
+{
+  "Name": "JinxEHit",
+  "AlternateName": "JinxE",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 1100.0,
+  "LineWidth": 120.0,
+  "CastFrame": 7.975,
+  "AIRange": 0.0,
+  "CastRange": 1200.0,
+  "CastRadius": 0.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 4320256,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | NotAffectSelf",
+  "HitEffectName": "heimerdinger_CH1_grenade_tar,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "PowerBall",
+  "AlternateName": null,
+  "AnimationName": "Spell1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.0,
+  "AIRange": 0.0,
+  "CastRange": 300.0,
+  "CastRadius": 210.0,
+  "Cooldown": 16.0,
+  "Cooldown1": 16.0,
+  "Cooldown2": 14.5,
+  "Cooldown3": 13.0,
+  "Cooldown4": 11.5,
+  "Cooldown5": 10.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 329732,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "PowerBall_tar,troy"
+}

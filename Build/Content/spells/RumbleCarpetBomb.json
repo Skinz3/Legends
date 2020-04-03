@@ -1,0 +1,22 @@
+{
+  "Name": "RumbleCarpetBomb",
+  "AlternateName": "",
+  "AnimationName": "menu_idle",
+  "MissileSpeed": 1200.0,
+  "LineWidth": 90.0,
+  "CastFrame": 1.92,
+  "AIRange": 0.0,
+  "CastRange": 1700.0,
+  "CastRadius": 210.0,
+  "Cooldown": 75.0,
+  "Cooldown1": 105.0,
+  "Cooldown2": 90.0,
+  "Cooldown3": 75.0,
+  "Cooldown4": 75.0,
+  "Cooldown5": 75.0,
+  "Cooldown6": 75.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 347148,
+  "TextFlags": "Instacast | PersistThroughDeath | AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

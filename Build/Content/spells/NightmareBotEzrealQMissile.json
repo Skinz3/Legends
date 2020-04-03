@@ -1,0 +1,22 @@
+{
+  "Name": "NightmareBotEzrealQMissile",
+  "AlternateName": "EzrealMysticShotMissile",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 2000.0,
+  "LineWidth": 60.0,
+  "CastFrame": 7.53,
+  "AIRange": 0.0,
+  "CastRange": 1200.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 115716,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "Ezreal_mysticshot_tar,troy"
+}

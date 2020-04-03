@@ -1,0 +1,22 @@
+{
+  "Name": "Nidalee_CougarTakedownAttack",
+  "AlternateName": null,
+  "AnimationName": "Spell1",
+  "MissileSpeed": 500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 11.0,
+  "AIRange": 0.0,
+  "CastRange": 400.0,
+  "CastRadius": 0.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.3077,
+  "SpellFlags": 232448,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectMinions | AffectHeroes | AffectTurrets",
+  "HitEffectName": "dr_mundo_infected_cleaver_tar,troy"
+}

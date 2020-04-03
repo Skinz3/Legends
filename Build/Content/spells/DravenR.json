@@ -1,0 +1,22 @@
+{
+  "Name": "DravenR",
+  "AlternateName": "DravenRCast",
+  "AnimationName": "Spell4",
+  "MissileSpeed": 2000.0,
+  "LineWidth": 160.0,
+  "CastFrame": 15.0,
+  "AIRange": -1.0,
+  "CastRange": 25000.0,
+  "CastRadius": 299.3,
+  "Cooldown": 110.0,
+  "Cooldown1": 110.0,
+  "Cooldown2": 100.0,
+  "Cooldown3": 90.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": 1.0,
+  "SpellFlags": 4310020,
+  "TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "Ezreal_TrueShot_tar,troy"
+}

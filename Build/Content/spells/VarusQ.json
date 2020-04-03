@@ -1,0 +1,22 @@
+{
+  "Name": "VarusQ",
+  "AlternateName": "VarusQ",
+  "AnimationName": "Spell1",
+  "MissileSpeed": 1500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 925.0,
+  "CastRadius": 500.0,
+  "Cooldown": 16.0,
+  "Cooldown1": 16.0,
+  "Cooldown2": 14.0,
+  "Cooldown3": 12.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 8.0,
+  "Cooldown6": 20.0,
+  "DelayCastOffsetPercent": -1.0,
+  "SpellFlags": 115744,
+  "TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": ""
+}

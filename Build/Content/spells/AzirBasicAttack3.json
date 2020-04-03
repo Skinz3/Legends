@@ -1,0 +1,22 @@
+{
+  "Name": "AzirBasicAttack3",
+  "AlternateName": "KassadinBasicAttack2",
+  "AnimationName": "Attack3",
+  "MissileSpeed": 2600.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": -1.0,
+  "CastRange": 549.4,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.3122,
+  "SpellFlags": 252928,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectBuildings | AffectMinions | AffectHeroes | AffectTurrets",
+  "HitEffectName": ""
+}

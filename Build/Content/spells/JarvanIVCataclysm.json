@@ -1,0 +1,22 @@
+{
+  "Name": "JarvanIVCataclysm",
+  "AlternateName": null,
+  "AnimationName": "Spell3",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 8.0,
+  "AIRange": 0.0,
+  "CastRange": 650.0,
+  "CastRadius": 210.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 120.0,
+  "Cooldown2": 105.0,
+  "Cooldown3": 90.0,
+  "Cooldown4": 8.0,
+  "Cooldown5": 5.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 74756,
+  "TextFlags": "Instacast | AffectEnemies | AffectHeroes | NotAffectSelf",
+  "HitEffectName": "GlobalHit_Yellow_tar,troy"
+}

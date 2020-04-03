@@ -1,0 +1,22 @@
+{
+  "Name": "LuxLightStrikeKugel",
+  "AlternateName": null,
+  "AnimationName": "Spell3",
+  "MissileSpeed": 1300.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 1100.0,
+  "CastRadius": 275.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 67584,
+  "TextFlags": "AffectFriends | AffectHeroes",
+  "HitEffectName": "LuxLightstrike_mis,troy"
+}

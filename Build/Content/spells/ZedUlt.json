@@ -1,0 +1,22 @@
+{
+  "Name": "ZedUlt",
+  "AlternateName": null,
+  "AnimationName": "Spell4",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 25.85,
+  "AIRange": 0.0,
+  "CastRange": 625.0,
+  "CastRadius": 210.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 120.0,
+  "Cooldown2": 100.0,
+  "Cooldown3": 80.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 5.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 66564,
+  "TextFlags": "AffectEnemies | AffectHeroes | Instacast | NotAffectSelf",
+  "HitEffectName": "GlobalHit_Yellow_tar,troy"
+}

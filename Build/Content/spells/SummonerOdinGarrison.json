@@ -1,0 +1,22 @@
+{
+  "Name": "SummonerOdinGarrison",
+  "AlternateName": "SummonerOdinGarrison",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 10.0,
+  "AIRange": 0.0,
+  "CastRange": 1250.0,
+  "CastRadius": 1250.0,
+  "Cooldown": 210.0,
+  "Cooldown1": 210.0,
+  "Cooldown2": 330.0,
+  "Cooldown3": 330.0,
+  "Cooldown4": 330.0,
+  "Cooldown5": 330.0,
+  "Cooldown6": 180.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 201501844,
+  "TextFlags": "Instacast | NonDispellable | AffectEnemies | AffectFriends | AffectMinions | AffectTurrets | NotAffectSelf | AffectWards | AffectUseable | AllowWhileTaunted",
+  "HitEffectName": "FireShield_buf,troy"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "SonaBasicAttack2",
+  "AlternateName": "SonaBasicAttack2",
+  "AnimationName": "Attack2",
+  "MissileSpeed": 1500.0,
+  "LineWidth": 0.0,
+  "CastFrame": 8.0,
+  "AIRange": -1.0,
+  "CastRange": 622.7,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.1528,
+  "SpellFlags": 5120,
+  "TextFlags": "AffectEnemies | AffectBuildings",
+  "HitEffectName": null
+}

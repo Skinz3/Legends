@@ -1,0 +1,22 @@
+{
+  "Name": "SionQIndicatorMissile2",
+  "AlternateName": "EzrealEssenceFluxMissile",
+  "AnimationName": "Spell2",
+  "MissileSpeed": 300.0,
+  "LineWidth": 80.0,
+  "CastFrame": 16.16,
+  "AIRange": 0.0,
+  "CastRange": 1050.0,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 76804,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectHeroes | NotAffectSelf",
+  "HitEffectName": "Ezreal_essenceflux_tar,troy"
+}

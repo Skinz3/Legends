@@ -1,0 +1,22 @@
+{
+  "Name": "arcanemastery",
+  "AlternateName": null,
+  "AnimationName": "Spell2",
+  "MissileSpeed": 1200.0,
+  "LineWidth": 0.0,
+  "CastFrame": 5.365,
+  "AIRange": 0.0,
+  "CastRange": 625.0,
+  "CastRadius": 20.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 329732,
+  "TextFlags": "Instacast | AffectFriends | AffectHeroes | AlwaysSelf",
+  "HitEffectName": "ManaLeachCharge,troy"
+}

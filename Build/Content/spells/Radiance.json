@@ -1,0 +1,22 @@
+{
+  "Name": "Radiance",
+  "AlternateName": null,
+  "AnimationName": "Spell2",
+  "MissileSpeed": 1000.0,
+  "LineWidth": 150.0,
+  "CastFrame": 8.1,
+  "AIRange": 0.0,
+  "CastRange": 850.0,
+  "CastRadius": 850.0,
+  "Cooldown": 20.0,
+  "Cooldown1": 20.0,
+  "Cooldown2": 20.0,
+  "Cooldown3": 20.0,
+  "Cooldown4": 15.0,
+  "Cooldown5": 15.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 362500,
+  "TextFlags": "Instacast | AffectFriends | AffectMinions | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

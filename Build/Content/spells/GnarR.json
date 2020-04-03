@@ -1,0 +1,22 @@
+{
+  "Name": "GnarR",
+  "AlternateName": null,
+  "AnimationName": "Spell4",
+  "MissileSpeed": 1200.0,
+  "LineWidth": 0.0,
+  "CastFrame": 1.98,
+  "AIRange": 0.0,
+  "CastRange": 10000.0,
+  "CastRadius": 210.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 120.0,
+  "Cooldown2": 100.0,
+  "Cooldown3": 80.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 347136,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+  "HitEffectName": ""
+}

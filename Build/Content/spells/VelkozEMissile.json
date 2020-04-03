@@ -1,0 +1,22 @@
+{
+  "Name": "VelkozEMissile",
+  "AlternateName": null,
+  "AnimationName": null,
+  "MissileSpeed": 1500.0,
+  "LineWidth": 120.0,
+  "CastFrame": 7.975,
+  "AIRange": 0.0,
+  "CastRange": 1100.0,
+  "CastRadius": 0.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 34816,
+  "TextFlags": "AffectFriendly | AffectMinions",
+  "HitEffectName": null
+}

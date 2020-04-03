@@ -1,0 +1,22 @@
+{
+  "Name": "AniviaBasicAttack",
+  "AlternateName": "AniviaBasicAttack",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 1400.0,
+  "LineWidth": 0.0,
+  "CastFrame": 14.0,
+  "AIRange": -1.0,
+  "CastRange": 650.0,
+  "CastRadius": 0.0,
+  "Cooldown": 10.0,
+  "Cooldown1": 10.0,
+  "Cooldown2": 10.0,
+  "Cooldown3": 10.0,
+  "Cooldown4": 10.0,
+  "Cooldown5": 10.0,
+  "Cooldown6": 10.0,
+  "DelayCastOffsetPercent": -0.4123,
+  "SpellFlags": 252928,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectBuildings | AffectMinions | AffectHeroes | AffectTurrets",
+  "HitEffectName": "cryo_BasicAttack_tar,troy"
+}

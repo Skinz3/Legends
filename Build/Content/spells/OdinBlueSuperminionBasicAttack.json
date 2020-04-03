@@ -1,0 +1,22 @@
+{
+  "Name": "OdinBlueSuperminionBasicAttack",
+  "AlternateName": "OdinBlueSuperminionBasicAttack",
+  "AnimationName": "Attack1",
+  "MissileSpeed": 0.0,
+  "LineWidth": 0.0,
+  "CastFrame": 15.0,
+  "AIRange": -1.0,
+  "CastRange": 73.9,
+  "CastRadius": 100.0,
+  "Cooldown": 0.0,
+  "Cooldown1": 0.0,
+  "Cooldown2": 0.0,
+  "Cooldown3": 0.0,
+  "Cooldown4": 0.0,
+  "Cooldown5": 0.0,
+  "Cooldown6": 0.0,
+  "DelayCastOffsetPercent": 0.0,
+  "SpellFlags": 232448,
+  "TextFlags": "AffectEnemies | AffectFriends | AffectMinions | AffectHeroes | AffectTurrets",
+  "HitEffectName": "globalhit_bloodslash,troy"
+}

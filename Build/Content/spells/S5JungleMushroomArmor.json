@@ -1,0 +1,22 @@
+{
+  "Name": "S5JungleMushroomArmor",
+  "AlternateName": "StyleBatteringRam",
+  "AnimationName": "Spell3",
+  "MissileSpeed": 900.0,
+  "LineWidth": 0.0,
+  "CastFrame": 7.5,
+  "AIRange": 0.0,
+  "CastRange": 300.0,
+  "CastRadius": 710.0,
+  "Cooldown": 9.0,
+  "Cooldown1": 9.0,
+  "Cooldown2": 8.0,
+  "Cooldown3": 7.0,
+  "Cooldown4": 6.0,
+  "Cooldown5": 5.0,
+  "Cooldown6": 4.0,
+  "DelayCastOffsetPercent": -0.5,
+  "SpellFlags": 4312068,
+  "TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes",
+  "HitEffectName": "BrandConflagration_tar,troy"
+}
