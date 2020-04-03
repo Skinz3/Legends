@@ -117,8 +117,12 @@ namespace Legends.DatabaseSynchronizer
                 RAFFileEntry[] entries = (RAFFileEntry[])hook.Invoke(null, new object[] { RafManager });
 
                 ITable[] records = GetRecords(type, entries);
-                DatabaseManager.Instance.CreateTable(type);
-                ORMExtensions.AddInstantElements(records, type);
+
+                foreach (var record in records)
+                {
+                    record.AddElement();
+                }
+
                 logger.Write("Synchronized: " + type.Name);
 
             }

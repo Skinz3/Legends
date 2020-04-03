@@ -4,15 +4,11 @@ namespace Legends.ORM.Attributes
 {
     public class TableAttribute : Attribute
     {
-        public string tableName;
-        public bool catchAll;
-        public short readingOrder;
+        public string path;
 
-        public TableAttribute(string tableName, short readingOrder = -1, bool catchAll = true)
+        public TableAttribute(string path)
         {
-            this.tableName = tableName;
-            this.catchAll = catchAll;
-            this.readingOrder = readingOrder;
+            this.path = path;
         }
     }
 }

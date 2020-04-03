@@ -24,6 +24,7 @@ namespace Legends.Records
             set;
         }
 
+        [Primary]
         [InibinField(InibinHashEnum.SKINS_ChampionSkinName)]
         public string Name
         {
@@ -31,14 +32,14 @@ namespace Legends.Records
             set;
         }
 
-        [Ignore]
+        [JsonIgnore]
         public int SkinId
         {
             get;
             private set;
         }
 
-        [Ignore]
+        [JsonIgnore]
         public int ChampionId
         {
             get;

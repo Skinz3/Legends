@@ -11,7 +11,6 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
-using YAXLib;
 
 namespace Legends.Core
 {
@@ -168,45 +167,8 @@ namespace Legends.Core
         {
             return methodInfo.GetCustomAttributes(false).FirstOrDefault(x => x.GetType() == attributeType);
         }
-        public static string JsonSerialize(this object obj)
-        {
-            return JsonConvert.SerializeObject(obj);
-        }
-        public static object JsonDeserialize(this string content, Type type)
-        {
-            return JsonConvert.DeserializeObject(content, type);
-        }
-        public static T JsonDeserialize<T>(this string content)
-        {
-            return JsonConvert.DeserializeObject<T>(content);
-        }
+       
 
-        public static string XMLSerialize(this object obj)
-        {
-            YAXSerializer serializer = new YAXSerializer(obj.GetType());
-            return serializer.Serialize(obj);
-        }
-        public static object GetDefault(this Type type)
-        {
-            if (type.IsValueType)
-            {
-                return Activator.CreateInstance(type);
-            }
-            return null;
-        }
-        public static object XMLDeserialize(this string content, Type type)
-        {
-            if (content == string.Empty)
-                return Activator.CreateInstance(type);
-
-            YAXSerializer serializer = new YAXSerializer(type);
-            return Convert.ChangeType(serializer.Deserialize(content), type);
-        }
-      
-        public static T XMLDeserialize<T>(this string content)
-        {
-            return (T)XMLDeserialize(content, typeof(T));
-        }
         public static bool RandomAssertion(float percentage)
         {
             if (percentage <= 0)

@@ -27,6 +27,8 @@ namespace Legends.Records
             get;
             set;
         }
+
+        [Primary]
         [InibinFieldFileName]
         public string Name
         {
@@ -393,13 +395,13 @@ namespace Legends.Records
             set;
         }
 
-        [Ignore]
+        [JsonIgnore]
         public SpellRecord BasicAttack
         {
             get;
             set;
         }
-        [Ignore]
+        [JsonIgnore]
         public SkinRecord[] Skins
         {
             get;

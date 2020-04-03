@@ -435,16 +435,4 @@ __pycache__/
 
 
 # End of https://www.gitignore.io/api/csharp,visualstudio
-/Loulou.bat
-/StartGame.bat
-/Sources/Legends.Test/App.config
-/Sources/Legends.Test/Form1.Designer.cs
-/Sources/Legends.Test/Form1.cs
-/Sources/Legends.Test/Form1.resx
-/Sources/Legends.Test/Legends.Test.csproj
-/Sources/Legends.Test/Program.cs
-/Sources/Legends.Test/Properties/AssemblyInfo.cs
-/Sources/Legends.Test/Properties/Resources.Designer.cs
-/Sources/Legends.Test/Properties/Resources.resx
-/Sources/Legends.Test/Properties/Settings.Designer.cs
-/Sources/Legends.Test/Properties/Settings.settings
+

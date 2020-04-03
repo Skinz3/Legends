@@ -62,7 +62,7 @@ namespace Legends.Handlers
 
             client.Hero.DefineGame(targetGame);
 
-            client.Hero.Game.AddUnitToTeam(client.Hero, client.Hero.Data.TeamId);
+            client.Hero.Game.AddUnitToTeam(client.Hero, client.Hero.Data.Team);
 
             client.Hero.PlayerNo = client.Hero.Game.PopNextPlayerNo();
 

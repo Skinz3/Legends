@@ -77,10 +77,6 @@
       <Project>{6ad17cf4-ec08-4ee6-98cc-2818fd9b10a2}</Project>
       <Name>Legends.Protocol</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Legends.Server\Legends.csproj">
-      <Project>{6719D139-0D2C-48C3-AD30-02D34E5162F5}</Project>
-      <Name>Legends</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

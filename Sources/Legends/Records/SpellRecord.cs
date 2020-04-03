@@ -4,6 +4,7 @@ using Legends.Core.IO.Inibin;
 using Legends.ORM.Attributes;
 using Legends.ORM.Interfaces;
 using Legends.Protocol.GameClient.Enum;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace Legends.Records
     public class SpellRecord : ITable
     {
         private static List<SpellRecord> Spells = new List<SpellRecord>();
-
+        
+        [Primary]
         [InibinFieldFileName]
         public string Name
         {
@@ -138,7 +140,7 @@ namespace Legends.Records
             get;
             set;
         }
-        [Ignore]
+        [JsonIgnore]
         public SpellFlags Flags
         {
             get

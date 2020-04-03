@@ -32,9 +32,9 @@ namespace Legends.DatabaseSynchronizer
     /// </summary>
     class Program
     {
-        public const string LeagueOfLegendsPath = @"C:\Emulateur LoL\League of Legends 4.20\League of Legends\";
+        public const string LeagueOfLegendsPath = @"D:\Emulateur LoL\League of Legends 4.20\League of Legends\";
 
-        public const string ExtractedRAFOutputPath = @"C:\Emulateur LoL\RAF 4.20\";
+        public const string ExtractedRAFOutputPath = @"D:\Emulateur LoL\RAF 4.20\";
 
         static Logger logger = new Logger();
 
@@ -43,13 +43,17 @@ namespace Legends.DatabaseSynchronizer
         {
             logger.OnStartup();
 
-            DatabaseManager.Instance.Initialize(Assembly.GetEntryAssembly(), "127.0.0.1", "legends", "root", "");
+            if (!DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(AIUnitRecord)), "Content"))
+            {
+                Console.Read();
+                Environment.Exit(1);
+            }
 
             RafManager manager = new RafManager(LeagueOfLegendsPath);
 
             TroyListBuilder.GenerateTroybinlist("troybin.txt", ExtractedRAFOutputPath);
 
-            DatabaseManager.Instance.DropTables(Assembly.GetAssembly(typeof(AIUnitRecord)));
+            DatabaseManager.Instance.DropAll();
 
             //  JSONHashes hashes = new JSONHashes(Environment.CurrentDirectory + "/items.json","ITEMS");  
 

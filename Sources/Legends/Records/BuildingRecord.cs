@@ -13,11 +13,12 @@ namespace Legends.Records
     /// <summary>
     /// Synchronized from ObjectsCFG.cgf file.
     /// </summary>
-    [Table("buildings")]
+    [Table("Buildings/")]
     public class BuildingRecord : ITable
     {
         private static List<BuildingRecord> Buildings = new List<BuildingRecord>();
 
+        [Primary]
         public string Name
         {
             get;

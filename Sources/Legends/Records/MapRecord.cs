@@ -28,13 +28,13 @@ namespace Legends.Records
             set;
         }
 
+        [Primary]
         public string Name
         {
             get;
             set;
         }
 
-        [Json]
         public Vector2 MiddleOfMap
         {
             get;
@@ -58,22 +58,19 @@ namespace Legends.Records
             set;
         }
 
-        [Ignore]
+        [JsonIgnore]
         public float HalfCellSize => CellSize / 2f;
 
-        [Json]
         public MapObjectRecord[] Objects
         {
             get;
             set;
         }
-        [Json]
         public MapCellRecord[] Cells
         {
             get;
             set;
         }
-        [Json]
         public ushort[] CellFlags
         {
             get;
@@ -89,19 +86,17 @@ namespace Legends.Records
             get;
             set;
         }
-        [Json]
         public Vector3 MinGridPos
         {
             get;
             set;
         }
-        [Json]
         public Vector3 MaxGridPos
         {
             get;
             set;
         }
-        [Ignore]
+        [JsonIgnore]
         public Vector3 TranslationMaxGridPos
         {
             get;

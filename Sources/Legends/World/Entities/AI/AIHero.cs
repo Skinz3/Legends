@@ -108,8 +108,8 @@ namespace Legends.World.Entities.AI
             this.StatsUpdateTimer = new UpdateTimer(STATS_REFRESH_DELAY);
             base.Initialize();
 
-            SpellManager.AddSpell(4, SpellProvider.Instance.GetSpell(this, 4, Data.Summoner1Spell.ToString(), true));
-            SpellManager.AddSpell(5, SpellProvider.Instance.GetSpell(this, 5, Data.Summoner2Spell.ToString(), true));
+            SpellManager.AddSpell(4, SpellProvider.Instance.GetSpell(this, 4, Data.Summoner1.ToString(), true));
+            SpellManager.AddSpell(5, SpellProvider.Instance.GetSpell(this, 5, Data.Summoner2.ToString(), true));
         }
         public override void OnGameStart()
         {
@@ -277,7 +277,7 @@ namespace Legends.World.Entities.AI
 
         public void UpdateInfos()
         {
-            Game.Send(new PlayerInfoMessage(NetId, Data.Summoner1Spell, Data.Summoner2Spell));
+            Game.Send(new PlayerInfoMessage(NetId, Data.Summoner1, Data.Summoner2));
         }
         public void AttentionPing(Vector2 position, uint targetNetId, PingTypeEnum pingType)
         {
@@ -315,7 +315,7 @@ namespace Legends.World.Entities.AI
 
         public override void Create()
         {
-            Game.Send(new HeroSpawnMessage(NetId, PlayerNo, Data.TeamId, SkinId, Data.Name,
+            Game.Send(new HeroSpawnMessage(NetId, PlayerNo, Data.Team, SkinId, Data.Name,
                    Model));
 
             UpdateInfos();

@@ -44,8 +44,11 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                 records.Add(new ExperienceRecord() { Level = level, CumulativeExp = cumulativeExps[i] });
                 level++;
             }
-            DatabaseManager.Instance.CreateTable(typeof(ExperienceRecord));
-            records.AddInstantElements(typeof(ExperienceRecord)); 
+
+            foreach (var record in records)
+            {
+                record.AddElement();
+            }
 
             logger.Write("Experiences synchronized");
         }

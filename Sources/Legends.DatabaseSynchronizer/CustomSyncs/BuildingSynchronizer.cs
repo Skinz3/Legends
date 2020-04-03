@@ -24,11 +24,13 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
             {
                 CFGFile cfg = new CFGFile(file.GetContent(true));
 
+                int mapId = Helper.GetMapId(file.Path);
+
                 foreach (var obj in cfg.Objects)
                 {
                     BuildingRecord record = new BuildingRecord();
 
-                    record.MapId = Helper.GetMapId(file.Path);
+                    record.MapId = mapId;
                     record.Name = obj.Key;
                     record.Health = GetFloatFromCFG(obj.Value, "mMaxHP", 0);
                     record.CollisionRadius = GetFloatFromCFG(obj.Value, "Collision Radius", 0);
@@ -49,8 +51,10 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                 }
             }
 
-            DatabaseManager.Instance.CreateTable(typeof(BuildingRecord));
-            records.AddInstantElements(typeof(BuildingRecord));
+            foreach (var record in records)
+            {
+                record.AddElement();
+            }
 
             logger.Write("Buildings Synchronized");
 

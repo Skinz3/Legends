@@ -1,190 +1,176 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Linq;
-using System.Collections;
-using Legends;
-using System.Threading;
-using Legends.ORM.IO;
-using Legends.ORM.Interfaces;
-using Legends.ORM.Attributes;
-using Legends.Core.Utils;
+﻿using Legends.Core;
 using Legends.Core.DesignPattern;
+using Legends.Core.IO;
+using Legends.Core.Utils;
+using Legends.ORM.Attributes;
+using Legends.ORM.Interfaces;
+using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Legends.ORM
 {
     public class DatabaseManager : Singleton<DatabaseManager>
     {
-        private static Logger logger = new Logger();
+        int UnknownIncr = 0;
 
-        private const string CREATE_TABLE = "CREATE TABLE if not exists {0} ({1})";
+        static Logger logger = new Logger();
 
-        private const string DROP_TABLE = "DROP TABLE IF EXISTS {0}";
-
-        internal MySqlConnection m_provider;
-
-        public Assembly RecordsAssembly;
-
-        public void Initialize(Assembly recordsAssembly, string host, string database, string user, string password)
+        private Assembly TargetAssembly
         {
-
-            this.m_provider = new MySqlConnection(string.Format("Server={0};UserId={1};Password={2};Database={3}", host, user, password, database));
-            this.RecordsAssembly = recordsAssembly;
+            get;
+            set;
+        }
+        private string TargetPath
+        {
+            get;
+            set;
+        }
+        private List<Type> TableTypes
+        {
+            get;
+            set;
         }
 
-        public MySqlConnection UseProvider()
+        public bool Initialize(Assembly recordAssembly, string path)
         {
-            return UseProvider(m_provider);
-        }
-        private MySqlConnection UseProvider(MySqlConnection connection)
-        {
-            if (!connection.Ping())
+            TargetPath = Path.GetFullPath(path);
+            TargetAssembly = recordAssembly;
+            TableTypes = new List<Type>();
+
+            if (!Directory.Exists(TargetPath))
             {
-                connection.Close();
-                connection.Open();
+                Directory.CreateDirectory(TargetPath);
             }
 
-            return connection;
-        }
 
-        public void LoadTables()
-        {
-            var tables = RecordsAssembly.GetTypes().Where(x => x.GetInterface("ITable") != null).ToArray();
-            var orderedTables = new Type[tables.Length];
-            var dontCatch = new List<Type>();
-
-            foreach (var table in tables)
+            foreach (var type in TargetAssembly.GetTypes())
             {
-                var attribute = (TableAttribute)table.GetCustomAttribute(typeof(TableAttribute), false);
-                if (attribute == null)
-                {
-                    logger.Write(string.Format("Warning : the table type '{0}' hasn't got an attribute called 'TableAttribute'", table.Name), MessageState.WARNING);
-                    continue;
-                }
+                TableAttribute attribute = type.GetCustomAttribute<TableAttribute>();
 
-                if (attribute.catchAll)
+                if (attribute != null)
                 {
-                    if (attribute.readingOrder >= 0)
-                        orderedTables[attribute.readingOrder] = table;
-                }
-                else
-                    dontCatch.Add(table);
-            }
-            foreach (var table in tables)
-            {
-                if (orderedTables.Contains(table) || dontCatch.Contains(table))
-                    continue;
-
-                for (var i = tables.Length - 1; i >= 0; i--)
-                {
-                    if (orderedTables[i] == null)
+                    if (!type.HasInterface(typeof(ITable)))
                     {
-                        orderedTables[i] = table;
-                        break;
+                        logger.Write(type.FullName + " has no ITable interface.", MessageState.ERROR);
+                        return false;
                     }
                 }
-            }
-            foreach (var type in orderedTables)
-            {
-                if (type == null)
+                else
+                {
                     continue;
-
-                var reader = Activator.CreateInstance(typeof(DatabaseReader<>).MakeGenericType(type));
-                var tableName = (string)reader.GetType().GetProperty("TableName").GetValue(reader);
-
-
-                logger.Write("Loading " + tableName + " ...");
-                var method = reader.GetType().GetMethods().FirstOrDefault(x => x.Name == "Read" && x.GetParameters().Length == 1);
-                method.Invoke(reader, new object[] { this.UseProvider() });
-
-                var elements = reader.GetType().GetProperty("Elements").GetValue(reader);
-
-                var field = ITableManager.GetCache(type);
-
-                if (field != null)
-                {
-                    field.FieldType.GetMethod("AddRange").Invoke(field.GetValue(null), new object[] { elements }); ;
                 }
 
-            }
-        }
+                FieldInfo cache = GetCache(type);
 
-        public void CloseProvider()
-        {
-            this.m_provider.Close();
-        }
-
-        public void DropTables(Assembly assembly)
-        {
-            var tables = assembly.GetTypes().Where(x => x.GetInterface("ITable") != null);
-
-            foreach (var table in tables)
-            {
-                TableAttribute attribute = table.GetCustomAttribute(typeof(TableAttribute)) as TableAttribute;
-                DropTable(attribute.tableName);
-            }
-        }
-        public void DropTable(string tableName)
-        {
-            Query(string.Format(DROP_TABLE, tableName), UseProvider());
-        }
-        public void Query(string query, MySqlConnection connection)
-        {
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch
-            {
-                logger.Write("Unable to query (" + query + ")", MessageState.ERROR);
-            }
-        }
-        /// <summary>
-        /// Prevent: Use only ITable type
-        /// </summary>
-        /// <param name="type"></param>
-        public void CreateTable(Type type)
-        {
-            string tableName = type.GetCustomAttribute<TableAttribute>().tableName;
-
-            PropertyInfo primaryProperty = type.GetProperties().FirstOrDefault(x => x.GetCustomAttribute<PrimaryAttribute>() != null);
-
-            string str = string.Empty;
-
-            foreach (var property in type.GetProperties().ToList().FindAll(x => x.GetCustomAttribute<IgnoreAttribute>() == null))
-            {
-                string propertyType = "mediumtext";
-
-                if (property.GetCustomAttribute<JsonAttribute>() != null)
+                if (cache == null)
                 {
-                    propertyType = "longtext";
+                    logger.Write("Unable to find cache for type " + type.FullName);
+                    return false;
                 }
 
-                if (primaryProperty == property)
+                PropertyInfo primaryProperty = GetPrimaryProperty(type);
+
+                if (primaryProperty == null)
                 {
-                    propertyType = "int (40)";
+                    logger.Write("Unable to find primary key for type " + type.FullName);
+                    return false;
                 }
-                str += property.Name + " " + propertyType + ",";
+                TableTypes.Add(type);
+
+            }
+            return true;
+        }
+        public void LoadTables()
+        {
+            foreach (var type in TableTypes)
+            {
+                TableAttribute attribute = type.GetCustomAttribute<TableAttribute>();
+
+                FieldInfo cache = GetCache(type);
+
+                string dir = Path.Combine(TargetPath, attribute.path);
+
+                var newList = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(type));
+
+                foreach (var file in Directory.GetFiles(dir))
+                {
+                    ITable element = (ITable)Json.Deserialize(File.ReadAllText(file), type);
+                    newList.Add(element);
+                }
+
+                cache.SetValue(null, newList);
+            }
+        }
+
+        public void DropAll()
+        {
+            DirectoryInfo di = new DirectoryInfo(TargetPath);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+        }
+        private PropertyInfo GetPrimaryProperty(Type type)
+        {
+            return type.GetProperties().FirstOrDefault(x => x.GetCustomAttribute<PrimaryAttribute>() != null);
+        }
+        private FieldInfo GetCache(Type type)
+        {
+            var attribute = type.GetCustomAttribute(typeof(TableAttribute), false);
+
+            if (attribute == null)
+                return null;
+
+            var field = type.GetFields(BindingFlags.NonPublic | BindingFlags.Static).FirstOrDefault(x => x.FieldType.IsGenericType);
+
+            if (field == null || !field.IsStatic || !field.FieldType.IsGenericType)
+            {
+                return null;
             }
 
-            if (primaryProperty != null)
-                str += "PRIMARY KEY (" + primaryProperty.Name + ")";
-            else
-                str = str.Remove(str.Length - 1, 1);
-
-            this.Query(string.Format(CREATE_TABLE, tableName, str), UseProvider());
+            return field;
         }
 
-        public void CreateTable(ITable table)
+        public void Add<T>(T table) where T : ITable
         {
-            CreateTable(table.GetType());
-        }
-        public void WriterInstance(Type type, DatabaseAction action, ITable[] elements)
-        {
-            Activator.CreateInstance(typeof(DatabaseWriter<>).MakeGenericType(type), action, elements);
-        }
+            string path = table.GetType().GetCustomAttribute<TableAttribute>().path;
 
+            string dir = Path.Combine(TargetPath, path);
+
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
+            PropertyInfo primary = table.GetType().GetProperties().FirstOrDefault(x => x.GetCustomAttribute<PrimaryAttribute>() != null);
+
+            var fileName = primary.GetValue(table, new object[] { }).ToString();
+
+            if (fileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+            {
+                fileName = "Unknown" + (++UnknownIncr);
+            }
+
+            string json = Json.Serialize(table);
+
+            File.WriteAllText(Path.Combine(dir, fileName + ".json"), json);
+
+        }
+        public void Remove<T>(T table) where T : ITable
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace Legends.Records
     {
         private static List<ItemRecord> Items = new List<ItemRecord>();
 
+        [Primary]
         [InibinFieldFileName]
         public uint ItemId
         {
@@ -290,13 +291,13 @@ namespace Legends.Records
             get;
             set;
         }
-        [Ignore]
+        [JsonIgnore]
         public ItemRecord[] RecipeItemRecords
         {
             get;
             private set;
         }
-        [Ignore]
+        [JsonIgnore]
         public ItemGroupEnum Group
         {
             get;

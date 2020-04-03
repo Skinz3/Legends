@@ -100,8 +100,12 @@ namespace Legends.DatabaseSynchronizer.CustomSyncs
                 }
 
             }
-            DatabaseManager.Instance.CreateTable(typeof(MapRecord));
-            records.AddInstantElements(typeof(MapRecord));
+
+            foreach (var record in records)
+            {
+                record.AddElement();
+            }
+
             logger.Write("Map synchronized");
 
         }

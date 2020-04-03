@@ -32,8 +32,6 @@ namespace Legends
     {
         static Logger logger = new Logger();
 
-        public const string DATABASE_FILENAME = "database.smart";
-
         static void Main(string[] args)
         {
             logger.OnStartup();
@@ -67,13 +65,13 @@ namespace Legends
         [StartupInvoke("Database", StartupInvokePriority.First)]
         public static void LoadDatabase()
         {
-            DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(AIUnitRecord)),
-               ConfigurationProvider.Instance.Configuration.MySQLHost, ConfigurationProvider.Instance.Configuration.DatabaseName
-               , ConfigurationProvider.Instance.Configuration.MySQLUser, ConfigurationProvider.Instance.Configuration.MySQLPassword);
+            if (!DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(AIUnitRecord)), "Content"))
+            {
+                Console.Read();
+                Environment.Exit(1);
+            }
 
             DatabaseManager.Instance.LoadTables();
-
-
         }
         [StartupInvoke("CSharp Scripts", StartupInvokePriority.Third)]
         public static void LoadScripts()

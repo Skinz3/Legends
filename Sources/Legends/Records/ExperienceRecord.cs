@@ -14,6 +14,7 @@ namespace Legends.Records
     {
         private static List<ExperienceRecord> Experiences = new List<ExperienceRecord>();
 
+        [Primary]
         public int Level
         {
             get;
