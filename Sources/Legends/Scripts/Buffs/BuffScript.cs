@@ -53,6 +53,13 @@ namespace Legends.Scripts.Spells
             get;
             private set;
         }
+        public bool Ended
+        {
+            get
+            {
+                return Duration <= 0;
+            }
+        }
         public byte Slot
         {
             get;

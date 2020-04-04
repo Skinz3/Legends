@@ -52,10 +52,10 @@ namespace Legends.World.Spells
             get;
             private set;
         }
-        private SpellScript Script
+        public SpellScript Script
         {
             get;
-            set;
+            private set;
         }
 
 
@@ -266,7 +266,7 @@ namespace Legends.World.Spells
                     }
                     if (Script.StopMovement)
                     {
-                        Owner.StopMove(true, false);
+                        Owner.StopMove(true, false); // notify?
                     }
 
                     this.onChannelOverAction = onChannelOverAction;

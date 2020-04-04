@@ -27,13 +27,14 @@ namespace Legends.World.Entities.AI.Buffs
             this.Owner = owner;
             this.Buffs = new Dictionary<byte, BuffScript>();
         }
-        public void AddBuff<T>(AIUnit source) where T : BuffScript
+        public BuffScript AddBuff<T>(AIUnit source) where T : BuffScript
         {
             var buff = BuffScriptManager.Instance.GetBuffScript<T>(Owner, source);
             buff.OnAdded();
             buff.Slot = PopNextSlotId();
             Buffs.Add(buff.Slot, buff);
             Owner.Game.Send(new BuffAddMessage(Owner.NetId, buff.Slot, buff.BuffType, 1, false, buff.BuffName.HashString(), (uint)Owner.GetHash(), 0f, (buff.MaxDuration / 1000f), source.NetId));
+            return buff;
         }
         private byte PopNextSlotId()
         {
@@ -43,10 +44,8 @@ namespace Legends.World.Entities.AI.Buffs
         {
             buff.OnRemoved();
             Buffs.Remove(buff.Slot);
-
             Owner.Game.Send(new BuffRemoveMessage(Owner.NetId, buff.Slot, buff.BuffName.HashString(), 0f));
         }
-
         public void Update(float deltaTime)
         {
             foreach (var buff in Buffs.Values.ToArray())

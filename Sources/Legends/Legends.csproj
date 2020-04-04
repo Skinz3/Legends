@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\Cooper Last Revision\Cooper\Sources\Cooper.Server\bin\Debug\MySql.Data.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -52,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bin\Debug\Scripts\Buffs\Global\RecallBuff.cs" />
     <Compile Include="bin\Debug\Scripts\Buffs\LeeSin\Safeguard.cs" />
     <Compile Include="bin\Debug\Scripts\Maps\HowlingAbyssScript.cs" />
     <Compile Include="bin\Debug\Scripts\Maps\SummonersRiftScript.cs" />
@@ -242,7 +240,9 @@
       <Name>Legends.Protocol</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\Debug\Scripts\Spells\MonkeyKing\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Todo List.txt" />
   </ItemGroup>

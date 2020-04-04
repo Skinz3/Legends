@@ -159,7 +159,7 @@ namespace Legends.Scripts.Spells
 
 
             var skillShot = new SkillShot(Spell.GetNextProjectileId(),
-                Owner, position.ToVector2(), record.MissileSpeed, record.LineWidth,
+                Owner, position.ToVector2(), record.MissileSpeed, record.LineWidth*2,
                 OnProjectileReach, direction, range, OnSkillShotRangeReached);
 
             Owner.Game.AddUnitToTeam(skillShot, Owner.Team.Id);
