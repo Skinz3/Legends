@@ -20,8 +20,8 @@ namespace Legends.Core.Utils
     }
     public class Logger
     {
-        private const ConsoleColor COLOR_1 = ConsoleColor.Cyan;
-        private const ConsoleColor COLOR_2 = ConsoleColor.DarkCyan;
+        private const ConsoleColor COLOR_1 = ConsoleColor.Magenta;
+        private const ConsoleColor COLOR_2 = ConsoleColor.DarkMagenta;
 
         private Dictionary<MessageState, ConsoleColor> Colors = new Dictionary<MessageState, ConsoleColor>()
         {

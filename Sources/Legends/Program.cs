@@ -62,7 +62,7 @@ namespace Legends
 
         }
 
-        [StartupInvoke("Database", StartupInvokePriority.First)]
+        [StartupInvoke("Content", StartupInvokePriority.First)]
         public static void LoadDatabase()
         {
             if (!DatabaseManager.Instance.Initialize(Assembly.GetAssembly(typeof(AIUnitRecord)), "Content"))
