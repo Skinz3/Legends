@@ -29,8 +29,6 @@ namespace Legends.Handlers
         [MessageHandler(PacketCmd.PKT_C2S_CastSpell)]
         public static void HandleCastSpellRequest(CastSpellRequestMessage message, LoLClient client)
         {
-           
-
             AttackableUnit spellTarget = client.Hero.Game.Map.GetUnit(message.targetNetId) as AttackableUnit;
 
             client.Hero.CastSpell(message.slot, message.position, message.endPosition, spellTarget);
@@ -126,7 +124,6 @@ namespace Legends.Handlers
                     if (!client.Hero.Move(wayPointsReader.Waypoints))
                     {
                         client.Hero.PathManager.PendingPoint = wayPointsReader.Waypoints.Last();
-
                     }
 
 
